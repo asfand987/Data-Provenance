@@ -104,7 +104,7 @@ jsPlumb.ready(function () {
 	}
 
 	makeDraggable("#entityID", "window start jsplumb-connected custom", "entity");
-	makeDraggable("#stepEv", "window step jsplumb-connected-step custom", "step");
+	makeDraggable("#stepEv", "window step jsplumb-connected-step custom", "activity");
 	makeDraggable("#endEv", "window start jsplumb-connected-end custom", "end");
 
     $("#descEv").draggable({
@@ -166,8 +166,8 @@ jsPlumb.ready(function () {
 
     //load properties of a step element once the step element in the palette is clicked
     $('#stepEv').mousedown(function () {
-        loadProperties("window step custom jtk-node jsplumb-connected-step", "5em", "5em", "step",
-            ["BottomCenter"], ["TopCenter"], true);
+        loadProperties("window step custom jtk-node jsplumb-connected-step", "5em", "5em", "activity",
+            ["BottomCenter"], ["TopCenter"], false);
         clicked = true;
     });
 

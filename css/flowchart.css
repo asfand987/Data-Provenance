@@ -31,7 +31,8 @@
     z-index: 1;
 }
 
-.start{
+  /* This is for the Entity shape*/
+.start{ 
     border-radius: 40px;
     text-align: center;
     width: 80px;
@@ -41,13 +42,13 @@
 
 .end{
     border-radius: 40px;
-    text-align: center;
+    text-align: center; 
 }
 
 .step{
-    border-radius: 0.5em;
     width: 80px;
-    height: 80px;
+    height: 50px;
+    line-height: 35px;
 }
 
 .diamond{
@@ -115,6 +116,7 @@
 }
 
 #stepEv{
+    border-radius: 0.5em;
     top: 10em;
     left: 3em;
 }

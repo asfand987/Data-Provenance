@@ -3,7 +3,6 @@ var sourcepointList = [];
 var _saveFlowchart, elementCount = 0;
 var jsPlumbInstance; //the jsPlumb jsPlumbInstance
 var properties = []; //keeps the properties of each element
-
 jsPlumb.ready(function () {
     var element = "";   //the element which will be appended to the canvas
     var clicked = false;    //check whether an element from the palette was clicked
@@ -25,9 +24,6 @@ jsPlumb.ready(function () {
         Container: "canvas"
     });
 
-
-    //create these in a new file - connector.js
-    //----------------------------------------
     //define basic connection type
     var basicType = {
         connector: "StateMachine",
@@ -36,10 +32,10 @@ jsPlumb.ready(function () {
     };
     jsPlumbInstance.registerConnectionType("basic", basicType);
 
-    //style for the connector from one shape to another
+    //style for the connector
     var connectorPaintStyle = {
         lineWidth: 4,
-        strokeStyle: "#FF5733",
+        strokeStyle: "#61B7CF",
         joinstyle: "round",
         outlineColor: "white",
         outlineWidth: 2
@@ -47,7 +43,7 @@ jsPlumb.ready(function () {
 
     //style for the connector hover
         connectorHoverStyle = {
-            lineWidth: 1,
+            lineWidth: 4,
             strokeStyle: "#216477",
             outlineWidth: 2,
             outlineColor: "white"
@@ -94,8 +90,6 @@ jsPlumb.ready(function () {
             isTarget: true
         };
 
-
-    //---------------------------------------------------------------------------    
 	function makeDraggable(id, className, text){
 	    $(id).draggable({
 		helper: function(){

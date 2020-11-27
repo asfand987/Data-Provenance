@@ -3,6 +3,7 @@ var sourcepointList = [];
 var _saveFlowchart, elementCount = 0;
 var jsPlumbInstance; //the jsPlumb jsPlumbInstance
 var properties = []; //keeps the properties of each element
+
 jsPlumb.ready(function () {
     var element = "";   //the element which will be appended to the canvas
     var clicked = false;    //check whether an element from the palette was clicked
@@ -24,6 +25,9 @@ jsPlumb.ready(function () {
         Container: "canvas"
     });
 
+
+    //create these in a new file - connector.js
+    //----------------------------------------
     //define basic connection type
     var basicType = {
         connector: "StateMachine",
@@ -32,10 +36,10 @@ jsPlumb.ready(function () {
     };
     jsPlumbInstance.registerConnectionType("basic", basicType);
 
-    //style for the connector
+    //style for the connector from one shape to another
     var connectorPaintStyle = {
         lineWidth: 4,
-        strokeStyle: "#61B7CF",
+        strokeStyle: "#FF5733",
         joinstyle: "round",
         outlineColor: "white",
         outlineWidth: 2
@@ -43,7 +47,7 @@ jsPlumb.ready(function () {
 
     //style for the connector hover
         connectorHoverStyle = {
-            lineWidth: 4,
+            lineWidth: 1,
             strokeStyle: "#216477",
             outlineWidth: 2,
             outlineColor: "white"
@@ -90,6 +94,8 @@ jsPlumb.ready(function () {
             isTarget: true
         };
 
+
+    //---------------------------------------------------------------------------    
 	function makeDraggable(id, className, text){
 	    $(id).draggable({
 		helper: function(){
@@ -103,7 +109,7 @@ jsPlumb.ready(function () {
 	    });
 	}
 
-	makeDraggable("#startEv", "window start jsplumb-connected custom", "start");
+	makeDraggable("#entityID", "window start jsplumb-connected custom", "entity");
 	makeDraggable("#stepEv", "window step jsplumb-connected-step custom", "step");
 	makeDraggable("#endEv", "window start jsplumb-connected-end custom", "end");
 
@@ -158,8 +164,8 @@ jsPlumb.ready(function () {
     }
 
 	//load properties of a start element once the start element in the palette is clicked
-    $('#startEv').mousedown(function () {
-        loadProperties("window start custom jtk-node jsplumb-connected", "5em", "5em", "start", ["BottomCenter"],
+    $('#entityID').mousedown(function () {
+        loadProperties("window start custom jtk-node jsplumb-connected", "5em", "5em", "entity", ["BottomCenter"],
             [], false);
         clicked = true;
     });

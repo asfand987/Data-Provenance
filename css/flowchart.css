@@ -31,10 +31,6 @@
     z-index: 1;
 }
 
-.start{
-    border-radius: 40px;
-    text-align: center;
-}
 
 .end{
     border-radius: 40px;
@@ -71,9 +67,9 @@
     -moz-box-shadow: 2px 2px 19px #aaa;
     -moz-border-radius: 0.5em;
     opacity: 0.8;
-    width: 80px;
-    height: 80px;
-    line-height: 70px;
+    /*width: 80px;
+    height: 80px;*/
+    /*line-height: 70px;*/
     cursor: pointer;
     text-align: center;
     position: absolute;
@@ -104,9 +100,14 @@
     border: 1px dotted red;
 }
 
-#startEv{
+#entityID{
     top: 2em;
     left: 3em;
+    border-radius: 50px;
+    height: 50px;
+    width: 80px;
+    text-align: center;
+    line-height: 35px;
 }
 
 #stepEv{

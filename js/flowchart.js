@@ -104,10 +104,10 @@ jsPlumb.ready(function () {
 	}
 
 	makeDraggable("#entityID", "window start jsplumb-connected custom", "entity");
-	makeDraggable("#stepEv", "window step jsplumb-connected-step custom", "activity");
-	makeDraggable("#endEv", "window start jsplumb-connected-end custom", "end");
+	makeDraggable("#activityID", "window step jsplumb-connected-step custom", "activity");
+	//makeDraggable("#agentsID", "window diamond jsplumb-connected-end custom", "agents");
 
-    $("#descEv").draggable({
+    $("#agentID").draggable({
         helper: function () {
     	   return createElement("");
         },
@@ -160,30 +160,24 @@ jsPlumb.ready(function () {
 	//load properties of a start element once the start element in the palette is clicked
     $('#entityID').mousedown(function () {
         loadProperties("window start custom jtk-node jsplumb-connected", "5em", "5em", "entity", ["BottomCenter"],
-            [], false);
+            ["LeftMiddle", "RightMiddle", "BottomCenter"], false);
         clicked = true;
     });
 
     //load properties of a step element once the step element in the palette is clicked
-    $('#stepEv').mousedown(function () {
+    $('#activityID').mousedown(function () {
         loadProperties("window step custom jtk-node jsplumb-connected-step", "5em", "5em", "activity",
             ["BottomCenter"], ["TopCenter"], false);
         clicked = true;
     });
 
     //load properties of a decision element once the decision element in the palette is clicked
-    $('#descEv').mousedown(function () {
-        loadProperties("window diamond custom jtk-node jsplumb-connected-step", "5em", "5em", "decision",
-            ["LeftMiddle", "RightMiddle", "BottomCenter"], ["TopCenter"], true, 100, 100);
+    $('#agentID').mousedown(function () {
+        loadProperties("window diamond custom jtk-node jsplumb-connected-step", "5em", "5em", "agents",
+            ["Top"], ["LeftMiddle", "RightMiddle", "BottomCenter"], true, 100, 100);
         clicked = true;
     });
 
-    //load properties of a end element once the end element in the palette is clicked
-    $('#endEv').mousedown(function () {
-        loadProperties("window end custom jtk-node jsplumb-connected-end", "5em", "5em", "end",
-            [], ["TopCenter"], false);
-        clicked = true;
-    });
 
     //create an element to be drawn on the canvas
     function createElement(id) {

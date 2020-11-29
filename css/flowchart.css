@@ -35,20 +35,15 @@
 .start{ 
     border-radius: 40px;
     text-align: center;
-    width: 80px;
-    height: 50px;
-    line-height: 35px;
+    width: 120px;
+    height: 80px;
+    line-height: 60px;
 }
-
-.end{
-    border-radius: 40px;
-    text-align: center; 
-}
-
 .step{
-    width: 80px;
-    height: 50px;
-    line-height: 35px;
+    width: 120px;
+    border-radius: 0.5em;
+    height: 80px;
+    line-height: 60px;
 }
 
 .diamond{
@@ -57,6 +52,9 @@
     -o-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
+    width: 100px;
+    height: 100px;
+    line-height: 80px;
 }
 
 .desc-text{
@@ -66,6 +64,8 @@
     -ms-transform: rotate(-45deg);
     transform: rotate(-45deg);
 }
+
+
 
 .flowchart-demo .window {
     border: 1px solid #346789;
@@ -110,26 +110,22 @@
 
 #entityID{
     border-radius: 5em;
-    top: 2em;
-    left: 3em;
+    top: 4em;
+    left: 4em;
    
 }
 
-#stepEv{
-    border-radius: 0.5em;
-    top: 10em;
-    left: 3em;
+#activityID{
+    /*border-radius: 0.5em;*/
+    top: 15em;
+    left: 4em;
 }
 
-#descEv{
-    top: 20em;
-    left: 3em;
+#agentID{
+    top: 28em;
+    left: 4em;
 }
 
-#endEv{
-    top: 30em;
-    left: 3em;
-}
 
 .flowchart-demo .jsplumb-connector {
     z-index: 4;

@@ -17,7 +17,7 @@
  *
  */
 
-.demo {
+.d {
     /* for IE10+ touch devices */
     touch-action:none;
 }
@@ -67,7 +67,7 @@
 
 
 
-.flowchart-demo .window {
+.flowchart-d .window {
     border: 1px solid #346789;
     box-shadow: 2px 2px 19px #aaa;
     -o-box-shadow: 2px 2px 19px #aaa;
@@ -92,7 +92,7 @@
     transition: box-shadow 0.15s ease-in;
 }
 
-.flowchart-demo .window:hover {
+.flowchart-d .window:hover {
     box-shadow: 2px 2px 19px #444;
     -o-box-shadow: 2px 2px 19px #444;
     -webkit-box-shadow: 2px 2px 19px #444;
@@ -100,11 +100,11 @@
     opacity: 0.6;
 }
 
-.flowchart-demo .active {
+.flowchart-d .active {
     border: 1px dotted green;
 }
 
-.flowchart-demo .hover {
+.flowchart-d .hover {
     border: 1px dotted red;
 }
 
@@ -127,11 +127,11 @@
 }
 
 
-.flowchart-demo .jsplumb-connector {
+.flowchart-d .jsplumb-connector {
     z-index: 4;
 }
 
-.flowchart-demo .jsplumb-endpoint, .endpointTargetLabel, .endpointSourceLabel {
+.flowchart-d .jsplumb-endpoint, .endpointTargetLabel, .endpointSourceLabel {
     z-index: 21;
     cursor: pointer;
 }

@@ -13,10 +13,6 @@ jsPlumb.ready(function () {
             cursor: 'pointer',
             zIndex: 2000
         },
-        /////////////////////////////////////////////////
-       
-        /////////////////////////////////////////////////7
-        //the arrow overlay for the connection
         ConnectionOverlays: [
             ["Arrow", {
                 location: 1,
@@ -24,12 +20,14 @@ jsPlumb.ready(function () {
                 id: "ARROW",
                 length: 14,
                 foldback: 0.8
-            }]
+            }], [ "Label", { label: "FOO", id: "label", cssClass: "aLabel" }]
         ],
         Container: "canvas"
     });
 
-   
+    jsPlumbInstance.bind("connection", function (info) {
+        info.connection.getOverlay("label").setLabel("Testing");
+    });
 
     //define basic connection type
     var basicType = {
@@ -166,22 +164,22 @@ jsPlumb.ready(function () {
 
 	//load properties of a start element once the start element in the palette is clicked
     $('#entityID').mousedown(function () {
-        loadProperties("window start custom jtk-node jsplumb-connected", "5em", "5em", "entity", ["BottomCenter"],
-            ["LeftMiddle", "RightMiddle", "BottomCenter"], false);
+        loadProperties("window start custom jtk-node jsplumb-connected", "5em", "5em", "entity", ["TopCenter", "BottomCenter"],
+            ["Left", "Right"], false);
         clicked = true;
     });
 
     //load properties of a step element once the step element in the palette is clicked
     $('#activityID').mousedown(function () {
         loadProperties("window step custom jtk-node jsplumb-connected-step", "5em", "5em", "activity",
-            ["BottomCenter"], ["TopCenter"], false);
+        ["TopCenter", "BottomCenter"],  ["Left", "Right"], false);
         clicked = true;
     });
 
     //load properties of a decision element once the decision element in the palette is clicked
     $('#agentID').mousedown(function () {
         loadProperties("window diamond custom jtk-node jsplumb-connected-step", "5em", "5em", "agents",
-            ["Top"], ["LeftMiddle", "RightMiddle", "BottomCenter"], true, 100, 100);
+        ["TopCenter", "BottomCenter"], ["Left", "Right"], true, 100, 100);
         clicked = true;
     });
 

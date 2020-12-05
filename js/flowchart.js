@@ -13,16 +13,23 @@ jsPlumb.ready(function () {
             cursor: 'pointer',
             zIndex: 2000
         },
+        /////////////////////////////////////////////////
+       
+        /////////////////////////////////////////////////7
         //the arrow overlay for the connection
         ConnectionOverlays: [
             ["Arrow", {
                 location: 1,
                 visible: true,
-                id: "ARROW"
+                id: "ARROW",
+                length: 14,
+                foldback: 0.8
             }]
         ],
         Container: "canvas"
     });
+
+   
 
     //define basic connection type
     var basicType = {
@@ -30,8 +37,8 @@ jsPlumb.ready(function () {
         paintStyle: {strokeStyle: "#216477", lineWidth: 4},
         hoverPaintStyle: {strokeStyle: "blue"}
     };
-    jsPlumbInstance.registerConnectionType("basic", basicType);
-
+    //jsPlumbInstance.registerConnectionType("basic", basicType);
+    jsPlumbInstance.registerConnectionType("basic", { anchor:"Continuous", connector:"StateMachine" });
     //style for the connector
     var connectorPaintStyle = {
         lineWidth: 4,
@@ -106,7 +113,7 @@ jsPlumb.ready(function () {
 	makeDraggable("#entityID", "window start jsplumb-connected custom", "entity");
 	makeDraggable("#activityID", "window step jsplumb-connected-step custom", "activity");
 	//makeDraggable("#agentsID", "window diamond jsplumb-connected-end custom", "agents");
-
+    
     $("#agentID").draggable({
         helper: function () {
     	   return createElement("");
@@ -217,29 +224,33 @@ jsPlumb.ready(function () {
             strong.append(p);
         }
         elm.append(strong);
+        var id = jsPlumbUtil.uuid();
+        elm.id = id;
+        elm.innerHTML = id.substring(0, 7) + "<div class=\"ep\"></div>";
+
         return elm;
     }
 
      //add the endpoints for the elements
-    var ep;
+    var epp;
     var _addEndpoints = function (toId, sourceAnchors, targetAnchors) {
         for (var i = 0; i < sourceAnchors.length; i++) {
             var sourceUUID = toId + sourceAnchors[i];
-            ep = jsPlumbInstance.addEndpoint("flowchart" + toId, sourceEndpoint, {
+            epp = jsPlumbInstance.addEndpoint("flowchart" + toId, sourceEndpoint, {
                 anchor: sourceAnchors[i], uuid: sourceUUID
             });
-            sourcepointList.push(["flowchart" + toId, ep]);
-            ep.canvas.setAttribute("title", "Drag a connection from here");
-            ep = null;
+            sourcepointList.push(["flowchart" + toId, epp]);
+            epp.canvas.setAttribute("title", "Drag a connection from here");
+            epp = null;
         }
         for (var j = 0; j < targetAnchors.length; j++) {
             var targetUUID = toId + targetAnchors[j];
-            ep = jsPlumbInstance.addEndpoint("flowchart" + toId, targetEndpoint, {
+            epp = jsPlumbInstance.addEndpoint("flowchart" + toId, targetEndpoint, {
                 anchor: targetAnchors[j], uuid: targetUUID
             });
-            endpointList.push(["flowchart" + toId, ep]);
-            ep.canvas.setAttribute("title", "Drop a connection here");
-            ep = null;
+            endpointList.push(["flowchart" + toId, epp]);
+            epp.canvas.setAttribute("title", "Drop a connection here");
+            epp = null;
         }
     };
 
@@ -251,4 +262,5 @@ jsPlumb.ready(function () {
             grid: [20, 20]
         });
     }
+
 });

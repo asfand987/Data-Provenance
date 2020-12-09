@@ -31,7 +31,8 @@ jsPlumb.ready(function () {
         //console.log(jsPlumbInstance.isTarget(".entityID"));
         var s=info.sourceId,t=info.targetId;
         //document.getElementById(ci);
-        console.log(s+" -> "+t + " - " + document.getElementById(s) );
+        console.log(s+" -> "+t);
+        //console.log(properties[0]);
     });
 
  
@@ -134,8 +135,21 @@ jsPlumb.ready(function () {
             if (clicked) {
     	        clicked = false;
     	        elementCount++;
-    	        var name = "Window" + elementCount;
-                var id = "flowchartWindow" + elementCount;
+                var name = "Window" + elementCount;
+                //console.log(properties[0]);
+                var id;
+                if(properties[0].label == "entity") {
+                    id = "entityWindow" + elementCount;
+                }
+                else if(properties[0].label == "activity") {
+                    id = "activityWindow" + elementCount;
+                }
+                else if(properties[0].label == "agents") {
+                    id = "agentWindow" + elementCount;
+                }
+                else {
+                    alert("Hello! I am an alert box!!");
+                }
                 //var id = docu
     	        element = createElement(id);
     	        drawElement(element, "#canvas", name);
@@ -197,9 +211,11 @@ jsPlumb.ready(function () {
     //create an element to be drawn on the canvas
     function createElement(id) {
         var elm = $('<div>').addClass(properties[0].clsName).attr('id', id);
+        
         if (properties[0].clsName.indexOf("diamond") > -1) {
             elm.outerWidth("100px");
             elm.outerHeight("100px");
+            //console.log("True");
         }
         elm.css({
             'top': properties[0].top,
@@ -240,21 +256,31 @@ jsPlumb.ready(function () {
      //add the endpoints for the elements
     var epp;
     var _addEndpoints = function (toId, sourceAnchors, targetAnchors) {
+        var id;
+        if(properties[0].label == "entity") {
+            id = "entity";
+        }
+        else if(properties[0].label == "activity") {
+            id = "activity";
+        }
+        else if(properties[0].label == "agents") {
+            id = "agent";
+        }
         for (var i = 0; i < sourceAnchors.length; i++) {
             var sourceUUID = toId + sourceAnchors[i];
-            epp = jsPlumbInstance.addEndpoint("flowchart" + toId, sourceEndpoint, {
+            epp = jsPlumbInstance.addEndpoint(id + toId, sourceEndpoint, {
                 anchor: sourceAnchors[i], uuid: sourceUUID
             });
-            sourcepointList.push(["flowchart" + toId, epp]);
+            sourcepointList.push([id + toId, epp]);
             epp.canvas.setAttribute("title", "Drag a connection from here");
             epp = null;
         }
         for (var j = 0; j < targetAnchors.length; j++) {
             var targetUUID = toId + targetAnchors[j];
-            epp = jsPlumbInstance.addEndpoint("flowchart" + toId, targetEndpoint, {
+            epp = jsPlumbInstance.addEndpoint(id + toId, targetEndpoint, {
                 anchor: targetAnchors[j], uuid: targetUUID
             });
-            endpointList.push(["flowchart" + toId, epp]);
+            endpointList.push([id + toId, epp]);
             epp.canvas.setAttribute("title", "Drop a connection here");
             epp = null;
         }

@@ -24,11 +24,18 @@ jsPlumb.ready(function () {
         ],
         Container: "canvas"
     });
-
+    var windows = jsPlumb.getSelector(".canvas-wide .window start jsplumb-connected");
     jsPlumbInstance.bind("connection", function (info) {
-        info.connection.getOverlay("label").setLabel("Testing");
+        //info.connection.getOverlay("label").setLabel("t");
+        //console.log(jsPlumbInstance.isSource(".entityID"));
+        //console.log(jsPlumbInstance.isTarget(".entityID"));
+        var s=info.sourceId,t=info.targetId;
+        //document.getElementById(ci);
+        console.log(s+" -> "+t + " - " + document.getElementById(s) );
     });
 
+ 
+    //instance.connect({ source: "opened", target: "phone1", type:"basic" });
     //define basic connection type
     var basicType = {
         connector: "StateMachine",
@@ -128,7 +135,8 @@ jsPlumb.ready(function () {
     	        clicked = false;
     	        elementCount++;
     	        var name = "Window" + elementCount;
-    	        var id = "flowchartWindow" + elementCount;
+                var id = "flowchartWindow" + elementCount;
+                //var id = docu
     	        element = createElement(id);
     	        drawElement(element, "#canvas", name);
     	        element = "";
@@ -164,22 +172,24 @@ jsPlumb.ready(function () {
 
 	//load properties of a start element once the start element in the palette is clicked
     $('#entityID').mousedown(function () {
-        loadProperties("window start custom jtk-node jsplumb-connected", "5em", "5em", "entity", ["TopCenter", "BottomCenter"],
-            ["Left", "Right"], false);
+        loadProperties("window start custom jtk-node jsplumb-connected", "5em", "5em", "entity", ["Left", "Right"],
+            ["Top", "Bottom"], false);
         clicked = true;
     });
 
     //load properties of a step element once the step element in the palette is clicked
     $('#activityID').mousedown(function () {
         loadProperties("window step custom jtk-node jsplumb-connected-step", "5em", "5em", "activity",
-        ["TopCenter", "BottomCenter"],  ["Left", "Right"], false);
+        ["Left", "Right"],
+        ["Top", "Bottom"], false);
         clicked = true;
     });
 
     //load properties of a decision element once the decision element in the palette is clicked
     $('#agentID').mousedown(function () {
         loadProperties("window diamond custom jtk-node jsplumb-connected-step", "5em", "5em", "agents",
-        ["TopCenter", "BottomCenter"], ["Left", "Right"], true, 100, 100);
+        ["Left", "Right"],
+        ["Top", "Bottom"], true, 100, 100);
         clicked = true;
     });
 
@@ -222,9 +232,7 @@ jsPlumb.ready(function () {
             strong.append(p);
         }
         elm.append(strong);
-        var id = jsPlumbUtil.uuid();
-        elm.id = id;
-        elm.innerHTML = id.substring(0, 7) + "<div class=\"ep\"></div>";
+       
 
         return elm;
     }

@@ -27,12 +27,27 @@ jsPlumb.ready(function () {
     var windows = jsPlumb.getSelector(".canvas-wide .window start jsplumb-connected");
     jsPlumbInstance.bind("connection", function (info) {
         //info.connection.getOverlay("label").setLabel("t");
-        //console.log(jsPlumbInstance.isSource(".entityID"));
-        //console.log(jsPlumbInstance.isTarget(".entityID"));
-        var s=info.sourceId,t=info.targetId;
+        
+        var source=info.sourceId.replace(/[0-9]/g, '');
+        var target=info.targetId.replace(/[0-9]/g, '');
         //document.getElementById(ci);
-        console.log(s+" -> "+t);
+        //console.log(s+" -> "+t);
         //console.log(properties[0]);
+        if (source == "entityWindow" && source == target) {
+            info.connection.getOverlay("label").setLabel("wasDerivedFrom");
+        }
+        else if(source == "entityWindow" && target == "agentWindow") {
+            info.connection.getOverlay("label").setLabel("wasAttributedTo");
+        }
+        else if(source == "entityWindow" && target == "activityWindow") {
+            info.connection.getOverlay("label").setLabel("wasGeneratedBy");
+        }
+        else if(source == "activityWindow" && target == "agentWindow") {
+            info.connection.getOverlay("label").setLabel("wasAssociatedWith");
+        }
+        else if(source == "activityWindow" && target == "entityWindow") {
+            info.connection.getOverlay("label").setLabel("used");
+        }
     });
 
  

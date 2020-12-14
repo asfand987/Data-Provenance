@@ -48,6 +48,12 @@ jsPlumb.ready(function () {
         else if(source == "activityWindow" && target == "entityWindow") {
             info.connection.getOverlay("label").setLabel("used");
         }
+        else if(source == "activityWindow" && target == source) {
+            info.connection.getOverlay("label").setLabel("wasInformedBy");
+        }
+        else if(source == "agentWindow" && target == source) {
+            info.connection.getOverlay("label").setLabel("actedOnBehalfOf");
+        }
     });
 
  

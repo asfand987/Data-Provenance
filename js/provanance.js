@@ -3,6 +3,7 @@ var sourcepointList = [];
 var _saveFlowchart, elementCount = 0;
 var jsPlumbInstance; //the jsPlumb jsPlumbInstance
 var properties = []; //keeps the properties of each element
+
 jsPlumb.ready(function () {
     var element = "";   //the element which will be appended to the canvas
     var clicked = false;    //check whether an element from the palette was clicked
@@ -55,7 +56,6 @@ jsPlumb.ready(function () {
             info.connection.getOverlay("label").setLabel("actedOnBehalfOf");
         }
     });
-
  
     //instance.connect({ source: "opened", target: "phone1", type:"basic" });
     //define basic connection type
@@ -139,15 +139,15 @@ jsPlumb.ready(function () {
 
 	makeDraggable("#entityID", "window start jsplumb-connected custom", "entity");
 	makeDraggable("#activityID", "window step jsplumb-connected-step custom", "activity");
-	//makeDraggable("#agentsID", "window diamond jsplumb-connected-end custom", "agents");
+	makeDraggable("#agentID", "window diamond jsplumb-connected-end custom", "agents");
     
-    $("#agentID").draggable({
+    /*$("#agentID").draggable({
         helper: function () {
     	   return createElement("");
         },
         stack: ".custom",
         revert: false
-	});
+	});*/
 
 	//make the editor canvas droppable
     $("#canvas").droppable({
@@ -222,7 +222,7 @@ jsPlumb.ready(function () {
 
     //load properties of a decision element once the decision element in the palette is clicked
     $('#agentID').mousedown(function () {
-        loadProperties("window diamond custom jtk-node jsplumb-connected-step", "5em", "5em", "agents",
+        loadProperties("window diamond custom jtk-node jsplumb-connected-end", "5em", "5em", "agents",
         ["Left", "Right"],
         ["Top", "Bottom"], true, 100, 100);
         clicked = true;
@@ -233,18 +233,18 @@ jsPlumb.ready(function () {
     function createElement(id) {
         var elm = $('<div>').addClass(properties[0].clsName).attr('id', id);
         
-        if (properties[0].clsName.indexOf("diamond") > -1) {
+        /*if (properties[0].clsName.indexOf("diamond") > -1) {
             elm.outerWidth("100px");
             elm.outerHeight("100px");
             //console.log("True");
-        }
+        }*/
         elm.css({
             'top': properties[0].top,
             'left': properties[0].left
         });
-
+        console.log(properties[0].clsName );
         var strong = $('<strong>');
-        if (properties[0].clsName == "window diamond custom jtk-node jsplumb-connected-step") {
+        /*if (properties[0].clsName == "window diamond custom jtk-node jsplumb-connected-step") {
             elm.append("<i style='display: none; margin-left: -5px; margin-top: -50px' " +
             "class=\"fa fa-trash fa-lg close-icon desc-text\"><\/i>");
             var p = "<p style='line-height: 110%; margin-top: 25px' class='desc-text' contenteditable='true' " +
@@ -264,10 +264,15 @@ jsPlumb.ready(function () {
                 "ondblclick='$(this).focus();'>" + properties[0].label + "</p>";
             strong.append(p);
         } else {
+            console.log("ewewe");
             elm.append("<i style='display: none' class=\"fa fa-trash fa-lg close-icon\"><\/i>");
             var p = $('<p>').text(properties[0].label);
             strong.append(p);
-        }
+        }*/
+        //console.log("ewewe");
+        elm.append("<i style='display: none' class=\"fa fa-trash fa-lg close-icon\"><\/i>");
+        var p = $('<p>').text(properties[0].label);
+        strong.append(p);
         elm.append(strong);
        
 

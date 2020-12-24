@@ -28,24 +28,51 @@
     line-height: 60px;
 }
 
+
 .diamond{
-    /*-webkit-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
     -moz-transform: rotate(45deg);
     -o-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
-    transform: rotate(45deg);*/
-    width: 100px;
-    height: 50px;
-    line-height: 40px;
+    transform: rotate(45deg);
+    width: 80px;
+    height: 80px;
+    line-height: 60px;
 }
 
-/*.desc-text{
+.diamond p{
     -webkit-transform: rotate(-45deg);
     -moz-transform: rotate(-45deg);
     -o-transform: rotate(-45deg);
     -ms-transform: rotate(-45deg);
     transform: rotate(-45deg);
+}
+/*
+.p{
+    transform: rotate(180deg);
 }*/
+
+#pent { 
+    width: 100px; 
+    height: 100px; 
+    background: #aaa; 
+    position:relative; 
+    border: 2px solid orangered;
+    top: 30em;
+    left: 4em; 
+  }
+  
+  #pent:before { 
+    height: 0px; 
+    width: 96px; 
+    content:""; 
+    position: absolute; 
+    border-bottom: 40px solid #aaa; 
+    border-left: 30px solid white; 
+    border-right: 30px solid white; 
+  } 
+  
+
 
 .flowchart-d .window {
     border: 1px solid #346789;
@@ -102,9 +129,8 @@
 
 #agentID{
     top: 28em;
-    left: 4em;
+    left: 5em;
 }
-
 
 .flowchart-d .jsplumb-connector {
     z-index: 4;

@@ -57,6 +57,7 @@ jsPlumb.ready(function () {
         }
     });
  
+
     //instance.connect({ source: "opened", target: "phone1", type:"basic" });
     //define basic connection type
     var basicType = {
@@ -139,7 +140,8 @@ jsPlumb.ready(function () {
 
 	makeDraggable("#entityID", "window start jsplumb-connected custom", "entity");
 	makeDraggable("#activityID", "window step jsplumb-connected-step custom", "activity");
-	makeDraggable("#agentID", "window diamond jsplumb-connected-end custom", "agents");
+    makeDraggable("#agentID", "window diamond jsplumb-connected-end custom", "agents");
+    makeDraggable("#Penta", "p");
     
     /*$("#agentID").draggable({
         helper: function () {
@@ -148,7 +150,7 @@ jsPlumb.ready(function () {
         stack: ".custom",
         revert: false
 	});*/
-
+   
 	//make the editor canvas droppable
     $("#canvas").droppable({
         accept: ".window",

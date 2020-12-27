@@ -118,18 +118,18 @@
 #entityID{
     /*border-radius: 5em;*/
     top: 4em;
-    left: 4em;
+    left: 1em;
 }
 
 #activityID{
     /*border-radius: 0.5em;*/
     top: 15em;
-    left: 4em;
+    left: 1em;
 }
 
 #agentID{
     top: 28em;
-    left: 5em;
+    left: 2.5em;
 }
 
 .flowchart-d .jsplumb-connector {

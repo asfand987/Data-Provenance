@@ -55,6 +55,12 @@ jsPlumb.ready(function () {
         else if(source == "agentWindow" && target == source) {
             info.connection.getOverlay("label").setLabel("actedOnBehalfOf");
         }
+        else if(source == "agentWindow" && target == "activityWindow") {
+            info.connection.getOverlay("label").setLabel("");
+        }
+        else if(source == "agentWindow" && target == "entityWindow") {
+            info.connection.getOverlay("label").setLabel("");
+        }
     });
  
 
@@ -141,7 +147,7 @@ jsPlumb.ready(function () {
 	makeDraggable("#entityID", "window start jsplumb-connected custom", "entity");
 	makeDraggable("#activityID", "window step jsplumb-connected-step custom", "activity");
     makeDraggable("#agentID", "window diamond jsplumb-connected-end custom", "agents");
-    makeDraggable("#Penta", "p");
+
     
     /*$("#agentID").draggable({
         helper: function () {

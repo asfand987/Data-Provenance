@@ -34,31 +34,31 @@ jsPlumb.ready(function () {
         //document.getElementById(ci);
         //console.log(s+" -> "+t);
         //console.log(properties[0]);
-        if (source == "entityWindow" && source == target) {
+        if (source == "entity" && source == target) {
             info.connection.getOverlay("label").setLabel("wasDerivedFrom");
         }
-        else if(source == "entityWindow" && target == "agentWindow") {
+        else if(source == "entity" && target == "agent") {
             info.connection.getOverlay("label").setLabel("wasAttributedTo");
         }
-        else if(source == "entityWindow" && target == "activityWindow") {
+        else if(source == "entity" && target == "activity") {
             info.connection.getOverlay("label").setLabel("wasGeneratedBy");
         }
-        else if(source == "activityWindow" && target == "agentWindow") {
+        else if(source == "activity" && target == "agent") {
             info.connection.getOverlay("label").setLabel("wasAssociatedWith");
         }
-        else if(source == "activityWindow" && target == "entityWindow") {
+        else if(source == "activity" && target == "entity") {
             info.connection.getOverlay("label").setLabel("used");
         }
-        else if(source == "activityWindow" && target == source) {
+        else if(source == "activity" && target == source) {
             info.connection.getOverlay("label").setLabel("wasInformedBy");
         }
-        else if(source == "agentWindow" && target == source) {
+        else if(source == "agent" && target == source) {
             info.connection.getOverlay("label").setLabel("actedOnBehalfOf");
         }
-        else if(source == "agentWindow" && target == "activityWindow") {
+        else if(source == "agent" && target == "activity") {
             info.connection.getOverlay("label").setLabel("");
         }
-        else if(source == "agentWindow" && target == "entityWindow") {
+        else if(source == "agent" && target == "entity") {
             info.connection.getOverlay("label").setLabel("");
         }
     });
@@ -157,29 +157,41 @@ jsPlumb.ready(function () {
         revert: false
 	});*/
    
-	//make the editor canvas droppable
+    //make the editor canvas droppable
+    entityCount = 1;
+    agentCount = 1;
+    activityCount = 1;
     $("#canvas").droppable({
-        accept: ".window",
+        //accept: ".window",
+        
         drop: function (event, ui) {
             if (clicked) {
     	        clicked = false;
-    	        elementCount++;
-                var name = "Window" + elementCount;
+                elementCount++;
+               
+                //var name = "Window" + elementCount;
                 //console.log(properties[0]);
+                //var name; // add this
+                var name;
                 var id;
                 if(properties[0].label == "entity") {
-                    id = "entityWindow" + elementCount;
+                    name =  entityCount;
+                    id = "entity" + entityCount++;
                 }
                 else if(properties[0].label == "activity") {
-                    id = "activityWindow" + elementCount;
+                    name = activityCount;
+                    id = "activity" + activityCount++;
                 }
                 else if(properties[0].label == "agents") {
-                    id = "agentWindow" + elementCount;
+                    var name = agentCount;
+                    id = "agent" + agentCount++;
                 }
                 else {
                     alert("Hello! I am an alert box!!");
                 }
+                //console.log(id);
                 //var id = docu
+                //console.log(id);
     	        element = createElement(id);
     	        drawElement(element, "#canvas", name);
     	        element = "";
@@ -231,8 +243,8 @@ jsPlumb.ready(function () {
     //load properties of a decision element once the decision element in the palette is clicked
     $('#agentID').mousedown(function () {
         loadProperties("window diamond custom jtk-node jsplumb-connected-end", "5em", "5em", "agents",
-        ["Left", "Right"],
-        ["Top", "Bottom"], true, 100, 100);
+        ["Bottom"],
+        ["Left", "Right", "Top"], true, 100, 100);
         clicked = true;
     });
 
@@ -250,7 +262,7 @@ jsPlumb.ready(function () {
             'top': properties[0].top,
             'left': properties[0].left
         });
-        console.log(properties[0].clsName );
+        //console.log(properties[0].clsName );
         var strong = $('<strong>');
         /*if (properties[0].clsName == "window diamond custom jtk-node jsplumb-connected-step") {
             elm.append("<i style='display: none; margin-left: -5px; margin-top: -50px' " +
@@ -300,11 +312,17 @@ jsPlumb.ready(function () {
         else if(properties[0].label == "agents") {
             id = "agent";
         }
+        //onsole.log("toID is: " + toId);
+        //console.log("id is: " + id);
         for (var i = 0; i < sourceAnchors.length; i++) {
             var sourceUUID = toId + sourceAnchors[i];
+            //console.log("sourceAnchors is: " + sourceAnchors[i]); 
+            //console.log("sourceUUID is: " + sourceUUID);
+            //console.log("sourceEP " + sourceEndpoint);
             epp = jsPlumbInstance.addEndpoint(id + toId, sourceEndpoint, {
                 anchor: sourceAnchors[i], uuid: sourceUUID
             });
+            
             sourcepointList.push([id + toId, epp]);
             epp.canvas.setAttribute("title", "Drag a connection from here");
             epp = null;
@@ -322,6 +340,7 @@ jsPlumb.ready(function () {
 
 
     function drawElement(element, canvasId, name) {
+        //console.log("Name is: " + name);
         $(canvasId).append(element);
         _addEndpoints(name, properties[0].startpoints, properties[0].endpoints);
         jsPlumbInstance.draggable(jsPlumbInstance.getSelector(".jtk-node"), {

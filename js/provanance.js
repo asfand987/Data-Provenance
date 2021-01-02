@@ -25,6 +25,12 @@ jsPlumb.ready(function () {
         ],
         Container: "canvas"
     });
+
+
+
+
+
+
     var windows = jsPlumb.getSelector(".canvas-wide .window start jsplumb-connected");
     jsPlumbInstance.bind("connection", function (info) {
         //info.connection.getOverlay("label").setLabel("t");
@@ -34,31 +40,31 @@ jsPlumb.ready(function () {
         //document.getElementById(ci);
         //console.log(s+" -> "+t);
         //console.log(properties[0]);
-        if (source == "entity" && source == target) {
+        if (source == "e" && source == target) {
             info.connection.getOverlay("label").setLabel("wasDerivedFrom");
         }
-        else if(source == "entity" && target == "agent") {
+        else if(source == "e" && target == "ex") {
             info.connection.getOverlay("label").setLabel("wasAttributedTo");
         }
-        else if(source == "entity" && target == "activity") {
+        else if(source == "e" && target == "a") {
             info.connection.getOverlay("label").setLabel("wasGeneratedBy");
         }
-        else if(source == "activity" && target == "agent") {
+        else if(source == "a" && target == "ex") {
             info.connection.getOverlay("label").setLabel("wasAssociatedWith");
         }
-        else if(source == "activity" && target == "entity") {
+        else if(source == "a" && target == "e") {
             info.connection.getOverlay("label").setLabel("used");
         }
-        else if(source == "activity" && target == source) {
+        else if(source == "a" && target == source) {
             info.connection.getOverlay("label").setLabel("wasInformedBy");
         }
-        else if(source == "agent" && target == source) {
+        else if(source == "ex" && target == source) {
             info.connection.getOverlay("label").setLabel("actedOnBehalfOf");
         }
-        else if(source == "agent" && target == "activity") {
+        else if(source == "ex" && target == "a") {
             info.connection.getOverlay("label").setLabel("");
         }
-        else if(source == "agent" && target == "entity") {
+        else if(source == "ex" && target == "e") {
             info.connection.getOverlay("label").setLabel("");
         }
     });
@@ -176,20 +182,20 @@ jsPlumb.ready(function () {
                 var id;
                 if(properties[0].label == "entity") {
                     name =  entityCount;
-                    id = "entity" + entityCount++;
+                    id = "e" + entityCount++;
                 }
                 else if(properties[0].label == "activity") {
                     name = activityCount;
-                    id = "activity" + activityCount++;
+                    id = "a" + activityCount++;
                 }
                 else if(properties[0].label == "agents") {
                     var name = agentCount;
-                    id = "agent" + agentCount++;
+                    id = "ex" + agentCount++;
                 }
                 else {
                     alert("Hello! I am an alert box!!");
                 }
-                //console.log(id);
+                console.log(id);
                 //var id = docu
                 //console.log(id);
     	        element = createElement(id);
@@ -225,6 +231,7 @@ jsPlumb.ready(function () {
 	});
     }
 
+    
 	//load properties of a start element once the start element in the palette is clicked
     $('#entityID').mousedown(function () {
         loadProperties("window start custom jtk-node jsplumb-connected", "5em", "5em", "entity", ["Left", "Right"],
@@ -304,13 +311,13 @@ jsPlumb.ready(function () {
     var _addEndpoints = function (toId, sourceAnchors, targetAnchors) {
         var id;
         if(properties[0].label == "entity") {
-            id = "entity";
+            id = "e";
         }
         else if(properties[0].label == "activity") {
-            id = "activity";
+            id = "a";
         }
         else if(properties[0].label == "agents") {
-            id = "agent";
+            id = "ex";
         }
         //onsole.log("toID is: " + toId);
         //console.log("id is: " + id);
@@ -349,3 +356,21 @@ jsPlumb.ready(function () {
     }
 
 });
+
+function add() {
+    var val = parseInt($('#vvar-input').val())+1;
+    var input="<input type='text' placeholder='Add var...' id='new_"+val+"'><button onclick='values()'>confirm</button><br/><div data-value=1 id=new_input2></div><input type='hidden' value=1 id=vars><br/>";
+    $('#new_input').append(input);
+    $('#vvar-input').val(val);
+}
+
+function values() {
+    var val = parseInt($('#vars').val())+1;
+    var val2 = document.getElementById('new_input2').getAttribute('data-value');
+
+    console.log(val2);
+    var input="<input type='text' placeholder='Add values...' id='new_"+val+"'>";
+    
+    $('#new_input2').append(input);
+    $('#vars').val(val);
+}

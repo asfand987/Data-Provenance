@@ -27,10 +27,6 @@ jsPlumb.ready(function () {
     });
 
 
-
-
-
-
     var windows = jsPlumb.getSelector(".canvas-wide .window start jsplumb-connected");
     jsPlumbInstance.bind("connection", function (info) {
         //info.connection.getOverlay("label").setLabel("t");
@@ -176,7 +172,7 @@ jsPlumb.ready(function () {
                 elementCount++;
                
                 //var name = "Window" + elementCount;
-                //console.log(properties[0]);
+                console.log(properties[0]);
                 //var name; // add this
                 var name;
                 var id;
@@ -196,7 +192,7 @@ jsPlumb.ready(function () {
                     alert("Hello! I am an alert box!!");
                 }
                 console.log(id);
-                //var id = docu
+
                 //console.log(id);
     	        element = createElement(id);
     	        drawElement(element, "#canvas", name);
@@ -216,6 +212,7 @@ jsPlumb.ready(function () {
         }
     });
 
+    var te = "tsgin";
     var properties;
     var clicked = false;
     function loadProperties(clsName, left, top, label, startpoints, endpoints, contenteditable) {
@@ -227,11 +224,14 @@ jsPlumb.ready(function () {
 	    label: label,
 	    startpoints: startpoints,
 	    endpoints: endpoints,
-	    contenteditable: contenteditable
+        contenteditable: contenteditable,
+        type: te
 	});
     }
 
-    
+    function test() {
+        properties.push
+    }
 	//load properties of a start element once the start element in the palette is clicked
     $('#entityID').mousedown(function () {
         loadProperties("window start custom jtk-node jsplumb-connected", "5em", "5em", "entity", ["Left", "Right"],
@@ -377,3 +377,4 @@ function values() {
   function add() {
     $('.c').append($('.t').html());
   }
+

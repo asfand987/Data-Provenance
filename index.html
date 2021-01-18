@@ -54,14 +54,23 @@
 				</span>
 				<span style="display: inline-block; vertical-align: top; padding: 5px; width:25%; height:100%">
 					<div id="inspector" style="border: solid 1px gray;;"><p><center><strong>Inspector</strong></center></p>
-						<label>prov:type</label>
+						<label for="cars">Choose an attribute:</label>
+						<select name="cars" id="cars">
+							<option value="1">prov:label</option>
+							<option value="2">prov:location</option>
+							<option value="3">prov:role</option>
+							<option value="4">prov:type</option>
+							<option value="5">custome</option>
+						</select>
+						<br><br>
+						<!--<label>prov:type</label>
 						<input type="text" placeholder="Add type...">
 						<button onclick="">confirm</button>
 						<br/>
 						<label>vvar</label>
 						<button onclick="add()">+</button>
 						<div id="new_input"></div>
-  						<input type="hidden" value="1" id="vvar-input">
+  						<input type="hidden" value="1" id="vvar-input"> -->
 					</div>
 				</span>
 		    </div>

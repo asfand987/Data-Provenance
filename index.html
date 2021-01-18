@@ -54,15 +54,21 @@
 				</span>
 				<span style="display: inline-block; vertical-align: top; padding: 5px; width:25%; height:100%">
 					<div id="inspector" style="border: solid 1px gray;;"><p><center><strong>Inspector</strong></center></p>
-						<label for="cars">Choose an attribute:</label>
-						<select name="cars" id="cars">
-							<option value="1">prov:label</option>
-							<option value="2">prov:location</option>
-							<option value="3">prov:role</option>
-							<option value="4">prov:type</option>
-							<option value="5">custome</option>
-						</select>
-						<br><br>
+						<div class="c">
+							<div class="t">
+								<label for="cars">Choose an attribute:</label>
+								<select name="cars" id="cars">
+									<option value="1">prov:label</option>
+									<option value="2">prov:location</option>
+									<option value="3">prov:role</option>
+									<option value="4">prov:type</option>
+									<option value="5">custome</option>
+								</select>
+								<button class="btnn" onclick="add()">+</button>
+								<br><br>
+							</div>
+						</div>
+						
 						<!--<label>prov:type</label>
 						<input type="text" placeholder="Add type...">
 						<button onclick="">confirm</button>
@@ -76,6 +82,7 @@
 		    </div>
 		</div>
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script src="js/jquery-ui.js"></script>
 	<script src="js/jsPlumb-2.0.7.js"></script>
 	<script type="text/javascript" src="js/provanance.js"></script>

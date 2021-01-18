@@ -357,7 +357,7 @@ jsPlumb.ready(function () {
 
 });
 
-function add() {
+/*function add() {
     var val = parseInt($('#vvar-input').val())+1;
     var input="<input type='text' placeholder='Add var...' id='new_"+val+"'><button onclick='values()'>confirm</button><br/><div data-value=1 id=new_input2></div><input type='hidden' value=1 id=vars><br/>";
     $('#new_input').append(input);
@@ -373,4 +373,7 @@ function values() {
     
     $('#new_input2').append(input);
     $('#vars').val(val);
-}
+}*/
+  function add() {
+    $('.c').append($('.t').html());
+  }

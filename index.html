@@ -57,7 +57,7 @@
 						<div class="c">
 							<div class="t">
 								<label for="cars">Choose an attribute:</label>
-								<select name="cars" id="cars">
+								<select name="attributes" id="attr">
 									<option value="0">choose...</option>
 									<option value="1">prov:label</option>
 									<option value="2">prov:location</option>
@@ -66,8 +66,9 @@
 									<option value="5">custom</option>
 								</select>
 								<button class="btnn" onclick="add()">+</button>
-								<button class="btnn" onclick="">save</button>
+								<button class="btnn" onclick="provLabel()">save</button>
 								<br><br>
+								<form id="form" action=""></form>
 							</div>
 						</div>
 						

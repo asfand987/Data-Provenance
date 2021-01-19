@@ -212,21 +212,23 @@ jsPlumb.ready(function () {
         }
     });
 
-    var te = "tsgin";
+    var count = 0;
     var properties;
     var clicked = false;
     function loadProperties(clsName, left, top, label, startpoints, endpoints, contenteditable) {
-	properties = [];
-	properties.push({
-	    left: left,
-	    top: top,
-	    clsName: clsName,
-	    label: label,
-	    startpoints: startpoints,
-	    endpoints: endpoints,
-        contenteditable: contenteditable,
-        type: te
-	});
+        properties = [];
+        properties.push({
+            left: left,
+            top: top,
+            clsName: clsName,
+            label: label,
+            startpoints: startpoints,
+            endpoints: endpoints,
+            contenteditable: contenteditable,
+            type: count
+        });
+        count++;
+        console.log(count);    
     }
 
     function test() {
@@ -378,3 +380,26 @@ function values() {
     $('.c').append($('.t').html());
   }
 
+
+function provLabel() {
+    //return option
+    var selectionAttr = document.getElementById("attr");
+    //console.log(selectionAttr.options[selectionAttr.selectedIndex].text);
+
+    var optionText = selectionAttr.options[selectionAttr.selectedIndex].text
+    var form = document.getElementById('form');
+    var input = document.createElement("input");
+    var label = document.createElement("label");
+
+    label.innerHTML = optionText;
+    
+    input.id = 'input-';
+    input.type = 'text';
+    input.name = 'name';
+    input.placeholder = 'Enter ' + optionText + "... attribute";
+
+    form.appendChild(label);
+    form.appendChild(input);
+}
+
+  

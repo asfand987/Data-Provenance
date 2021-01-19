@@ -380,9 +380,25 @@ function values() {
     $('.c').append($('.t').html());
   }
 
+  function addd() {
+    var select = document.createElement("select");
+    var option = document.createElement("option");
+
+    select.name = "attributes";
+    select.id = "tst";
+    option.value="0";
+    option.text="Testing";
+    
+    var holder = document.getElementsByClassName("t");
+    console.log(holder);
+    //console.log( holder.innerHTML += select);
+    holder.appendChild(select);
+    //holder.innerHTML += select;
+    select.appendChild(option);
+    //holder.appendChild(select);
+}
 
 function provLabel() {
-    //return option
     var selectionAttr = document.getElementById("attr");
     //console.log(selectionAttr.options[selectionAttr.selectedIndex].text);
 

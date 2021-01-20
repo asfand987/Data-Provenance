@@ -133,6 +133,7 @@ jsPlumb.ready(function () {
             isTarget: true
         };
 
+       
 	function makeDraggable(id, className, text){
 	    $(id).draggable({
 		helper: function(){
@@ -163,6 +164,7 @@ jsPlumb.ready(function () {
     entityCount = 1;
     agentCount = 1;
     activityCount = 1;
+    tt = 0;
     $("#canvas").droppable({
         //accept: ".window",
         
@@ -172,7 +174,7 @@ jsPlumb.ready(function () {
                 elementCount++;
                
                 //var name = "Window" + elementCount;
-                console.log(properties[0]);
+                //console.log(properties[0]);
                 //var name; // add this
                 var name;
                 var id;
@@ -191,15 +193,21 @@ jsPlumb.ready(function () {
                 else {
                     alert("Hello! I am an alert box!!");
                 }
-                console.log(id);
-
                 //console.log(id);
-    	        element = createElement(id);
+                
+                //elementId(id);
+                element = createElement(id);
+                //properties[0].elementId = id;
+                //console.log(properties[0].elementId);
     	        drawElement(element, "#canvas", name);
     	        element = "";
 	        }
-        }
+        }   
     });
+
+    function elementId(id) {
+        return id;
+    }
 
     //take the x, y coordinates of the current mouse position
     var x, y;
@@ -212,10 +220,14 @@ jsPlumb.ready(function () {
         }
     });
 
-    var count = 0;
+    $(document).on("click", function (event) {
+        console.log(properties[0].elementId);
+    });
+
+
     var properties;
     var clicked = false;
-    function loadProperties(clsName, left, top, label, startpoints, endpoints, contenteditable) {
+    function loadProperties(clsName, left, top, label, startpoints, endpoints, contenteditable, id) {
         properties = [];
         properties.push({
             left: left,
@@ -225,15 +237,11 @@ jsPlumb.ready(function () {
             startpoints: startpoints,
             endpoints: endpoints,
             contenteditable: contenteditable,
-            type: count
+            id: elementId(id)
         });
-        count++;
-        console.log(count);    
     }
 
-    function test() {
-        properties.push
-    }
+    
 	//load properties of a start element once the start element in the palette is clicked
     $('#entityID').mousedown(function () {
         loadProperties("window start custom jtk-node jsplumb-connected", "5em", "5em", "entity", ["Left", "Right"],
@@ -257,11 +265,17 @@ jsPlumb.ready(function () {
         clicked = true;
     });
 
-
+    document.onclick = function(e) {
+        console.log(e.path[2].id);
+    }
+   
     //create an element to be drawn on the canvas
     function createElement(id) {
         var elm = $('<div>').addClass(properties[0].clsName).attr('id', id);
-        
+        //console.log(elm.attr('id'));
+        //document.onclick = function(e) {
+         //   console.log(elm.attr('id'));
+        //}
         /*if (properties[0].clsName.indexOf("diamond") > -1) {
             elm.outerWidth("100px");
             elm.outerHeight("100px");
@@ -349,12 +363,13 @@ jsPlumb.ready(function () {
 
 
     function drawElement(element, canvasId, name) {
-        //console.log("Name is: " + name);
+        
         $(canvasId).append(element);
         _addEndpoints(name, properties[0].startpoints, properties[0].endpoints);
         jsPlumbInstance.draggable(jsPlumbInstance.getSelector(".jtk-node"), {
             grid: [20, 20]
         });
+        
     }
 
 });
@@ -398,6 +413,7 @@ function values() {
     //holder.appendChild(select);
 }
 
+var inputOutput;
 function provLabel() {
     var selectionAttr = document.getElementById("attr");
     //console.log(selectionAttr.options[selectionAttr.selectedIndex].text);
@@ -406,6 +422,7 @@ function provLabel() {
     var form = document.getElementById('form');
     var input = document.createElement("input");
     var label = document.createElement("label");
+    var button = document.createElement("button");
 
     label.innerHTML = optionText;
     
@@ -413,9 +430,21 @@ function provLabel() {
     input.type = 'text';
     input.name = 'name';
     input.placeholder = 'Enter ' + optionText + "... attribute";
+    inputOutput = input;
 
     form.appendChild(label);
     form.appendChild(input);
 }
+
+function saveOutput() {
+    
+}
+
+function inspector() {
+
+}
+
+
+
 
   

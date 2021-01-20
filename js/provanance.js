@@ -220,11 +220,6 @@ jsPlumb.ready(function () {
         }
     });
 
-    $(document).on("click", function (event) {
-        console.log(properties[0].elementId);
-    });
-
-
     var properties;
     var clicked = false;
     function loadProperties(clsName, left, top, label, startpoints, endpoints, contenteditable, id) {
@@ -265,8 +260,22 @@ jsPlumb.ready(function () {
         clicked = true;
     });
 
+    var entityClsName = "window start custom jtk-node jsplumb-connected jsplumb-endpoint-anchor jsplumb-draggable";
+    var activityClsName = "window step custom jtk-node jsplumb-connected-step jsplumb-endpoint-anchor jsplumb-draggable";
+    var agentClsName = "window diamond custom jtk-node jsplumb-connected-end jsplumb-endpoint-anchor jsplumb-draggable";
+    
     document.onclick = function(e) {
-        console.log(e.path[2].id);
+        //console.log(e.path[2].className);
+        if(e.path[2].className == entityClsName || e.path[2].className == activityClsName || e.path[2].className == agentClsName ) {
+            var x = document.getElementById("s");
+            if (x.style.display == "none") {
+                x.style.display = "inline-block";
+                console.log(x);
+            } else {
+                x.style.display = "none";
+            }
+        }
+        
     }
    
     //create an element to be drawn on the canvas

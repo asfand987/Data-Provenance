@@ -178,6 +178,8 @@ jsPlumb.ready(function () {
                 //var name; // add this
                 var name;
                 var id;
+
+
                 if(properties[0].label == "entity") {
                     name =  entityCount;
                     id = "e" + entityCount++;
@@ -205,10 +207,6 @@ jsPlumb.ready(function () {
         }   
     });
 
-    function elementId(id) {
-        return id;
-    }
-
     //take the x, y coordinates of the current mouse position
     var x, y;
     $(document).on("mousemove", function (event) {
@@ -231,8 +229,7 @@ jsPlumb.ready(function () {
             label: label,
             startpoints: startpoints,
             endpoints: endpoints,
-            contenteditable: contenteditable,
-            id: elementId(id)
+            contenteditable: contenteditable
         });
     }
 
@@ -260,68 +257,19 @@ jsPlumb.ready(function () {
         clicked = true;
     });
 
-    var entityClsName = "window start custom jtk-node jsplumb-connected jsplumb-endpoint-anchor jsplumb-draggable";
-    var activityClsName = "window step custom jtk-node jsplumb-connected-step jsplumb-endpoint-anchor jsplumb-draggable";
-    var agentClsName = "window diamond custom jtk-node jsplumb-connected-end jsplumb-endpoint-anchor jsplumb-draggable";
-    
-    document.onclick = function(e) {
-        //console.log(e.path[2].className);
-        if(e.path[2].className == entityClsName || e.path[2].className == activityClsName || e.path[2].className == agentClsName ) {
-            var x = document.getElementById("s");
-            if (x.style.display == "none") {
-                x.style.display = "inline-block";
-                console.log(x);
-            } else {
-                x.style.display = "none";
-            }
-        }
-        
-    }
    
     //create an element to be drawn on the canvas
     function createElement(id) {
-        var elm = $('<div>').addClass(properties[0].clsName).attr('id', id);
-        //console.log(elm.attr('id'));
-        //document.onclick = function(e) {
-         //   console.log(elm.attr('id'));
-        //}
-        /*if (properties[0].clsName.indexOf("diamond") > -1) {
-            elm.outerWidth("100px");
-            elm.outerHeight("100px");
-            //console.log("True");
-        }*/
+        var attr = ["testing!"];
+        var elm = $('<div>').addClass(properties[0].clsName).attr('id', id).attr('attribute', attr);
+
         elm.css({
             'top': properties[0].top,
             'left': properties[0].left
         });
         //console.log(properties[0].clsName );
         var strong = $('<strong>');
-        /*if (properties[0].clsName == "window diamond custom jtk-node jsplumb-connected-step") {
-            elm.append("<i style='display: none; margin-left: -5px; margin-top: -50px' " +
-            "class=\"fa fa-trash fa-lg close-icon desc-text\"><\/i>");
-            var p = "<p style='line-height: 110%; margin-top: 25px' class='desc-text' contenteditable='true' " +
-                "ondblclick='$(this).focus();'>" + properties[0].label + "</p>";
-            strong.append(p);
-        }
-        else if (properties[0].clsName == "window parallelogram step custom jtk-node jsplumb-connected-step") {
-            elm.append("<i style='display: none' class=\"fa fa-trash fa-lg close-icon input-text\"><\/i>");
-            var p = "<p style='line-height: 110%; margin-top: 25px' class='input-text' contenteditable='true' " +
-                "ondblclick='$(this).focus();'>" + properties[0].label
-                + "</p>";
-            strong.append(p);
-        }
-        else if (properties[0].contenteditable) {
-            elm.append("<i style='display: none' class=\"fa fa-trash fa-lg close-icon\"><\/i>");
-            var p = "<p style='line-height: 110%; margin-top: 25px' contenteditable='true' " +
-                "ondblclick='$(this).focus();'>" + properties[0].label + "</p>";
-            strong.append(p);
-        } else {
-            console.log("ewewe");
-            elm.append("<i style='display: none' class=\"fa fa-trash fa-lg close-icon\"><\/i>");
-            var p = $('<p>').text(properties[0].label);
-            strong.append(p);
-        }*/
-        //console.log("ewewe");
+
         elm.append("<i style='display: none' class=\"fa fa-trash fa-lg close-icon\"><\/i>");
         var p = $('<p>').text(properties[0].label);
         strong.append(p);
@@ -381,7 +329,31 @@ jsPlumb.ready(function () {
         
     }
 
+    // Inspector 
+    var entityClsName = "window start custom jtk-node jsplumb-connected jsplumb-endpoint-anchor jsplumb-draggable";
+    var activityClsName = "window step custom jtk-node jsplumb-connected-step jsplumb-endpoint-anchor jsplumb-draggable";
+    var agentClsName = "window diamond custom jtk-node jsplumb-connected-end jsplumb-endpoint-anchor jsplumb-draggable";
+    
+    document.onclick = function(e) {
+        //console.log(e.path[2].className);
+        if(e.path[2].className == entityClsName || e.path[2].className == activityClsName || e.path[2].className == agentClsName ) {
+            var x = document.getElementById("s");
+            if (x.style.display == "none") {
+                x.style.display = "inline-block";
+                //console.log(e);
+                ee = e;
+                //e.path[2].attributes[2].inputValue.push("w");
+                //console.log(e.path[2].attributes[2].value);
+                //e.path[2].id = 7;
+            } else {
+                x.style.display = "none";
+            }
+        }
+        
+    }
+
 });
+
 
 /*function add() {
     var val = parseInt($('#vvar-input').val())+1;
@@ -400,29 +372,9 @@ function values() {
     $('#new_input2').append(input);
     $('#vars').val(val);
 }*/
-  function add() {
-    $('.c').append($('.t').html());
-  }
 
-  function addd() {
-    var select = document.createElement("select");
-    var option = document.createElement("option");
 
-    select.name = "attributes";
-    select.id = "tst";
-    option.value="0";
-    option.text="Testing";
-    
-    var holder = document.getElementsByClassName("t");
-    console.log(holder);
-    //console.log( holder.innerHTML += select);
-    holder.appendChild(select);
-    //holder.innerHTML += select;
-    select.appendChild(option);
-    //holder.appendChild(select);
-}
-
-var inputOutput;
+var inputValue;
 function provLabel() {
     var selectionAttr = document.getElementById("attr");
     //console.log(selectionAttr.options[selectionAttr.selectedIndex].text);
@@ -439,14 +391,18 @@ function provLabel() {
     input.type = 'text';
     input.name = 'name';
     input.placeholder = 'Enter ' + optionText + "... attribute";
-    inputOutput = input;
+    inputValue = input;
 
     form.appendChild(label);
     form.appendChild(input);
 }
 
+var ee;
 function saveOutput() {
-    
+    //console.log(inputValue.value);
+    //ee.path[2].attribute.push(inputValue);
+    //console.log(ee);
+    console.log(ee.path[2]);
 }
 
 function inspector() {

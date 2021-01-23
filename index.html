@@ -15,7 +15,7 @@
 		<div id="flowChartView" style="display:block;">
 		    <br />
 		    <button class="btn btn-success" id="flowchartSaveBtn" onclick="" style="margin-left: 15px">Save</button><br /><br />
-			<p><center><strong style="font-size: 40px">Provanance Editor</strong></center></p>
+			<p><center><strong style="font-size: 40px">Provenance Editor</strong></center></p>
 			<div style="width:70%; white-space:nowrap;">
 		        <span style="display: inline-block; vertical-align: top; padding: 5px; width:13%">
 		            <div id="myPalette" style="border: solid 1px gray; height: auto"><p><center><strong>Palette</strong></center></p>
@@ -56,6 +56,11 @@
 						<div class="c">
 							<div class="t" id="rr">
 								<div class="r">
+									<form id="form" action=""></form>
+									<label>Name:</label>
+									<input type="text" id="objectName" name="Name">
+									<button>Save</button>
+									<br><br>
 									<label for="at">Choose an attribute:</label>
 									<select name="attributes" id="attr">
 										<option value="0">choose...</option>

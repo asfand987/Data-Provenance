@@ -334,14 +334,19 @@ jsPlumb.ready(function () {
     var activityClsName = "window step custom jtk-node jsplumb-connected-step jsplumb-endpoint-anchor jsplumb-draggable";
     var agentClsName = "window diamond custom jtk-node jsplumb-connected-end jsplumb-endpoint-anchor jsplumb-draggable";
     
+    var clickedObject;
     document.onclick = function(e) {
         //console.log(e.path[2].className);
+        
+        
         if(e.path[2].className == entityClsName || e.path[2].className == activityClsName || e.path[2].className == agentClsName ) {
             var x = document.getElementById("s");
             if (x.style.display == "none") {
                 x.style.display = "inline-block";
                 //console.log(e);
                 ee = e;
+                var placeholder = document.getElementById("objectName");
+                placeholder.placeholder = e.path[2].id; 
                 //e.path[2].attributes[2].inputValue.push("w");
                 //console.log(e.path[2].attributes[2].value);
                 //e.path[2].id = 7;
@@ -352,6 +357,8 @@ jsPlumb.ready(function () {
         
     }
 
+   
+    
 });
 
 

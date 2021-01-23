@@ -30,37 +30,42 @@ jsPlumb.ready(function () {
     var windows = jsPlumb.getSelector(".canvas-wide .window start jsplumb-connected");
     jsPlumbInstance.bind("connection", function (info) {
         //info.connection.getOverlay("label").setLabel("t");
-        
-        var source=info.sourceId.replace(/[0-9]/g, '');
-        var target=info.targetId.replace(/[0-9]/g, '');
-        //document.getElementById(ci);
-        //console.log(s+" -> "+t);
-        //console.log(properties[0]);
-        if (source == "e" && source == target) {
+        var entity = "window start custom jtk-node jsplumb-connected jsplumb-endpoint-anchor jsplumb-draggable";
+        var activity = "window step custom jtk-node jsplumb-connected-step jsplumb-endpoint-anchor jsplumb-draggable jsplumb-connected";
+        var agent = "window diamond custom jtk-node jsplumb-connected-end jsplumb-endpoint-anchor jsplumb-draggable jsplumb-connected"; 
+        //var source=info.sourceId.replace(/[0-9]/g, '');
+        var source = info.source.className;
+        var target = info.target.className;
+        //var target=info.targetId.replace(/[0-9]/g, '');
+        //console.log(source);
+        //console.log(target);
+        //console.log(entity);
+        //console.log(source + " " + target);
+        if (source == entity && source == target) {
             info.connection.getOverlay("label").setLabel("wasDerivedFrom");
         }
-        else if(source == "e" && target == "ex") {
+        else if(source == entity && target == agent) {
             info.connection.getOverlay("label").setLabel("wasAttributedTo");
         }
-        else if(source == "e" && target == "a") {
+        else if(source == entity && target == activity) {
             info.connection.getOverlay("label").setLabel("wasGeneratedBy");
         }
-        else if(source == "a" && target == "ex") {
+        else if(source == activity && target == agent) {
             info.connection.getOverlay("label").setLabel("wasAssociatedWith");
         }
-        else if(source == "a" && target == "e") {
+        else if(source == activity && target == entity) {
             info.connection.getOverlay("label").setLabel("used");
         }
-        else if(source == "a" && target == source) {
+        else if(source == activity && target == source) {
             info.connection.getOverlay("label").setLabel("wasInformedBy");
         }
-        else if(source == "ex" && target == source) {
+        else if(source == agent && target == source) {
             info.connection.getOverlay("label").setLabel("actedOnBehalfOf");
         }
-        else if(source == "ex" && target == "a") {
+        else if(source == agent && target == activity) {
             info.connection.getOverlay("label").setLabel("");
         }
-        else if(source == "ex" && target == "e") {
+        else if(source == agent && target == entity) {
             info.connection.getOverlay("label").setLabel("");
         }
     });
@@ -165,10 +170,11 @@ jsPlumb.ready(function () {
     agentCount = 1;
     activityCount = 1;
     tt = 0;
+    
     $("#canvas").droppable({
         //accept: ".window",
-        
         drop: function (event, ui) {
+            console.log(idIs);
             if (clicked) {
     	        clicked = false;
                 elementCount++;
@@ -178,30 +184,32 @@ jsPlumb.ready(function () {
                 //var name; // add this
                 var name;
                 var id;
+                id =  myFunction();
 
-
-                if(properties[0].label == "entity") {
-                    name =  entityCount;
-                    id = "e" + entityCount++;
+                /*if(properties[0].label == "entity") {
+                    //name =  entityCount;
+                    //id = "e" ;//+ entityCount++;
                 }
                 else if(properties[0].label == "activity") {
-                    name = activityCount;
-                    id = "a" + activityCount++;
+                    //name = activityCount;
+                    //id = "a" + activityCount++;
                 }
                 else if(properties[0].label == "agents") {
-                    var name = agentCount;
-                    id = "ex" + agentCount++;
+                    //var name = agentCount;
+                    //id = "ex" + agentCount++;
                 }
                 else {
                     alert("Hello! I am an alert box!!");
-                }
+
+                }*/
                 //console.log(id);
                 
                 //elementId(id);
                 element = createElement(id);
                 //properties[0].elementId = id;
                 //console.log(properties[0].elementId);
-    	        drawElement(element, "#canvas", name);
+                //drawElement(element, "#canvas", name);
+                drawElement(element, "#canvas", id);//, name);
     	        element = "";
 	        }
         }   
@@ -281,24 +289,22 @@ jsPlumb.ready(function () {
 
      //add the endpoints for the elements
     var epp;
-    var _addEndpoints = function (toId, sourceAnchors, targetAnchors) {
-        var id;
+    var _addEndpoints = function (sourceAnchors, targetAnchors, id) {
+        //var id;
+        //console.log(properties);
         if(properties[0].label == "entity") {
-            id = "e";
+            //id = "e";
         }
         else if(properties[0].label == "activity") {
-            id = "a";
+            //id = "a";
         }
         else if(properties[0].label == "agents") {
-            id = "ex";
+            //id = "ex";
         }
-        //onsole.log("toID is: " + toId);
+        //console.log("toID is: " + toId);
         //console.log("id is: " + id);
-        for (var i = 0; i < sourceAnchors.length; i++) {
+       /* for (var i = 0; i < sourceAnchors.length; i++) {
             var sourceUUID = toId + sourceAnchors[i];
-            //console.log("sourceAnchors is: " + sourceAnchors[i]); 
-            //console.log("sourceUUID is: " + sourceUUID);
-            //console.log("sourceEP " + sourceEndpoint);
             epp = jsPlumbInstance.addEndpoint(id + toId, sourceEndpoint, {
                 anchor: sourceAnchors[i], uuid: sourceUUID
             });
@@ -315,38 +321,66 @@ jsPlumb.ready(function () {
             endpointList.push([id + toId, epp]);
             epp.canvas.setAttribute("title", "Drop a connection here");
             epp = null;
+        }*/
+
+        for (var i = 0; i < sourceAnchors.length; i++) {
+            var sourceUUID = sourceAnchors[i];
+            epp = jsPlumbInstance.addEndpoint(id, sourceEndpoint, {
+                anchor: sourceAnchors[i], uuid: sourceUUID
+            });
+            
+            sourcepointList.push([id , epp]);
+            epp.canvas.setAttribute("title", "Drag a connection from here");
+            epp = null;
+        }
+        for (var j = 0; j < targetAnchors.length; j++) {
+            var targetUUID = targetAnchors[j];
+            epp = jsPlumbInstance.addEndpoint(id, targetEndpoint, {
+                anchor: targetAnchors[j], uuid: targetUUID
+            });
+            endpointList.push([id, epp]);
+            epp.canvas.setAttribute("title", "Drop a connection here");
+            epp = null;
         }
     };
+    
 
-
-    function drawElement(element, canvasId, name) {
-        
+    /*function drawElement(element, canvasId, name) {
+        console.log("name is: " + name);     
         $(canvasId).append(element);
         _addEndpoints(name, properties[0].startpoints, properties[0].endpoints);
         jsPlumbInstance.draggable(jsPlumbInstance.getSelector(".jtk-node"), {
             grid: [20, 20]
         });
         
-    }
+    }*/
 
+    function drawElement(element, canvasId, id) {
+        //console.log("name is: ");     
+        $(canvasId).append(element);
+        _addEndpoints(properties[0].startpoints, properties[0].endpoints, id);
+        jsPlumbInstance.draggable(jsPlumbInstance.getSelector(".jtk-node"), {
+            grid: [20, 20]
+        });
+        
+    }
     // Inspector 
     var entityClsName = "window start custom jtk-node jsplumb-connected jsplumb-endpoint-anchor jsplumb-draggable";
     var activityClsName = "window step custom jtk-node jsplumb-connected-step jsplumb-endpoint-anchor jsplumb-draggable";
     var agentClsName = "window diamond custom jtk-node jsplumb-connected-end jsplumb-endpoint-anchor jsplumb-draggable";
     
-    var clickedObject;
+    //var clickedObject;
     document.onclick = function(e) {
         //console.log(e.path[2].className);
-        
-        
         if(e.path[2].className == entityClsName || e.path[2].className == activityClsName || e.path[2].className == agentClsName ) {
             var x = document.getElementById("s");
+            var objectIdentifier = e.path[2].id;
             if (x.style.display == "none") {
                 x.style.display = "inline-block";
-                //console.log(e);
-                ee = e;
+                console.log(objectIdentifier);
+                clickedObject = e;
                 var placeholder = document.getElementById("objectName");
-                placeholder.placeholder = e.path[2].id; 
+                placeholder.placeholder = objectIdentifier 
                 //e.path[2].attributes[2].inputValue.push("w");
                 //console.log(e.path[2].attributes[2].value);
                 //e.path[2].id = 7;
@@ -354,10 +388,20 @@ jsPlumb.ready(function () {
                 x.style.display = "none";
             }
         }
-        
     }
-
-   
+    var idIs;
+    function myFunction() {
+        var txt;
+        var promptAlert = prompt("Please enter your ID:", "ID");
+        if (promptAlert == null || promptAlert == "") {
+          txt = "User cancelled the prompt.";
+        } else {
+          txt =  promptAlert;
+        }
+        idIs = txt;
+        //console.log(txt);
+        return txt;
+    }
     
 });
 
@@ -404,12 +448,14 @@ function provLabel() {
     form.appendChild(input);
 }
 
-var ee;
+var clickedObject;
 function saveOutput() {
-    //console.log(inputValue.value);
-    //ee.path[2].attribute.push(inputValue);
-    //console.log(ee);
-    console.log(ee.path[2]);
+    var x = document.getElementById("objectName");
+    if(x.value != '') {
+        clickedObject.path[2].id =  x.value;
+        console.log(clickedObject.path[2].id);
+        x.value = '';
+    }
 }
 
 function inspector() {

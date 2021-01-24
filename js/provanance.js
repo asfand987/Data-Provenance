@@ -174,7 +174,7 @@ jsPlumb.ready(function () {
     $("#canvas").droppable({
         //accept: ".window",
         drop: function (event, ui) {
-            console.log(idIs);
+            //console.log(idIs);
             if (clicked) {
     	        clicked = false;
                 elementCount++;
@@ -374,7 +374,7 @@ jsPlumb.ready(function () {
             var objectIdentifier = e.path[2].id;
             if (x.style.display == "none") {
                 x.style.display = "inline-block";
-                console.log(objectIdentifier);
+                console.log("On click " + objectIdentifier);
                 clickedObject = e;
                 var placeholder = document.getElementById("objectName");
                 placeholder.placeholder = objectIdentifier 
@@ -432,15 +432,20 @@ function provLabel() {
 var clickedObject;
 function saveOutput() {
     var nodeID = clickedObject.path[2].id;
+    //console.log("Before " + nodeID);
     var x = document.getElementById("objectName");
     var p = document.getElementById(nodeID).querySelectorAll("p");//.getElementsByClassName("p");
     //p.text(test);
-    console.log(p);
+    //console.log(p);
     if(x.value != '') {
         nodeID =  x.value;
         p[0].innerHTML = nodeID;
         x.value = '';
+        //console.log("NodeID: " + nodeID + " - clickedObject: " + clickedObject.path[2].id);
+        clickedObject.path[2].id = nodeID;
     }
+    //console.log("After " + nodeID);
+    //console.log(clickedObject.path[2].id);
 }
 
 function inspector() {

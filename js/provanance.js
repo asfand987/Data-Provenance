@@ -279,7 +279,10 @@ jsPlumb.ready(function () {
         var strong = $('<strong>');
 
         elm.append("<i style='display: none' class=\"fa fa-trash fa-lg close-icon\"><\/i>");
-        var p = $('<p>').text(properties[0].label);
+        var p = $('<p>').text(id);
+        //p.innerHTML = id;
+        p.id = "p";
+        //console.log(p);
         strong.append(p);
         elm.append(strong);
        
@@ -292,15 +295,7 @@ jsPlumb.ready(function () {
     var _addEndpoints = function (sourceAnchors, targetAnchors, id) {
         //var id;
         //console.log(properties);
-        if(properties[0].label == "entity") {
-            //id = "e";
-        }
-        else if(properties[0].label == "activity") {
-            //id = "a";
-        }
-        else if(properties[0].label == "agents") {
-            //id = "ex";
-        }
+       
         //console.log("toID is: " + toId);
         //console.log("id is: " + id);
        /* for (var i = 0; i < sourceAnchors.length; i++) {
@@ -356,7 +351,9 @@ jsPlumb.ready(function () {
     }*/
 
     function drawElement(element, canvasId, id) {
-        //console.log("name is: ");     
+        //console.log(properties[0].label);     
+        //properties[0].label.innerHTML = "tesgtr";
+        //console.log(properties); 
         $(canvasId).append(element);
         _addEndpoints(properties[0].startpoints, properties[0].endpoints, id);
         jsPlumbInstance.draggable(jsPlumbInstance.getSelector(".jtk-node"), {
@@ -382,7 +379,7 @@ jsPlumb.ready(function () {
                 var placeholder = document.getElementById("objectName");
                 placeholder.placeholder = objectIdentifier 
                 //e.path[2].attributes[2].inputValue.push("w");
-                //console.log(e.path[2].attributes[2].value);
+                //console.log(e.path);
                 //e.path[2].id = 7;
             } else {
                 x.style.display = "none";
@@ -397,6 +394,9 @@ jsPlumb.ready(function () {
           txt = "User cancelled the prompt.";
         } else {
           txt =  promptAlert;
+          //var pTag = document.getElementById("entityP");
+          //pTag.innerHTML = txt;
+          //console.log(pTag);
         }
         idIs = txt;
         //console.log(txt);
@@ -404,25 +404,6 @@ jsPlumb.ready(function () {
     }
     
 });
-
-
-/*function add() {
-    var val = parseInt($('#vvar-input').val())+1;
-    var input="<input type='text' placeholder='Add var...' id='new_"+val+"'><button onclick='values()'>confirm</button><br/><div data-value=1 id=new_input2></div><input type='hidden' value=1 id=vars><br/>";
-    $('#new_input').append(input);
-    $('#vvar-input').val(val);
-}
-
-function values() {
-    var val = parseInt($('#vars').val())+1;
-    var val2 = document.getElementById('new_input2').getAttribute('data-value');
-
-    console.log(val2);
-    var input="<input type='text' placeholder='Add values...' id='new_"+val+"'>";
-    
-    $('#new_input2').append(input);
-    $('#vars').val(val);
-}*/
 
 
 var inputValue;
@@ -450,10 +431,14 @@ function provLabel() {
 
 var clickedObject;
 function saveOutput() {
+    var nodeID = clickedObject.path[2].id;
     var x = document.getElementById("objectName");
+    var p = document.getElementById(nodeID).querySelectorAll("p");//.getElementsByClassName("p");
+    //p.text(test);
+    console.log(p);
     if(x.value != '') {
-        clickedObject.path[2].id =  x.value;
-        console.log(clickedObject.path[2].id);
+        nodeID =  x.value;
+        p[0].innerHTML = nodeID;
         x.value = '';
     }
 }

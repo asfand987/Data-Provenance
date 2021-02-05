@@ -395,8 +395,8 @@ jsPlumb.ready(function () {
             p[0].innerHTML = nodeID;
             x.value = '';
             
-            clickedObject.path[2].id = nodeID;
-
+            //clickedObject.path[2].id = nodeID;
+            jsPlumbInstance.setId(clickedObject.path[2].id, nodeID);
             jsPlumbInstance.selectEndpoints().each(function(endpoint) {
                 //console.log(endpoint);
             });
@@ -411,7 +411,7 @@ var inputValue;
 function provLabel() {
     var selectionAttr = document.getElementById("attr");
    
-    var div = document.getElementById("test");
+    var div = document.getElementById("AttrContainer");
     var optionText = selectionAttr.options[selectionAttr.selectedIndex].text
     var form = document.createElement('form');
     var input = document.createElement("input");
@@ -425,7 +425,7 @@ function provLabel() {
     input.name = 'name';
     input.placeholder = 'Enter ' + optionText + "... attribute";
     inputValue = input;
-    button.innerHTML = "+";
+    button.innerHTML = "Save";
 
     form.appendChild(label);
     form.appendChild(input);

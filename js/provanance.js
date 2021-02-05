@@ -384,14 +384,12 @@ jsPlumb.ready(function () {
         return txt;
     }
 
-    a = function saveOutput() {
+    saveFunction = function saveOutput() {
         var nodeID = clickedObject.path[2].id;
         
         var x = document.getElementById("objectName");
         var p = document.getElementById(nodeID).querySelectorAll("p");//.getElementsByClassName("p");
         //console.log(clickedObject.path[2].get);
-      
-        
         if(x.value != '') {
             nodeID =  x.value;
             p[0].innerHTML = nodeID;
@@ -400,28 +398,11 @@ jsPlumb.ready(function () {
             clickedObject.path[2].id = nodeID;
 
             jsPlumbInstance.selectEndpoints().each(function(endpoint) {
-                //endpoint.setId(nodeID);
-                //endpoint.elementId = nodeID;
-                //endpoint.anchor.elementId = nodeID;
                 //console.log(endpoint);
-                //endpoint.prepareAnchor(properties[0].startpoints, properties[0].endpoints, nodeID);
-                //endpoint.setElement(clickedObject.path[2]);
-                //endpoint.setAnchor(properties[0].startpoints, properties[0].endpoints, {uuid:nodeID});
-
-                console.log(endpoint);
             });
 
       
         }
-        //var x = clickedObject.path[2].nextSibling._jsPlumb.appendToDefaultType.Scopes;
-        //console.log(x);
-      
-    }
-
-    function t() {
-        //var sib = [];
-        var firstChild = clickedObject.path[2];
-        //console.log(firstChild.nextElementSibling);
     }
 });
 
@@ -429,43 +410,28 @@ jsPlumb.ready(function () {
 var inputValue;
 function provLabel() {
     var selectionAttr = document.getElementById("attr");
-    //console.log(selectionAttr.options[selectionAttr.selectedIndex].text);
-
+   
+    var div = document.getElementById("test");
     var optionText = selectionAttr.options[selectionAttr.selectedIndex].text
-    var form = document.getElementById('form');
+    var form = document.createElement('form');
     var input = document.createElement("input");
     var label = document.createElement("label");
     var button = document.createElement("button");
-
-    label.innerHTML = optionText;
+    var br = document.createElement("br");
     
+    label.innerHTML = optionText;
     input.id = 'input-';
     input.type = 'text';
     input.name = 'name';
     input.placeholder = 'Enter ' + optionText + "... attribute";
     inputValue = input;
+    button.innerHTML = "+";
 
     form.appendChild(label);
     form.appendChild(input);
+    form.appendChild(button);
+    form.appendChild(br);
+    div.appendChild(form);
 }
 
-var a;
-
-//var clickedObject;
-/*function saveOutput() {
-    var nodeID = clickedObject.path[2].id;
-    var x = document.getElementById("objectName");
-    var p = document.getElementById(nodeID).querySelectorAll("p");//.getElementsByClassName("p");
-
-    if(x.value != '') {
-        nodeID =  x.value;
-        p[0].innerHTML = nodeID;
-        x.value = '';
-        clickedObject.path[2].id = nodeID;
-    }
-}*/
-
-
-
-
-  
+var saveFunction;

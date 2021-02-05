@@ -29,6 +29,8 @@ jsPlumb.ready(function () {
 
     var windows = jsPlumb.getSelector(".canvas-wide .window start jsplumb-connected");
     jsPlumbInstance.bind("connection", function (info) {
+        //console.log(info);
+        //console.log(info.source);
         //info.connection.getOverlay("label").setLabel("t");
         var entity = "window start custom jtk-node jsplumb-connected jsplumb-endpoint-anchor jsplumb-draggable";
         var activity = "window step custom jtk-node jsplumb-connected-step jsplumb-endpoint-anchor jsplumb-draggable jsplumb-connected";
@@ -228,7 +230,7 @@ jsPlumb.ready(function () {
 
     var properties;
     var clicked = false;
-    function loadProperties(clsName, left, top, label, startpoints, endpoints, contenteditable, id) {
+    function loadProperties(clsName, left, top, label, startpoints, endpoints, contenteditable) {
         properties = [];
         properties.push({
             left: left,
@@ -244,11 +246,11 @@ jsPlumb.ready(function () {
     
 	//load properties of a start element once the start element in the palette is clicked
     $('#entityID').mousedown(function () {
-        loadProperties("window start custom jtk-node jsplumb-connected", "5em", "5em", "entity", ["Left", "Right"],
-            ["Top", "Bottom"], false);
+        loadProperties("window start custom jtk-node jsplumb-connected", "5em", "5em", "entity", ["Left"],
+            [], false);
         clicked = true;
     });
-
+    //["Left", "Right"], ["Top", "Bottom"]
     //load properties of a step element once the step element in the palette is clicked
     $('#activityID').mousedown(function () {
         loadProperties("window step custom jtk-node jsplumb-connected-step", "5em", "5em", "activity",
@@ -268,9 +270,10 @@ jsPlumb.ready(function () {
    
     //create an element to be drawn on the canvas
     function createElement(id) {
-        var attr = ["testing!"];
+        //var attr = ["testing!"];
+        //var t = $('<div>').addClass("1").attr('id', "1");
         var elm = $('<div>').addClass(properties[0].clsName).attr('id', id).attr('attribute', attr);
-
+        
         elm.css({
             'top': properties[0].top,
             'left': properties[0].left
@@ -285,7 +288,7 @@ jsPlumb.ready(function () {
         //console.log(p);
         strong.append(p);
         elm.append(strong);
-       
+        //t.append(elm);
 
         return elm;
     }
@@ -293,39 +296,17 @@ jsPlumb.ready(function () {
      //add the endpoints for the elements
     var epp;
     var _addEndpoints = function (sourceAnchors, targetAnchors, id) {
-        //var id;
-        //console.log(properties);
-       
-        //console.log("toID is: " + toId);
-        //console.log("id is: " + id);
-       /* for (var i = 0; i < sourceAnchors.length; i++) {
-            var sourceUUID = toId + sourceAnchors[i];
-            epp = jsPlumbInstance.addEndpoint(id + toId, sourceEndpoint, {
-                anchor: sourceAnchors[i], uuid: sourceUUID
-            });
-            
-            sourcepointList.push([id + toId, epp]);
-            epp.canvas.setAttribute("title", "Drag a connection from here");
-            epp = null;
-        }
-        for (var j = 0; j < targetAnchors.length; j++) {
-            var targetUUID = toId + targetAnchors[j];
-            epp = jsPlumbInstance.addEndpoint(id + toId, targetEndpoint, {
-                anchor: targetAnchors[j], uuid: targetUUID
-            });
-            endpointList.push([id + toId, epp]);
-            epp.canvas.setAttribute("title", "Drop a connection here");
-            epp = null;
-        }*/
-
+        //console.log(sourceAnchors);
+        
         for (var i = 0; i < sourceAnchors.length; i++) {
             var sourceUUID = sourceAnchors[i];
+            //console.log("sourceAnchors: " + sourceAnchors[i]);
             epp = jsPlumbInstance.addEndpoint(id, sourceEndpoint, {
                 anchor: sourceAnchors[i], uuid: sourceUUID
             });
             
             sourcepointList.push([id , epp]);
-            epp.canvas.setAttribute("title", "Drag a connection from here");
+            //epp.canvas.setAttribute("title", "Drag a connection here");
             epp = null;
         }
         for (var j = 0; j < targetAnchors.length; j++) {
@@ -333,10 +314,12 @@ jsPlumb.ready(function () {
             epp = jsPlumbInstance.addEndpoint(id, targetEndpoint, {
                 anchor: targetAnchors[j], uuid: targetUUID
             });
+            
             endpointList.push([id, epp]);
-            epp.canvas.setAttribute("title", "Drop a connection here");
+            //epp.canvas.setAttribute("title", "Drop a connection here");
             epp = null;
         }
+
     };
     
 
@@ -351,42 +334,44 @@ jsPlumb.ready(function () {
     }*/
 
     function drawElement(element, canvasId, id) {
-        //console.log(properties[0].label);     
-        //properties[0].label.innerHTML = "tesgtr";
-        //console.log(properties); 
         $(canvasId).append(element);
+        //console.log(properties[0].startpoints);
         _addEndpoints(properties[0].startpoints, properties[0].endpoints, id);
         jsPlumbInstance.draggable(jsPlumbInstance.getSelector(".jtk-node"), {
             grid: [20, 20]
-        });
-        
+        });   
     }
+
     // Inspector 
     var entityClsName = "window start custom jtk-node jsplumb-connected jsplumb-endpoint-anchor jsplumb-draggable";
     var activityClsName = "window step custom jtk-node jsplumb-connected-step jsplumb-endpoint-anchor jsplumb-draggable";
     var agentClsName = "window diamond custom jtk-node jsplumb-connected-end jsplumb-endpoint-anchor jsplumb-draggable";
     
-    //var clickedObject;
+    var clickedObject;
+    
     document.onclick = function(e) {
-        //console.log(e.path[2].className);
-        if(e.path[2].className == entityClsName || e.path[2].className == activityClsName || e.path[2].className == agentClsName ) {
+
+        var clssName = e.path[2].className.split(' ').slice(1, 2);
+        //console.log(clssName);
+        if(clssName == "start" || clssName == "step" || clssName == "diamond") {
+        //if(e.path[2].className == entityClsName || e.path[2].className == activityClsName || e.path[2].className == agentClsName ) {
             var x = document.getElementById("s");
             var objectIdentifier = e.path[2].id;
+           
             if (x.style.display == "none") {
                 x.style.display = "inline-block";
-                console.log("On click " + objectIdentifier);
+                //console.log("On click " + objectIdentifier);
                 clickedObject = e;
                 var placeholder = document.getElementById("objectName");
                 placeholder.placeholder = objectIdentifier 
-                //e.path[2].attributes[2].inputValue.push("w");
-                //console.log(e.path);
-                //e.path[2].id = 7;
             } else {
                 x.style.display = "none";
             }
         }
+
     }
-    var idIs;
+    
+    
     function myFunction() {
         var txt;
         var promptAlert = prompt("Please enter your ID:", "ID");
@@ -394,15 +379,50 @@ jsPlumb.ready(function () {
           txt = "User cancelled the prompt.";
         } else {
           txt =  promptAlert;
-          //var pTag = document.getElementById("entityP");
-          //pTag.innerHTML = txt;
-          //console.log(pTag);
         }
-        idIs = txt;
-        //console.log(txt);
+        //idIs = txt;
         return txt;
     }
-    
+
+    a = function saveOutput() {
+        var nodeID = clickedObject.path[2].id;
+        
+        var x = document.getElementById("objectName");
+        var p = document.getElementById(nodeID).querySelectorAll("p");//.getElementsByClassName("p");
+        //console.log(clickedObject.path[2].get);
+      
+        
+        if(x.value != '') {
+            nodeID =  x.value;
+            p[0].innerHTML = nodeID;
+            x.value = '';
+            
+            clickedObject.path[2].id = nodeID;
+
+            jsPlumbInstance.selectEndpoints().each(function(endpoint) {
+                //endpoint.setId(nodeID);
+                //endpoint.elementId = nodeID;
+                //endpoint.anchor.elementId = nodeID;
+                //console.log(endpoint);
+                //endpoint.prepareAnchor(properties[0].startpoints, properties[0].endpoints, nodeID);
+                //endpoint.setElement(clickedObject.path[2]);
+                //endpoint.setAnchor(properties[0].startpoints, properties[0].endpoints, {uuid:nodeID});
+
+                console.log(endpoint);
+            });
+
+      
+        }
+        //var x = clickedObject.path[2].nextSibling._jsPlumb.appendToDefaultType.Scopes;
+        //console.log(x);
+      
+    }
+
+    function t() {
+        //var sib = [];
+        var firstChild = clickedObject.path[2];
+        //console.log(firstChild.nextElementSibling);
+    }
 });
 
 
@@ -429,28 +449,21 @@ function provLabel() {
     form.appendChild(input);
 }
 
-var clickedObject;
-function saveOutput() {
+var a;
+
+//var clickedObject;
+/*function saveOutput() {
     var nodeID = clickedObject.path[2].id;
-    //console.log("Before " + nodeID);
     var x = document.getElementById("objectName");
     var p = document.getElementById(nodeID).querySelectorAll("p");//.getElementsByClassName("p");
-    //p.text(test);
-    //console.log(p);
+
     if(x.value != '') {
         nodeID =  x.value;
         p[0].innerHTML = nodeID;
         x.value = '';
-        //console.log("NodeID: " + nodeID + " - clickedObject: " + clickedObject.path[2].id);
         clickedObject.path[2].id = nodeID;
     }
-    //console.log("After " + nodeID);
-    //console.log(clickedObject.path[2].id);
-}
-
-function inspector() {
-
-}
+}*/
 
 
 

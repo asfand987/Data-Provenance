@@ -246,8 +246,8 @@ jsPlumb.ready(function () {
     
 	//load properties of a start element once the start element in the palette is clicked
     $('#entityID').mousedown(function () {
-        loadProperties("window start custom jtk-node jsplumb-connected", "5em", "5em", "entity", ["Left"],
-            [], false);
+        loadProperties("window start custom jtk-node jsplumb-connected", "5em", "5em", "entity", ["Left", "Right"],
+            ["Top", "Bottom"], false);
         clicked = true;
     });
     //["Left", "Right"], ["Top", "Bottom"]

@@ -345,6 +345,7 @@ jsPlumb.ready(function () {
     document.getElementById("attrBtn").addEventListener("click",  function() {
         inspectorAttr(idEle);
     });   
+    //var inputValue;
     function inspectorAttr(a) {
         var cont = document.getElementById(a+"Inspector");
         var div = document.getElementById("AttrContainer");
@@ -361,7 +362,7 @@ jsPlumb.ready(function () {
         input.type = 'text';
         input.name = 'name';
         input.placeholder = 'Enter ' + optionText + "... attribute";
-        inputValue = input;
+        //inputValue = input;
         button.innerHTML = "Save";
 
         form.appendChild(label);
@@ -410,78 +411,5 @@ jsPlumb.ready(function () {
         }
     }
 });
-var are;
 
-/*
-function inspectorAttr() {
-    var div = document.getElementById("AttrContainer");
-    var selectionAttr = document.getElementById("attr");
-    var optionText = selectionAttr.options[selectionAttr.selectedIndex].text;
-
-    var localDiv = document.createElement("div");
-    localDiv.id = a;
-    console.log(a);
-
-    var form = document.createElement('form');
-    var input = document.createElement("input");
-    var label = document.createElement("label");
-    var button = document.createElement("button");
-    var br = document.createElement("br");
-    label.innerHTML = optionText;
-    input.id = 'input-';
-    input.type = 'text';
-    input.name = 'name';
-    input.placeholder = 'Enter ' + optionText + "... attribute";
-    inputValue = input;
-    button.innerHTML = "Save";
-
-    form.appendChild(label);
-    form.appendChild(input);
-    form.appendChild(button);
-    form.appendChild(br);
-    localDiv.appendChild(form);
-    div.appendChild(localDiv);
-}
-*/
-var inputValue;
-var t;
-/*
-function provLabel(a) {
-    console.log(a);
-    var div = document.getElementById("AttrContainer");
-    var myEle = document.getElementById(a + "Div");
-    console.log(myEle);
-    var selectionAttr = document.getElementById("attr");
-    var optionText = selectionAttr.options[selectionAttr.selectedIndex].text
-
-    var form = document.createElement('form');
-    var input = document.createElement("input");
-    var label = document.createElement("label");
-    var button = document.createElement("button");
-    var br = document.createElement("br");
-    label.innerHTML = optionText;
-    input.id = 'input-';
-    input.type = 'text';
-    input.name = 'name';
-    input.placeholder = 'Enter ' + optionText + "... attribute";
-    inputValue = input;
-    button.innerHTML = "Save";
-
-    form.appendChild(label);
-    form.appendChild(input);
-    form.appendChild(button);
-    form.appendChild(br);
-    
-    if(myEle){
-        myEle.appendChild(form);
-        div.appendChild(myEle);
-    }
-    else {
-        var localDiv = document.createElement("div");   
-        localDiv.id = a + "Div";  
-        localDiv.appendChild(form);
-        div.appendChild(localDiv);
-    }
-}
-*/
 var saveFunction;

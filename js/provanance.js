@@ -159,7 +159,6 @@ jsPlumb.ready(function () {
 	makeDraggable("#activityID", "window step jsplumb-connected-step custom", "activity");
     makeDraggable("#agentID", "window diamond jsplumb-connected-end custom", "agents");
 
-    
     /*$("#agentID").draggable({
         helper: function () {
     	   return createElement("");
@@ -245,7 +244,9 @@ jsPlumb.ready(function () {
    
     //create an element to be drawn on the canvas
     function createElement(id) {
-        var elm = $('<div>').addClass(properties[0].clsName).attr('id', id).attr('attribute', attr);
+        var arr = {};
+
+        var elm = $('<div>').addClass(properties[0].clsName).attr('id', id).attr('variables', arr);
         
         elm.css({
             'top': properties[0].top,
@@ -262,7 +263,7 @@ jsPlumb.ready(function () {
         strong.append(p);
         elm.append(strong);
         //t.append(elm);
-
+        console.log(elm[0].attributes);
         return elm;
     }
 
@@ -304,16 +305,12 @@ jsPlumb.ready(function () {
         });   
     }
 
-    // Inspector 
-    var entityClsName = "window start custom jtk-node jsplumb-connected jsplumb-endpoint-anchor jsplumb-draggable";
-    var activityClsName = "window step custom jtk-node jsplumb-connected-step jsplumb-endpoint-anchor jsplumb-draggable";
-    var agentClsName = "window diamond custom jtk-node jsplumb-connected-end jsplumb-endpoint-anchor jsplumb-draggable";
-    
     var clickedObject;
     var idEle;
     document.onclick = function(e) {
         var clssName = e.path[2].className.split(' ').slice(1, 2);
         if(clssName == "start" || clssName == "step" || clssName == "diamond") {
+            console.log(e.path[2]);
         //if(e.path[2].className == entityClsName || e.path[2].className == activityClsName || e.path[2].className == agentClsName ) {
             var x = document.getElementById("s");
             var objectIdentifier = e.path[2].id;
@@ -380,8 +377,6 @@ jsPlumb.ready(function () {
             localDiv.appendChild(form);
             div.appendChild(localDiv);
         }
-        
-      
     }
     function myFunction() {
         var txt;
@@ -400,12 +395,13 @@ jsPlumb.ready(function () {
         
         var x = document.getElementById("objectName");
         var p = document.getElementById(nodeID).querySelectorAll("p");//.getElementsByClassName("p");
-        //console.log(clickedObject.path[2].get);
+        var cont = document.getElementById(nodeID+"Inspector");
+
         if(x.value != '') {
             nodeID =  x.value;
             p[0].innerHTML = nodeID;
             x.value = '';          
-            //clickedObject.path[2].id = nodeID;
+            cont.id = nodeID+"Inspector";
             jsPlumbInstance.setId(clickedObject.path[2].id, nodeID);
             jsPlumbInstance.recalculateOffsets(nodeID);
         }

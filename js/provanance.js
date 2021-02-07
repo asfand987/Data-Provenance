@@ -38,11 +38,12 @@ jsPlumb.ready(function () {
        
         info.targetId = info.target.id;
         info.connection.targetId = info.target.id;
+
         jsPlumbInstance.draggable(jsPlumbInstance.getSelector(".jtk-node"), {
             grid: [20, 20]
         }); 
        
-        console.log(info);
+        //console.log(info);
         if (source == entity && source == target) {
             info.connection.getOverlay("label").setLabel("wasDerivedFrom");
         }
@@ -294,7 +295,6 @@ jsPlumb.ready(function () {
 
     };
 
-
     function drawElement(element, canvasId, id) {
         $(canvasId).append(element);
         //console.log(properties[0].startpoints);
@@ -310,20 +310,21 @@ jsPlumb.ready(function () {
     var agentClsName = "window diamond custom jtk-node jsplumb-connected-end jsplumb-endpoint-anchor jsplumb-draggable";
     
     var clickedObject;
-    
+    var idEle;
     document.onclick = function(e) {
-
         var clssName = e.path[2].className.split(' ').slice(1, 2);
-        //console.log(e.path[2]);
         if(clssName == "start" || clssName == "step" || clssName == "diamond") {
+          
         //if(e.path[2].className == entityClsName || e.path[2].className == activityClsName || e.path[2].className == agentClsName ) {
             var x = document.getElementById("s");
             var objectIdentifier = e.path[2].id;
-           
+            idEle = e.path[2].id;
+            
             if (x.style.display == "none") {
                 x.style.display = "inline-block";
                 //console.log("On click " + objectIdentifier);
                 clickedObject = e;
+                //inspectorAttr(objectIdentifier);
                 var placeholder = document.getElementById("objectName");
                 placeholder.placeholder = objectIdentifier 
             } else {
@@ -331,8 +332,68 @@ jsPlumb.ready(function () {
             }
         }
     }
+    //are = idEle; 
+    document.getElementById("attrBtn").addEventListener("click",  function() {
+        inspectorAttr(idEle);
+    });   
+    function inspectorAttr(a) {
+        var cont = document.getElementById(a+"Inspector");
+        var div = document.getElementById("AttrContainer");
+        var selectionAttr = document.getElementById("attr");
+        var optionText = selectionAttr.options[selectionAttr.selectedIndex].text;
     
+        var form = document.createElement('form');
+        var input = document.createElement("input");
+        var label = document.createElement("label");
+        var button = document.createElement("button");
+        var br = document.createElement("br");
+        label.innerHTML = optionText;
+        input.id = 'input-';
+        input.type = 'text';
+        input.name = 'name';
+        input.placeholder = 'Enter ' + optionText + "... attribute";
+        inputValue = input;
+        button.innerHTML = "Save";
+
+        form.appendChild(label);
+        form.appendChild(input);
+        form.appendChild(button);
+        form.appendChild(br);
+
+        if(cont) {
+            cont.appendChild(form);
+            div.appendChild(cont);
+        }
+        else {
+            var localDiv = document.createElement("div");
+            localDiv.id = a+"Inspector";
+            localDiv.appendChild(form);
+            div.appendChild(localDiv);
+        }
+      
+        /*var localDiv = document.createElement("div");
+        localDiv.id = a+"Inspector";
+
+        var form = document.createElement('form');
+        var input = document.createElement("input");
+        var label = document.createElement("label");
+        var button = document.createElement("button");
+        var br = document.createElement("br");
+        label.innerHTML = optionText;
+        input.id = 'input-';
+        input.type = 'text';
+        input.name = 'name';
+        input.placeholder = 'Enter ' + optionText + "... attribute";
+        inputValue = input;
+        button.innerHTML = "Save";
     
+        form.appendChild(label);
+        form.appendChild(input);
+        form.appendChild(button);
+        form.appendChild(br);
+        localDiv.appendChild(form);
+        div.appendChild(localDiv);*/
+    }
     function myFunction() {
         var txt;
         var promptAlert = prompt("Please enter your ID:", "ID");
@@ -361,20 +422,23 @@ jsPlumb.ready(function () {
         }
     }
 });
+var are;
 
-
-var inputValue;
-function provLabel() {
-    var selectionAttr = document.getElementById("attr");
-   
+/*
+function inspectorAttr() {
     var div = document.getElementById("AttrContainer");
-    var optionText = selectionAttr.options[selectionAttr.selectedIndex].text
+    var selectionAttr = document.getElementById("attr");
+    var optionText = selectionAttr.options[selectionAttr.selectedIndex].text;
+
+    var localDiv = document.createElement("div");
+    localDiv.id = a;
+    console.log(a);
+
     var form = document.createElement('form');
     var input = document.createElement("input");
     var label = document.createElement("label");
     var button = document.createElement("button");
     var br = document.createElement("br");
-    
     label.innerHTML = optionText;
     input.id = 'input-';
     input.type = 'text';
@@ -387,7 +451,49 @@ function provLabel() {
     form.appendChild(input);
     form.appendChild(button);
     form.appendChild(br);
-    div.appendChild(form);
+    localDiv.appendChild(form);
+    div.appendChild(localDiv);
 }
+*/
+var inputValue;
+var t;
+/*
+function provLabel(a) {
+    console.log(a);
+    var div = document.getElementById("AttrContainer");
+    var myEle = document.getElementById(a + "Div");
+    console.log(myEle);
+    var selectionAttr = document.getElementById("attr");
+    var optionText = selectionAttr.options[selectionAttr.selectedIndex].text
 
+    var form = document.createElement('form');
+    var input = document.createElement("input");
+    var label = document.createElement("label");
+    var button = document.createElement("button");
+    var br = document.createElement("br");
+    label.innerHTML = optionText;
+    input.id = 'input-';
+    input.type = 'text';
+    input.name = 'name';
+    input.placeholder = 'Enter ' + optionText + "... attribute";
+    inputValue = input;
+    button.innerHTML = "Save";
+
+    form.appendChild(label);
+    form.appendChild(input);
+    form.appendChild(button);
+    form.appendChild(br);
+    
+    if(myEle){
+        myEle.appendChild(form);
+        div.appendChild(myEle);
+    }
+    else {
+        var localDiv = document.createElement("div");   
+        localDiv.id = a + "Div";  
+        localDiv.appendChild(form);
+        div.appendChild(localDiv);
+    }
+}
+*/
 var saveFunction;

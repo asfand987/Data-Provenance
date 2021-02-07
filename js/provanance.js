@@ -314,7 +314,6 @@ jsPlumb.ready(function () {
     document.onclick = function(e) {
         var clssName = e.path[2].className.split(' ').slice(1, 2);
         if(clssName == "start" || clssName == "step" || clssName == "diamond") {
-          
         //if(e.path[2].className == entityClsName || e.path[2].className == activityClsName || e.path[2].className == agentClsName ) {
             var x = document.getElementById("s");
             var objectIdentifier = e.path[2].id;
@@ -326,9 +325,19 @@ jsPlumb.ready(function () {
                 clickedObject = e;
                 //inspectorAttr(objectIdentifier);
                 var placeholder = document.getElementById("objectName");
-                placeholder.placeholder = objectIdentifier 
+                placeholder.placeholder = objectIdentifier;
             } else {
                 x.style.display = "none";
+            }
+
+            var IDs = document.querySelectorAll("#AttrContainer div");
+            for (var i = 0; i<IDs.length; i++) {
+                if(IDs[i].id != (objectIdentifier+"Inspector")) {
+                    IDs[i].style.display = "none";
+                }
+                else {
+                    IDs[i].style.display = "inline-block";
+                }
             }
         }
     }
@@ -370,29 +379,8 @@ jsPlumb.ready(function () {
             localDiv.appendChild(form);
             div.appendChild(localDiv);
         }
+        
       
-        /*var localDiv = document.createElement("div");
-        localDiv.id = a+"Inspector";
-
-        var form = document.createElement('form');
-        var input = document.createElement("input");
-        var label = document.createElement("label");
-        var button = document.createElement("button");
-        var br = document.createElement("br");
-        label.innerHTML = optionText;
-        input.id = 'input-';
-        input.type = 'text';
-        input.name = 'name';
-        input.placeholder = 'Enter ' + optionText + "... attribute";
-        inputValue = input;
-        button.innerHTML = "Save";
-    
-        form.appendChild(label);
-        form.appendChild(input);
-        form.appendChild(button);
-        form.appendChild(br);
-        localDiv.appendChild(form);
-        div.appendChild(localDiv);*/
     }
     function myFunction() {
         var txt;

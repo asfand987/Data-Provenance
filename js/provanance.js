@@ -244,7 +244,7 @@ jsPlumb.ready(function () {
    
     //create an element to be drawn on the canvas
     function createElement(id) {
-        var arr = {};
+        var arr = [];
 
         var elm = $('<div>').addClass(properties[0].clsName).attr('id', id).attr('variables', arr);
         
@@ -263,7 +263,7 @@ jsPlumb.ready(function () {
         strong.append(p);
         elm.append(strong);
         //t.append(elm);
-        console.log(elm[0].attributes);
+        //console.log(elm[0].attributes);
         return elm;
     }
 
@@ -310,8 +310,8 @@ jsPlumb.ready(function () {
     document.onclick = function(e) {
         var clssName = e.path[2].className.split(' ').slice(1, 2);
         if(clssName == "start" || clssName == "step" || clssName == "diamond") {
-            console.log(e.path[2]);
-        //if(e.path[2].className == entityClsName || e.path[2].className == activityClsName || e.path[2].className == agentClsName ) {
+            //console.log(e.path[2]);
+            //if(e.path[2].className == entityClsName || e.path[2].className == activityClsName || e.path[2].className == agentClsName ) {
             var x = document.getElementById("s");
             var objectIdentifier = e.path[2].id;
             idEle = e.path[2].id;
@@ -355,12 +355,13 @@ jsPlumb.ready(function () {
         var button = document.createElement("button");
         var br = document.createElement("br");
         label.innerHTML = optionText;
-        input.id = 'input-';
+        //input.id = a+"Inspector";
         input.type = 'text';
         input.name = 'name';
         input.placeholder = 'Enter ' + optionText + "... attribute";
         //inputValue = input;
-        button.innerHTML = "Save";
+        button.innerHTML = "S";
+        button.type = 'button';
 
         form.appendChild(label);
         form.appendChild(input);
@@ -372,12 +373,24 @@ jsPlumb.ready(function () {
             div.appendChild(cont);
         }
         else {
+            input.id = a+"Input";
+            button.id = a+"Button";
             var localDiv = document.createElement("div");
             localDiv.id = a+"Inspector";
             localDiv.appendChild(form);
             div.appendChild(localDiv);
         }
+        document.getElementById(a+"Button").addEventListener("click", function() {
+            //e.preventDefault();
+            return console.log("Testing");
+        })
     }
+
+    function getIdOfClickedNode(id) {
+        return id;
+    }
+   
+
     function myFunction() {
         var txt;
         var promptAlert = prompt("Please enter your ID:", "ID");
@@ -396,12 +409,18 @@ jsPlumb.ready(function () {
         var x = document.getElementById("objectName");
         var p = document.getElementById(nodeID).querySelectorAll("p");//.getElementsByClassName("p");
         var cont = document.getElementById(nodeID+"Inspector");
+        var input = document.getElementById(nodeID+"Input");
+        var button = document.getElementById(nodeID+"Button");
 
+
+        //Delete old element ID
         if(x.value != '') {
             nodeID =  x.value;
             p[0].innerHTML = nodeID;
             x.value = '';          
             cont.id = nodeID+"Inspector";
+            input.id = nodeID+"Input";
+            button.id = nodeID+"Button";
             jsPlumbInstance.setId(clickedObject.path[2].id, nodeID);
             jsPlumbInstance.recalculateOffsets(nodeID);
         }

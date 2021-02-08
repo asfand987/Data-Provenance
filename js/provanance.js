@@ -339,8 +339,12 @@ jsPlumb.ready(function () {
         }
     }
     //are = idEle; 
+    var count = false;
     document.getElementById("attrBtn").addEventListener("click",  function() {
-        inspectorAttr(idEle);
+        if(!count) {
+            inspectorAttr(idEle);
+            count = true;
+        }
     });   
     //var inputValue;
     function inspectorAttr(a) {
@@ -354,6 +358,10 @@ jsPlumb.ready(function () {
         var label = document.createElement("label");
         var button = document.createElement("button");
         var br = document.createElement("br");
+
+        input.id = a+"Input";
+        button.id = a+"Button";
+        
         label.innerHTML = optionText;
         //input.id = a+"Inspector";
         input.type = 'text';
@@ -380,11 +388,16 @@ jsPlumb.ready(function () {
             localDiv.appendChild(form);
             div.appendChild(localDiv);
         }
+
         document.getElementById(a+"Button").addEventListener("click", function() {
+            count = false;
             var inputValue = document.getElementById(a+"Input").value;
             var val = document.getElementById(a);
-            val.attributes[2].nodeValue =  val.attributes[2].nodeValue + inputValue + ", ";
+            val.attributes[2].nodeValue =  val.attributes[2].nodeValue + label.innerHTML+ ": " + inputValue + ", ";
             console.log(val.attributes[2].nodeValue);
+            input.remove();
+            label.remove();
+            button.remove();
         })
     }
 

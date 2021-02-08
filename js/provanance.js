@@ -361,7 +361,7 @@ jsPlumb.ready(function () {
 
         input.id = a+"Input";
         button.id = a+"Button";
-        
+        label.id = a+"Label";
         label.innerHTML = optionText;
         //input.id = a+"Inspector";
         input.type = 'text';
@@ -393,6 +393,7 @@ jsPlumb.ready(function () {
             count = false;
             var inputValue = document.getElementById(a+"Input").value;
             var val = document.getElementById(a);
+            console.log(val.attributes[2]);
             val.attributes[2].nodeValue =  val.attributes[2].nodeValue + label.innerHTML+ ": " + inputValue + ", ";
             console.log(val.attributes[2].nodeValue);
             input.remove();
@@ -424,18 +425,30 @@ jsPlumb.ready(function () {
         var cont = document.getElementById(nodeID+"Inspector");
         var input = document.getElementById(nodeID+"Input");
         var button = document.getElementById(nodeID+"Button");
-
+        var label = document.getElementById(nodeID+"Label");
 
         //Delete old element ID
         if(x.value != '') {
             nodeID =  x.value;
             p[0].innerHTML = nodeID;
-            x.value = '';          
-            cont.id = nodeID+"Inspector";
-            input.id = nodeID+"Input";
-            button.id = nodeID+"Button";
+            x.value = '';       
+            
+            if(cont) {   
+                cont.id = nodeID+"Inspector";
+            }
+            if(input) {
+                input.id = nodeID+"Input";    
+            }
+            if(button) {
+                button.id = nodeID+"Button";
+            }
+            if(label) {
+                label.id = nodeID+"Label";
+            }
             jsPlumbInstance.setId(clickedObject.path[2].id, nodeID);
             jsPlumbInstance.recalculateOffsets(nodeID);
+
+            idEle = nodeID;
         }
     }
 });

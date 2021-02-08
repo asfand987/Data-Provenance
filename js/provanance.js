@@ -381,14 +381,14 @@ jsPlumb.ready(function () {
             div.appendChild(localDiv);
         }
         document.getElementById(a+"Button").addEventListener("click", function() {
-            //e.preventDefault();
-            return console.log("Testing");
+            var inputValue = document.getElementById(a+"Input").value;
+            var val = document.getElementById(a);
+            val.attributes[2].nodeValue =  val.attributes[2].nodeValue + inputValue + ", ";
+            console.log(val.attributes[2].nodeValue);
         })
     }
 
-    function getIdOfClickedNode(id) {
-        return id;
-    }
+
    
 
     function myFunction() {

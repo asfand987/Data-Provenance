@@ -340,7 +340,7 @@ jsPlumb.ready(function () {
                 }
             }
             //var getAttrId = "#"+e.path[2].id+"D";
-            var attrs = document.getElementById(objectIdentifier+"D");
+            var attrs = document.getElementById(objectIdentifier+"Attr");
             if(attrs) {
                 attrs.style.display = "inline-block";
             }
@@ -399,7 +399,7 @@ jsPlumb.ready(function () {
             div.appendChild(localDiv);
         }
 
-        var divAttr = document.getElementById(a+"D");
+        var divAttr = document.getElementById(a+"Attr");
         var br = document.createElement("br");
         var b = document.createElement("button");
         var attrlabel = document.createElement("label");
@@ -410,7 +410,7 @@ jsPlumb.ready(function () {
         }
         else {
             var divAttr = document.createElement('div');
-            divAttr.id = a+"D";
+            divAttr.id = a+"Attr";
         }
 
         document.getElementById(a+"Button").addEventListener("click", function() {
@@ -442,9 +442,6 @@ jsPlumb.ready(function () {
         form.appendChild(divAttr);
     }
 
-
-   
-
     function myFunction() {
         var txt;
         var promptAlert = prompt("Please enter your ID:", "ID");
@@ -466,6 +463,7 @@ jsPlumb.ready(function () {
         var input = document.getElementById(nodeID+"Input");
         var button = document.getElementById(nodeID+"Button");
         var label = document.getElementById(nodeID+"Label");
+        var attr = document.getElementById(nodeID+"Attr");
 
         //Delete old element ID
         if(x.value != '') {
@@ -473,18 +471,11 @@ jsPlumb.ready(function () {
             p[0].innerHTML = nodeID;
             x.value = '';       
             
-            if(cont) {   
-                cont.id = nodeID+"Inspector";
-            }
-            if(input) {
-                input.id = nodeID+"Input";    
-            }
-            if(button) {
-                button.id = nodeID+"Button";
-            }
-            if(label) {
-                label.id = nodeID+"Label";
-            }
+            if(cont) { cont.id = nodeID+"Inspector";}
+            if(input) { input.id = nodeID+"Input";}
+            if(button) { button.id = nodeID+"Button";}
+            if(label) { label.id = nodeID+"Label";}
+            if(attr) { attr.id = nodeID+"Attr";}
             jsPlumbInstance.setId(clickedObject.path[2].id, nodeID);
             jsPlumbInstance.recalculateOffsets(nodeID);
 

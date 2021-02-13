@@ -27,9 +27,9 @@ jsPlumb.ready(function () {
     });
 
     //var windows = jsPlumb.getSelector(".canvas-wide .window start jsplumb-connected");
-    jsPlumbInstance.bind("connection", function (info) {
+    jsPlumbInstance.bind('connection', function (info) {
         var entity = "window start custom jtk-node jsplumb-connected jsplumb-endpoint-anchor jsplumb-draggable".split(' ').slice(1, 2)[0];
-        var activity = "window step custom jtk-node jsplumb-connected-step jsplumb-endpoint-anchor jsplumb-draggable jsplumb-connected".split(' ').slice(1, 2)[0];;
+        var activity = "window step custom jtk-node jsplumb-connected-step jsplumb-endpoint-anchor jsplumb-draggable jsplumb-connected".split(' ').slice(1, 2)[0];
         var agent = "window diamond custom jtk-node jsplumb-connected-end jsplumb-endpoint-anchor jsplumb-draggable jsplumb-connected".split(' ').slice(1, 2)[0];; 
 
         //var source=info.sourceId.replace(/[0-9]/g, '');
@@ -84,6 +84,11 @@ jsPlumb.ready(function () {
 
     });
 
+    $(document).on('dblclick','.window',function(){
+        jsPlumbInstance.remove($(this));
+        //other logic goes here...
+    });
+  
     //instance.connect({ source: "opened", target: "phone1", type:"basic" });
     //define basic connection type
     var basicType = {
@@ -103,53 +108,53 @@ jsPlumb.ready(function () {
     },
 
     //style for the connector hover
-        connectorHoverStyle = {
-            lineWidth: 4,
-            strokeStyle: "#216477",
-            outlineWidth: 2,
-            outlineColor: "white"
-        },
-        endpointHoverStyle = {
-            fillStyle: "#216477",
-            strokeStyle: "#216477"
-        },
+    connectorHoverStyle = {
+        lineWidth: 4,
+        strokeStyle: "#216477",
+        outlineWidth: 2,
+        outlineColor: "white"
+    },
+    endpointHoverStyle = {
+        fillStyle: "#216477",
+        strokeStyle: "#216477"
+    },
 
     //the source endpoint definition from which a connection can be started
-        sourceEndpoint = {
-            endpoint: "Dot",
-            paintStyle: {
-                strokeStyle: "#7AB02C",
-                fillStyle: "transparent",
-                radius: 7,
-                lineWidth: 3
-            },
-            isSource: true,
-            connector: ["Flowchart", {stub: [40, 60], gap: 5, cornerRadius: 5, alwaysRespectStubs: true}],
-            connectorStyle: connectorPaintStyle,
-            hoverPaintStyle: endpointHoverStyle,
-            connectorHoverStyle: connectorHoverStyle,
-            EndpointOverlays: [],
-            maxConnections: -1,
-            dragOptions: {},
-            connectorOverlays: [
-                ["Arrow", {
-                    location: 1,
-                    visible: true,
-                    id: "ARROW",
-                    direction: 1
-                }]
-            ]
+    sourceEndpoint = {
+        endpoint: "Dot",
+        paintStyle: {
+            strokeStyle: "#7AB02C",
+            fillStyle: "transparent",
+            radius: 7,
+            lineWidth: 3
         },
+        isSource: true,
+        connector: ["Flowchart", {stub: [40, 60], gap: 5, cornerRadius: 5, alwaysRespectStubs: true}],
+        connectorStyle: connectorPaintStyle,
+        hoverPaintStyle: endpointHoverStyle,
+        connectorHoverStyle: connectorHoverStyle,
+        EndpointOverlays: [],
+        maxConnections: -1,
+        dragOptions: {},
+        connectorOverlays: [
+            ["Arrow", {
+                location: 1,
+                visible: true,
+                id: "ARROW",
+                direction: 1
+            }]
+        ]
+    },
 
     //definition of the target endpoint the connector would end
-        targetEndpoint = {
-            endpoint: "Dot",
-            paintStyle: {fillStyle: "#7AB02C", radius: 9},
-            maxConnections: -1,
-            dropOptions: {hoverClass: "hover", activeClass: "active"},
-            hoverPaintStyle: endpointHoverStyle,
-            isTarget: true
-        };
+    targetEndpoint = {
+        endpoint: "Dot",
+        paintStyle: {fillStyle: "#7AB02C", radius: 9},
+        maxConnections: -1,
+        dropOptions: {hoverClass: "hover", activeClass: "active"},
+        hoverPaintStyle: endpointHoverStyle,
+        isTarget: true
+    };
 
        
 	function makeDraggable(id, className, text){
@@ -227,7 +232,6 @@ jsPlumb.ready(function () {
         });
     }
 
-    
 	//load properties of a start element once the start element in the palette is clicked
     $('#entityID').mousedown(function () {
         loadProperties("window start custom jtk-node jsplumb-connected", "5em", "5em", "entity", ["Left", "Right"],
@@ -317,6 +321,7 @@ jsPlumb.ready(function () {
 
     var clickedObject;
     var idEle;
+
     document.onclick = function(e) {
         var clssName = e.path[2].className.split(' ').slice(1, 2);
         if(clssName == "start" || clssName == "step" || clssName == "diamond") {

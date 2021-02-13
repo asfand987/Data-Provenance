@@ -310,6 +310,7 @@ jsPlumb.ready(function () {
     document.onclick = function(e) {
         var clssName = e.path[2].className.split(' ').slice(1, 2);
         if(clssName == "start" || clssName == "step" || clssName == "diamond") {
+            
             //console.log(e.path[2]);
             //if(e.path[2].className == entityClsName || e.path[2].className == activityClsName || e.path[2].className == agentClsName ) {
             var x = document.getElementById("s");
@@ -328,6 +329,8 @@ jsPlumb.ready(function () {
             }
 
             var IDs = document.querySelectorAll("#AttrContainer div");
+            var Is = document.querySelectorAll(e.path[2].id+" label");
+            //console.log(Is);
             for (var i = 0; i<IDs.length; i++) {
                 if(IDs[i].id != (objectIdentifier+"Inspector")) {
                     IDs[i].style.display = "none";
@@ -336,6 +339,12 @@ jsPlumb.ready(function () {
                     IDs[i].style.display = "inline-block";
                 }
             }
+            //var getAttrId = "#"+e.path[2].id+"D";
+            var attrs = document.getElementById(objectIdentifier+"D");
+            if(attrs) {
+                attrs.style.display = "inline-block";
+            }
+
         }
     }
     //are = idEle; 
@@ -371,6 +380,7 @@ jsPlumb.ready(function () {
         button.innerHTML = "S";
         button.type = 'button';
 
+        //form.appendChild(divAttr);
         form.appendChild(label);
         form.appendChild(input);
         form.appendChild(button);
@@ -389,17 +399,47 @@ jsPlumb.ready(function () {
             div.appendChild(localDiv);
         }
 
+        var divAttr = document.getElementById(a+"D");
+        var br = document.createElement("br");
+        var b = document.createElement("button");
+        var attrlabel = document.createElement("label");
+        
+        if(divAttr) {
+            //console.log(divAttr);
+            form.appendChild(divAttr);
+        }
+        else {
+            var divAttr = document.createElement('div');
+            divAttr.id = a+"D";
+        }
+
         document.getElementById(a+"Button").addEventListener("click", function() {
             count = false;
             var inputValue = document.getElementById(a+"Input").value;
             var val = document.getElementById(a);
+            //console.log(val.attributes[2]);
+            val.attributes[2].nodeValue =  val.attributes[2].nodeValue + label.innerHTML+ ": " + inputValue + ",";
+            var res = val.attributes[2].nodeValue.split(",");
+            var i;
+            res.pop();
+            
+            for (i = 0; i < res.length; i++) {
+                //var attrlabel = document.createElement("label");
+                b.innerHTML = "+";
+                b.type = 'button';
+
+                attrlabel.innerHTML = res[i];
+                divAttr.appendChild(attrlabel);
+                divAttr.appendChild(b);
+                divAttr.appendChild(br);
+            }
             console.log(val.attributes[2]);
-            val.attributes[2].nodeValue =  val.attributes[2].nodeValue + label.innerHTML+ ": " + inputValue + ", ";
-            console.log(val.attributes[2].nodeValue);
             input.remove();
-            label.remove();
+            label.remove(); 
             button.remove();
-        })
+        });
+        
+        form.appendChild(divAttr);
     }
 
 

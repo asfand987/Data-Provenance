@@ -182,7 +182,7 @@ jsPlumb.ready(function () {
                 elementCount++;
 
                 var id;
-                id =  myFunction();
+                id =  myFunction("Please enter your ID:", "ID");
                 element = createElement(id);
 
                 drawElement(element, "#canvas", id);//, name);
@@ -361,21 +361,30 @@ jsPlumb.ready(function () {
         var div = document.getElementById("AttrContainer");
         var selectionAttr = document.getElementById("attr");
         var optionText = selectionAttr.options[selectionAttr.selectedIndex].text;
-    
+        
+        //console.log(selectionAttr.options[selectionAttr.selectedIndex].value);
+       
         var form = document.createElement('form');
         var input = document.createElement("input");
         var label = document.createElement("label");
         var button = document.createElement("button");
         var br = document.createElement("br");
 
+        if(selectionAttr.options[selectionAttr.selectedIndex].value == 4) {
+            var attr = myFunction("Enter Attr", "Attr");
+            label.innerHTML = attr;
+        }
+        else {
+            label.innerHTML = optionText;
+        }
         input.id = a+"Input";
         button.id = a+"Button";
         label.id = a+"Label";
-        label.innerHTML = optionText;
+        //label.innerHTML = optionText;
         //input.id = a+"Inspector";
         input.type = 'text';
         input.name = 'name';
-        input.placeholder = 'Enter ' + optionText + "... attribute";
+       
         //inputValue = input;
         button.innerHTML = "S";
         button.type = 'button';
@@ -442,9 +451,9 @@ jsPlumb.ready(function () {
         form.appendChild(divAttr);
     }
 
-    function myFunction() {
+    function myFunction(message, placeholder) {
         var txt;
-        var promptAlert = prompt("Please enter your ID:", "ID");
+        var promptAlert = prompt(message, placeholder);
         if (promptAlert == null || promptAlert == "") {
           txt = "User cancelled the prompt.";
         } else {
@@ -453,6 +462,7 @@ jsPlumb.ready(function () {
         //idIs = txt;
         return txt;
     }
+
 
     saveFunction = function saveOutput() {
         var nodeID = clickedObject.path[2].id;

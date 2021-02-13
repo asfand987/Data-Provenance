@@ -28,12 +28,13 @@ jsPlumb.ready(function () {
 
     //var windows = jsPlumb.getSelector(".canvas-wide .window start jsplumb-connected");
     jsPlumbInstance.bind("connection", function (info) {
-        var entity = "window start custom jtk-node jsplumb-connected jsplumb-endpoint-anchor jsplumb-draggable";
-        var activity = "window step custom jtk-node jsplumb-connected-step jsplumb-endpoint-anchor jsplumb-draggable jsplumb-connected";
-        var agent = "window diamond custom jtk-node jsplumb-connected-end jsplumb-endpoint-anchor jsplumb-draggable jsplumb-connected"; 
+        var entity = "window start custom jtk-node jsplumb-connected jsplumb-endpoint-anchor jsplumb-draggable".split(' ').slice(1, 2)[0];
+        var activity = "window step custom jtk-node jsplumb-connected-step jsplumb-endpoint-anchor jsplumb-draggable jsplumb-connected".split(' ').slice(1, 2)[0];;
+        var agent = "window diamond custom jtk-node jsplumb-connected-end jsplumb-endpoint-anchor jsplumb-draggable jsplumb-connected".split(' ').slice(1, 2)[0];; 
+
         //var source=info.sourceId.replace(/[0-9]/g, '');
-        var source = info.source.className;
-        var target = info.target.className;
+        var source = info.source.className.split(' ').slice(1, 2)[0];
+        var target = info.target.className.split(' ').slice(1, 2)[0];
        
         info.targetId = info.target.id;
         info.connection.targetId = info.target.id;
@@ -41,8 +42,11 @@ jsPlumb.ready(function () {
         jsPlumbInstance.draggable(jsPlumbInstance.getSelector(".jtk-node"), {
             grid: [20, 20]
         }); 
-       
         //console.log(info);
+       
+        //console.log(entity);
+        //console.log(source);
+        //console.log(target);
         if (source == entity && source == target) {
             info.connection.getOverlay("label").setLabel("wasDerivedFrom");
         }
@@ -73,7 +77,7 @@ jsPlumb.ready(function () {
     });
  
     jsPlumbInstance.bind('click', function (connection, e) {
-        var answer = window.confirm("Save data?");
+        var answer = window.confirm("Are you sure you want to delete this connection?");
         if(answer) {
             jsPlumbInstance.detach(connection);
         }

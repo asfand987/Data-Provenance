@@ -26,7 +26,6 @@ jsPlumb.ready(function () {
         Container: "canvas"
     });
 
-
     //var windows = jsPlumb.getSelector(".canvas-wide .window start jsplumb-connected");
     jsPlumbInstance.bind("connection", function (info) {
         var entity = "window start custom jtk-node jsplumb-connected jsplumb-endpoint-anchor jsplumb-draggable";
@@ -73,6 +72,13 @@ jsPlumb.ready(function () {
         }
     });
  
+    jsPlumbInstance.bind('click', function (connection, e) {
+        var answer = window.confirm("Save data?");
+        if(answer) {
+            jsPlumbInstance.detach(connection);
+        }
+
+    });
 
     //instance.connect({ source: "opened", target: "phone1", type:"basic" });
     //define basic connection type
@@ -355,6 +361,7 @@ jsPlumb.ready(function () {
             count = true;
         }
     });   
+   
     //var inputValue;
     function inspectorAttr(a) {
         var cont = document.getElementById(a+"Inspector");

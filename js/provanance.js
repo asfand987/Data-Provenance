@@ -332,38 +332,37 @@ jsPlumb.ready(function () {
             }
     }
 
-    document.onclick = function(e) {
-        var clssName = e.path[2].className.split(' ').slice(1, 2);
+    document.onclick = function(node) {
+        var clssName = node.path[2].className.split(' ').slice(1, 2);
         if(clssName == "start" || clssName == "step" || clssName == "diamond") {
-            var objectIdentifier = e.path[2].id;
-            idEle = e.path[2].id;
-            displayInspectorWindow(e, objectIdentifier);
+            var objectIdentifier = node.path[2].id;
+            idEle = node.path[2].id;
+            displayInspectorWindow(node, objectIdentifier);
             displayInspectorValues(objectIdentifier);
         }
     }
     //are = idEle; 
-    var count = false;
+    var block = false;
     document.getElementById("attrBtn").addEventListener("click",  function() {
-        if(!count) {
+        if(!block) {
             inspectorAttr(idEle);
-            count = true;
+            block = true;
         }
     });   
    
     //var inputValue;
-    function inspectorAttr(a) {
-        var cont = document.getElementById(a+"Inspector");
+    function inspectorAttr(id) {
+        var inspectorWindow = document.getElementById(id+"Inspector");
         var div = document.getElementById("inspectorValuesContainer");
         var selectionAttr = document.getElementById("attr");
-        var optionText = selectionAttr.options[selectionAttr.selectedIndex].text;
         
-        //console.log(selectionAttr.options[selectionAttr.selectedIndex].value);
-       
         var form = document.createElement('form');
         var input = document.createElement("input");
         var label = document.createElement("label");
         var button = document.createElement("button");
         var br = document.createElement("br");
+
+        var optionText = selectionAttr.options[selectionAttr.selectedIndex].text;
 
         if(selectionAttr.options[selectionAttr.selectedIndex].value == 4) {
             var attr = myFunction("Enter Attr", "Attr");
@@ -372,77 +371,77 @@ jsPlumb.ready(function () {
         else {
             label.innerHTML = optionText;
         }
-        input.id = a+"Input";
-        button.id = a+"Button";
-        label.id = a+"Label";
-        //label.innerHTML = optionText;
-        //input.id = a+"Inspector";
+
+        input.id = id+"Input";
+        button.id = id+"Button";
+        label.id = id+"Label";
         input.type = 'text';
         input.name = 'name';
-       
-        //inputValue = input;
         button.innerHTML = "S";
         button.type = 'button';
 
-        //form.appendChild(divAttr);
         form.appendChild(label);
         form.appendChild(input);
         form.appendChild(button);
         form.appendChild(br);
 
-        if(cont) {
-            cont.appendChild(form);
-            div.appendChild(cont);
+        if(inspectorWindow) {
+            inspectorWindow.appendChild(form);
+            div.appendChild(inspectorWindow);
         }
         else {
-            input.id = a+"Input";
-            button.id = a+"Button";
+            input.id = id+"Input";
+            button.id = id+"Button";
             var localDiv = document.createElement("div");
-            localDiv.id = a+"Inspector";
+            localDiv.id = id+"Inspector";
             localDiv.appendChild(form);
             div.appendChild(localDiv);
         }
-
-        var divAttr = document.getElementById(a+"Attr");
-        var br = document.createElement("br");
-        var b = document.createElement("button");
-        var attrlabel = document.createElement("label");
         
+        displayNodeValues(id, input, label, button, form);
+        
+    }
+
+    function displayNodeValues(id, input, label, button, form) {
+        var divAttr = document.getElementById(id+"Attr");
         if(divAttr) {
             //console.log(divAttr);
             form.appendChild(divAttr);
         }
         else {
             var divAttr = document.createElement('div');
-            divAttr.id = a+"Attr";
+            divAttr.id = id+"Attr";
         }
 
-        document.getElementById(a+"Button").addEventListener("click", function() {
-            count = false;
-            var inputValue = document.getElementById(a+"Input").value;
-            var val = document.getElementById(a);
-            //console.log(val.attributes[2]);
-            val.attributes[2].nodeValue =  val.attributes[2].nodeValue + label.innerHTML+ ": " + inputValue + ",";
-            var res = val.attributes[2].nodeValue.split(",");
-            var i;
-            res.pop();
-            
-            for (i = 0; i < res.length; i++) {
-                //var attrlabel = document.createElement("label");
-                b.innerHTML = "+";
-                b.type = 'button';
+        var br = document.createElement("br");
+        var attrButton = document.createElement("button");
+        var attrlabel = document.createElement("label");
 
-                attrlabel.innerHTML = res[i];
+        document.getElementById(id+"Button").addEventListener("click", function() {
+            block = false;
+            var inputValue = document.getElementById(id+"Input").value;
+            var node = document.getElementById(id);
+            node.attributes[2].nodeValue =  node.attributes[2].nodeValue + label.innerHTML+ ": " + inputValue + ",";
+            
+            var nodeAttrs = node.attributes[2].nodeValue.split(",");
+            nodeAttrs.pop();
+            
+            var i;
+            for (i = 0; i < nodeAttrs.length; i++) {
+                //var attrlabel = document.createElement("label");
+                attrButton.innerHTML = "+";
+                attrButton.type = 'button';
+
+                attrlabel.innerHTML = nodeAttrs[i];
                 divAttr.appendChild(attrlabel);
-                divAttr.appendChild(b);
+                divAttr.appendChild(attrButton);
                 divAttr.appendChild(br);
             }
-            console.log(val.attributes[2]);
+            console.log(node.attributes[2]);
             input.remove();
             label.remove(); 
             button.remove();
         });
-        
         form.appendChild(divAttr);
     }
 

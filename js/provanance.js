@@ -365,25 +365,33 @@ jsPlumb.ready(function () {
         var optionText = selectionAttr.options[selectionAttr.selectedIndex].text;
 
         if(selectionAttr.options[selectionAttr.selectedIndex].value == 4) {
-            var attr = myFunction("Enter Attr", "Attr");
-            label.innerHTML = attr;
+            var attr = prompt("Enter Attribute", "Attr");
+            if(attr) {
+                label.innerHTML = attr;
+            }
+            else {
+                label.innerHTML = "value";
+            }
         }
         else {
             label.innerHTML = optionText;
         }
 
         input.id = id+"Input";
-        button.id = id+"Button";
-        label.id = id+"Label";
         input.type = 'text';
         input.name = 'name';
         button.innerHTML = "S";
         button.type = 'button';
+        button.id = id+"Button";
+        label.id = id+"Label";
 
+        $(form).submit(function (e) {
+            e.preventDefault();
+        });
         form.appendChild(label);
         form.appendChild(input);
         form.appendChild(button);
-        form.appendChild(br);
+        //
 
         if(inspectorWindow) {
             inspectorWindow.appendChild(form);
@@ -405,7 +413,6 @@ jsPlumb.ready(function () {
     function displayNodeValues(id, input, label, button, form) {
         var divAttr = document.getElementById(id+"Attr");
         if(divAttr) {
-            //console.log(divAttr);
             form.appendChild(divAttr);
         }
         else {
@@ -426,12 +433,18 @@ jsPlumb.ready(function () {
             var nodeAttrs = node.attributes[2].nodeValue.split(",");
             nodeAttrs.pop();
             
-            var i;
-            for (i = 0; i < nodeAttrs.length; i++) {
-                //var attrlabel = document.createElement("label");
-                attrButton.innerHTML = "+";
+            //var i;
+            for (var i = 0; i < nodeAttrs.length; i++) {
+                attrButton.innerHTML = "X";
                 attrButton.type = 'button';
-
+                attrButton.id = nodeAttrs[i];
+                
+                attrButton.addEventListener("click", function() {
+                    attrlabel.remove();
+                    attrButton.remove();
+                    node.attributes[2].nodeValue = node.attributes[2].nodeValue.replace(attrlabel.innerHTML+",", "");
+                    //console.log( node.attributes[2].nodeValue);
+                })
                 attrlabel.innerHTML = nodeAttrs[i];
                 divAttr.appendChild(attrlabel);
                 divAttr.appendChild(attrButton);

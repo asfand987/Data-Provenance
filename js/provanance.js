@@ -438,7 +438,7 @@ jsPlumb.ready(function () {
                 attrButton.innerHTML = "X";
                 attrButton.type = 'button';
                 attrButton.id = nodeAttrs[i];
-                
+                //delete
                 attrButton.addEventListener("click", function() {
                     attrlabel.remove();
                     attrButton.remove();

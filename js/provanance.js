@@ -42,11 +42,7 @@ jsPlumb.ready(function () {
         jsPlumbInstance.draggable(jsPlumbInstance.getSelector(".jtk-node"), {
             grid: [20, 20]
         }); 
-        //console.log(info);
-       
-        //console.log(entity);
-        //console.log(source);
-        //console.log(target);
+
         if (source == entity && source == target) {
             info.connection.getOverlay("label").setLabel("wasDerivedFrom");
         }
@@ -85,8 +81,10 @@ jsPlumb.ready(function () {
     });
 
     $(document).on('dblclick','.window',function(){
-        jsPlumbInstance.remove($(this));
-        //other logic goes here...
+        var answer = window.confirm("Are you sure you want to delete this connection?");
+        if(answer) {
+            jsPlumbInstance.remove($(this));
+        }
     });
   
     //instance.connect({ source: "opened", target: "phone1", type:"basic" });

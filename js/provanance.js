@@ -89,11 +89,11 @@ jsPlumb.ready(function () {
   
     //instance.connect({ source: "opened", target: "phone1", type:"basic" });
     //define basic connection type
-    var basicType = {
-        connector: "StateMachine",
-        paintStyle: {strokeStyle: "#216477", lineWidth: 4},
-        hoverPaintStyle: {strokeStyle: "blue"}
-    };
+    // var basicType = {
+    //     connector: "StateMachine",
+    //     paintStyle: {strokeStyle: "#216477", lineWidth: 4},
+    //     hoverPaintStyle: {strokeStyle: "blue"}
+    // };
     //jsPlumbInstance.registerConnectionType("basic", basicType);
     jsPlumbInstance.registerConnectionType("basic", { anchor:"Continuous", connector:"StateMachine" });
     //style for the connector
@@ -172,14 +172,6 @@ jsPlumb.ready(function () {
 	makeDraggable("#activityID", "window step jsplumb-connected-step custom", "activity");
     makeDraggable("#agentID", "window diamond jsplumb-connected-end custom", "agents");
 
-    /*$("#agentID").draggable({
-        helper: function () {
-    	   return createElement("");
-        },
-        stack: ".custom",
-        revert: false
-	});*/
-   
     //make the editor canvas droppable
     entityCount = 1;
     agentCount = 1;
@@ -257,7 +249,6 @@ jsPlumb.ready(function () {
     //create an element to be drawn on the canvas
     function createElement(id) {
         var arr = [];
-
         var elm = $('<div>').addClass(properties[0].clsName).attr('id', id).attr('variables', arr);
         
         elm.css({
@@ -266,33 +257,24 @@ jsPlumb.ready(function () {
         });
         //console.log(properties[0].clsName );
         var strong = $('<strong>');
-
         elm.append("<i style='display: none' class=\"fa fa-trash fa-lg close-icon\"><\/i>");
         var p = $('<p>').text(id);
-        //p.innerHTML = id;
         p.id = "p";
-        //console.log(p);
         strong.append(p);
         elm.append(strong);
-        //t.append(elm);
-        //console.log(elm[0].attributes);
+
         return elm;
     }
 
      //add the endpoints for the elements
-    var epp;
+    // var epp;
     var _addEndpoints = function (sourceAnchors, targetAnchors, id) {
-        //console.log(sourceAnchors);
-        
         for (var i = 0; i < sourceAnchors.length; i++) {
             var sourceUUID = sourceAnchors[i];
-            //console.log("sourceAnchors: " + sourceAnchors[i]);
             epp = jsPlumbInstance.addEndpoint(id, sourceEndpoint, {
                 anchor: sourceAnchors[i], uuid: sourceUUID
             });
-            
-            sourcepointList.push([id , epp]);
-            //epp.canvas.setAttribute("title", "Drag a connection here");
+            //sourcepointList.push([id , epp]);
             epp = null;
         }
         for (var j = 0; j < targetAnchors.length; j++) {
@@ -300,17 +282,14 @@ jsPlumb.ready(function () {
             epp = jsPlumbInstance.addEndpoint(id, targetEndpoint, {
                 anchor: targetAnchors[j], uuid: targetUUID
             });
-            
-            endpointList.push([id, epp]);
+            // endpointList.push([id, epp]);
             //epp.canvas.setAttribute("title", "Drop a connection here");
             epp = null;
         }
-
     };
 
     function drawElement(element, canvasId, id) {
         $(canvasId).append(element);
-        //console.log(properties[0].startpoints);
         _addEndpoints(properties[0].startpoints, properties[0].endpoints, id);
         jsPlumbInstance.draggable(jsPlumbInstance.getSelector(".jtk-node"), {
             grid: [20, 20]
@@ -320,44 +299,46 @@ jsPlumb.ready(function () {
     var clickedObject;
     var idEle;
 
+    function displayInspectorWindow(node, id) {
+        var inspectorWindow = document.getElementById("inspectorSpan");
+
+        if (inspectorWindow.style.display == "none") {
+            inspectorWindow.style.display = "inline-block";
+            //console.log("On click " + objectIdentifier);
+            clickedObject = node;
+            //inspectorAttr(objectIdentifier);
+            var placeholder = document.getElementById("objectName");
+            placeholder.placeholder = id;
+        } else {
+            inspectorWindow.style.display = "none";
+        }
+
+    }
+
+    function displayInspectorValues(id) {
+        var inspectorValues = document.querySelectorAll("#inspectorValuesContainer div");
+        //console.log(Is);
+        for (var i = 0; i < inspectorValues.length; i++) {
+            if(inspectorValues[i].id != (id+"Inspector")) {
+                inspectorValues[i].style.display = "none";
+            }
+            else {
+                inspectorValues[i].style.display = "inline-block";
+            }
+        }
+        var attributes = document.getElementById(id+"Attr");
+            if(attributes) {
+                attributes.style.display = "inline-block";
+            }
+    }
+
     document.onclick = function(e) {
         var clssName = e.path[2].className.split(' ').slice(1, 2);
         if(clssName == "start" || clssName == "step" || clssName == "diamond") {
-            
-            //console.log(e.path[2]);
-            //if(e.path[2].className == entityClsName || e.path[2].className == activityClsName || e.path[2].className == agentClsName ) {
-            var x = document.getElementById("s");
             var objectIdentifier = e.path[2].id;
             idEle = e.path[2].id;
-            
-            if (x.style.display == "none") {
-                x.style.display = "inline-block";
-                //console.log("On click " + objectIdentifier);
-                clickedObject = e;
-                //inspectorAttr(objectIdentifier);
-                var placeholder = document.getElementById("objectName");
-                placeholder.placeholder = objectIdentifier;
-            } else {
-                x.style.display = "none";
-            }
-
-            var IDs = document.querySelectorAll("#AttrContainer div");
-            var Is = document.querySelectorAll(e.path[2].id+" label");
-            //console.log(Is);
-            for (var i = 0; i<IDs.length; i++) {
-                if(IDs[i].id != (objectIdentifier+"Inspector")) {
-                    IDs[i].style.display = "none";
-                }
-                else {
-                    IDs[i].style.display = "inline-block";
-                }
-            }
-            //var getAttrId = "#"+e.path[2].id+"D";
-            var attrs = document.getElementById(objectIdentifier+"Attr");
-            if(attrs) {
-                attrs.style.display = "inline-block";
-            }
-
+            displayInspectorWindow(e, objectIdentifier);
+            displayInspectorValues(objectIdentifier);
         }
     }
     //are = idEle; 
@@ -372,7 +353,7 @@ jsPlumb.ready(function () {
     //var inputValue;
     function inspectorAttr(a) {
         var cont = document.getElementById(a+"Inspector");
-        var div = document.getElementById("AttrContainer");
+        var div = document.getElementById("inspectorValuesContainer");
         var selectionAttr = document.getElementById("attr");
         var optionText = selectionAttr.options[selectionAttr.selectedIndex].text;
         

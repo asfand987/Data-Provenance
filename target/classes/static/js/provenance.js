@@ -3,6 +3,7 @@ var sourcepointList = [];
 var _saveFlowchart, elementCount = 0;
 var jsPlumbInstance; //the jsPlumb jsPlumbInstance
 var properties = []; //keeps the properties of each element
+var elementsOnCanvas = [];
 
 jsPlumb.ready(function () {
     var element = "";   //the element which will be appended to the canvas
@@ -82,9 +83,15 @@ jsPlumb.ready(function () {
 
     $(document).on('dblclick','.window',function(){
         var answer = window.confirm("Are you sure you want to delete this connection?");
+        for (var i = 0; i < elementsOnCanvas.length; i++) {
+            if(elementsOnCanvas[i][0] == $(this)[0]) {
+                elementsOnCanvas.splice(i, 1);
+            }
+        }
         if(answer) {
             jsPlumbInstance.remove($(this));
         }
+       
     });
   
     //instance.connect({ source: "opened", target: "phone1", type:"basic" });
@@ -287,13 +294,14 @@ jsPlumb.ready(function () {
             epp = null;
         }
     };
-
+    
     function drawElement(element, canvasId, id) {
         $(canvasId).append(element);
         _addEndpoints(properties[0].startpoints, properties[0].endpoints, id);
         jsPlumbInstance.draggable(jsPlumbInstance.getSelector(".jtk-node"), {
             grid: [20, 20]
         });   
+        elementsOnCanvas.push(element);
     }
 
     var clickedObject;
@@ -339,6 +347,7 @@ jsPlumb.ready(function () {
             idEle = node.path[2].id;
             displayInspectorWindow(node, objectIdentifier);
             displayInspectorValues(objectIdentifier);
+            console.log(elementsOnCanvas);
         }
     }
     //are = idEle; 
@@ -423,7 +432,7 @@ jsPlumb.ready(function () {
         var br = document.createElement("br");
         var attrButton = document.createElement("button");
         var attrlabel = document.createElement("label");
-
+    
         document.getElementById(id+"Button").addEventListener("click", function() {
             block = false;
             var inputValue = document.getElementById(id+"Input").value;
@@ -498,6 +507,11 @@ jsPlumb.ready(function () {
             idEle = nodeID;
         }
     }
+
+    var saveButton = document.getElementById(flowchartSaveBtn);
+    saveButton.addEventListener("click", function() {
+
+    });
 });
 
 var saveFunction;

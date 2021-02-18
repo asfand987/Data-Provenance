@@ -1,0 +1,73 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Data Provenance</title>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+        <link href="/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/jsPlumb-defaults.css">
+        <link rel="stylesheet" href="/css/editor.css">
+		<link rel="stylesheet" href="/css/icons.css">
+		<link rel="stylesheet" href="/css/inspector.css">
+	</head>
+	<body>
+		<div id="flowChartView" style="display:block;">
+		    <br>
+		    <button class="btn btn-success" id="flowchartSaveBtn" onclick="" style="margin-left: 15px">Save</button><br><br>
+			<p></p><center><strong style="font-size: 40px">Provenance Editor</strong></center>
+			<div style="width:70%; white-space:nowrap;">
+		        <span style="display: inline-block; vertical-align: top; padding: 5px; width:13%">
+		            <div id="myPalette" style="border: solid 1px gray; height: auto"><p></p><center><strong>Palette</strong></center>
+		                <div class="container1" style="margin-top: 20px;">
+		                    <div class="jtk-d-canvas canvas-wide flowchart-d" id="canvas1">
+		                        <div class="window start jsplumb-connected" id="entityID"><strong><p id="entityP">entity</p></strong></div>
+								<div class="window step jsplumb-connected-step" id="activityID"><strong><p>activity</p></strong></div>
+								<div class="window diamond jsplumb-connected-end" id="agentID"><strong><p>agent</p></strong></div>
+		                    </div>
+		                </div>
+		            </div>
+		        </span>
+
+		        <span style="display: inline-block; vertical-align: top; padding: 5px; width:100%; height:100%">
+		          <div id="myDiagram" style="border: solid 1px gray;;"><p></p><center><strong></strong></center>
+		              <div class="container" style="margin-top: 20px;">
+		                  <div class="jtk-d-canvas canvas-wide flowchart-d jtk-surface  jtk-surface-nopan" id="canvas">	  
+		                  </div>
+		              </div>
+		          </div>
+				</span>
+				<span id="inspectorSpan" style="display: none; vertical-align: top; padding: 5px; width:26%; height:100%">
+					<div id="inspector" style="border: solid 1px gray;;"><p></p><center><strong>Inspector</strong></center>
+						<div class="">
+							<div class="">
+								<form id="form" action=""></form>
+								<label>Name:</label>
+								<input type="text" id="objectName" name="Name">
+								<button id="idBtn" onclick="saveFunction()">Save</button>
+							</div>
+							<div>
+								<label for="at">Choose an attribute:</label>   <!---  for="at" -->
+								<select name="attributes" id="attr">
+									<option value="0">prov:label</option>
+									<option value="1">prov:location</option>
+									<option value="2">prov:role</option>
+									<option value="3">prov:type</option>
+									<option value="4">custom</option>
+								</select>
+								<button id="attrBtn">+</button>
+								<!-- <button class="btnn" onclick="saveFunction">save</button> -->
+								<div id="inspectorValuesContainer"></div>
+							</div>						
+						</div>
+					</div>
+				</span>
+		    </div>
+		</div>
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="/js/jquery-ui.js"></script>
+	<script src="/js/jsPlumb-2.0.7.js"></script>
+	<script type="text/javascript" src="/js/provanance.js"></script>
+	</body>
+</html>

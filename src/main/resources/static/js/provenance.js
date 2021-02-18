@@ -347,7 +347,7 @@ jsPlumb.ready(function () {
             idEle = node.path[2].id;
             displayInspectorWindow(node, objectIdentifier);
             displayInspectorValues(objectIdentifier);
-            console.log(elementsOnCanvas);
+            //console.log(elementsOnCanvas);
         }
     }
     //are = idEle; 
@@ -478,6 +478,10 @@ jsPlumb.ready(function () {
         return txt;
     }
 
+    function printValues() {
+        console.log("test");
+    };
+    document.getElementById("flowchartSaveBtn").addEventListener("click", printValues);
 
     saveFunction = function saveOutput() {
         var nodeID = clickedObject.path[2].id;
@@ -508,10 +512,12 @@ jsPlumb.ready(function () {
         }
     }
 
-    var saveButton = document.getElementById(flowchartSaveBtn);
-    saveButton.addEventListener("click", function() {
-
-    });
+    // document.getElementById(flowchartSaveBtn).addEventListener("click", function() {
+    //     console.log("tes");
+    //     for(var i = 0; i < elementsOnCanvas.length(); i++) {
+    //         console.log(elementsOnCanvas[i]);
+    //     }
+    // });
 });
 
 var saveFunction;

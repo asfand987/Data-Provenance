@@ -516,8 +516,18 @@ jsPlumb.ready(function () {
 
     document.getElementById("nameSpaceButton").addEventListener("click", addNameSpace);
 
+    function deleteNameSpace(id, namespaceId) {
+        var namespaceDiv = document.getElementById(id);
+        namespaceDiv.remove();
+        var index = namespace.indexOf(namespaceId);
+        if (index > -1) {
+            namespace.splice(index, 1);
+        }
+        //console.log(namespace)
+    }
+
     function addNameSpace() {
-        let namespaceAlert = prompt("Enter Namespace", "random");
+        let namespaceAlert = prompt("Enter Namespace", "namespace");
         let namespaceContainer = document.getElementById("namespaceContainer"); 
         let label = document.createElement("label");
         let br = document.createElement("br");
@@ -525,10 +535,13 @@ jsPlumb.ready(function () {
         let namespaceBtn = document.createElement("button");
 
         label.innerHTML = "prefix " + namespaceAlert;
-        namespaceBtn.id = label.innerHTML + "-Btn";
         namespaceBtn.innerHTML = "X";
         namespaceBtn.style = "margin:5px";
+        
         namespaceDiv.id = label.innerHTML;
+        namespaceBtn.addEventListener("click", function() {
+            deleteNameSpace(namespaceDiv.id, label.innerHTML);
+        });
         namespaceDiv.style = "overflow-y: auto"
         namespaceDiv.appendChild(label);
         namespaceDiv.appendChild(namespaceBtn);
@@ -537,6 +550,12 @@ jsPlumb.ready(function () {
         namespace.push(label.innerHTML);
 
     }
+
+   
 });
 
 var saveFunction;
+var del;
+
+
+

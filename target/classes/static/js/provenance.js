@@ -542,20 +542,27 @@ jsPlumb.ready(function () {
         namespaceBtn.addEventListener("click", function() {
             deleteNameSpace(namespaceDiv.id, label.innerHTML);
         });
-        namespaceDiv.style = "overflow-y: auto"
+        namespaceDiv.style = "overflow-y: auto";
         namespaceDiv.appendChild(label);
         namespaceDiv.appendChild(namespaceBtn);
         namespaceDiv.appendChild(br);
-        namespaceContainer.appendChild(namespaceDiv)
+        namespaceContainer.appendChild(namespaceDiv);
         namespace.push(label.innerHTML);
-
+        console.log(namespace);
     }
 
-   
+    arr = namespace;
 });
 
 var saveFunction;
 var del;
+var arr;
+function removeDefaultNameSpace() {
+    var removeDefaultNameSpaceDiv = document.getElementById("defaultNameSpaceDiv");
+    arr.shift(); 
+    removeDefaultNameSpaceDiv.remove();
+    console.log(arr);
+}
 
 
 

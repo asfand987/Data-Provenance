@@ -4,6 +4,7 @@ var _saveFlowchart, elementCount = 0;
 var jsPlumbInstance; //the jsPlumb jsPlumbInstance
 var properties = []; //keeps the properties of each element
 var elementsOnCanvas = [];
+var namespace = ["default <http://kcl.ac.uk/1>"];
 
 jsPlumb.ready(function () {
     var element = "";   //the element which will be appended to the canvas
@@ -320,7 +321,6 @@ jsPlumb.ready(function () {
         } else {
             inspectorWindow.style.display = "none";
         }
-
     }
 
     function displayInspectorValues(id) {
@@ -350,6 +350,7 @@ jsPlumb.ready(function () {
             //console.log(elementsOnCanvas);
         }
     }
+    
     //are = idEle; 
     var block = false;
     document.getElementById("attrBtn").addEventListener("click",  function() {
@@ -466,7 +467,7 @@ jsPlumb.ready(function () {
         form.appendChild(divAttr);
     }
 
-    function myFunction(message, placeholder) {
+    function myFunction(message, placeholder) { 
         var txt;
         var promptAlert = prompt(message, placeholder);
         if (promptAlert == null || promptAlert == "") {
@@ -481,6 +482,7 @@ jsPlumb.ready(function () {
     function printValues() {
         console.log("test");
     };
+    
     document.getElementById("flowchartSaveBtn").addEventListener("click", printValues);
 
     saveFunction = function saveOutput() {
@@ -512,12 +514,29 @@ jsPlumb.ready(function () {
         }
     }
 
-    // document.getElementById(flowchartSaveBtn).addEventListener("click", function() {
-    //     console.log("tes");
-    //     for(var i = 0; i < elementsOnCanvas.length(); i++) {
-    //         console.log(elementsOnCanvas[i]);
-    //     }
-    // });
+    document.getElementById("nameSpaceButton").addEventListener("click", addNameSpace);
+
+    function addNameSpace() {
+        let namespaceAlert = prompt("Enter Namespace", "random");
+        let namespaceContainer = document.getElementById("namespaceContainer"); 
+        let label = document.createElement("label");
+        let br = document.createElement("br");
+        let namespaceDiv = document.createElement("div");
+        let namespaceBtn = document.createElement("button");
+
+        label.innerHTML = "prefix " + namespaceAlert;
+        namespaceBtn.id = label.innerHTML + "-Btn";
+        namespaceBtn.innerHTML = "X";
+        namespaceBtn.style = "margin:5px";
+        namespaceDiv.id = label.innerHTML;
+        namespaceDiv.style = "overflow-y: auto"
+        namespaceDiv.appendChild(label);
+        namespaceDiv.appendChild(namespaceBtn);
+        namespaceDiv.appendChild(br);
+        namespaceContainer.appendChild(namespaceDiv)
+        namespace.push(label.innerHTML);
+
+    }
 });
 
 var saveFunction;

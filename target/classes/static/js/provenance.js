@@ -325,6 +325,7 @@ jsPlumb.ready(function () {
 
     function displayInspectorValues(id) {
         var inspectorValues = document.querySelectorAll("#inspectorValuesContainer div");
+        
         //console.log(Is);
         for (var i = 0; i < inspectorValues.length; i++) {
             if(inspectorValues[i].id != (id+"Inspector")) {
@@ -352,7 +353,7 @@ jsPlumb.ready(function () {
     }
     
     //are = idEle; 
-    var block = false;
+    var block = false;  
     document.getElementById("attrBtn").addEventListener("click",  function() {
         if(!block) {
             inspectorAttr(idEle);
@@ -364,7 +365,7 @@ jsPlumb.ready(function () {
     function inspectorAttr(id) {
         var inspectorWindow = document.getElementById(id+"Inspector");
         var div = document.getElementById("inspectorValuesContainer");
-        var selectionAttr = document.getElementById("attr");
+        let selectionAttr = document.getElementById("attr");
         
         var form = document.createElement('form');
         var input = document.createElement("input");
@@ -372,9 +373,9 @@ jsPlumb.ready(function () {
         var button = document.createElement("button");
         var br = document.createElement("br");
 
-        var optionText = selectionAttr.options[selectionAttr.selectedIndex].text;
-
-        if(selectionAttr.options[selectionAttr.selectedIndex].value == 4) {
+        //var optionText = selectionAttr.options[selectionAttr.selectedIndex].text;
+    
+        /*if(selectionAttr.options[selectionAttr.selectedIndex].value == 4) {
             var attr = prompt("Enter Attribute", "Attr");
             if(attr) {
                 label.innerHTML = attr;
@@ -385,7 +386,11 @@ jsPlumb.ready(function () {
         }
         else {
             label.innerHTML = optionText;
-        }
+        }*/
+        
+        let attributeType = selectionAttr.options[selectionAttr.selectedIndex].text;
+        let enterAttributeValue = prompt("Enter " +  attributeType + " type", "type");
+        label.innerHTML = attributeType + enterAttributeValue;
 
         input.id = id+"Input";
         input.type = 'text';
@@ -420,6 +425,29 @@ jsPlumb.ready(function () {
         
     }
 
+    function updateSelect() {
+        let selectionAttr = document.getElementById("attr");
+        for(let i = 1; i < namespace.length; i++) {
+            let word = namespace[i].split(" ")[1] + ":";
+            let containsAttr = false;
+            for(let j = 0; j < selectionAttr.length; j++) {
+                console.log("word " + word);
+                console.log("selection " + selectionAttr[j].innerHTML);
+                if(word == selectionAttr[j].innerHTML) {
+                    console.log("true");
+                    containsAttr = true;
+                    break;
+                }
+            }
+
+            if(!containsAttr) {
+                let option = document.createElement("option");
+                option.innerHTML = word;
+                selectionAttr.appendChild(option);
+            }
+        }
+        
+    }
     function displayNodeValues(id, input, label, button, form) {
         var divAttr = document.getElementById(id+"Attr");
         if(divAttr) {
@@ -533,7 +561,6 @@ jsPlumb.ready(function () {
         let br = document.createElement("br");
         let namespaceDiv = document.createElement("div");
         let namespaceBtn = document.createElement("button");
-
         label.innerHTML = "prefix " + namespaceAlert;
         namespaceBtn.innerHTML = "X";
         namespaceBtn.style = "margin:5px";
@@ -548,7 +575,9 @@ jsPlumb.ready(function () {
         namespaceDiv.appendChild(br);
         namespaceContainer.appendChild(namespaceDiv);
         namespace.push(label.innerHTML);
-        console.log(namespace);
+
+        updateSelect();
+        //console.log(namespace);
     }
 
     arr = namespace;

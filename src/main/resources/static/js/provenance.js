@@ -366,30 +366,16 @@ jsPlumb.ready(function () {
     function inspectorAttr(id) {
         var inspectorWindow = document.getElementById(id+"Inspector");
         var div = document.getElementById("inspectorValuesContainer");
-        let selectionAttr = document.getElementById("attr");
+        let selectionAttr = document.getElementById("attrOption");
+        let selection =  document.getElementById("attr");
         
         var form = document.createElement('form');
         var input = document.createElement("input");
         var label = document.createElement("label");
         var button = document.createElement("button");
         var br = document.createElement("br");
-
-        //var optionText = selectionAttr.options[selectionAttr.selectedIndex].text;
-    
-        /*if(selectionAttr.options[selectionAttr.selectedIndex].value == 4) {
-            var attr = prompt("Enter Attribute", "Attr");
-            if(attr) {
-                label.innerHTML = attr;
-            }
-            else {
-                label.innerHTML = "value";
-            }
-        }
-        else {
-            label.innerHTML = optionText;
-        }*/
         
-        let attributeType = selectionAttr.options[selectionAttr.selectedIndex].text;
+        let attributeType = selection.options[selection.selectedIndex].text;
         let enterAttributeValue = prompt("Enter " +  attributeType + " type", "type");
         label.innerHTML = attributeType + enterAttributeValue;
 
@@ -427,7 +413,7 @@ jsPlumb.ready(function () {
     }
 
     function addNamespaceAttributes() {
-        let selectionAttr = document.getElementById("attr");
+        let selectionAttr = document.getElementById("attrOption");
         for(let i = 1; i < namespace.length; i++) {
             let word = namespace[i].split(" ")[1] + ":";
             let containsAttr = false;
@@ -618,7 +604,16 @@ jsPlumb.ready(function () {
         }
     }
 
-   
+    function addTemplateNamespaceAttributes() {
+        let selectionAttr = document.getElementById("attrOption ");
+        let namespaceAttrs = ["zone:id", "zone:type", "zone:min", "zone:max", "zone:parent", "zone:relation"];
+
+        for(let i = 0; i < namespaceAttrs.length; i++) {
+            let option = document.createElement("option");
+            option.innerHTML = namespaceAttrs[i];
+            selectionAttr.appendChild(option);
+        }
+    }
 });
 
 var saveFunction;

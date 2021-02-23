@@ -605,13 +605,15 @@ jsPlumb.ready(function () {
     }
 
     function addTemplateNamespaceAttributes() {
-        let selectionAttr = document.getElementById("attrOption ");
+        let selectionAttr = document.getElementById("pd-attrOption");
         let namespaceAttrs = ["zone:id", "zone:type", "zone:min", "zone:max", "zone:parent", "zone:relation"];
 
         for(let i = 0; i < namespaceAttrs.length; i++) {
             let option = document.createElement("option");
+            let br = document.createElement("br");
             option.innerHTML = namespaceAttrs[i];
             selectionAttr.appendChild(option);
+            selectionAttr.appendChild(br);
         }
     }
 });

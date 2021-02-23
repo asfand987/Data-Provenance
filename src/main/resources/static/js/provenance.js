@@ -376,8 +376,15 @@ jsPlumb.ready(function () {
         var br = document.createElement("br");
         
         let attributeType = selection.options[selection.selectedIndex].text;
-        let enterAttributeValue = prompt("Enter " +  attributeType + " type", "type");
-        label.innerHTML = attributeType + enterAttributeValue;
+        
+        if(selection.options[selection.selectedIndex].parentElement.label == "Attributes") {
+            let enterAttributeValue = prompt("Enter " +  attributeType + " type", "type");
+            label.innerHTML = attributeType + enterAttributeValue;
+        }
+        else {
+            label.innerHTML = attributeType;
+        }
+        
 
         input.id = id+"Input";
         input.type = 'text';
@@ -435,7 +442,7 @@ jsPlumb.ready(function () {
         }
         
     }
-    function displayNodeValues(id, input, label, button, form) {
+    function displayNodeValues(id, input, label, button, form) { 
         var divAttr = document.getElementById(id+"Attr");
         if(divAttr) {
             form.appendChild(divAttr);
@@ -474,7 +481,7 @@ jsPlumb.ready(function () {
                 divAttr.appendChild(attrButton);
                 divAttr.appendChild(br);
             }
-            console.log(node.attributes[2]);
+            //console.log(node.attributes[2]);
             input.remove();
             label.remove(); 
             button.remove();

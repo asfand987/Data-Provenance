@@ -7,8 +7,8 @@ var elementsOnCanvas = [];
 var namespace = ["default <http://kcl.ac.uk/1>"];
 
 jsPlumb.ready(function () {
-    var element = "";   //the element which will be appended to the canvas
-    var clicked = false;    //check whether an element from the palette was clicked
+    let element = "";   //the element which will be appended to the canvas
+    //let clicked = false;    //check whether an element from the palette was clicked
 
     jsPlumbInstance = window.jsp = jsPlumb.getInstance({
         // default drag options
@@ -30,13 +30,13 @@ jsPlumb.ready(function () {
 
     //var windows = jsPlumb.getSelector(".canvas-wide .window start jsplumb-connected");
     jsPlumbInstance.bind('connection', function (info) {
-        var entity = "window start custom jtk-node jsplumb-connected jsplumb-endpoint-anchor jsplumb-draggable".split(' ').slice(1, 2)[0];
-        var activity = "window step custom jtk-node jsplumb-connected-step jsplumb-endpoint-anchor jsplumb-draggable jsplumb-connected".split(' ').slice(1, 2)[0];
-        var agent = "window diamond custom jtk-node jsplumb-connected-end jsplumb-endpoint-anchor jsplumb-draggable jsplumb-connected".split(' ').slice(1, 2)[0];; 
+        let entity = "window start custom jtk-node jsplumb-connected jsplumb-endpoint-anchor jsplumb-draggable".split(' ').slice(1, 2)[0];
+        let activity = "window step custom jtk-node jsplumb-connected-step jsplumb-endpoint-anchor jsplumb-draggable jsplumb-connected".split(' ').slice(1, 2)[0];
+        let agent = "window diamond custom jtk-node jsplumb-connected-end jsplumb-endpoint-anchor jsplumb-draggable jsplumb-connected".split(' ').slice(1, 2)[0];; 
 
         //var source=info.sourceId.replace(/[0-9]/g, '');
-        var source = info.source.className.split(' ').slice(1, 2)[0];
-        var target = info.target.className.split(' ').slice(1, 2)[0];
+        let source = info.source.className.split(' ').slice(1, 2)[0];
+        let target = info.target.className.split(' ').slice(1, 2)[0];
        
         info.targetId = info.target.id;
         info.connection.targetId = info.target.id;
@@ -75,7 +75,7 @@ jsPlumb.ready(function () {
     });
  
     jsPlumbInstance.bind('click', function (connection, e) {
-        var answer = window.confirm("Are you sure you want to delete this connection?");
+        let answer = window.confirm("Are you sure you want to delete this connection?");
         if(answer) {
             jsPlumbInstance.detach(connection);
         }
@@ -83,8 +83,8 @@ jsPlumb.ready(function () {
     });
 
     $(document).on('dblclick','.window',function(){
-        var answer = window.confirm("Are you sure you want to delete this connection?");
-        for (var i = 0; i < elementsOnCanvas.length; i++) {
+        let answer = window.confirm("Are you sure you want to delete this connection?");
+        for (let i = 0; i < elementsOnCanvas.length; i++) {
             if(elementsOnCanvas[i][0] == $(this)[0]) {
                 elementsOnCanvas.splice(i, 1);
             }
@@ -195,7 +195,7 @@ jsPlumb.ready(function () {
     	        clicked = false;
                 elementCount++;
 
-                var id;
+                let id;
                 id =  myFunction("Please enter your ID:", "ID");
                 element = createElement(id);
 
@@ -257,17 +257,17 @@ jsPlumb.ready(function () {
    
     //create an element to be drawn on the canvas
     function createElement(id) {
-        var arr = [];
-        var elm = $('<div>').addClass(properties[0].clsName).attr('id', id).attr('variables', arr);
+        let arr = [];
+        let elm = $('<div>').addClass(properties[0].clsName).attr('id', id).attr('variables', arr);
         
         elm.css({
             'top': properties[0].top,
             'left': properties[0].left
         });
         //console.log(properties[0].clsName );
-        var strong = $('<strong>');
+        let strong = $('<strong>');
         elm.append("<i style='display: none' class=\"fa fa-trash fa-lg close-icon\"><\/i>");
-        var p = $('<p>').text(id);
+        let p = $('<p>').text(id);
         p.id = "p";
         strong.append(p);
         elm.append(strong);
@@ -278,16 +278,16 @@ jsPlumb.ready(function () {
      //add the endpoints for the elements
     // var epp;
     var _addEndpoints = function (sourceAnchors, targetAnchors, id) {
-        for (var i = 0; i < sourceAnchors.length; i++) {
-            var sourceUUID = sourceAnchors[i];
+        for (let i = 0; i < sourceAnchors.length; i++) {
+            let sourceUUID = sourceAnchors[i];
             epp = jsPlumbInstance.addEndpoint(id, sourceEndpoint, {
                 anchor: sourceAnchors[i], uuid: sourceUUID
             });
             //sourcepointList.push([id , epp]);
             epp = null;
         }
-        for (var j = 0; j < targetAnchors.length; j++) {
-            var targetUUID = targetAnchors[j];
+        for (let j = 0; j < targetAnchors.length; j++) {
+            let targetUUID = targetAnchors[j];
             epp = jsPlumbInstance.addEndpoint(id, targetEndpoint, {
                 anchor: targetAnchors[j], uuid: targetUUID
             });
@@ -310,14 +310,14 @@ jsPlumb.ready(function () {
     var idEle;
 
     function displayInspectorWindow(node, id) {
-        var inspectorWindow = document.getElementById("inspectorSpan");
+        let inspectorWindow = document.getElementById("inspectorSpan");
 
         if (inspectorWindow.style.display == "none") {
             inspectorWindow.style.display = "inline-block";
             //console.log("On click " + objectIdentifier);
             clickedObject = node;
             //inspectorAttr(objectIdentifier);
-            var placeholder = document.getElementById("objectName");
+            let placeholder = document.getElementById("objectName");
             placeholder.placeholder = id;
         } else {
             inspectorWindow.style.display = "none";
@@ -325,10 +325,10 @@ jsPlumb.ready(function () {
     }
 
     function displayInspectorValues(id) {
-        var inspectorValues = document.querySelectorAll("#inspectorValuesContainer div");
+        let inspectorValues = document.querySelectorAll("#inspectorValuesContainer div");
         
         //console.log(Is);
-        for (var i = 0; i < inspectorValues.length; i++) {
+        for (let i = 0; i < inspectorValues.length; i++) {
             if(inspectorValues[i].id != (id+"Inspector")) {
                 inspectorValues[i].style.display = "none";
             }
@@ -336,16 +336,16 @@ jsPlumb.ready(function () {
                 inspectorValues[i].style.display = "inline-block";
             }
         }
-        var attributes = document.getElementById(id+"Attr");
+        let attributes = document.getElementById(id+"Attr");
             if(attributes) {
                 attributes.style.display = "inline-block";
             }
     }
 
     document.onclick = function(node) {
-        var clssName = node.path[2].className.split(' ').slice(1, 2);
+        let clssName = node.path[2].className.split(' ').slice(1, 2);
         if(clssName == "start" || clssName == "step" || clssName == "diamond") {
-            var objectIdentifier = node.path[2].id;
+            let objectIdentifier = node.path[2].id;
             idEle = node.path[2].id;
             displayInspectorWindow(node, objectIdentifier);
             displayInspectorValues(objectIdentifier);
@@ -364,16 +364,16 @@ jsPlumb.ready(function () {
    
     //var inputValue;
     function inspectorAttr(id) {
-        var inspectorWindow = document.getElementById(id+"Inspector");
-        var div = document.getElementById("inspectorValuesContainer");
+        let inspectorWindow = document.getElementById(id+"Inspector");
+        let div = document.getElementById("inspectorValuesContainer");
         let selectionAttr = document.getElementById("attrOption");
         let selection =  document.getElementById("attr");
         
-        var form = document.createElement('form');
-        var input = document.createElement("input");
-        var label = document.createElement("label");
-        var button = document.createElement("button");
-        var br = document.createElement("br");
+        let form = document.createElement('form');
+        let input = document.createElement("input");
+        let label = document.createElement("label");
+        let button = document.createElement("button");
+        let br = document.createElement("br");
         
         let attributeType = selection.options[selection.selectedIndex].text;
         
@@ -409,7 +409,7 @@ jsPlumb.ready(function () {
         else {
             input.id = id+"Input";
             button.id = id+"Button";
-            var localDiv = document.createElement("div");
+            let localDiv = document.createElement("div");
             localDiv.id = id+"Inspector";
             localDiv.appendChild(form);
             div.appendChild(localDiv);
@@ -443,29 +443,29 @@ jsPlumb.ready(function () {
         
     }
     function displayNodeValues(id, input, label, button, form) { 
-        var divAttr = document.getElementById(id+"Attr");
+        let divAttr = document.getElementById(id+"Attr");
         if(divAttr) {
             form.appendChild(divAttr);
         }
         else {
-            var divAttr = document.createElement('div');
+            let divAttr = document.createElement('div');
             divAttr.id = id+"Attr";
         }
 
-        var br = document.createElement("br");
-        var attrButton = document.createElement("button");
-        var attrlabel = document.createElement("label");
+        let br = document.createElement("br");
+        let attrButton = document.createElement("button");
+        let attrlabel = document.createElement("label");
     
         document.getElementById(id+"Button").addEventListener("click", function() {
             block = false;
-            var inputValue = document.getElementById(id+"Input").value;
-            var node = document.getElementById(id);
+            let inputValue = document.getElementById(id+"Input").value;
+            let node = document.getElementById(id);
             node.attributes[2].nodeValue =  node.attributes[2].nodeValue + label.innerHTML+ ": " + inputValue + ",";
             
-            var nodeAttrs = node.attributes[2].nodeValue.split(",");
+            let nodeAttrs = node.attributes[2].nodeValue.split(",");
             nodeAttrs.pop();
             
-            for (var i = 0; i < nodeAttrs.length; i++) {
+            for (let i = 0; i < nodeAttrs.length; i++) {
                 attrButton.innerHTML = "X";
                 attrButton.type = 'button';
                 attrButton.id = nodeAttrs[i];
@@ -490,8 +490,8 @@ jsPlumb.ready(function () {
     }
 
     function myFunction(message, placeholder) { 
-        var txt;
-        var promptAlert = prompt(message, placeholder);
+        let txt;
+        let promptAlert = prompt(message, placeholder);
         if (promptAlert == null || promptAlert == "") {
           txt = "User cancelled the prompt.";
         } else {
@@ -508,15 +508,15 @@ jsPlumb.ready(function () {
     document.getElementById("flowchartSaveBtn").addEventListener("click", printValues);
 
     saveFunction = function saveOutput() {
-        var nodeID = clickedObject.path[2].id;
+        let nodeID = clickedObject.path[2].id;
         
-        var x = document.getElementById("objectName");
-        var p = document.getElementById(nodeID).querySelectorAll("p");//.getElementsByClassName("p");
-        var cont = document.getElementById(nodeID+"Inspector");
-        var input = document.getElementById(nodeID+"Input");
-        var button = document.getElementById(nodeID+"Button");
-        var label = document.getElementById(nodeID+"Label");
-        var attr = document.getElementById(nodeID+"Attr");
+        let x = document.getElementById("objectName");
+        let p = document.getElementById(nodeID).querySelectorAll("p");//.getElementsByClassName("p");
+        let cont = document.getElementById(nodeID+"Inspector");
+        let input = document.getElementById(nodeID+"Input");
+        let button = document.getElementById(nodeID+"Button");
+        let label = document.getElementById(nodeID+"Label");
+        let attr = document.getElementById(nodeID+"Attr");
 
         //Delete old element ID
         if(x.value != '') {
@@ -539,9 +539,9 @@ jsPlumb.ready(function () {
     document.getElementById("nameSpaceButton").addEventListener("click", addNameSpace);
 
     function deleteNameSpace(id, namespaceId) {
-        var namespaceDiv = document.getElementById(id);
+        let namespaceDiv = document.getElementById(id);
         namespaceDiv.remove();
-        var index = namespace.indexOf(namespaceId);
+        let index = namespace.indexOf(namespaceId);
         if (index > -1) {
             namespace.splice(index, 1);
         }

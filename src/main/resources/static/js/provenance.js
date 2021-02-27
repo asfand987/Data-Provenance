@@ -259,7 +259,7 @@ jsPlumb.ready(function () {
     function createElement(id) {
         let arr = [];
         let elm = $('<div>').addClass(properties[0].clsName).attr('id', id).attr('variables', arr);
-        
+        console.log(properties[0].clsName);
         elm.css({
             'top': properties[0].top,
             'left': properties[0].left
@@ -444,14 +444,17 @@ jsPlumb.ready(function () {
     }
     function displayNodeValues(id, input, label, button, form) { 
         let divAttr = document.getElementById(id+"Attr");
-        if(divAttr) {
-            form.appendChild(divAttr);
-        }
-        else {
-            let divAttr = document.createElement('div');
+        // if(divAttr) {
+        //     form.appendChild(divAttr);
+        // }
+        // else {
+        //     let divAttr = document.createElement('div');
+        //     divAttr.id = id+"Attr";
+        // }
+        if(!divAttr) {
+            divAttr = document.createElement('div');
             divAttr.id = id+"Attr";
         }
-
         let br = document.createElement("br");
         let attrButton = document.createElement("button");
         let attrlabel = document.createElement("label");
@@ -500,12 +503,6 @@ jsPlumb.ready(function () {
         //idIs = txt;
         return txt;
     }
-
-    function printValues() {
-        console.log("test");
-    };
-    
-    document.getElementById("flowchartSaveBtn").addEventListener("click", printValues);
 
     saveFunction = function saveOutput() {
         let nodeID = clickedObject.path[2].id;
@@ -623,6 +620,20 @@ jsPlumb.ready(function () {
             selectionAttr.appendChild(br);
         }
     }
+
+    
+    function createJSON(){
+        $(".window start custom jtk-node jsplumb-connected").resizable("destroy");
+        Objs = [];
+        $('div.window.start.custom.jtk-node.jsplumb-connected').each(function() {
+            Objs.push({id:$(this).attr('id'), html:$(this).html(),left:$(this).css('left'), attributes:$(this).attr('attributes')});
+        });
+        console.log(Objs);
+    }
+    
+    
+    document.getElementById("flowchartSaveBtn").addEventListener("click", createJSON);
+
 });
 
 var saveFunction;
@@ -634,6 +645,7 @@ function removeDefaultNameSpace() {
     removeDefaultNameSpaceDiv.remove();
     console.log(arr);
 }
+
 
 
 

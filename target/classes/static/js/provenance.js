@@ -5,6 +5,7 @@ var jsPlumbInstance; //the jsPlumb jsPlumbInstance
 var properties = []; //keeps the properties of each element
 var elementsOnCanvas = [];
 var namespace = ["default <http://kcl.ac.uk/1>"];
+var connections = [];
 
 jsPlumb.ready(function () {
     let element = "";   //the element which will be appended to the canvas
@@ -41,36 +42,48 @@ jsPlumb.ready(function () {
         info.targetId = info.target.id;
         info.connection.targetId = info.target.id;
 
+        let sourceID = info.sourceId;
+        let targetID = info.targetId;
+       
         jsPlumbInstance.draggable(jsPlumbInstance.getSelector(".jtk-node"), {
             grid: [20, 20]
         }); 
 
         if (source == entity && source == target) {
             info.connection.getOverlay("label").setLabel("wasDerivedFrom");
+            connections.push("wasDerivedFrom(" + sourceID + ", " + targetID + ")");
         }
         else if(source == entity && target == agent) {
             info.connection.getOverlay("label").setLabel("wasAttributedTo");
+            connections.push("wasAttributedTo(" + sourceID + ", " + targetID + ")");
         }
         else if(source == entity && target == activity) {
             info.connection.getOverlay("label").setLabel("wasGeneratedBy");
+            connections.push("wasGeneratedBy(" + sourceID + ", " + targetID + ")");
         }
         else if(source == activity && target == agent) {
             info.connection.getOverlay("label").setLabel("wasAssociatedWith");
+            connections.push("wasAssociatedWith(" + sourceID + ", " + targetID + ")");
         }
         else if(source == activity && target == entity) {
             info.connection.getOverlay("label").setLabel("used");
+            connections.push("used(" + sourceID + ", " + targetID + ")");
         }
         else if(source == activity && target == source) {
             info.connection.getOverlay("label").setLabel("wasInformedBy");
+            connections.push("wasInformedBy(" + sourceID + ", " + targetID + ")");
         }
         else if(source == agent && target == source) {
             info.connection.getOverlay("label").setLabel("actedOnBehalfOf");
+            connections.push("actedOnBehalfOf(" + sourceID + ", " + targetID + ")");
         }
         else if(source == agent && target == activity) {
             info.connection.getOverlay("label").setLabel("");
+            //connections.push("wasAttributedTo(" + sourceID + ", " + targetID + ")");
         }
         else if(source == agent && target == entity) {
             info.connection.getOverlay("label").setLabel("");
+            //connections.push("wasAttributedTo(" + sourceID + ", " + targetID + ")");
         }
     });
  
@@ -259,7 +272,7 @@ jsPlumb.ready(function () {
     function createElement(id) {
         let arr = [];
         let elm = $('<div>').addClass(properties[0].clsName).attr('id', id).attr('variables', arr);
-        console.log(properties[0].clsName);
+        //console.log(properties[0].clsName);
         elm.css({
             'top': properties[0].top,
             'left': properties[0].left
@@ -517,6 +530,13 @@ jsPlumb.ready(function () {
 
         //Delete old element ID
         if(x.value != '') {
+             //change connection ID
+            for(let i = 0; i < connections.length; i++) {
+                if(connections[i].includes(nodeID)) {
+                    connections[i] = connections[i].replaceAll(nodeID, x.value);
+                }
+            }
+
             nodeID =  x.value;
             p[0].innerHTML = nodeID;
             x.value = '';       
@@ -625,12 +645,21 @@ jsPlumb.ready(function () {
     function createJSON(){
         $(".window start custom jtk-node jsplumb-connected").resizable("destroy");
         Objs = [];
-        $('div.window.start.custom.jtk-node.jsplumb-connected').each(function() {
-            Objs.push({id:$(this).attr('id'), html:$(this).html(),left:$(this).css('left'), attributes:$(this).attr('attributes')});
+        elements = ["div.window.start.custom.jtk-node.jsplumb-connected", "div.window.step.custom.jtk-node.jsplumb-connected-step",
+        "div.window.diamond.custom.jtk-node.jsplumb-connected-end"];
+        
+        for(let i = 0; i < elements.length;i++) {
+            $(elements[i]).each(function() {
+                Objs.push({id:$(this).attr('id'), variables:$(this).attr('variables')});
+            });
+        }
+        jsPlumbInstance.bind('connection', function (info) {
+            console.log(info);
         });
+        Objs.push(namespace);
+        Objs.push(connections);
         console.log(Objs);
     }
-    
     
     document.getElementById("flowchartSaveBtn").addEventListener("click", createJSON);
 

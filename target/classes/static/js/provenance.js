@@ -521,7 +521,6 @@ jsPlumb.ready(function () {
 
     saveFunction = function saveOutput() {
         let nodeID = clickedObject.path[2].id;
-        addNStoID();
         let x = document.getElementById("objectName");
         let p = document.getElementById(nodeID).querySelectorAll("p");//.getElementsByClassName("p");
         let cont = document.getElementById(nodeID+"Inspector");
@@ -530,6 +529,10 @@ jsPlumb.ready(function () {
         let label = document.getElementById(nodeID+"Label");
         let attr = document.getElementById(nodeID+"Attr");
 
+        let getNsOption = document.getElementById("addNStoID");
+        let getNSOptionValue = getNsOption.options[ getNsOption.selectedIndex].value
+        
+      
         //Delete old element ID
         if(x.value != '') {
              //change connection ID
@@ -537,6 +540,10 @@ jsPlumb.ready(function () {
                 if(connections[i].includes(nodeID)) {
                     connections[i] = connections[i].replaceAll(nodeID, x.value);
                 }
+            }
+
+            if(getNSOptionValue != "default") {
+                x.value = getNSOptionValue + ":" + x.value;
             }
 
             nodeID =  x.value;
@@ -560,7 +567,6 @@ jsPlumb.ready(function () {
     function deleteNameSpace(id, namespaceId) {
         let namespaceDiv = document.getElementById(id);
 
-        let namespaceOption = document.getElementById(addNStoID);
         let namespaceOptionID = document.getElementById(id + "Option");
         namespaceOptionID.remove();
 
@@ -569,8 +575,6 @@ jsPlumb.ready(function () {
         if (index > -1) {
             namespace.splice(index, 1);
         }
-
-       
 
         //console.log(namespace)
     }
@@ -676,8 +680,6 @@ jsPlumb.ready(function () {
         });
         Objs.push(namespace);
         Objs.push(connections);
-
-    
     }
 
 

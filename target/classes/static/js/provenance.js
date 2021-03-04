@@ -559,11 +559,19 @@ jsPlumb.ready(function () {
 
     function deleteNameSpace(id, namespaceId) {
         let namespaceDiv = document.getElementById(id);
+
+        let namespaceOption = document.getElementById(addNStoID);
+        let namespaceOptionID = document.getElementById(id + "Option");
+        namespaceOptionID.remove();
+
         namespaceDiv.remove();
         let index = namespace.indexOf(namespaceId);
         if (index > -1) {
             namespace.splice(index, 1);
         }
+
+       
+
         //console.log(namespace)
     }
 
@@ -596,6 +604,7 @@ jsPlumb.ready(function () {
         let namespaceAddtoID = document.getElementById("addNStoID");
         let namespaceOption = document.createElement("option");
         namespaceOption.innerHTML = namespaceAlert;
+        namespaceOption.id = label.innerHTML + "Option";
         namespaceAddtoID.appendChild(namespaceOption);
         //console.log(namespace);
     }

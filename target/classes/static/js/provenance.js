@@ -516,10 +516,12 @@ jsPlumb.ready(function () {
         //idIs = txt;
         return txt;
     }
+    
+    //document.getElementById("addNSBtn").addEventListener("click", addNStoID);
 
     saveFunction = function saveOutput() {
         let nodeID = clickedObject.path[2].id;
-        
+        addNStoID();
         let x = document.getElementById("objectName");
         let p = document.getElementById(nodeID).querySelectorAll("p");//.getElementsByClassName("p");
         let cont = document.getElementById(nodeID+"Inspector");
@@ -572,6 +574,7 @@ jsPlumb.ready(function () {
         let br = document.createElement("br");
         let namespaceDiv = document.createElement("div");
         let namespaceBtn = document.createElement("button");
+
         label.innerHTML = "prefix " + namespaceAlert;
         namespaceBtn.innerHTML = "X";
         namespaceBtn.style = "margin:5px";
@@ -588,6 +591,12 @@ jsPlumb.ready(function () {
         namespace.push(label.innerHTML);
 
         addNamespaceAttributes();
+
+
+        let namespaceAddtoID = document.getElementById("addNStoID");
+        let namespaceOption = document.createElement("option");
+        namespaceOption.innerHTML = namespaceAlert;
+        namespaceAddtoID.appendChild(namespaceOption);
         //console.log(namespace);
     }
 
@@ -658,9 +667,11 @@ jsPlumb.ready(function () {
         });
         Objs.push(namespace);
         Objs.push(connections);
-        console.log(Objs);
-    }
+
     
+    }
+
+
     document.getElementById("flowchartSaveBtn").addEventListener("click", createJSON);
 
 });

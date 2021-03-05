@@ -559,12 +559,14 @@ jsPlumb.ready(function () {
     document.getElementById("nameSpaceButton").addEventListener("click", addNameSpace);
 
     function deleteNameSpace(id, namespaceId) {
+        console.log(id);
         let namespaceDiv = document.getElementById(id);
-
+        console.log(namespaceDiv);
         let namespaceOptionID = document.getElementById(id + "Option");
+        //console.log(namespaceOptionID);
         namespaceOptionID.remove();
-
         namespaceDiv.remove();
+
         let index = namespace.indexOf(namespaceId);
         if (index > -1) {
             namespace.splice(index, 1);
@@ -626,26 +628,26 @@ jsPlumb.ready(function () {
                 let namespaceBtn = document.createElement("button");
                 let br = document.createElement("br");
                 let namespaceDiv = document.createElement("div");
+                let id = templateNamespace[i].split(' ');
 
-                label.innerHTML = templateNamespace[i];
+                label.innerHTML = id.slice(0, 2).join(" ");
                 namespaceBtn.innerHTML = "X";
                 namespaceBtn.style = "margin:5px";
+
                 namespaceDiv.id = label.innerHTML;
-                namespaceBtn.addEventListener("click", function() {
-                    deleteNameSpace(namespaceDiv.id, label.innerHTML);
-                });
                 namespaceDiv.style = "overflow-y: auto";
                 namespaceDiv.appendChild(label);
                 namespaceDiv.appendChild(namespaceBtn);
                 namespaceDiv.appendChild(br);
+                
                 namespaceContainer.appendChild(namespaceDiv);
                 namespace.push(label.innerHTML);
-                //console.log(templateNamespace[i].split(' ').slice(1, 2)[0] + " : " + templateNamespace[i].split(' ').slice(0, 2).join(" "));
-                addNameSpacetoID(templateNamespace[i].split(' ').slice(1, 2)[0], templateNamespace[i].split(' ').slice(0, 2).join(" "));
-            }
 
-            //let namespaceAddtoID = document.getElementById("addNStoID");
-        
+                addNameSpacetoID(id.slice(1, 2)[0], id.slice(0, 2).join(" "));
+                namespaceBtn.addEventListener("click", function() {
+                    deleteNameSpace(id.slice(0, 2).join(" "), namespaceDiv.id);
+                });
+            }
 
             addNamespaceAttributes();
             addTemplateNamespaceAttributes();

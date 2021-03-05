@@ -434,7 +434,7 @@ jsPlumb.ready(function () {
 
     function addNamespaceAttributes() {
         let selectionAttr = document.getElementById("attrOption");
-        for(let i = 1; i < namespace.length; i++) {
+        for(let i = 0; i < namespace.length; i++) {
             let word = namespace[i].split(" ")[1] + ":";
             let containsAttr = false;
             for(let j = 0; j < selectionAttr.length; j++) {
@@ -457,13 +457,7 @@ jsPlumb.ready(function () {
     }
     function displayNodeValues(id, input, label, button, form) { 
         let divAttr = document.getElementById(id+"Attr");
-        // if(divAttr) {
-        //     form.appendChild(divAttr);
-        // }
-        // else {
-        //     let divAttr = document.createElement('div');
-        //     divAttr.id = id+"Attr";
-        // }
+     
         if(!divAttr) {
             divAttr = document.createElement('div');
             divAttr.id = id+"Attr";
@@ -603,16 +597,25 @@ jsPlumb.ready(function () {
         namespace.push(label.innerHTML);
 
         addNamespaceAttributes();
-
-
-        let namespaceAddtoID = document.getElementById("addNStoID");
-        let namespaceOption = document.createElement("option");
-        namespaceOption.innerHTML = namespaceAlert;
-        namespaceOption.id = label.innerHTML + "Option";
-        namespaceAddtoID.appendChild(namespaceOption);
+        addNameSpacetoID(namespaceAlert, label.innerHTML);
+        //Add Namspace Attrs in ID section
+        // let namespaceAddtoID = document.getElementById("addNStoID");
+        // let namespaceOption = document.createElement("option");
+        // namespaceOption.innerHTML = namespaceAlert;
+        // namespaceOption.id = label.innerHTML + "Option";
+        // namespaceAddtoID.appendChild(namespaceOption);
         //console.log(namespace);
     }
 
+    function addNameSpacetoID(Namespace, id) {
+         //Add Namspace Attrs in ID section
+         let namespaceAddtoID = document.getElementById("addNStoID");
+         let namespaceOption = document.createElement("option");
+         namespaceOption.innerHTML = Namespace;
+         namespaceOption.id = id + "Option";
+         namespaceAddtoID.appendChild(namespaceOption);
+         //console.log(namespace);
+    }
     arr = namespace;
 
     //template section
@@ -631,6 +634,7 @@ jsPlumb.ready(function () {
                 let namespaceBtn = document.createElement("button");
                 let br = document.createElement("br");
                 let namespaceDiv = document.createElement("div");
+
                 label.innerHTML = templateNamespace[i];
                 namespaceBtn.innerHTML = "X";
                 namespaceBtn.style = "margin:5px";
@@ -645,6 +649,10 @@ jsPlumb.ready(function () {
                 namespaceContainer.appendChild(namespaceDiv);
                 namespace.push(label.innerHTML);
             }
+
+            let namespaceAddtoID = document.getElementById("addNStoID");
+        
+
             addNamespaceAttributes();
             addTemplateNamespaceAttributes();
         }
@@ -663,27 +671,25 @@ jsPlumb.ready(function () {
         }
     }
 
-    
+    document.getElementById("flowchartSaveBtn").addEventListener("click", createJSON);
+
     function createJSON(){
-        $(".window start custom jtk-node jsplumb-connected").resizable("destroy");
+        //$(".window start custom jtk-node jsplumb-connected").resizable("destroy");
         Objs = [];
         elements = ["div.window.start.custom.jtk-node.jsplumb-connected", "div.window.step.custom.jtk-node.jsplumb-connected-step",
         "div.window.diamond.custom.jtk-node.jsplumb-connected-end"];
         
-        for(let i = 0; i < elements.length;i++) {
+        for(let i = 0; i < elements.length; i++) {
             $(elements[i]).each(function() {
                 Objs.push({id:$(this).attr('id'), variables:$(this).attr('variables')});
             });
         }
-        jsPlumbInstance.bind('connection', function (info) {
-            console.log(info);
-        });
+        
         Objs.push(namespace);
         Objs.push(connections);
     }
 
 
-    document.getElementById("flowchartSaveBtn").addEventListener("click", createJSON);
 
 });
 

@@ -598,17 +598,9 @@ jsPlumb.ready(function () {
 
         addNamespaceAttributes();
         addNameSpacetoID(namespaceAlert, label.innerHTML);
-        //Add Namspace Attrs in ID section
-        // let namespaceAddtoID = document.getElementById("addNStoID");
-        // let namespaceOption = document.createElement("option");
-        // namespaceOption.innerHTML = namespaceAlert;
-        // namespaceOption.id = label.innerHTML + "Option";
-        // namespaceAddtoID.appendChild(namespaceOption);
-        //console.log(namespace);
     }
 
     function addNameSpacetoID(Namespace, id) {
-         //Add Namspace Attrs in ID section
          let namespaceAddtoID = document.getElementById("addNStoID");
          let namespaceOption = document.createElement("option");
          namespaceOption.innerHTML = Namespace;
@@ -648,13 +640,16 @@ jsPlumb.ready(function () {
                 namespaceDiv.appendChild(br);
                 namespaceContainer.appendChild(namespaceDiv);
                 namespace.push(label.innerHTML);
+                //console.log(templateNamespace[i].split(' ').slice(1, 2)[0] + " : " + templateNamespace[i].split(' ').slice(0, 2).join(" "));
+                addNameSpacetoID(templateNamespace[i].split(' ').slice(1, 2)[0], templateNamespace[i].split(' ').slice(0, 2).join(" "));
             }
 
-            let namespaceAddtoID = document.getElementById("addNStoID");
+            //let namespaceAddtoID = document.getElementById("addNStoID");
         
 
             addNamespaceAttributes();
             addTemplateNamespaceAttributes();
+            
         }
     }
 

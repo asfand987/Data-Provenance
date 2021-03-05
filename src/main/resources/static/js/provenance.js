@@ -432,29 +432,7 @@ jsPlumb.ready(function () {
         
     }
 
-    function addNamespaceAttributes() {
-        let selectionAttr = document.getElementById("attrOption");
-        for(let i = 0; i < namespace.length; i++) {
-            let word = namespace[i].split(" ")[1] + ":";
-            let containsAttr = false;
-            for(let j = 0; j < selectionAttr.length; j++) {
-                console.log("word " + word);
-                console.log("selection " + selectionAttr[j].innerHTML);
-                if(word == selectionAttr[j].innerHTML) {
-                    console.log("true");
-                    containsAttr = true;
-                    break;
-                }
-            }
-
-            if(!containsAttr) {
-                let option = document.createElement("option");
-                option.innerHTML = word;
-                selectionAttr.appendChild(option);
-            }
-        }
-        
-    }
+   
     function displayNodeValues(id, input, label, button, form) { 
         let divAttr = document.getElementById(id+"Attr");
      
@@ -559,9 +537,7 @@ jsPlumb.ready(function () {
     document.getElementById("nameSpaceButton").addEventListener("click", addNameSpace);
 
     function deleteNameSpace(id, namespaceId) {
-        console.log(id);
         let namespaceDiv = document.getElementById(id);
-        console.log(namespaceDiv);
         let namespaceOptionID = document.getElementById(id + "Option");
         //console.log(namespaceOptionID);
         namespaceOptionID.remove();
@@ -573,6 +549,14 @@ jsPlumb.ready(function () {
         }
 
         //console.log(namespace)
+    }
+
+    function addNamespaceAttributes(namespace) {
+        let selectionAttr = document.getElementById("attrOption");
+        let option = document.createElement("option");
+        option.innerHTML = namespace;
+        selectionAttr.appendChild(option);
+     
     }
 
     function addNameSpace() {
@@ -598,7 +582,7 @@ jsPlumb.ready(function () {
         namespaceContainer.appendChild(namespaceDiv);
         namespace.push(label.innerHTML);
 
-        addNamespaceAttributes();
+        addNamespaceAttributes(namespaceAlert.split(' ').slice(0, 1) + ":");
         addNameSpacetoID(namespaceAlert, label.innerHTML);
     }
 
@@ -639,17 +623,19 @@ jsPlumb.ready(function () {
                 namespaceDiv.appendChild(label);
                 namespaceDiv.appendChild(namespaceBtn);
                 namespaceDiv.appendChild(br);
-                
+
                 namespaceContainer.appendChild(namespaceDiv);
                 namespace.push(label.innerHTML);
 
                 addNameSpacetoID(id.slice(1, 2)[0], id.slice(0, 2).join(" "));
+
                 namespaceBtn.addEventListener("click", function() {
                     deleteNameSpace(id.slice(0, 2).join(" "), namespaceDiv.id);
                 });
+                addNamespaceAttributes(id.slice(1, 2)[0] + ":");
             }
 
-            addNamespaceAttributes();
+            //addNamespaceAttributes();
             addTemplateNamespaceAttributes();
             
         }
@@ -667,6 +653,8 @@ jsPlumb.ready(function () {
             selectionAttr.appendChild(br);
         }
     }
+
+
 
     document.getElementById("flowchartSaveBtn").addEventListener("click", createJSON);
 

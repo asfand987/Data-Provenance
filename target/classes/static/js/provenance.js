@@ -536,14 +536,17 @@ jsPlumb.ready(function () {
 
     document.getElementById("nameSpaceButton").addEventListener("click", addNameSpace);
 
-    function deleteNameSpace(id, namespaceId) {
+    function deleteNameSpace(id) {
+        console.log(id);
         let namespaceDiv = document.getElementById(id);
         let namespaceOptionID = document.getElementById(id + "Option");
         //console.log(namespaceOptionID);
         namespaceOptionID.remove();
         namespaceDiv.remove();
+        //$('#attr').find('optgroup,' option).remove();
 
-        let index = namespace.indexOf(namespaceId);
+
+        let index = namespace.indexOf(id);
         if (index > -1) {
             namespace.splice(index, 1);
         }
@@ -573,7 +576,7 @@ jsPlumb.ready(function () {
         
         namespaceDiv.id = label.innerHTML;
         namespaceBtn.addEventListener("click", function() {
-            deleteNameSpace(namespaceDiv.id, label.innerHTML);
+            deleteNameSpace(namespaceDiv.id);
         });
         namespaceDiv.style = "overflow-y: auto";
         namespaceDiv.appendChild(label);
@@ -630,7 +633,7 @@ jsPlumb.ready(function () {
                 addNameSpacetoID(id.slice(1, 2)[0], id.slice(0, 2).join(" "));
 
                 namespaceBtn.addEventListener("click", function() {
-                    deleteNameSpace(id.slice(0, 2).join(" "), namespaceDiv.id);
+                    deleteNameSpace(id.slice(0, 2).join(" "));
                 });
                 addNamespaceAttributes(id.slice(1, 2)[0] + ":");
             }

@@ -552,13 +552,11 @@ jsPlumb.ready(function () {
             }            
         }
 
-
         let index = namespace.indexOf(id);
         if (index > -1) {
             namespace.splice(index, 1);
         }
 
-        //console.log(namespace)
     }
 
     function addNamespaceAttributes(namespace) {
@@ -566,13 +564,12 @@ jsPlumb.ready(function () {
         let option = document.createElement("option");
         option.id = namespace;
         option.innerHTML = namespace;
-        console.log(option.id);
         selectionAttr.appendChild(option);
      
     }
 
     function addNameSpace() {
-        let namespaceAlert = prompt("Enter Namespace", "namespace");
+        let namespaceAlert = prompt("Prefix", "namespace");
         let namespaceContainer = document.getElementById("namespaceContainer"); 
         let label = document.createElement("label");
         let br = document.createElement("br");

@@ -540,10 +540,17 @@ jsPlumb.ready(function () {
         let namespaceDiv = document.getElementById(id);
         let namespaceOptionID = document.getElementById(id + "Option");
         let namespaceIdentifier = document.getElementById(id.split(' ').slice(1, 2)[0] + ":");
-        //console.log(namespaceOptionID);
+        
         namespaceIdentifier.remove();
         namespaceOptionID.remove();
         namespaceDiv.remove();
+
+        if(id == "prefix zone") {
+            for(let i = 0; i < 6; i++) {
+                let zoneAttr = document.getElementById("zoneAttr" + i);
+                zoneAttr.remove();
+            }            
+        }
 
 
         let index = namespace.indexOf(id);
@@ -653,6 +660,7 @@ jsPlumb.ready(function () {
         for(let i = 0; i < namespaceAttrs.length; i++) {
             let option = document.createElement("option");
             let br = document.createElement("br");
+            option.id = "zoneAttr" + i;
             option.innerHTML = namespaceAttrs[i];
             selectionAttr.appendChild(option);
             selectionAttr.appendChild(br);

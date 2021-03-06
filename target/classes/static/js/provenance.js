@@ -537,13 +537,13 @@ jsPlumb.ready(function () {
     document.getElementById("nameSpaceButton").addEventListener("click", addNameSpace);
 
     function deleteNameSpace(id) {
-        console.log(id);
         let namespaceDiv = document.getElementById(id);
         let namespaceOptionID = document.getElementById(id + "Option");
+        let namespaceIdentifier = document.getElementById(id.split(' ').slice(1, 2)[0] + ":");
         //console.log(namespaceOptionID);
+        namespaceIdentifier.remove();
         namespaceOptionID.remove();
         namespaceDiv.remove();
-        //$('#attr').find('optgroup,' option).remove();
 
 
         let index = namespace.indexOf(id);
@@ -557,7 +557,9 @@ jsPlumb.ready(function () {
     function addNamespaceAttributes(namespace) {
         let selectionAttr = document.getElementById("attrOption");
         let option = document.createElement("option");
+        option.id = namespace;
         option.innerHTML = namespace;
+        console.log(option.id);
         selectionAttr.appendChild(option);
      
     }
@@ -573,7 +575,7 @@ jsPlumb.ready(function () {
         label.innerHTML = "prefix " + namespaceAlert;
         namespaceBtn.innerHTML = "X";
         namespaceBtn.style = "margin:5px";
-        
+
         namespaceDiv.id = label.innerHTML;
         namespaceBtn.addEventListener("click", function() {
             deleteNameSpace(namespaceDiv.id);
@@ -584,7 +586,7 @@ jsPlumb.ready(function () {
         namespaceDiv.appendChild(br);
         namespaceContainer.appendChild(namespaceDiv);
         namespace.push(label.innerHTML);
-
+        //console.log(namespaceAlert.split(' ').slice(0, 1) + ":");
         addNamespaceAttributes(namespaceAlert.split(' ').slice(0, 1) + ":");
         addNameSpacetoID(namespaceAlert, label.innerHTML);
     }

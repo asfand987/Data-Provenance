@@ -579,7 +579,6 @@ jsPlumb.ready(function () {
         label.innerHTML = "prefix " + namespaceAlert;
         namespaceBtn.innerHTML = "X";
         namespaceBtn.style = "margin:5px";
-
         namespaceDiv.id = label.innerHTML;
         namespaceBtn.addEventListener("click", function() {
             deleteNameSpace(namespaceDiv.id);

@@ -633,7 +633,7 @@ jsPlumb.ready(function () {
                 namespaceDiv.appendChild(br);
 
                 namespaceContainer.appendChild(namespaceDiv);
-                namespace.push(label.innerHTML);
+                namespace.push(templateNamespace[i]);
 
                 addNameSpacetoID(id.slice(0, 1)[0], id.slice(0, 1));
 

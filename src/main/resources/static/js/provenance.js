@@ -4,7 +4,7 @@ var _saveFlowchart, elementCount = 0;
 var jsPlumbInstance; //the jsPlumb jsPlumbInstance
 var properties = []; //keeps the properties of each element
 var elementsOnCanvas = [];
-var namespace = ["default <http://kcl.ac.uk/1>"];
+var namespace = {Prefix:[{default : '<http://kcl.ac.uk/1>'}]};
 var connections = [];
 
 jsPlumb.ready(function () {
@@ -551,7 +551,7 @@ jsPlumb.ready(function () {
                 zoneAttr.remove();
             }            
         }
-
+        console.log(namespace);
         let index = namespace.indexOf(id);
         if (index > -1) {
             namespace.splice(index, 1);
@@ -569,17 +569,21 @@ jsPlumb.ready(function () {
     }
 
     function addNameSpace() {
-        let namespaceAlert = prompt("Prefix", "namespace");
+        let userInput = prompt("Prefix", "namespace");
         let namespaceContainer = document.getElementById("namespaceContainer"); 
         let label = document.createElement("label");
         let br = document.createElement("br");
         let namespaceDiv = document.createElement("div");
         let namespaceBtn = document.createElement("button");
 
-        label.innerHTML = namespaceAlert;//
+        let userInputArr = userInput.split(" ");
+        let prefix = userInputArr[0];
+        let url = userInputArr[1];
+
+        label.innerHTML = prefix//
         namespaceBtn.innerHTML = "X";
         namespaceBtn.style = "margin:5px";
-        namespaceDiv.id = label.innerHTML;
+        namespaceDiv.id = userInput;
         namespaceBtn.addEventListener("click", function() {
             deleteNameSpace(namespaceDiv.id);
         });
@@ -588,18 +592,21 @@ jsPlumb.ready(function () {
         namespaceDiv.appendChild(namespaceBtn);
         namespaceDiv.appendChild(br);
         namespaceContainer.appendChild(namespaceDiv);
-        namespace.push(label.innerHTML);
-        //console.log(namespaceAlert.split(' ').slice(0, 1) + ":");
-        addNamespaceAttributes(namespaceAlert.split(' ').slice(0, 1) + ":");
-        addNameSpacetoID(namespaceAlert, label.innerHTML);
+
+        //add namespace to namespace arr
+        namespace['Prefix'].push({[prefix]: url});
+        console.log(namespace);
+
+        addNamespaceAttributes(userInput.split(' ').slice(0, 1) + ":");
+        addNameSpacetoID(userInput, label.innerHTML);
     }
 
     function addNameSpacetoID(Namespace, id) {
-         let namespaceAddtoID = document.getElementById("addNStoID");
-         let namespaceOption = document.createElement("option");
-         namespaceOption.innerHTML = Namespace;
-         namespaceOption.id = id + "Option";
-         namespaceAddtoID.appendChild(namespaceOption);
+        let namespaceAddtoID = document.getElementById("addNStoID");
+        let namespaceOption = document.createElement("option");
+        namespaceOption.innerHTML = Namespace;
+        namespaceOption.id = id + "Option";
+        namespaceAddtoID.appendChild(namespaceOption);
          //console.log(namespace);
     }
     arr = namespace;
@@ -673,15 +680,19 @@ jsPlumb.ready(function () {
         elements = ["div.window.start.custom.jtk-node.jsplumb-connected", "div.window.step.custom.jtk-node.jsplumb-connected-step",
         "div.window.diamond.custom.jtk-node.jsplumb-connected-end"];
         
-        for(let i = 0; i < elements.length; i++) {
-            $(elements[i]).each(function() {
-                Objs.push({id:$(this).attr('id'), variables:$(this).attr('variables')});
-            });
+        // for(let i = 0; i < elements.length; i++) {
+        //     $(elements[i]).each(function() {
+        //         Objs.push({id:$(this).attr('id'), variables:$(this).attr('variables')});
+        //     });
+        // }
+
+        for(let i = 0; i < namespace.length; i++) {
+
         }
 
-        Objs.push(namespace);
-        Objs.push(connections);
-        console.log(Objs);
+        // Objs.push(namespace);
+        // Objs.push(connections);
+        // console.log(Objs);
     }
 
 

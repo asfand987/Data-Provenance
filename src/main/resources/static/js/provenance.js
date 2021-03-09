@@ -523,11 +523,21 @@ jsPlumb.ready(function () {
             p[0].innerHTML = nodeID;
             x.value = '';       
             
-            if(cont) { cont.id = nodeID+"Inspector";}
-            if(input) { input.id = nodeID+"Input";}
-            if(button) { button.id = nodeID+"Button";}
-            if(label) { label.id = nodeID+"Label";}
-            if(attr) { attr.id = nodeID+"Attr";}
+            if(cont) { 
+                cont.id = nodeID+"Inspector";
+            }
+            if(input) { 
+                input.id = nodeID+"Input";
+            }
+            if(button) { 
+                button.id = nodeID+"Button";
+            }
+            if(label) { 
+                label.id = nodeID+"Label";
+            }
+            if(attr) { 
+                attr.id = nodeID+"Attr";
+            }
             jsPlumbInstance.setId(clickedObject.path[2].id, nodeID);
             jsPlumbInstance.recalculateOffsets(nodeID);
 
@@ -628,27 +638,29 @@ jsPlumb.ready(function () {
                 let namespaceBtn = document.createElement("button");
                 let br = document.createElement("br");
                 let namespaceDiv = document.createElement("div");
-                let id = templateNamespace[i].split(' ');
+                let templateNamespaceArr = templateNamespace[i].split(' ');
+                let prefixValue = templateNamespaceArr[0];
+                let url = templateNamespaceArr[1];
                 //console.log(id);
-                label.innerHTML = id[0];
+                label.innerHTML = prefixValue;
                 namespaceBtn.innerHTML = "X";
                 namespaceBtn.style = "margin:5px";
 
-                namespaceDiv.id = id[0];
+                namespaceDiv.id = prefixValue;
                 namespaceDiv.style = "overflow-y: auto";
                 namespaceDiv.appendChild(label);
                 namespaceDiv.appendChild(namespaceBtn);
                 namespaceDiv.appendChild(br);
 
                 namespaceContainer.appendChild(namespaceDiv);
-                //namespace.push(templateNamespace[i]);
+                namespace['prefix'].push({[prefixValue]: url})
 
-                addNamespacetoInspector(id[0]);
+                addNamespacetoInspector(prefixValue);
 
                 namespaceBtn.addEventListener("click", function() {
-                    deleteNameSpace(id.slice(0, 1));
+                    deleteNameSpace(prefixValue);
                 });
-                addNamespaceAttributes(id.slice(0, 1)[0] + ":");
+                addNamespaceAttributes(prefixValue + ":");
             }
 
             //addNamespaceAttributes();

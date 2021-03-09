@@ -581,7 +581,7 @@ jsPlumb.ready(function () {
         let prefix = userInputArr[0];
         let url = userInputArr[1];
 
-        label.innerHTML = prefix//
+        label.innerHTML = prefix;//
         namespaceBtn.innerHTML = "X";
         namespaceBtn.style = "margin:5px";
         namespaceDiv.id = prefix;
@@ -629,12 +629,12 @@ jsPlumb.ready(function () {
                 let br = document.createElement("br");
                 let namespaceDiv = document.createElement("div");
                 let id = templateNamespace[i].split(' ');
-
-                label.innerHTML = id[1];
+                //console.log(id);
+                label.innerHTML = id[0];
                 namespaceBtn.innerHTML = "X";
                 namespaceBtn.style = "margin:5px";
 
-                namespaceDiv.id = label.innerHTML;
+                namespaceDiv.id = id[0];
                 namespaceDiv.style = "overflow-y: auto";
                 namespaceDiv.appendChild(label);
                 namespaceDiv.appendChild(namespaceBtn);

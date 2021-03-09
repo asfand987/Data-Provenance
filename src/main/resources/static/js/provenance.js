@@ -7,6 +7,8 @@ var elementsOnCanvas = [];
 var namespace = {prefix:[{default : '<http://kcl.ac.uk/1>'}]};
 var connections = [];
 var enitityArray = {entity:[]};
+var activityArray = {activity:[]};
+var agentArray = {agent:[]};
 
 jsPlumb.ready(function () {
     let element = "";   //the element which will be appended to the canvas
@@ -286,6 +288,26 @@ jsPlumb.ready(function () {
         strong.append(p);
         elm.append(strong);
 
+        let entity = "window start custom jtk-node jsplumb-connected";
+        let activity = "window step custom jtk-node jsplumb-connected-step";
+        let agent = "window diamond custom jtk-node jsplumb-connected-end";
+        
+        if(properties[0].clsName == entity) {
+            enitityArray['entity'].push({[id]: {}});
+        }
+        else if(properties[0].clsName == activity) {
+            activityArray['activity'].push({[id]: {}});
+        }
+        else {
+            if(properties[0].clsName == agent) {
+                agentArray['agent'].push({[id]: {}});
+            }
+        }
+
+        console.log(enitityArray);
+        console.log(activityArray);
+        console.log(agentArray);
+        console.log("------------------");
         return elm;
     }
 
@@ -562,12 +584,24 @@ jsPlumb.ready(function () {
                 zoneAttr.remove();
             }            
         }
-        console.log(namespace);
-        let index = namespace.indexOf(id);
-        if (index > -1) {
-            namespace.splice(index, 1);
-        }
+        console.log(filterItems(namespace, 'id')); 
+        //console.log(id)
+        $.each(namespace, function(i){
+            console.log(namespace[i].v);
+            //console.log(namespace[i]);
+            console.log("------");
+            if(namespace[i] == namespace[id]) {
+                console.log("true");
+                namespace.splice(i,1);
+                return false;
+            }
+        });
+    }
 
+    function filterItems(a, query) {
+        return a.filter(function(el) {
+            return el.indexOf(query.toLowerCase()) !== -1;
+        })
     }
 
     function addNamespaceAttributes(namespace) {
@@ -596,7 +630,7 @@ jsPlumb.ready(function () {
         namespaceBtn.style = "margin:5px";
         namespaceDiv.id = prefix;
         namespaceBtn.addEventListener("click", function() {
-            deleteNameSpace(namespaceDiv.id);
+            deleteNameSpace(prefix);
         });
         namespaceDiv.style = "overflow-y: auto";
         namespaceDiv.appendChild(label);

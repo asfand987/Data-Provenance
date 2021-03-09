@@ -4,8 +4,9 @@ var _saveFlowchart, elementCount = 0;
 var jsPlumbInstance; //the jsPlumb jsPlumbInstance
 var properties = []; //keeps the properties of each element
 var elementsOnCanvas = [];
-var namespace = {Prefix:[{default : '<http://kcl.ac.uk/1>'}]};
+var namespace = {prefix:[{default : '<http://kcl.ac.uk/1>'}]};
 var connections = [];
+var enitityArray = {entity:[]};
 
 jsPlumb.ready(function () {
     let element = "";   //the element which will be appended to the canvas
@@ -583,7 +584,7 @@ jsPlumb.ready(function () {
         label.innerHTML = prefix//
         namespaceBtn.innerHTML = "X";
         namespaceBtn.style = "margin:5px";
-        namespaceDiv.id = userInput;
+        namespaceDiv.id = prefix;
         namespaceBtn.addEventListener("click", function() {
             deleteNameSpace(namespaceDiv.id);
         });
@@ -594,18 +595,18 @@ jsPlumb.ready(function () {
         namespaceContainer.appendChild(namespaceDiv);
 
         //add namespace to namespace arr
-        namespace['Prefix'].push({[prefix]: url});
+        namespace['prefix'].push({[prefix]: url});
         console.log(namespace);
 
         addNamespaceAttributes(userInput.split(' ').slice(0, 1) + ":");
-        addNameSpacetoID(userInput, label.innerHTML);
+        addNamespacetoInspector(prefix);
     }
 
-    function addNameSpacetoID(Namespace, id) {
+    function addNamespacetoInspector(NamespaceID) {
         let namespaceAddtoID = document.getElementById("addNStoID");
         let namespaceOption = document.createElement("option");
-        namespaceOption.innerHTML = Namespace;
-        namespaceOption.id = id + "Option";
+        namespaceOption.innerHTML = NamespaceID;
+        namespaceOption.id = NamespaceID + "Option";
         namespaceAddtoID.appendChild(namespaceOption);
          //console.log(namespace);
     }
@@ -629,7 +630,7 @@ jsPlumb.ready(function () {
                 let namespaceDiv = document.createElement("div");
                 let id = templateNamespace[i].split(' ');
 
-                label.innerHTML = id.slice(0, 1);
+                label.innerHTML = id[1];
                 namespaceBtn.innerHTML = "X";
                 namespaceBtn.style = "margin:5px";
 
@@ -640,9 +641,9 @@ jsPlumb.ready(function () {
                 namespaceDiv.appendChild(br);
 
                 namespaceContainer.appendChild(namespaceDiv);
-                namespace.push(templateNamespace[i]);
+                //namespace.push(templateNamespace[i]);
 
-                addNameSpacetoID(id.slice(0, 1)[0], id.slice(0, 1));
+                addNamespacetoInspector(id[0]);
 
                 namespaceBtn.addEventListener("click", function() {
                     deleteNameSpace(id.slice(0, 1));

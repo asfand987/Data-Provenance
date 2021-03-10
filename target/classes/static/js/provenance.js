@@ -304,10 +304,6 @@ jsPlumb.ready(function () {
             }
         }
 
-        console.log(enitityArray);
-        console.log(activityArray);
-        console.log(agentArray);
-        console.log("------------------");
         return elm;
     }
 
@@ -584,25 +580,13 @@ jsPlumb.ready(function () {
                 zoneAttr.remove();
             }            
         }
-        console.log(filterItems(namespace, 'id')); 
-        //console.log(id)
-        $.each(namespace, function(i){
-            console.log(namespace[i].v);
-            //console.log(namespace[i]);
-            console.log("------");
-            if(namespace[i] == namespace[id]) {
-                console.log("true");
-                namespace.splice(i,1);
-                return false;
-            }
-        });
+        
+        //Delete from array
+        namespace['prefix'] = namespace.prefix.filter(obj => !(obj.hasOwnProperty(id)));
+        //console.log(namespace);
+
     }
 
-    function filterItems(a, query) {
-        return a.filter(function(el) {
-            return el.indexOf(query.toLowerCase()) !== -1;
-        })
-    }
 
     function addNamespaceAttributes(namespace) {
         let selectionAttr = document.getElementById("attrOption");

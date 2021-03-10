@@ -9,6 +9,7 @@ var connections = [];
 var enitityArray = {entity:[]};
 var activityArray = {activity:[]};
 var agentArray = {agent:[]};
+var lastClickElement;
 
 jsPlumb.ready(function () {
     let element = "";   //the element which will be appended to the canvas
@@ -303,7 +304,7 @@ jsPlumb.ready(function () {
                 agentArray['agent'].push({[id]: {}});
             }
         }
-
+        console.log(enitityArray);
         return elm;
     }
 
@@ -381,10 +382,12 @@ jsPlumb.ready(function () {
             idEle = node.path[2].id;
             displayInspectorWindow(node, objectIdentifier);
             displayInspectorValues(objectIdentifier);
+            lastClickElement = clssName;
             //console.log(elementsOnCanvas);
         }
     }
     
+
     //are = idEle; 
     var block = false;  
     document.getElementById("attrBtn").addEventListener("click",  function() {
@@ -507,11 +510,26 @@ jsPlumb.ready(function () {
         //idIs = txt;
         return txt;
     }
+
     
-    //document.getElementById("addNSBtn").addEventListener("click", addNStoID);
+    function changeElementIDinArray(oldID, newID) {
+        if(lastClickElement == "start") {
+            enitityArray.entity[0][newID] = enitityArray.entity[0][oldID];
+            delete enitityArray.entity[0][nodeID];
+        }
+        //change Activ ID in entity array
+        else if(lastClickElement == "step") {
+            activityArray.activity[0][newID] = activityArray.activity[0][oldID];
+            delete activityArray.activity[0][oldID];
+        }
+        else if(lastClickElement == "diamond") {
+            agentArray.agent[0][newID] = agentArray.agent[0][oldID];
+            delete agentArray.agent[0][nodeIoldIDD];
+        }
+    } 
 
     saveFunction = function saveOutput() {
-        let nodeID = clickedObject.path[2].id;
+        var nodeID = clickedObject.path[2].id;
         let x = document.getElementById("objectName");
         let p = document.getElementById(nodeID).querySelectorAll("p");//.getElementsByClassName("p");
         let cont = document.getElementById(nodeID+"Inspector");
@@ -521,9 +539,11 @@ jsPlumb.ready(function () {
         let attr = document.getElementById(nodeID+"Attr");
 
         let getNsOption = document.getElementById("addNStoID");
-        let getNSOptionValue = getNsOption.options[ getNsOption.selectedIndex].value
+        let getNSOptionValue = getNsOption.options[getNsOption.selectedIndex].value;
+       
+        //update ID's in element arrays
+        changeElementIDinArray(nodeID, x.value);
         
-      
         //Delete old element ID
         if(x.value != '') {
              //change connection ID

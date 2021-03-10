@@ -4,7 +4,7 @@ var _saveFlowchart, elementCount = 0;
 var jsPlumbInstance; //the jsPlumb jsPlumbInstance
 var properties = []; //keeps the properties of each element
 var elementsOnCanvas = [];
-var namespace = {prefix:[{default : '<http://kcl.ac.uk/1>'}]};
+var namespaceArray = {prefix:[{default : '<http://kcl.ac.uk/1>'}]};
 var connections = [];
 var enitityArray = {entity:[]};
 var activityArray = {activity:[]};
@@ -582,8 +582,8 @@ jsPlumb.ready(function () {
         }
         
         //Delete from array
-        namespace['prefix'] = namespace.prefix.filter(obj => !(obj.hasOwnProperty(id)));
-        //console.log(namespace);
+        namespaceArray['prefix'] = namespaceArray.prefix.filter(obj => !(obj.hasOwnProperty(id)));
+        //console.log(namespaceArray);
 
     }
 
@@ -623,8 +623,8 @@ jsPlumb.ready(function () {
         namespaceContainer.appendChild(namespaceDiv);
 
         //add namespace to namespace arr
-        namespace['prefix'].push({[prefix]: url});
-        console.log(namespace);
+        namespaceArray['prefix'].push({[prefix]: url});
+        //console.log(namespaceArray);
 
         addNamespaceAttributes(userInput.split(' ').slice(0, 1) + ":");
         addNamespacetoInspector(prefix);
@@ -638,7 +638,7 @@ jsPlumb.ready(function () {
         namespaceAddtoID.appendChild(namespaceOption);
          //console.log(namespace);
     }
-    arr = namespace;
+    arr = namespaceArray;
 
     //template section
     document.getElementById("templateButton").addEventListener("click", addTemplate);
@@ -671,7 +671,7 @@ jsPlumb.ready(function () {
                 namespaceDiv.appendChild(br);
 
                 namespaceContainer.appendChild(namespaceDiv);
-                namespace['prefix'].push({[prefixValue]: url})
+                namespaceArray['prefix'].push({[prefixValue]: url})
 
                 addNamespacetoInspector(prefixValue);
 
@@ -716,10 +716,6 @@ jsPlumb.ready(function () {
         //         Objs.push({id:$(this).attr('id'), variables:$(this).attr('variables')});
         //     });
         // }
-
-        for(let i = 0; i < namespace.length; i++) {
-
-        }
 
         // Objs.push(namespace);
         // Objs.push(connections);

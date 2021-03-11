@@ -11,6 +11,8 @@ var activityArray = {activity:[]};
 var agentArray = {agent:[]};
 var lastClickElement;
 
+
+
 jsPlumb.ready(function () {
     let element = "";   //the element which will be appended to the canvas
     //let clicked = false;    //check whether an element from the palette was clicked
@@ -48,7 +50,7 @@ jsPlumb.ready(function () {
 
         let sourceID = info.sourceId;
         let targetID = info.targetId;
-        console.log(sourceID + " " + targetID);
+        //console.log(sourceID + " " + targetID);
         jsPlumbInstance.draggable(jsPlumbInstance.getSelector(".jtk-node"), {
             grid: [20, 20]
         }); 
@@ -737,12 +739,19 @@ jsPlumb.ready(function () {
         }
     }
 
-
+    /**
+     * JSON Section
+     */
 
     document.getElementById("flowchartSaveBtn").addEventListener("click", createJSON);
 
     function createJSON(){
         addElementToArray();
+
+        var JSON_Array = [];
+        JSON_Array = JSON_Array.concat(namespaceArray, enitityArray, activityArray, agentArray);
+        //console.log(JSON_Array);
+        //console.log(jsPlumbInstance.getConnections());
     }
 
     function addElementToArray() {

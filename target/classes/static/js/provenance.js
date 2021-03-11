@@ -48,7 +48,7 @@ jsPlumb.ready(function () {
 
         let sourceID = info.sourceId;
         let targetID = info.targetId;
-       
+        console.log(sourceID + " " + targetID);
         jsPlumbInstance.draggable(jsPlumbInstance.getSelector(".jtk-node"), {
             grid: [20, 20]
         }); 
@@ -380,6 +380,7 @@ jsPlumb.ready(function () {
         if(clssName == "start" || clssName == "step" || clssName == "diamond") {
             let objectIdentifier = node.path[2].id;
             idEle = node.path[2].id;
+            console.log(objectIdentifier);
             displayInspectorWindow(node, objectIdentifier);
             displayInspectorValues(objectIdentifier);
             lastClickElement = clssName;
@@ -533,7 +534,7 @@ jsPlumb.ready(function () {
 
     saveFunction = function saveOutput() {
         var nodeID = clickedObject.path[2].id;
-        let x = document.getElementById("objectName");
+        let userEnteredID = document.getElementById("objectName");
         let p = document.getElementById(nodeID).querySelectorAll("p");//.getElementsByClassName("p");
         let cont = document.getElementById(nodeID+"Inspector");
         let input = document.getElementById(nodeID+"Input");
@@ -541,28 +542,31 @@ jsPlumb.ready(function () {
         let label = document.getElementById(nodeID+"Label");
         let attr = document.getElementById(nodeID+"Attr");
 
+        //console.log(nodeID);
         let getNsOption = document.getElementById("addNStoID");
         let getNSOptionValue = getNsOption.options[getNsOption.selectedIndex].value;
-       
+        
         //update ID's in element arrays
-        changeElementIDinArray(nodeID, x.value);
+        //changeElementIDinArray(nodeID, userEnteredID.value);
         
         //Delete old element ID
-        if(x.value != '') {
+        if(userEnteredID.value != '') {
              //change connection ID
             for(let i = 0; i < connections.length; i++) {
                 if(connections[i].includes(nodeID)) {
-                    connections[i] = connections[i].replaceAll(nodeID, x.value);
+                    connections[i] = connections[i].replaceAll(nodeID, userEnteredID.value);
                 }
             }
 
             if(getNSOptionValue != "default") {
-                x.value = getNSOptionValue + ":" + x.value;
+                userEnteredID.value = getNSOptionValue + ":" + userEnteredID.value;
             }
+            let oldID = nodeID;
 
-            nodeID =  x.value;
+            //update nodeID with new ID
+            nodeID =  userEnteredID.value;
             p[0].innerHTML = nodeID;
-            x.value = '';       
+            userEnteredID.value = '';       
             
             if(cont) { 
                 cont.id = nodeID+"Inspector";
@@ -579,6 +583,8 @@ jsPlumb.ready(function () {
             if(attr) { 
                 attr.id = nodeID+"Attr";
             }
+
+            changeElementIDinArray(oldID, nodeID);
             jsPlumbInstance.setId(clickedObject.path[2].id, nodeID);
             jsPlumbInstance.recalculateOffsets(nodeID);
 

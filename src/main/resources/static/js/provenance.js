@@ -742,42 +742,54 @@ jsPlumb.ready(function () {
     document.getElementById("flowchartSaveBtn").addEventListener("click", createJSON);
 
     function createJSON(){
-        //$(".window start custom jtk-node jsplumb-connected").resizable("destroy");
-        // Objs = [];
-        elements = ["div.window.start.custom.jtk-node.jsplumb-connected", "div.window.step.custom.jtk-node.jsplumb-connected-step",
-         "div.window.diamond.custom.jtk-node.jsplumb-connected-end"];
-        
-        //console.log(enitityArray);
-        elementsOnCanvas.forEach(function (e) {
-            //console.log(e);
-            if(e[0].className == "window start custom jtk-node jsplumb-connected jsplumb-endpoint-anchor jsplumb-draggable") {
-                let id = e[0].id;
-                let values = e[0].attributes[2].nodeValue.split(",");
-                values.pop();
-                var obj = []
-                for(let i = 0; i < values.length; i++) {
-                    let allAttributes = values[i].split(" ");
-                    let prefix = allAttributes[0].slice(0, -1); ;
-                    let val = allAttributes[1];
-                    obj.push({[prefix] : val});
-                }
-                enitityArray['entity'].push({[id] : obj});
-                
-            }
-        });
-        console.log(enitityArray);
-        // for(let i = 0; i < elements.length; i++) {
-        //     $(elements[i]).each(function() {
-        //         Objs.push({id:$(this).attr('id'), variables:$(this).attr('variables')});
-        //     });
-        // }
-
-        // Objs.push(namespace);
-        // Objs.push(connections);
-        // console.log(Objs);
+        addElementToArray();
     }
 
+    function addElementToArray() {
+       elementsOnCanvas.forEach(function (e) {
+           let className = e[0].className;
+           let id = e[0].id;
+           let attributeValues = e[0].attributes[2].nodeValue.split(",");
 
+           let entity =  "window start custom jtk-node jsplumb-connected jsplumb-endpoint-anchor jsplumb-draggable";
+           let activity = "window step custom jtk-node jsplumb-connected-step jsplumb-endpoint-anchor jsplumb-draggable";
+           let agent = "window diamond custom jtk-node jsplumb-connected-end jsplumb-endpoint-anchor jsplumb-draggable";
+
+           attributeValues.pop();
+
+           if(className == entity) {
+                addAttributesToElementinArray(id, attributeValues, "entity");
+           }
+           else if(className == activity) {
+                addAttributesToElementinArray(id, attributeValues, "activity");
+           }
+           else if(className == agent) {
+                addAttributesToElementinArray(id, attributeValues, "agent");
+           }
+       });
+        //console.log(enitityArray);
+        //console.log(activityArray);
+        //console.log(agentArray);
+    }
+
+    function addAttributesToElementinArray(id, elementAttributeValues, type) {
+        var attribute = []
+        for(let i = 0; i < elementAttributeValues.length; i++) {
+            let allAttributes = elementAttributeValues[i].split(" ");
+            let prefix = allAttributes[0].slice(0, -1); ;
+            let value = allAttributes[1];
+            attribute.push({[prefix] : value});
+        }
+        if(type == "entity") {
+            enitityArray['entity'].push({[id] : attribute});
+        }
+        else if(type == "activity") {
+            activityArray['activity'].push({[id] : attribute});
+        }
+        else if(type == "agent") {
+            agentArray['agent'].push({[id] : attribute});
+        }
+    }
 
 });
 

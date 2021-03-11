@@ -515,7 +515,7 @@ jsPlumb.ready(function () {
     function changeElementIDinArray(oldID, newID) {
         if(lastClickElement == "start") {
             enitityArray.entity[0][newID] = enitityArray.entity[0][oldID];
-            delete enitityArray.entity[0][nodeID];
+            delete enitityArray.entity[0][oldID];
         }
         //change Activ ID in entity array
         else if(lastClickElement == "step") {
@@ -524,8 +524,11 @@ jsPlumb.ready(function () {
         }
         else if(lastClickElement == "diamond") {
             agentArray.agent[0][newID] = agentArray.agent[0][oldID];
-            delete agentArray.agent[0][nodeIoldIDD];
+            delete agentArray.agent[0][oldID];
         }
+        console.log(enitityArray);
+        console.log(activityArray);
+        console.log(enitityArray);
     } 
 
     saveFunction = function saveOutput() {

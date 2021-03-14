@@ -747,13 +747,31 @@ jsPlumb.ready(function () {
 
     function createJSON(){
         addElementToArray();
-
-        var JSON_Array = [];
-        JSON_Array = JSON_Array.concat(namespaceArray, enitityArray, activityArray, agentArray);
-        //console.log(JSON_Array);
-        //console.log(jsPlumbInstance.getConnections());
+        sendJsonToServer();
     }
 
+    function sendJsonToServer() {
+        var JSON_Array = [];
+        JSON_Array = JSON_Array.concat(namespaceArray, enitityArray, activityArray, agentArray);
+        
+        var JSONstring = JSON.stringify(JSON_Array);
+        console.log(JSONstring);        
+
+        $.ajax({
+            url: 'http://localhost:8080/',
+            type: 'POST',
+            data: JSONstring,
+           // dataType: 'text',
+            contentType: "application/json; charset=utf-8",
+            success: function () {
+                console.log("Success!");
+            },
+            error: function() {
+                console.log("error");
+            }, 
+        });
+    }
+    //console.log(createJSON());
     function addElementToArray() {
        elementsOnCanvas.forEach(function (e) {
            let className = e[0].className;

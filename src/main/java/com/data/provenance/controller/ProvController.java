@@ -16,7 +16,8 @@ public class ProvController  {
 
     @RequestMapping(value = "/", method = RequestMethod.POST)//, consumes = "text/plain")
     @ResponseBody
-    public void PROV_JSON(@RequestBody String json) throws Exception {
-        System.out.println(json);
+    public void PROV_JSON(@RequestBody String jsonString) throws Exception {
+        System.out.println(jsonString);
+        
     }
 }

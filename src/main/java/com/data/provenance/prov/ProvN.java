@@ -25,7 +25,45 @@ import org.openprovenance.prov.model.WasDerivedFrom;
  */
 public class ProvN {
 
+    public final ProvFactory pFactory;
+    public final Namespace ns;
 
+    public static final String JIM_PREFIX = "jim";
+    public static final String JIM_NS = "http://www.cs.rpi.edu/~hendler/";
+
+    public ProvN(ProvFactory pFactory, HashMap<String, String> map) {
+        this.pFactory = pFactory;
+//        for (Map.Entry<String, String> entry : map.entrySet()) {
+//            System.out.println(entry.getKey()+" : "+entry.getValue());
+//            ns=new Namespace();
+//            ns.addKnownNamespaces();
+//            ns.register(JIM_PREFIX, JIM_NS);
+//            ns.register(entry.getKey(), entry.getValue());
+//
+//       }
+        ns=new Namespace();
+        ns.addKnownNamespaces();
+        ns.register(JIM_PREFIX, JIM_NS);
+    }
+
+
+    public void doConversions(String filein) {
+        InteropFramework intF = new InteropFramework();
+        Document document=intF.readDocumentFromFile(filein);
+        //intF.writeDocument(fileout, document);
+       // intF.writeDocument(System.out, ProvFormat.PROVN, document);
+    }
+
+    public void closingBanner() {
+        System.out.println("");
+        System.out.println("*************************");
+    }
+
+    public void openingBanner() {
+        System.out.println("*************************");
+        System.out.println("* Converting document  ");
+        System.out.println("*************************");
+    }
 
 
 }

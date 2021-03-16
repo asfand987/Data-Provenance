@@ -30,6 +30,14 @@ public class ProvController {
         JSONArray jsonArray = new JSONArray(jsonString);
         populateNamespaceMap(jsonArray);
 
+        try {
+            ProvN tutorial = new ProvN(InteropFramework.getDefaultFactory(), namespaceMap);
+            tutorial.doConversions(jsonString);
+        }
+        catch (Exception e) {
+            System.out.println(e);
+        }
+
     }
 
 

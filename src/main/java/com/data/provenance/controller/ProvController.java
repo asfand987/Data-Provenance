@@ -35,9 +35,7 @@ public class ProvController {
         jsonObject.put("entity",jsonArray.getJSONObject(0).getJSONObject("entity"));
 
         System.out.println(jsonObject);
-        //obj=new JSONObject(jsonArray);
 
-        //System.out.println(obj);
        // populateNamespaceMap(obj);
 
         try {

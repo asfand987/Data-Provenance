@@ -216,6 +216,7 @@ jsPlumb.ready(function () {
 
                 let id;
                 id =  myFunction("Please enter your ID:", "ID");
+                id = "prov:" + id;
                 element = createElement(id);
 
                 drawElement(element, "#canvas", id);//, name);

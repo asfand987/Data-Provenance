@@ -48,9 +48,11 @@ public class ProvN {
 
 
     public void doConversions(String filein, String fileout) {
+        System.out.println("Output1: " + fileout);
         InteropFramework intF = new InteropFramework();
+        System.out.println("Output2: " + fileout);
         Document document= intF.readDocumentFromFile(filein);
-        System.out.println("Output: " + fileout);
+        System.out.println("Output3: " + fileout);
         intF.writeDocument(fileout, document);
         //intF.writeDocument(System.out.println(fileout), ProvFormat.PROVN, document);
     }

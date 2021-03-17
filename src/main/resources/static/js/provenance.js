@@ -663,7 +663,9 @@ jsPlumb.ready(function () {
         namespaceContainer.appendChild(namespaceDiv);
 
         //add namespace to namespace arr
-        namespaceArray['prefix'].push({[prefix]: url});
+        //namespaceArray['prefix'].push({[prefix]: url});
+        namespaceArray.prefix[prefixValue] = url;
+
         //console.log(namespaceArray);
 
         addNamespaceAttributes(userInput.split(' ').slice(0, 1) + ":");
@@ -808,13 +810,15 @@ jsPlumb.ready(function () {
 
 
     function addAttributesToElementinArray(id, elementAttributeValues, type) {
-        var attribute = {val:{}};
+        var attribute = {v:{}};
         for(let i = 0; i < elementAttributeValues.length; i++) {
             let allAttributes = elementAttributeValues[i].split(" ");
+            console.log(allAttributes);
             let prefix = allAttributes[0].slice(0, -1); ;
             let value = allAttributes[1];
+            
             //attribute.push({[prefix] : value});
-            attribute.val[prefix] = value;
+            attribute.v[prefix] = value;
         }
         console.log(attribute);
         if(type == "entity") {

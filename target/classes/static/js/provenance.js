@@ -664,7 +664,7 @@ jsPlumb.ready(function () {
 
         //add namespace to namespace arr
         //namespaceArray['prefix'].push({[prefix]: url});
-        namespaceArray.prefix[prefixValue] = url;
+        namespaceArray.prefix[prefix] = url;
 
         //console.log(namespaceArray);
 

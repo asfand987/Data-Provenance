@@ -216,7 +216,7 @@ jsPlumb.ready(function () {
 
                 let id;
                 id =  myFunction("Please enter your ID:", "ID");
-                id = "prov:" + id;
+                //id = "prov:" + id;
                 element = createElement(id);
 
                 drawElement(element, "#canvas", id);//, name);
@@ -569,9 +569,9 @@ jsPlumb.ready(function () {
             if(getNSOptionValue != "default") {
                 userEnteredID.value = getNSOptionValue + ":" + userEnteredID.value;
             }
-            else {
-                userEnteredID.value = "prov:" + userEnteredID.value;
-            }
+            // else {
+            //     userEnteredID.value = "prov:" + userEnteredID.value;
+            // }
             let oldID = nodeID;
 
             //update nodeID with new ID

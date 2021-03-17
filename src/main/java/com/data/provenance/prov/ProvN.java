@@ -1,4 +1,5 @@
 package com.data.provenance.prov;
+import java.io.File;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,11 +26,16 @@ import org.openprovenance.prov.model.WasDerivedFrom;
  */
 public class ProvN {
 
+
+
+    public static final String PROVBOOK_NS = "http://www.provbook.org";
+    public static final String PROVBOOK_PREFIX = "provbook";
+
+    public static final String JIM_PREFIX = "jim";
+    public static final String JIM_NS = "http://www.cs.rpi.edu/~hendler/";
+
     public final ProvFactory pFactory;
     public final Namespace ns;
-
-    public static final String JIM_PREFIX = "nr";
-    public static final String JIM_NS = "http://www.cs.rpi.edu/~hendler/";
 
     public ProvN(ProvFactory pFactory, HashMap<String, String> map) {
         this.pFactory = pFactory;
@@ -43,18 +49,20 @@ public class ProvN {
 //       }
         ns=new Namespace();
         ns.addKnownNamespaces();
+        ns.register(PROVBOOK_PREFIX, PROVBOOK_NS);
         ns.register(JIM_PREFIX, JIM_NS);
     }
 
 
     public void doConversions(String filein, String fileout) {
-        System.out.println("Output1: " + fileout);
         InteropFramework intF = new InteropFramework();
-        System.out.println("Output2: " + fileout);
+        //File file = new File(filein);
+
         Document document= intF.readDocumentFromFile(filein);
-        System.out.println("Output3: " + fileout);
-        intF.writeDocument(fileout, document);
-        //intF.writeDocument(System.out.println(fileout), ProvFormat.PROVN, document);
+        System.out.println(document.toString());
+        //System.out.println("Output2: " + file);
+        //intF.writeDocument(fileout, document);
+        intF.writeDocument(System.out, ProvFormat.PROVN, document);
     }
 
     public void closingBanner() {

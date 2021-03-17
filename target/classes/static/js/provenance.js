@@ -4,11 +4,11 @@ var _saveFlowchart, elementCount = 0;
 var jsPlumbInstance; //the jsPlumb jsPlumbInstance
 var properties = []; //keeps the properties of each element
 var elementsOnCanvas = [];
-var namespaceArray = {prefix:[{default : 'http://kcl.ac.uk/1'}]};
+var namespaceArray = {prefix:{default : 'http://kcl.ac.uk/1'}};
 var connections = [];
-var enitityArray = {entity:[]};
-var activityArray = {activity:[]};
-var agentArray = {agent:[]};
+var enitityArray = {entity:{}};
+var activityArray = {activity:{}};
+var agentArray = {agent:{}};
 var lastClickElement;
 
 
@@ -620,7 +620,7 @@ jsPlumb.ready(function () {
         }
         
         //Delete from array
-        namespaceArray['prefix'] = namespaceArray.prefix.filter(obj => !(obj.hasOwnProperty(id)));
+        delete namespaceArray.prefix[id];
         //console.log(namespaceArray);
 
     }
@@ -711,8 +711,8 @@ jsPlumb.ready(function () {
                 namespaceDiv.appendChild(br);
 
                 namespaceContainer.appendChild(namespaceDiv);
-                namespaceArray['prefix'].push({[prefixValue]: url})
-
+                //namespaceArray.prefix.push({[prefixValue]: url});
+                namespaceArray.prefix[prefixValue] = url;
                 addNamespacetoInspector(prefixValue);
 
                 namespaceBtn.addEventListener("click", function() {
@@ -749,7 +749,11 @@ jsPlumb.ready(function () {
 
     function createJSON(){
         addElementToArray();
-        sendJsonToServer();
+        //console.log(enitityArray);
+        console.log(namespaceArray);
+        //var JSONstring = JSON.stringify(enitityArray);
+       // console.log(JSONstring);
+        //sendJsonToServer();
     }
 
     function sendJsonToServer() {
@@ -800,17 +804,21 @@ jsPlumb.ready(function () {
         //console.log(activityArray);
         //console.log(agentArray);
     }
+    //                namespaceArray.prefix[prefixValue] = url;
+
 
     function addAttributesToElementinArray(id, elementAttributeValues, type) {
-        var attribute = []
+        var attribute = {val:{}};
         for(let i = 0; i < elementAttributeValues.length; i++) {
             let allAttributes = elementAttributeValues[i].split(" ");
             let prefix = allAttributes[0].slice(0, -1); ;
             let value = allAttributes[1];
-            attribute.push({[prefix] : value});
+            //attribute.push({[prefix] : value});
+            attribute.val[prefix] = value;
         }
+        console.log(attribute);
         if(type == "entity") {
-            enitityArray['entity'].push({[id] : attribute});
+            //enitityArray.entity[id] = attribute.val;
         }
         else if(type == "activity") {
             activityArray['activity'].push({[id] : attribute});

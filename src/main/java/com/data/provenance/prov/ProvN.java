@@ -28,7 +28,7 @@ public class ProvN {
     public final ProvFactory pFactory;
     public final Namespace ns;
 
-    public static final String JIM_PREFIX = "jim";
+    public static final String JIM_PREFIX = "nr";
     public static final String JIM_NS = "http://www.cs.rpi.edu/~hendler/";
 
     public ProvN(ProvFactory pFactory, HashMap<String, String> map) {
@@ -47,11 +47,12 @@ public class ProvN {
     }
 
 
-    public void doConversions(String filein) {
+    public void doConversions(String filein, String fileout) {
         InteropFramework intF = new InteropFramework();
         Document document= intF.readDocumentFromFile(filein);
-        //intF.writeDocument(fileout, document);
-       // intF.writeDocument(System.out, ProvFormat.PROVN, document);
+        System.out.println("Output: " + fileout);
+        intF.writeDocument(fileout, document);
+        //intF.writeDocument(System.out.println(fileout), ProvFormat.PROVN, document);
     }
 
     public void closingBanner() {

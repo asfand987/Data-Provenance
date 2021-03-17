@@ -756,7 +756,9 @@ jsPlumb.ready(function () {
 
     function sendJsonToServer() {
         var JSON_Array = [];
-        JSON_Array = JSON_Array.concat(namespaceArray, enitityArray, activityArray, agentArray);
+        JSON_Array = JSON_Array.concat(enitityArray, activityArray, agentArray);
+
+        //JSON.parse(JSON.stringify(data[0]));
         
         var JSONstring = JSON.stringify(JSON_Array);
         console.log(JSONstring);        
@@ -813,7 +815,6 @@ jsPlumb.ready(function () {
             let value = allAttributes[1];
             attribute.attrs[prefix] = value;
         }
-        console.log(attribute);
         if(type == "entity") {
             enitityArray.entity[id] = attribute.attrs;
         }

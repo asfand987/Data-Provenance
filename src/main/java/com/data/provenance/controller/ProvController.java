@@ -28,11 +28,21 @@ public class ProvController {
     @ResponseBody
     public void PROV_JSON(@RequestBody String jsonString) throws Exception {
         JSONArray jsonArray = new JSONArray(jsonString);
-        populateNamespaceMap(jsonArray);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("entity",jsonArray.getJSONObject(0).getJSONObject("entity"));
+        jsonObject.put("activity",jsonArray.getJSONObject(1).getJSONObject("activity"));
+        jsonObject.put("agent",jsonArray.getJSONObject(2).getJSONObject("agent"));
+
+        System.out.println(jsonObject);
+        //obj=new JSONObject(jsonArray);
+
+        //System.out.println(obj);
+       // populateNamespaceMap(obj);
 
         try {
+            String str = "";
             ProvN tutorial = new ProvN(InteropFramework.getDefaultFactory(), namespaceMap);
-            tutorial.doConversions(jsonString);
+            tutorial.doConversions(jsonObject.toString(), str);
         }
         catch (Exception e) {
             System.out.println(e);

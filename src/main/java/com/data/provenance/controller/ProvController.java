@@ -29,14 +29,14 @@ public class ProvController {
     public void PROV_JSON(@RequestBody String jsonString) throws Exception {
         JSONArray jsonArray = new JSONArray(jsonString);
         JSONObject jsonObject = new JSONObject();
-
-        jsonObject.put("agent",jsonArray.getJSONObject(2).getJSONObject("agent"));
-        jsonObject.put("activity",jsonArray.getJSONObject(1).getJSONObject("activity"));
-        jsonObject.put("entity",jsonArray.getJSONObject(0).getJSONObject("entity"));
-
+        JSONArray namespaceArray = new JSONArray(jsonArray.getJSONArray(0));
+        jsonObject.put("entity",jsonArray.getJSONObject(1).getJSONObject("entity"));
+        jsonObject.put("activity",jsonArray.getJSONObject(2).getJSONObject("activity"));
+        jsonObject.put("agent",jsonArray.getJSONObject(3).getJSONObject("agent"));
+        System.out.println(namespaceArray);
         System.out.println(jsonObject);
 
-       // populateNamespaceMap(obj);
+       // populateNamespaceMap(namespaceArray);
 
         try {
             String str = "";

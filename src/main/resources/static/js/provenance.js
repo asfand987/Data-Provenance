@@ -569,6 +569,9 @@ jsPlumb.ready(function () {
             if(getNSOptionValue != "default") {
                 userEnteredID.value = getNSOptionValue + ":" + userEnteredID.value;
             }
+            else {
+                userEnteredID.value = "prov:" + userEnteredID.value;
+            }
             let oldID = nodeID;
 
             //update nodeID with new ID
@@ -757,7 +760,7 @@ jsPlumb.ready(function () {
 
     function sendJsonToServer() {
         var JSON_Array = [];
-        JSON_Array = JSON_Array.concat(enitityArray, activityArray, agentArray);
+        JSON_Array = JSON_Array.concat(namespaceArray, enitityArray, activityArray, agentArray);
 
         //JSON.parse(JSON.stringify(data[0]));
         

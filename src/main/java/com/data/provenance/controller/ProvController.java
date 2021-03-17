@@ -29,9 +29,10 @@ public class ProvController {
     public void PROV_JSON(@RequestBody String jsonString) throws Exception {
         JSONArray jsonArray = new JSONArray(jsonString);
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("entity",jsonArray.getJSONObject(0).getJSONObject("entity"));
-        jsonObject.put("activity",jsonArray.getJSONObject(1).getJSONObject("activity"));
+
         jsonObject.put("agent",jsonArray.getJSONObject(2).getJSONObject("agent"));
+        jsonObject.put("activity",jsonArray.getJSONObject(1).getJSONObject("activity"));
+        jsonObject.put("entity",jsonArray.getJSONObject(0).getJSONObject("entity"));
 
         System.out.println(jsonObject);
         //obj=new JSONObject(jsonArray);

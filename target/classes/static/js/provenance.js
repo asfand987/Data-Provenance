@@ -751,11 +751,7 @@ jsPlumb.ready(function () {
 
     function createJSON(){
         addElementToArray();
-        //console.log(enitityArray);
-        console.log(namespaceArray);
-        //var JSONstring = JSON.stringify(enitityArray);
-       // console.log(JSONstring);
-        //sendJsonToServer();
+        sendJsonToServer();
     }
 
     function sendJsonToServer() {
@@ -810,25 +806,22 @@ jsPlumb.ready(function () {
 
 
     function addAttributesToElementinArray(id, elementAttributeValues, type) {
-        var attribute = {v:{}};
+        var attribute = {attrs:{}};
         for(let i = 0; i < elementAttributeValues.length; i++) {
             let allAttributes = elementAttributeValues[i].split(" ");
-            console.log(allAttributes);
-            let prefix = allAttributes[0].slice(0, -1); ;
+            let prefix = allAttributes[0].slice(0, -1); 
             let value = allAttributes[1];
-            
-            //attribute.push({[prefix] : value});
-            attribute.v[prefix] = value;
+            attribute.attrs[prefix] = value;
         }
         console.log(attribute);
         if(type == "entity") {
-            //enitityArray.entity[id] = attribute.val;
+            enitityArray.entity[id] = attribute.attrs;
         }
         else if(type == "activity") {
-            activityArray['activity'].push({[id] : attribute});
+            activityArray.activity[id] = attribute.attrs;
         }
         else if(type == "agent") {
-            agentArray['agent'].push({[id] : attribute});
+            agentArray.agent[id] = attribute.attrs;
         }
     }
 

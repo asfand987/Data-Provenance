@@ -31,6 +31,7 @@ public class ProvController {
         JSONArray jsonArray = new JSONArray(jsonString);
         JSONObject jsonObject = new JSONObject();
 
+        jsonObject.put("prefix", jsonArray.getJSONObject(0).getJSONObject("prefix"));
         jsonObject.put("entity",jsonArray.getJSONObject(1).getJSONObject("entity"));
         jsonObject.put("activity",jsonArray.getJSONObject(2).getJSONObject("activity"));
         jsonObject.put("agent",jsonArray.getJSONObject(3).getJSONObject("agent"));
@@ -39,8 +40,11 @@ public class ProvController {
 
         try {
             String str = "";
-            ProvN tutorial = new ProvN(InteropFramework.getDefaultFactory());
-            tutorial.doConversions(jsonObject.toString());
+            ProvN provConversion = new ProvN(InteropFramework.getDefaultFactory(), namespaceMap);
+
+            provConversion.openingBanner();
+            provConversion.doConversions(jsonObject.toString()); //jsonObject.toString()
+            provConversion.closingBanner();
         }
         catch (Exception e) {
             System.out.println(e);

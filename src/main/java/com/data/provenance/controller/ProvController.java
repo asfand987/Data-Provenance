@@ -2,6 +2,7 @@ package com.data.provenance.controller;
 
 import com.data.provenance.prov.ProvN;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.openprovenance.prov.interop.InteropFramework;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -49,29 +50,21 @@ public class ProvController {
 
     }
 
-    public void populateNamespaceMap(JSONArray jsonArray) {
-        try {
+    public void populateNamespaceMap(JSONArray jsonArray) throws JSONException {
+        JSONObject namespaceObject = new JSONObject(jsonArray.get(0).toString());
+        JSONObject namespaceArray = namespaceObject.getJSONObject("prefix");
 
-            JSONObject namespaceObject = new JSONObject(jsonArray.get(0).toString());
-            JSONArray namespaceJSONArr = new JSONArray(namespaceObject.get("prefix").toString());
-            System.out.println("OBJECT " + namespaceObject);
-            for (int i = 0; i < namespaceJSONArr.length(); i++) {
-                JSONObject json = namespaceJSONArr.getJSONObject(i);
-                Iterator<String> keys = json.keys();
-                while (keys.hasNext()) {
-                    String key = keys.next();
-                    System.out.println("Key :" + key + "  Value :" + json.get(key));
-                    namespaceMap.put(key, json.get(key).toString());
-                }
-            }
+        Iterator ite = namespaceArray.keys();
+
+        while (ite.hasNext()){
+            String key = (String) ite.next();
+            namespaceMap.put(key, namespaceArray.get(key).toString());
         }
-        catch (Exception e) {
-        }
-        for (Map.Entry<String, String> entry : namespaceMap.entrySet()) {
-            //System.out.println(entry.getKey()+" : "+entry.getValue());
-        }
+//        for (Map.Entry<String, String> entry : namespaceMap.entrySet()) {
+//            System.out.println(entry.getKey()+" : "+entry.getValue());
+//        }
+
     }
-
 
 }
 

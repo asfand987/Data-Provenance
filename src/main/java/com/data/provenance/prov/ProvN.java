@@ -1,5 +1,8 @@
 package com.data.provenance.prov;
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -35,33 +38,31 @@ public class ProvN {
     public static final String JIM_NS = "http://www.cs.rpi.edu/~hendler/";
 
     public final ProvFactory pFactory;
-    public final Namespace ns;
+    public Namespace ns;
 
     public ProvN(ProvFactory pFactory, HashMap<String, String> map) {
         this.pFactory = pFactory;
-//        for (Map.Entry<String, String> entry : map.entrySet()) {
-//            System.out.println(entry.getKey()+" : "+entry.getValue());
-//            ns=new Namespace();
-//            ns.addKnownNamespaces();
-//            ns.register(JIM_PREFIX, JIM_NS);
-//            ns.register(entry.getKey(), entry.getValue());
-//
-//       }
-        ns=new Namespace();
-        ns.addKnownNamespaces();
-        ns.register(PROVBOOK_PREFIX, PROVBOOK_NS);
-        ns.register(JIM_PREFIX, JIM_NS);
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            System.out.println(entry.getKey()+" : "+entry.getValue());
+            ns=new Namespace();
+            ns.addKnownNamespaces();
+            ns.register(JIM_PREFIX, JIM_NS);
+            ns.register(entry.getKey(), entry.getValue());
+
+       }
+//        ns=new Namespace();
+//        ns.addKnownNamespaces();
+//        ns.register(PROVBOOK_PREFIX, PROVBOOK_NS);
+//        ns.register(JIM_PREFIX, JIM_NS);
     }
 
 
-    public void doConversions(String filein, String fileout) {
+    public void doConversions(String filein) {
+        System.out.println(filein);
         InteropFramework intF = new InteropFramework();
-        //File file = new File(filein);
-
-        Document document= intF.readDocumentFromFile(filein);
-        System.out.println(document.toString());
-        //System.out.println("Output2: " + file);
-        //intF.writeDocument(fileout, document);
+        InputStream stream = new ByteArrayInputStream(filein.getBytes());
+        Document document= intF.readDocument(stream, ProvFormat.JSON, null);
+        System.out.println("DOCUMENT: " + document.toString());
         intF.writeDocument(System.out, ProvFormat.PROVN, document);
     }
 

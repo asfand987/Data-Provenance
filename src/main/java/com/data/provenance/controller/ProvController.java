@@ -33,15 +33,15 @@ public class ProvController {
         jsonObject.put("entity",jsonArray.getJSONObject(1).getJSONObject("entity"));
         jsonObject.put("activity",jsonArray.getJSONObject(2).getJSONObject("activity"));
         jsonObject.put("agent",jsonArray.getJSONObject(3).getJSONObject("agent"));
-        //System.out.println(namespaceArray);
+        //System.out.println(jsonArray);
         //System.out.println(jsonObject);
 
-       // populateNamespaceMap(namespaceArray);
+        populateNamespaceMap(jsonArray);
 
         try {
             String str = "";
-            ProvN tutorial = new ProvN(InteropFramework.getDefaultFactory(), namespaceMap);
-            tutorial.doConversions(jsonObject.toString(), str);
+            //ProvN tutorial = new ProvN(InteropFramework.getDefaultFactory(), namespaceMap);
+            //tutorial.doConversions(jsonObject.toString());
         }
         catch (Exception e) {
             System.out.println(e);
@@ -49,27 +49,27 @@ public class ProvController {
 
     }
 
-
     public void populateNamespaceMap(JSONArray jsonArray) {
         try {
+
             JSONObject namespaceObject = new JSONObject(jsonArray.get(0).toString());
             JSONArray namespaceJSONArr = new JSONArray(namespaceObject.get("prefix").toString());
-
+            System.out.println("OBJECT " + namespaceObject);
             for (int i = 0; i < namespaceJSONArr.length(); i++) {
                 JSONObject json = namespaceJSONArr.getJSONObject(i);
                 Iterator<String> keys = json.keys();
                 while (keys.hasNext()) {
                     String key = keys.next();
-                    //System.out.println("Key :" + key + "  Value :" + json.get(key));
+                    System.out.println("Key :" + key + "  Value :" + json.get(key));
                     namespaceMap.put(key, json.get(key).toString());
                 }
             }
         }
         catch (Exception e) {
         }
-//        for (Map.Entry<String, String> entry : namespaceMap.entrySet()) {
-//            System.out.println(entry.getKey()+" : "+entry.getValue());
-//        }
+        for (Map.Entry<String, String> entry : namespaceMap.entrySet()) {
+            //System.out.println(entry.getKey()+" : "+entry.getValue());
+        }
     }
 
 

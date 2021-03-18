@@ -34,15 +34,13 @@ public class ProvController {
         jsonObject.put("entity",jsonArray.getJSONObject(1).getJSONObject("entity"));
         jsonObject.put("activity",jsonArray.getJSONObject(2).getJSONObject("activity"));
         jsonObject.put("agent",jsonArray.getJSONObject(3).getJSONObject("agent"));
-        //System.out.println(jsonArray);
-        //System.out.println(jsonObject);
 
         populateNamespaceMap(jsonArray);
 
         try {
             String str = "";
-            //ProvN tutorial = new ProvN(InteropFramework.getDefaultFactory(), namespaceMap);
-            //tutorial.doConversions(jsonObject.toString());
+            ProvN tutorial = new ProvN(InteropFramework.getDefaultFactory());
+            tutorial.doConversions(jsonObject.toString());
         }
         catch (Exception e) {
             System.out.println(e);

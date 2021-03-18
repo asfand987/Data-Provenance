@@ -29,31 +29,28 @@ import org.openprovenance.prov.model.WasDerivedFrom;
  */
 public class ProvN {
 
-
-
     public static final String PROVBOOK_NS = "http://www.provbook.org";
     public static final String PROVBOOK_PREFIX = "provbook";
 
     public static final String JIM_PREFIX = "jim";
     public static final String JIM_NS = "http://www.cs.rpi.edu/~hendler/";
 
-    public final ProvFactory pFactory;
-    public Namespace ns;
-
-    public ProvN(ProvFactory pFactory, HashMap<String, String> map) {
+    private final ProvFactory pFactory;
+    private final Namespace ns;
+    
+    public ProvN(ProvFactory pFactory) {
         this.pFactory = pFactory;
-        for (Map.Entry<String, String> entry : map.entrySet()) {
-            System.out.println(entry.getKey()+" : "+entry.getValue());
+        ns=new Namespace();
+        ns.addKnownNamespaces();
+        ns.register(PROVBOOK_PREFIX, PROVBOOK_NS);
+        ns.register(JIM_PREFIX, JIM_NS);
+       /* for (Map.Entry<String, String> entry : map.entrySet()) {
             ns=new Namespace();
             ns.addKnownNamespaces();
-            ns.register(JIM_PREFIX, JIM_NS);
             ns.register(entry.getKey(), entry.getValue());
+            this.pFactory.newNamespace(ns);
+       }*/
 
-       }
-//        ns=new Namespace();
-//        ns.addKnownNamespaces();
-//        ns.register(PROVBOOK_PREFIX, PROVBOOK_NS);
-//        ns.register(JIM_PREFIX, JIM_NS);
     }
 
 

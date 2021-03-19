@@ -33,17 +33,23 @@ public class ProvController {
         jsonObject.put("entity",jsonArray.getJSONObject(1).getJSONObject("entity"));
         jsonObject.put("activity",jsonArray.getJSONObject(2).getJSONObject("activity"));
         jsonObject.put("agent",jsonArray.getJSONObject(3).getJSONObject("agent"));
+        jsonObject.put("wasDerivedFrom",jsonArray.getJSONObject(4).getJSONObject("wasDerivedFrom"));
+        jsonObject.put("wasAttributedTo",jsonArray.getJSONObject(5).getJSONObject("wasAttributedTo"));
+        jsonObject.put("wasGeneratedBy",jsonArray.getJSONObject(6).getJSONObject("wasGeneratedBy"));
+        jsonObject.put("wasAssociatedWith",jsonArray.getJSONObject(7).getJSONObject("wasAssociatedWith"));
+        jsonObject.put("used",jsonArray.getJSONObject(8).getJSONObject("used"));
+        jsonObject.put("wasInformedBy",jsonArray.getJSONObject(9).getJSONObject("wasInformedBy"));
+        jsonObject.put("actedOnBehalfOf",jsonArray.getJSONObject(10).getJSONObject("actedOnBehalfOf"));
 
-        String conversionType = jsonArray.getString(4).toString();
+
+        String conversionType = jsonArray.getString(11).toString();
         populateNamespaceMap(jsonArray);
         String sendDataToClient = "";
         try {
             String str = "";
             ProvN provConversion = new ProvN(InteropFramework.getDefaultFactory(), namespaceMap);
 
-            provConversion.openingBanner();
             provConversion.doConversions(jsonObject.toString(), conversionType); //jsonObject.toString()
-            provConversion.closingBanner();
             sendDataToClient = provConversion.returnConvertedFile();
         }
         catch (Exception e) {

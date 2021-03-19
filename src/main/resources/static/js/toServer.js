@@ -1,15 +1,27 @@
 var enitityArray = {entity:{}};
 var activityArray = {activity:{}};
 var agentArray = {agent:{}};
+var wasDerivedFromArr = {wasDerivedFrom:{}};
+var wasAttributedToArr = {wasAttributedTo:{}};
+var wasGeneratedByArr = {wasGeneratedBy:{}};
+var wasAssociatedWithArr = {wasAssociatedWith:{}};
+var usedArr = {used:{}};
+var wasInformedByArr = {wasInformedBy:{}};
+var actedOnBehalfOfArr = {actedOnBehalfOf:{}};
+
+
+
 var connectionArray = [];
 document.getElementById("flowchartSaveBtn").addEventListener("click", createJSON);
 
 function createJSON(){
     let textbox = document.getElementById('displayConvertedFile');
     textbox.value = "";
+
     addElementToArray();
+    addConnectionsToArray();
     sendJsonToServer();
-    combineConnectionArrays();
+    
     
 }
 
@@ -20,11 +32,11 @@ function sendJsonToServer() {
     var JSON_Array = [];
     var conversionType = [conversionFormat]
     
-    JSON_Array = JSON_Array.concat(namespaceArray, enitityArray, activityArray, agentArray, conversionType);
+    JSON_Array = JSON_Array.concat(namespaceArray, enitityArray, activityArray, agentArray, wasDerivedFromArr, wasAttributedToArr,  wasGeneratedByArr, wasAssociatedWithArr, usedArr, wasInformedByArr, actedOnBehalfOfArr, conversionType);
     
 
     var JSONstring = JSON.stringify(JSON_Array);
-    //console.log(JSONstring);        
+    console.log(JSONstring);        
 
     $.ajax({
         url: 'http://localhost:8080/',
@@ -87,13 +99,7 @@ function addAttributesToElementinArray(id, elementAttributeValues, type) {
     }
 }
 
-var wasDerivedFromArr = {wasDerivedFrom:{}};
-var wasAttributedToArr = {wasAttributedTo:{}};
-var wasGeneratedByArr = {wasGeneratedBy:{}};
-var wasAssociatedWithArr = {wasAssociatedWith:{}};
-var usedArr = {used:{}};
-var wasInformedByArr = {wasInformedBy:{}};
-var actedOnBehalfOfArr = {actedOnBehalfOf:{}};
+
 
 var entity = "window start custom jtk-node jsplumb-connected jsplumb-endpoint-anchor jsplumb-draggable";
 var activity  = "window step custom jtk-node jsplumb-connected-step jsplumb-endpoint-anchor jsplumb-draggable jsplumb-connected";

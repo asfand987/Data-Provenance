@@ -72,17 +72,4 @@ public class ProvN {
     public String returnConvertedFile() {
         return convertedFile;
     }
-    public void closingBanner() {
-        System.out.println("");
-        System.out.println("*************************");
-    }
-
-    public void openingBanner() {
-        System.out.println("*************************");
-        System.out.println("* Converting document  ");
-        System.out.println("*************************");
-    }
-
-
-
 }

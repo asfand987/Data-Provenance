@@ -763,6 +763,7 @@ jsPlumb.ready(function () {
         addElementToArray();
         
         sendJsonToServer();
+        
     }
 
     function sendJsonToServer() {
@@ -779,13 +780,14 @@ jsPlumb.ready(function () {
             data: JSONstring,
            // dataType: 'text',
             contentType: "application/json; charset=utf-8",
-            success: function () {
-                console.log("Success!");
+            success: function (d) {
+                console.log(d);
             },
             error: function() {
                 console.log("error");
             }, 
         });
+
     }
 
     function addElementToArray() {

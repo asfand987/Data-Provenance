@@ -30,6 +30,7 @@ public class ProvN {
 
     private final ProvFactory pFactory;
     private Namespace ns;
+    private String convertedFile;
 
     public ProvN(ProvFactory pFactory, HashMap<String, String> map) {
         this.pFactory = pFactory;
@@ -50,10 +51,15 @@ public class ProvN {
 
         ByteArrayOutputStream fileOutput = new ByteArrayOutputStream ();
         intF.writeDocument(fileOutput, ProvFormat.PROVN, document);
-        String finalString = new String(fileOutput.toByteArray());
-        System.out.println(finalString);
+
+        //String finalString = new String(fileOutput.toByteArray());
+        convertedFile = new String(fileOutput.toByteArray());
+
     }
 
+    public String returnConvertedFile() {
+        return convertedFile;
+    }
     public void closingBanner() {
         System.out.println("");
         System.out.println("*************************");
@@ -64,6 +70,7 @@ public class ProvN {
         System.out.println("* Converting document  ");
         System.out.println("*************************");
     }
+
 
 
 }

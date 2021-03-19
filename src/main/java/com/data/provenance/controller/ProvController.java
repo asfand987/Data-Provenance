@@ -5,11 +5,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.openprovenance.prov.interop.InteropFramework;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.json.JSONObject;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -27,7 +25,7 @@ public class ProvController {
 
     @RequestMapping(value = "/", method = RequestMethod.POST)//, consumes = "text/plain")
     @ResponseBody
-    public void PROV_JSON(@RequestBody String jsonString) throws Exception {
+    public String PROV_JSON(@RequestBody String jsonString) throws Exception {
         JSONArray jsonArray = new JSONArray(jsonString);
         JSONObject jsonObject = new JSONObject();
 
@@ -37,7 +35,7 @@ public class ProvController {
         jsonObject.put("agent",jsonArray.getJSONObject(3).getJSONObject("agent"));
 
         populateNamespaceMap(jsonArray);
-
+        String sendDataToClient = "";
         try {
             String str = "";
             ProvN provConversion = new ProvN(InteropFramework.getDefaultFactory(), namespaceMap);
@@ -45,12 +43,14 @@ public class ProvController {
             provConversion.openingBanner();
             provConversion.doConversions(jsonObject.toString()); //jsonObject.toString()
             provConversion.closingBanner();
+            sendDataToClient = provConversion.returnConvertedFile();
         }
         catch (Exception e) {
             System.out.println(e);
         }
-
+        return sendDataToClient;
     }
+
 
     public void populateNamespaceMap(JSONArray jsonArray) throws JSONException {
         JSONObject namespaceObject = new JSONObject(jsonArray.get(0).toString());

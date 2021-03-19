@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class DataProvenance {
     public static void main(String[] args) {
-        //BasicConfigurator.configure();
+        BasicConfigurator.configure();
         SpringApplication.run(DataProvenance.class, args);
     }
 }

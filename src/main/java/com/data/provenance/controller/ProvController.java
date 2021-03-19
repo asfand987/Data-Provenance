@@ -59,14 +59,10 @@ public class ProvController {
 
         Iterator ite = namespaceArray.keys();
 
-        while (ite.hasNext()){
+        while (ite.hasNext()) {
             String key = (String) ite.next();
             namespaceMap.put(key, namespaceArray.get(key).toString());
         }
-//        for (Map.Entry<String, String> entry : namespaceMap.entrySet()) {
-//            System.out.println(entry.getKey()+" : "+entry.getValue());
-//        }
-
     }
 
 }

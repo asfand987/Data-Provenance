@@ -19,7 +19,7 @@ function sendJsonToServer() {
     
 
     var JSONstring = JSON.stringify(JSON_Array);
-    console.log(JSONstring);        
+    //console.log(JSONstring);        
 
     $.ajax({
         url: 'http://localhost:8080/',
@@ -30,7 +30,6 @@ function sendJsonToServer() {
         success: function (data) {
             let textbox = document.getElementById('displayConvertedFile');
             textbox.value = data;
-            console.log("YAAA" + data);
         },
         error: function() {
             console.log("error");

@@ -759,9 +759,9 @@ jsPlumb.ready(function () {
     document.getElementById("flowchartSaveBtn").addEventListener("click", createJSON);
 
     function createJSON(){
-        //jsPlumbInstance.o
+        let textbox = document.getElementById('displayConvertedFile');
+        textbox.value = "";
         addElementToArray();
-        
         sendJsonToServer();
         
     }
@@ -781,7 +781,7 @@ jsPlumb.ready(function () {
            // dataType: 'text',
             contentType: "application/json; charset=utf-8",
             success: function (data) {
-                var textbox = document.getElementById('displayConvertedFile');
+                let textbox = document.getElementById('displayConvertedFile');
                 textbox.value = data;
                 //console.log(d);
             },

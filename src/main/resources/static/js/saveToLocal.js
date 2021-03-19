@@ -1,4 +1,5 @@
 
+
 function saveTextAsFile() {
     var textToWrite = document.getElementById('displayConvertedFile').value;
     var textFileAsBlob = new Blob([ textToWrite ], { type: 'text/plain' });

@@ -751,13 +751,7 @@ jsPlumb.ready(function () {
             selectionAttr.appendChild(br);
         }
     }
-
-    /**
-     * JSON Section
-     */
-
    
-
 });
 
 var saveFunction;

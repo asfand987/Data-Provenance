@@ -9,10 +9,15 @@ function createJSON(){
 }
 
 function sendJsonToServer() {
-    var JSON_Array = [];
-    JSON_Array = JSON_Array.concat(namespaceArray, enitityArray, activityArray, agentArray);
+    let conversionFormatOption =  document.getElementById("conversionFormat");
+    let conversionFormat = conversionFormatOption.options[conversionFormatOption.selectedIndex].value;
 
+    var JSON_Array = [];
+    var conversionType = [conversionFormat]
     
+    JSON_Array = JSON_Array.concat(namespaceArray, enitityArray, activityArray, agentArray, conversionType);
+    
+
     var JSONstring = JSON.stringify(JSON_Array);
     console.log(JSONstring);        
 

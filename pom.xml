@@ -66,6 +66,17 @@
             <version>0.9.5</version>
         </dependency>
         <dependency>
+            <groupId>org.openprovenance.prov</groupId>
+            <artifactId>prov-rdf</artifactId>
+            <version>0.9.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openprovenance.prov</groupId>
+            <artifactId>prov-jsonld</artifactId>
+            <version>0.9.5</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.vaadin.external.google</groupId>
             <artifactId>android-json</artifactId>
             <version>0.0.20131108.vaadin1</version>

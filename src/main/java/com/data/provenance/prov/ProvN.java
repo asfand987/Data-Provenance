@@ -44,13 +44,33 @@ public class ProvN {
         //System.out.println(ns);
     }
 
-    public void doConversions(String filein) throws FileNotFoundException {
+    public void doConversions(String filein, String type) throws FileNotFoundException {
+        ProvFormat format;
+        if(type.equals("N")) {
+            format = ProvFormat.PROVN;
+        }
+        else if(type.equals("XML")){
+            format = ProvFormat.XML;
+        }
+        else if(type.equals("RDF")) {
+            format = ProvFormat.RDFXML;
+        }
+        else if(type.equals("TURTLE")) {
+            format = ProvFormat.TURTLE;
+        }
+        else if(type.equals("JSON-LD")) {
+            format = ProvFormat.JSONLD;
+        }
+        else {
+            format = ProvFormat.TRIG;
+        }
+
         InteropFramework intF = new InteropFramework();
         InputStream stream = new ByteArrayInputStream(filein.getBytes());
         Document document= intF.readDocument(stream, ProvFormat.JSON, null);
 
         ByteArrayOutputStream fileOutput = new ByteArrayOutputStream ();
-        intF.writeDocument(fileOutput, ProvFormat.PROVN, document);
+        intF.writeDocument(System.out, format, document);
 
         //String finalString = new String(fileOutput.toByteArray());
         convertedFile = new String(fileOutput.toByteArray());

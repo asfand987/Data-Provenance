@@ -34,6 +34,7 @@ public class ProvController {
         jsonObject.put("activity",jsonArray.getJSONObject(2).getJSONObject("activity"));
         jsonObject.put("agent",jsonArray.getJSONObject(3).getJSONObject("agent"));
 
+        String conversionType = jsonArray.getString(4).toString();
         populateNamespaceMap(jsonArray);
         String sendDataToClient = "";
         try {
@@ -41,7 +42,7 @@ public class ProvController {
             ProvN provConversion = new ProvN(InteropFramework.getDefaultFactory(), namespaceMap);
 
             provConversion.openingBanner();
-            provConversion.doConversions(jsonObject.toString()); //jsonObject.toString()
+            provConversion.doConversions(jsonObject.toString(), conversionType); //jsonObject.toString()
             provConversion.closingBanner();
             sendDataToClient = provConversion.returnConvertedFile();
         }

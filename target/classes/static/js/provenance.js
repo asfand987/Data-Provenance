@@ -12,7 +12,6 @@ var agentArray = {agent:{}};
 var lastClickElement;
 
 
-
 jsPlumb.ready(function () {
     let element = "";   //the element which will be appended to the canvas
     //let clicked = false;    //check whether an element from the palette was clicked
@@ -41,6 +40,7 @@ jsPlumb.ready(function () {
         let activity = "window step custom jtk-node jsplumb-connected-step jsplumb-endpoint-anchor jsplumb-draggable jsplumb-connected".split(' ').slice(1, 2)[0];
         let agent = "window diamond custom jtk-node jsplumb-connected-end jsplumb-endpoint-anchor jsplumb-draggable jsplumb-connected".split(' ').slice(1, 2)[0];; 
 
+        
         //var source=info.sourceId.replace(/[0-9]/g, '');
         let source = info.source.className.split(' ').slice(1, 2)[0];
         let target = info.target.className.split(' ').slice(1, 2)[0];
@@ -50,7 +50,13 @@ jsPlumb.ready(function () {
 
         let sourceID = info.sourceId;
         let targetID = info.targetId;
-        //console.log(sourceID + " " + targetID);
+
+        // let connectionID = myFunction("Enter ID: ", "id");
+        // //jsPlumbInstance.setId(info.connection.id, connectionID);
+        // info.connection.id = connectionID;
+
+        console.log(info.connection);
+        console.log(sourceID + " " + targetID);
         jsPlumbInstance.draggable(jsPlumbInstance.getSelector(".jtk-node"), {
             grid: [20, 20]
         }); 
@@ -727,7 +733,6 @@ jsPlumb.ready(function () {
                 addNamespaceAttributes(prefixValue + ":");
             }
 
-            //addNamespaceAttributes();
             addTemplateNamespaceAttributes();
             
         }
@@ -754,7 +759,9 @@ jsPlumb.ready(function () {
     document.getElementById("flowchartSaveBtn").addEventListener("click", createJSON);
 
     function createJSON(){
+        //jsPlumbInstance.o
         addElementToArray();
+        
         sendJsonToServer();
     }
 
@@ -762,7 +769,6 @@ jsPlumb.ready(function () {
         var JSON_Array = [];
         JSON_Array = JSON_Array.concat(namespaceArray, enitityArray, activityArray, agentArray);
 
-        //JSON.parse(JSON.stringify(data[0]));
         
         var JSONstring = JSON.stringify(JSON_Array);
         console.log(JSONstring);        
@@ -781,7 +787,7 @@ jsPlumb.ready(function () {
             }, 
         });
     }
-    //console.log(createJSON());
+
     function addElementToArray() {
        elementsOnCanvas.forEach(function (e) {
            let className = e[0].className;
@@ -804,12 +810,8 @@ jsPlumb.ready(function () {
                 addAttributesToElementinArray(id, attributeValues, "agent");
            }
        });
-        //console.log(enitityArray);
-        //console.log(activityArray);
-        //console.log(agentArray);
+        
     }
-    //                namespaceArray.prefix[prefixValue] = url;
-
 
     function addAttributesToElementinArray(id, elementAttributeValues, type) {
         var attribute = {attrs:{}};

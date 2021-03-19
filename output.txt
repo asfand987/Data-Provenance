@@ -1,0 +1,3 @@
+document
+default <http://kcl.ac.uk/1>
+endDocument

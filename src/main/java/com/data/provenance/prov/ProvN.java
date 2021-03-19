@@ -1,7 +1,5 @@
 package com.data.provenance.prov;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.InputStream;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -45,12 +43,15 @@ public class ProvN {
         //System.out.println(ns);
     }
 
-    public void doConversions(String filein) {
+    public void doConversions(String filein) throws FileNotFoundException {
         InteropFramework intF = new InteropFramework();
         InputStream stream = new ByteArrayInputStream(filein.getBytes());
         Document document= intF.readDocument(stream, ProvFormat.JSON, null);
-        System.out.println("DOCUMENT: " + document.toString());
-        intF.writeDocument(System.out, ProvFormat.PROVN, document);
+
+        ByteArrayOutputStream fileOutput = new ByteArrayOutputStream ();
+        intF.writeDocument(fileOutput, ProvFormat.PROVN, document);
+        String finalString = new String(fileOutput.toByteArray());
+        System.out.println(finalString);
     }
 
     public void closingBanner() {

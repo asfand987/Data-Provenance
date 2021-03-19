@@ -780,8 +780,10 @@ jsPlumb.ready(function () {
             data: JSONstring,
            // dataType: 'text',
             contentType: "application/json; charset=utf-8",
-            success: function (d) {
-                console.log(d);
+            success: function (data) {
+                var textbox = document.getElementById('displayConvertedFile');
+                textbox.value = data;
+                //console.log(d);
             },
             error: function() {
                 console.log("error");

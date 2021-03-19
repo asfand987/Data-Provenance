@@ -55,7 +55,7 @@
 		          </div>
 				</span>
 				<span id="inspectorSpan" style="display: none; vertical-align: top; padding: 5px; width:26%; height:100%">
-					<div id="inspector" style="border: solid 1px gray;;"><p></p><center><strong>Inspector</strong></center>
+					<div id="inspector" style="border: solid 1px gray;"><p></p><center><strong>Inspector</strong></center>
 						<div class="">
 							<div class="">
 								<form id="form" action=""></form>
@@ -72,13 +72,8 @@
 									<optgroup label="Attributes" id="attrOption">
 										<option>prov:</option>
 									</optgroup>
-									<optgroup label="Pre-defined Attributes" id="pd-attrOption">
-
-									</optgroup>
-								<!--	<option value="1">prov:location</option>
-									<option value="2">prov:role</option>
-									<option value="3">prov:type</option> 
-									<option value="4">custom</option> -->
+									<optgroup label="Pre-defined Attributes" id="pd-attrOption"></optgroup>
+							
 								</select>
 								<button id="attrBtn">+</button>
 								<!-- <button class="btnn" onclick="saveFunction">save</button> -->
@@ -89,8 +84,14 @@
 				</span>
 		    </div>
 			<br>
-			<button class="btn btn-success" id="flowchartSaveBtn" style="margin-left: 15px">Save</button>
-			<button class="btn btn-success" id="templateButton" style="margin-left: 5px">Template</button>
+			<center>
+				<button class="btn btn-success" id="flowchartSaveBtn" style="margin-left: 15px">Convert</button>
+				<button class="btn btn-success" id="templateButton" style="margin-left: 5px">Template</button>
+			</center>
+		</div>
+		<div id="fileDisplayer" style="margin-top: 5%;">
+			<center><textarea id="displayConvertedFile" style="width: 70%; height:800px; font-size:14pt;" ></textarea></center>
+
 		</div>
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>

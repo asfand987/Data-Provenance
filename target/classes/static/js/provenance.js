@@ -6,15 +6,10 @@ var properties = []; //keeps the properties of each element
 var elementsOnCanvas = [];
 var namespaceArray = {prefix:{default : 'http://kcl.ac.uk/1'}};
 var connections = [];
-var enitityArray = {entity:{}};
-var activityArray = {activity:{}};
-var agentArray = {agent:{}};
 var lastClickElement;
-
 
 jsPlumb.ready(function () {
     let element = "";   //the element which will be appended to the canvas
-    //let clicked = false;    //check whether an element from the palette was clicked
 
     jsPlumbInstance = window.jsp = jsPlumb.getInstance({
         // default drag options
@@ -36,6 +31,7 @@ jsPlumb.ready(function () {
 
     //var windows = jsPlumb.getSelector(".canvas-wide .window start jsplumb-connected");
     jsPlumbInstance.bind('connection', function (info) {
+
         let entity = "window start custom jtk-node jsplumb-connected jsplumb-endpoint-anchor jsplumb-draggable".split(' ').slice(1, 2)[0];
         let activity = "window step custom jtk-node jsplumb-connected-step jsplumb-endpoint-anchor jsplumb-draggable jsplumb-connected".split(' ').slice(1, 2)[0];
         let agent = "window diamond custom jtk-node jsplumb-connected-end jsplumb-endpoint-anchor jsplumb-draggable jsplumb-connected".split(' ').slice(1, 2)[0];; 
@@ -55,8 +51,6 @@ jsPlumb.ready(function () {
         // //jsPlumbInstance.setId(info.connection.id, connectionID);
         // info.connection.id = connectionID;
 
-        console.log(info.connection);
-        console.log(sourceID + " " + targetID);
         jsPlumbInstance.draggable(jsPlumbInstance.getSelector(".jtk-node"), {
             grid: [20, 20]
         }); 
@@ -752,7 +746,19 @@ jsPlumb.ready(function () {
         }
     }
    
+    var wasDerivedFrom = {wasDerivedFrom:{}};
+    var wasAttributedTo = {wasAttributedTo:{}};
+    var wasGeneratedBy = {wasGeneratedBy:{}};
+    var wasAssociatedWith = {wasAssociatedWith:{}};
+    var used = {used:{}};
+    var wasInformedBy = {wasInformedBy:{}};
+    var actedOnBehalfOf = {actedOnBehalfOf:{}};
+    
+
 });
+
+
+
 
 var saveFunction;
 var del;

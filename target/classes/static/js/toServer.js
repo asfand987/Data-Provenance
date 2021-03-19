@@ -30,7 +30,7 @@ function sendJsonToServer() {
         success: function (data) {
             let textbox = document.getElementById('displayConvertedFile');
             textbox.value = data;
-            //console.log(d);
+            console.log("YAAA" + data);
         },
         error: function() {
             console.log("error");

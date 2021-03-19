@@ -41,10 +41,21 @@ public class ProvN {
             ns.addKnownNamespaces();
             ns.register(entry.getKey(), entry.getValue());
        }
-        //System.out.println(ns);
     }
 
     public void doConversions(String filein, String type) throws FileNotFoundException {
+        ProvFormat format = conversionType(type);
+        InteropFramework intF = new InteropFramework();
+        ByteArrayOutputStream fileOutput = new ByteArrayOutputStream ();
+
+        InputStream stream = new ByteArrayInputStream(filein.getBytes());
+        Document document= intF.readDocument(stream, ProvFormat.JSON, null);
+
+        intF.writeDocument(fileOutput, format, document);
+        convertedFile = fileOutput.toString();
+    }
+
+    private ProvFormat conversionType(String type) {
         ProvFormat format;
         if(type.equals("N")) {
             format = ProvFormat.PROVN;
@@ -64,19 +75,8 @@ public class ProvN {
         else {
             format = ProvFormat.TRIG;
         }
-
-        InteropFramework intF = new InteropFramework();
-        InputStream stream = new ByteArrayInputStream(filein.getBytes());
-        Document document= intF.readDocument(stream, ProvFormat.JSON, null);
-
-        ByteArrayOutputStream fileOutput = new ByteArrayOutputStream ();
-        intF.writeDocument(System.out, format, document);
-
-        //String finalString = new String(fileOutput.toByteArray());
-        convertedFile = new String(fileOutput.toByteArray());
-
+        return format;
     }
-
     public String returnConvertedFile() {
         return convertedFile;
     }

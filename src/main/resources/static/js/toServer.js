@@ -1,7 +1,7 @@
 var enitityArray = {entity:{}};
 var activityArray = {activity:{}};
 var agentArray = {agent:{}};
-
+var connectionArray = [];
 document.getElementById("flowchartSaveBtn").addEventListener("click", createJSON);
 
 function createJSON(){
@@ -9,7 +9,7 @@ function createJSON(){
     textbox.value = "";
     addElementToArray();
     sendJsonToServer();
-    addConnectionsToArray();
+    combineConnectionArrays();
     
 }
 
@@ -107,6 +107,12 @@ var U = 1;
 var INFM = 1;
 var AO = 1;
 
+function combineConnectionArrays() {
+    addConnectionsToArray();
+    connectionArray = connectionArray.concat(wasDerivedFromArr, wasAttributedToArr, wasGeneratedByArr, wasAssociatedWithArr, usedArr, wasInformedByArr, actedOnBehalfOfArr);
+        console.log(connectionArray);
+    //return connectionArray;
+}
 function addConnectionsToArray() {
     $.each(jsPlumbInstance.getAllConnections(), function (idx, connection) {
         console.log(connection);

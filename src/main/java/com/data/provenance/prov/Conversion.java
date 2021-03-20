@@ -18,13 +18,13 @@ import org.openprovenance.prov.model.StatementOrBundle;
 import org.openprovenance.prov.model.WasAttributedTo;
 import org.openprovenance.prov.model.WasDerivedFrom;
 
-public class ProvN {
+public class Conversion {
 
     private final ProvFactory pFactory;
     private Namespace ns;
     private String convertedFile;
 
-    public ProvN(ProvFactory pFactory, HashMap<String, String> map) {
+    public Conversion(ProvFactory pFactory, HashMap<String, String> map) {
         this.pFactory = pFactory;
         ns=new Namespace();
 
@@ -61,9 +61,9 @@ public class ProvN {
         else if(type.equals("TURTLE")) {
             format = ProvFormat.TURTLE;
         }
-        else if(type.equals("JSON-LD")) {
-            format = ProvFormat.JSONLD;
-        }
+//        else if(type.equals("JSON-LD")) {
+//            format = ProvFormat.JSONLD;
+//        }
         else {
             format = ProvFormat.TRIG;
         }

@@ -1,6 +1,6 @@
 package com.data.provenance.controller;
 
-import com.data.provenance.prov.ProvN;
+import com.data.provenance.prov.Conversion;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.openprovenance.prov.interop.InteropFramework;
@@ -47,10 +47,10 @@ public class ProvController {
         String sendDataToClient = "";
         try {
             String str = "";
-            ProvN provConversion = new ProvN(InteropFramework.getDefaultFactory(), namespaceMap);
+            Conversion conversion = new Conversion(InteropFramework.getDefaultFactory(), namespaceMap);
 
-            provConversion.doConversions(jsonObject.toString(), conversionType); //jsonObject.toString()
-            sendDataToClient = provConversion.returnConvertedFile();
+            conversion.doConversions(jsonObject.toString(), conversionType); //jsonObject.toString()
+            sendDataToClient = conversion.returnConvertedFile();
         }
         catch (Exception e) {
             System.out.println(e);

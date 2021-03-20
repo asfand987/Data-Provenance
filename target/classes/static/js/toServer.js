@@ -1,4 +1,4 @@
-var enitityArray = {entity:{}};
+var entityArray = {entity:{}};
 var activityArray = {activity:{}};
 var agentArray = {agent:{}};
 var wasDerivedFromArr = {wasDerivedFrom:{}};
@@ -8,22 +8,32 @@ var wasAssociatedWithArr = {wasAssociatedWith:{}};
 var usedArr = {used:{}};
 var wasInformedByArr = {wasInformedBy:{}};
 var actedOnBehalfOfArr = {actedOnBehalfOf:{}};
-
-
-
 var connectionArray = [];
+
 document.getElementById("flowchartSaveBtn").addEventListener("click", createJSON);
 
 function createJSON(){
-    let textbox = document.getElementById('displayConvertedFile');
-    textbox.value = "";
-
+    clearArrays();
     addElementToArray();
     addConnectionsToArray();
-    sendJsonToServer();
-    
-    
+    sendJsonToServer();   
+    //console.log(activityArray);
 }
+
+function clearArrays(){
+    let textbox = document.getElementById('displayConvertedFile');
+    textbox.value = "";
+    entityArray = {entity:{}};
+    activityArray = {activity:{}};
+    agentArray = {agent:{}};
+    wasDerivedFromArr = {wasDerivedFrom:{}};
+    wasAttributedToArr = {wasAttributedTo:{}};
+    wasGeneratedByArr = {wasGeneratedBy:{}};
+    wasAssociatedWithArr = {wasAssociatedWith:{}};
+    usedArr = {used:{}};
+    wasInformedByArr = {wasInformedBy:{}};
+    actedOnBehalfOfArr = {actedOnBehalfOf:{}};
+};
 
 function sendJsonToServer() {
     let conversionFormatOption =  document.getElementById("conversionFormat");
@@ -32,11 +42,23 @@ function sendJsonToServer() {
     var JSON_Array = [];
     var conversionType = [conversionFormat]
     
-    JSON_Array = JSON_Array.concat(namespaceArray, enitityArray, activityArray, agentArray, wasDerivedFromArr, wasAttributedToArr,  wasGeneratedByArr, wasAssociatedWithArr, usedArr, wasInformedByArr, actedOnBehalfOfArr, conversionType);
+    JSON_Array = JSON_Array.concat(
+        namespaceArray, 
+        entityArray,
+        activityArray, 
+        agentArray, 
+        wasDerivedFromArr, 
+        wasAttributedToArr,  
+        wasGeneratedByArr, 
+        wasAssociatedWithArr, 
+        usedArr, wasInformedByArr, 
+        actedOnBehalfOfArr, 
+        conversionType
+        );
     
 
     var JSONstring = JSON.stringify(JSON_Array);
-    console.log(JSONstring);        
+    //console.log(JSONstring);        
 
     $.ajax({
         url: 'http://localhost:8080/',
@@ -65,15 +87,15 @@ function addElementToArray() {
        let activity = "window step custom jtk-node jsplumb-connected-step jsplumb-endpoint-anchor jsplumb-draggable";
        let agent = "window diamond custom jtk-node jsplumb-connected-end jsplumb-endpoint-anchor jsplumb-draggable";
 
-       attributeValues.pop();
+       //attributeValues.pop();
 
        if(className == entity) {
             addAttributesToElementinArray(id, attributeValues, "entity");
        }
-       else if(className == activity) {
+        if(className == activity) {
             addAttributesToElementinArray(id, attributeValues, "activity");
        }
-       else if(className == agent) {
+        if(className == agent) {
             addAttributesToElementinArray(id, attributeValues, "agent");
        }
    });
@@ -88,17 +110,17 @@ function addAttributesToElementinArray(id, elementAttributeValues, type) {
         let value = allAttributes[1];
         attribute.attrs[prefix] = value;
     }
+    console.log(type);
     if(type == "entity") {
-        enitityArray.entity[id] = attribute.attrs;
+        entityArray.entity[id] = attribute.attrs;
     }
-    else if(type == "activity") {
+    if(type == "activity") {
         activityArray.activity[id] = attribute.attrs;
     }
     else if(type == "agent") {
         agentArray.agent[id] = attribute.attrs;
     }
 }
-
 
 
 var entity = "window start custom jtk-node jsplumb-connected jsplumb-endpoint-anchor jsplumb-draggable";
@@ -116,9 +138,8 @@ var AO = 1;
 function combineConnectionArrays() {
     addConnectionsToArray();
     connectionArray = connectionArray.concat(wasDerivedFromArr, wasAttributedToArr, wasGeneratedByArr, wasAssociatedWithArr, usedArr, wasInformedByArr, actedOnBehalfOfArr);
-        console.log(connectionArray);
-    //return connectionArray;
 }
+
 function addConnectionsToArray() {
     $.each(jsPlumbInstance.getAllConnections(), function (idx, connection) {
         console.log(connection);
@@ -160,10 +181,10 @@ function addConnectionsToArray() {
     });
 }
 
-function addConnectionData(a, b, sourceID, targetID) {
+function addConnectionData(nameA, nameB, sourceID, targetID) {
     let wg = "attr";
     let values = {[wg] : {}}; 
-    values["attr"][a] = sourceID;
-    values["attr"][b] = targetID;
+    values["attr"][nameA] = sourceID;
+    values["attr"][nameB] = targetID;
     return values["attr"];
 }

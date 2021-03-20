@@ -57,31 +57,31 @@ jsPlumb.ready(function () {
 
         if (source == entity && source == target) {
             info.connection.getOverlay("label").setLabel("wasDerivedFrom");
-            connections.push("wasDerivedFrom(" + sourceID + ", " + targetID + ")");
+            //connections.push("wasDerivedFrom(" + sourceID + ", " + targetID + ")");
         }
         else if(source == entity && target == agent) {
             info.connection.getOverlay("label").setLabel("wasAttributedTo");
-            connections.push("wasAttributedTo(" + sourceID + ", " + targetID + ")");
+            //connections.push("wasAttributedTo(" + sourceID + ", " + targetID + ")");
         }
         else if(source == entity && target == activity) {
             info.connection.getOverlay("label").setLabel("wasGeneratedBy");
-            connections.push("wasGeneratedBy(" + sourceID + ", " + targetID + ")");
+            //connections.push("wasGeneratedBy(" + sourceID + ", " + targetID + ")");
         }
         else if(source == activity && target == agent) {
             info.connection.getOverlay("label").setLabel("wasAssociatedWith");
-            connections.push("wasAssociatedWith(" + sourceID + ", " + targetID + ")");
+            //connections.push("wasAssociatedWith(" + sourceID + ", " + targetID + ")");
         }
         else if(source == activity && target == entity) {
             info.connection.getOverlay("label").setLabel("used");
-            connections.push("used(" + sourceID + ", " + targetID + ")");
+            //connections.push("used(" + sourceID + ", " + targetID + ")");
         }
         else if(source == activity && target == source) {
             info.connection.getOverlay("label").setLabel("wasInformedBy");
-            connections.push("wasInformedBy(" + sourceID + ", " + targetID + ")");
+            //connections.push("wasInformedBy(" + sourceID + ", " + targetID + ")");
         }
         else if(source == agent && target == source) {
             info.connection.getOverlay("label").setLabel("actedOnBehalfOf");
-            connections.push("actedOnBehalfOf(" + sourceID + ", " + targetID + ")");
+            //connections.push("actedOnBehalfOf(" + sourceID + ", " + targetID + ")");
         }
         else if(source == agent && target == activity) {
             info.connection.getOverlay("label").setLabel("");
@@ -292,22 +292,6 @@ jsPlumb.ready(function () {
         strong.append(p);
         elm.append(strong);
 
-        let entity = "window start custom jtk-node jsplumb-connected";
-        let activity = "window step custom jtk-node jsplumb-connected-step";
-        let agent = "window diamond custom jtk-node jsplumb-connected-end";
-        
-        // if(properties[0].clsName == entity) {
-        //     enitityArray['entity'].push({[id]: {}});
-        // }
-        // else if(properties[0].clsName == activity) {
-        //     activityArray['activity'].push({[id]: {}});
-        // }
-        // else {
-        //     if(properties[0].clsName == agent) {
-        //         agentArray['agent'].push({[id]: {}});
-        //     }
-        // }
-        // console.log(enitityArray);
         return elm;
     }
 
@@ -520,26 +504,6 @@ jsPlumb.ready(function () {
         //idIs = txt;
         return txt;
     }
-
-    
-    function changeElementIDinArray(oldID, newID) {
-        if(lastClickElement == "start") {
-            enitityArray.entity[0][newID] = enitityArray.entity[0][oldID];
-            delete enitityArray.entity[0][oldID];
-        }
-        //change Activ ID in entity array
-        else if(lastClickElement == "step") {
-            activityArray.activity[0][newID] = activityArray.activity[0][oldID];
-            delete activityArray.activity[0][oldID];
-        }
-        else if(lastClickElement == "diamond") {
-            agentArray.agent[0][newID] = agentArray.agent[0][oldID];
-            delete agentArray.agent[0][oldID];
-        }
-        console.log(enitityArray);
-        console.log(activityArray);
-        console.log(enitityArray);
-    } 
 
     saveFunction = function saveOutput() {
         var nodeID = clickedObject.path[2].id;

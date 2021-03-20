@@ -14,8 +14,9 @@ document.getElementById("flowchartSaveBtn").addEventListener("click", createJSON
 
 function createJSON(){
     clearArrays();
-    addElementToArray();
     addConnectionsToArray();
+    addElementToArray();
+    
     sendJsonToServer();   
     //console.log(activityArray);
 }
@@ -79,25 +80,25 @@ function sendJsonToServer() {
 
 function addElementToArray() {
    elementsOnCanvas.forEach(function (e) {
-       let className = e[0].className;
+       let className = e[0].className.split(' ').slice(1, 2)[0];
        let id = e[0].id;
        let attributeValues = e[0].attributes[2].nodeValue.split(",");
 
-       let entity =  "window start custom jtk-node jsplumb-connected jsplumb-endpoint-anchor jsplumb-draggable";
-       let activity = "window step custom jtk-node jsplumb-connected-step jsplumb-endpoint-anchor jsplumb-draggable";
-       let agent = "window diamond custom jtk-node jsplumb-connected-end jsplumb-endpoint-anchor jsplumb-draggable";
+       let entity =  "window start custom jtk-node jsplumb-connected jsplumb-endpoint-anchor jsplumb-draggable".split(' ').slice(1, 2)[0];
+       let activity = "window step custom jtk-node jsplumb-connected-step jsplumb-endpoint-anchor jsplumb-draggable".split(' ').slice(1, 2)[0];
+       let agent = "window diamond custom jtk-node jsplumb-connected-end jsplumb-endpoint-anchor jsplumb-draggable".split(' ').slice(1, 2)[0];
 
        //attributeValues.pop();
 
-       if(className == entity) {
+        if(className == entity) {
             addAttributesToElementinArray(id, attributeValues, "entity");
-       }
-        if(className == activity) {
+        }
+        else if(className == activity) {
             addAttributesToElementinArray(id, attributeValues, "activity");
-       }
-        if(className == agent) {
+        }
+        else if(className == agent) {
             addAttributesToElementinArray(id, attributeValues, "agent");
-       }
+        }
    });
     
 }

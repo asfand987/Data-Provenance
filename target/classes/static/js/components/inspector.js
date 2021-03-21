@@ -40,6 +40,10 @@ function displayInspectorComponent(node, id) {
     }
 }
 
+function hideInspectorWindow() {
+    const inspectorWindow = document.getElementById("inspectorSpan");
+    inspectorWindow.style.display = "none";
+}
 /*
 **  This function displays each unique elements values in the Inspector Component.
 **  This function is used in the function @document.onclick so whenever an element
@@ -47,7 +51,7 @@ function displayInspectorComponent(node, id) {
 **  data.
 */
 function displayElementValuesInInspector(id) {
-    const inspectorValues = document.querySelectorAll("#inspectorValuesContainer div");
+    const inspectorValues = document.querySelectorAll("#elementDataInInspector div");
 
     for (let i = 0; i < inspectorValues.length; i++) {
         if(inspectorValues[i].id != (id+"inspectorComponent")) {
@@ -63,11 +67,10 @@ function displayElementValuesInInspector(id) {
     }
 }
 
-var datBeingEntered = false;  
+var dataEntered = false;  
 document.getElementById("chooseAttributeBtn").addEventListener("click",  function() {
-    if(!datBeingEntered) {
+    if(!dataEntered) {
         userEnterDataIntoElement(clickedElementID);
-        datBeingEntered = true;
     }
 });   
 
@@ -75,20 +78,24 @@ document.getElementById("chooseAttributeBtn").addEventListener("click",  functio
    
 //var inputValue;
 function userEnterDataIntoElement(id) {
-    let inspectorWindow = document.getElementById(id+"inspectorComponent");
-    let div = document.getElementById("inspectorValuesContainer");
-    let selection =  document.getElementById("selectionAttributes");
+    let elementDataDivParent = document.getElementById("elementDataInInspector");
+    let elementDataDiv = document.getElementById(id+"inspectorComponent");
+    let attributeSelectionDiv =  document.getElementById("selectionAttributes");
     
     let form = document.createElement('form');
     let input = document.createElement("input");
     let label = document.createElement("label");
     let button = document.createElement("button");
-    let br = document.createElement("br");
     
-    let attributeType = selection.options[selection.selectedIndex].text;
+    let attributeType = attributeSelectionDiv.options[attributeSelectionDiv.selectedIndex].text;
     
-    if(selection.options[selection.selectedIndex].parentElement.label == "Attributes") {
-        let enterAttributeValue = prompt("Enter " +  attributeType + " type", "type");
+    if(attributeSelectionDiv.options[attributeSelectionDiv.selectedIndex].parentElement.label == "Attributes") {
+        let enterAttributeValue = prompt("Enter " +  attributeType + " type", );
+        if(!enterAttributeValue) {
+            dataEntered = false;
+            //hideInspectorWindow();
+            return;
+        } 
         label.innerHTML = attributeType + enterAttributeValue;
     }
     else {
@@ -112,9 +119,9 @@ function userEnterDataIntoElement(id) {
     form.appendChild(button);
     //
 
-    if(inspectorWindow) {
-        inspectorWindow.appendChild(form);
-        div.appendChild(inspectorWindow);
+    if(elementDataDiv) {
+        elementDataDiv.appendChild(form);
+        elementDataDivParent.appendChild(elementDataDiv);
     }
     else {
         input.id = id+"Input";
@@ -122,7 +129,7 @@ function userEnterDataIntoElement(id) {
         let localDiv = document.createElement("div");
         localDiv.id = id+"inspectorComponent";
         localDiv.appendChild(form);
-        div.appendChild(localDiv);
+        elementDataDivParent.appendChild(localDiv);
     }
     
     displayNodeValues(id, input, label, button, form);
@@ -143,7 +150,7 @@ function userEnterDataIntoElement(id) {
         
         //add attributes to the inspector window
         document.getElementById(id+"Button").addEventListener("click", function() {
-            datBeingEntered = false;
+            dataEntered = false;
             let attributeValue = document.getElementById(id+"Input").value;
             //console.log(attributeValue);
             let node = document.getElementById(id);

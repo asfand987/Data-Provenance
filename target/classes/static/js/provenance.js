@@ -103,15 +103,16 @@ jsPlumb.ready(function () {
 
     $(document).on('dblclick','.window',function(){
         let answer = window.confirm("Are you sure you want to delete this connection?");
+                //console.log($(this).remove());
+        if(!answer) return;
+        
         for (let i = 0; i < elementsOnCanvas.length; i++) {
             if(elementsOnCanvas[i][0] == $(this)[0]) {
                 elementsOnCanvas.splice(i, 1);
             }
         }
-                //console.log($(this).remove());
-        if(answer) {
-            jsPlumbInstance.remove($(this));
-        }
+        jsPlumbInstance.remove($(this));
+        
        
     });
   

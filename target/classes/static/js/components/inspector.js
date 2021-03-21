@@ -1,126 +1,141 @@
 var clickedElement;
-var clickedElementID;
+var clickedElementID;  //last element that was clicked
+
+
 
 
 /*
-**  This function makes the Inspector component visible on the interface  
+**  This function is called every time an element on canvas is clicked on by the user.
+**  This is so the inspector component can be displayed on the interface as well as the
+**  elements data values.
+**
+**  "start" = entity element
+**  "step" = activity element
+**  "diamond" = agent element
+*/
+document.onclick = function(element) {
+    let clssName = element.path[2].className.split(' ').slice(1, 2);
+
+    if(clssName == "start" || clssName == "step" || clssName == "diamond") {   
+        let elementID = element.path[2].id;
+        clickedElementID = element.path[2].id;
+        displayInspectorComponent(element, elementID);
+        displayElementValuesInInspector(elementID);
+    }
+}
+
+/*
+**  This function makes the Inspector component visible on the interface.  
 */
 function displayInspectorComponent(node, id) {
-    let inspectorWindow = document.getElementById("inspectorSpan");
+    const inspectorWindow = document.getElementById("inspectorSpan");
 
     if (inspectorWindow.style.display == "none") {
         inspectorWindow.style.display = "inline-block";
         clickedElement = node;
-        let displayIdOnInputBox = document.getElementById("placeholderID");
+        const displayIdOnInputBox = document.getElementById("placeholderID");
         displayIdOnInputBox.placeholder = id;
     } else {
         inspectorWindow.style.display = "none";
     }
 }
 
-
-function displayElementValueInInspector(id) {
+/*
+**  This function displays each unique elements values in the Inspector Component.
+**  This function is used in the function @document.onclick so whenever an element
+**  is clicked on by the user, the inspector gets populated with the elements respective
+**  data.
+*/
+function displayElementValuesInInspector(id) {
     const inspectorValues = document.querySelectorAll("#inspectorValuesContainer div");
 
     for (let i = 0; i < inspectorValues.length; i++) {
-        if(inspectorValues[i].id != (id+"Inspector")) {
+        if(inspectorValues[i].id != (id+"inspectorComponent")) {
             inspectorValues[i].style.display = "none";
         }
         else {
             inspectorValues[i].style.display = "inline-block";
         }
     }
-    let attributes = document.getElementById(id+"Attr");
-    if(attributes) {
-        attributes.style.display = "inline-block";
+    const displaySelectBox = document.getElementById(id+"selectionAttributes");
+    if(displaySelectBox) {
+        displaySelectBox.style.display = "inline-block";
     }
 }
 
-document.onclick = function(node) {
-    let clssName = node.path[2].className.split(' ').slice(1, 2);
-    if(clssName == "start" || clssName == "step" || clssName == "diamond") {
-        let objectIdentifier = node.path[2].id;
-        clickedElementID = node.path[2].id;
-        console.log(objectIdentifier);
-        displayInspectorComponent(node, objectIdentifier);
-        displayElementValueInInspector(objectIdentifier);
-        lastClickElement = clssName;
-        //console.(elementsOnCanvas);
+var datBeingEntered = false;  
+document.getElementById("chooseAttributeBtn").addEventListener("click",  function() {
+    if(!datBeingEntered) {
+        userEnterDataIntoElement(clickedElementID);
+        datBeingEntered = true;
     }
-}
+});   
 
-var block = false;  
-    document.getElementById("attrBtn").addEventListener("click",  function() {
-        if(!block) {
-            inspectorAttr(clickedElementID);
-            block = true;
-        }
-    });   
+
    
-    //var inputValue;
-    function inspectorAttr(id) {
-        let inspectorWindow = document.getElementById(id+"Inspector");
-        let div = document.getElementById("inspectorValuesContainer");
-        let selectionAttr = document.getElementById("attrOption");
-        let selection =  document.getElementById("attr");
-        
-        let form = document.createElement('form');
-        let input = document.createElement("input");
-        let label = document.createElement("label");
-        let button = document.createElement("button");
-        let br = document.createElement("br");
-        
-        let attributeType = selection.options[selection.selectedIndex].text;
-        
-        if(selection.options[selection.selectedIndex].parentElement.label == "Attributes") {
-            let enterAttributeValue = prompt("Enter " +  attributeType + " type", "type");
-            label.innerHTML = attributeType + enterAttributeValue;
-        }
-        else {
-            label.innerHTML = attributeType;
-        }
-        
-
-        input.id = id+"Input";
-        input.type = 'text';
-        input.name = 'name';
-        button.innerHTML = "S";
-        button.type = 'button';
-        button.id = id+"Button";
-        label.id = id+"Label";
-
-        $(form).submit(function (e) {
-            e.preventDefault();
-        });
-        form.appendChild(label);
-        form.appendChild(input);
-        form.appendChild(button);
-        //
-
-        if(inspectorWindow) {
-            inspectorWindow.appendChild(form);
-            div.appendChild(inspectorWindow);
-        }
-        else {
-            input.id = id+"Input";
-            button.id = id+"Button";
-            let localDiv = document.createElement("div");
-            localDiv.id = id+"Inspector";
-            localDiv.appendChild(form);
-            div.appendChild(localDiv);
-        }
-        
-        displayNodeValues(id, input, label, button, form);
-        
+//var inputValue;
+function userEnterDataIntoElement(id) {
+    let inspectorWindow = document.getElementById(id+"inspectorComponent");
+    let div = document.getElementById("inspectorValuesContainer");
+    let selection =  document.getElementById("selectionAttributes");
+    
+    let form = document.createElement('form');
+    let input = document.createElement("input");
+    let label = document.createElement("label");
+    let button = document.createElement("button");
+    let br = document.createElement("br");
+    
+    let attributeType = selection.options[selection.selectedIndex].text;
+    
+    if(selection.options[selection.selectedIndex].parentElement.label == "Attributes") {
+        let enterAttributeValue = prompt("Enter " +  attributeType + " type", "type");
+        label.innerHTML = attributeType + enterAttributeValue;
     }
+    else {
+        label.innerHTML = attributeType;
+    }
+    
+
+    input.id = id+"Input";
+    input.type = 'text';
+    input.name = 'name';
+    button.innerHTML = "S";
+    button.type = 'button';
+    button.id = id+"Button";
+    label.id = id+"Label";
+
+    $(form).submit(function (e) {
+        e.preventDefault();
+    });
+    form.appendChild(label);
+    form.appendChild(input);
+    form.appendChild(button);
+    //
+
+    if(inspectorWindow) {
+        inspectorWindow.appendChild(form);
+        div.appendChild(inspectorWindow);
+    }
+    else {
+        input.id = id+"Input";
+        button.id = id+"Button";
+        let localDiv = document.createElement("div");
+        localDiv.id = id+"inspectorComponent";
+        localDiv.appendChild(form);
+        div.appendChild(localDiv);
+    }
+    
+    displayNodeValues(id, input, label, button, form);
+    
+}
 
    
     function displayNodeValues(id, input, label, button, form) { 
-        let divAttr = document.getElementById(id+"Attr");
+        let divAttr = document.getElementById(id+"selectionAttributes");
      
         if(!divAttr) {
             divAttr = document.createElement('div');
-            divAttr.id = id+"Attr";
+            divAttr.id = id+"selectionAttributes";
         }
         let br = document.createElement("br");
         let attrButton = document.createElement("button");
@@ -128,7 +143,7 @@ var block = false;
         
         //add attributes to the inspector window
         document.getElementById(id+"Button").addEventListener("click", function() {
-            block = false;
+            datBeingEntered = false;
             let attributeValue = document.getElementById(id+"Input").value;
             //console.log(attributeValue);
             let node = document.getElementById(id);
@@ -181,11 +196,11 @@ var block = false;
         var nodeID = clickedElement.path[2].id;
         let userEnteredID = document.getElementById("objectName");
         let p = document.getElementById(nodeID).querySelectorAll("p");//.getElementsByClassName("p");
-        let cont = document.getElementById(nodeID+"Inspector");
+        let cont = document.getElementById(nodeID+"inspectorComponent");
         let input = document.getElementById(nodeID+"Input");
         let button = document.getElementById(nodeID+"Button");
         let label = document.getElementById(nodeID+"Label");
-        let attr = document.getElementById(nodeID+"Attr");
+        let attr = document.getElementById(nodeID+"selectionAttributes");
 
         //console.log(nodeID);
         let getNsOption = document.getElementById("addNStoID");
@@ -216,7 +231,7 @@ var block = false;
             userEnteredID.value = '';       
             
             if(cont) { 
-                cont.id = nodeID+"Inspector";
+                cont.id = nodeID+"inspectorComponent";
             }
             if(input) { 
                 input.id = nodeID+"Input";
@@ -228,7 +243,7 @@ var block = false;
                 label.id = nodeID+"Label";
             }
             if(attr) { 
-                attr.id = nodeID+"Attr";
+                attr.id = nodeID+"selectionAttributes";
             }
 
             //changeElementIDinArray(nodeID, userEnteredID.value);

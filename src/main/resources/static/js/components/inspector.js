@@ -1,26 +1,27 @@
-var clickedObject;
-var idEle;
+var clickedElement;
+var clickedElementID;
 
-function displayInspectorWindow(node, id) {
+
+/*
+**  This function makes the Inspector component visible on the interface  
+*/
+function displayInspectorComponent(node, id) {
     let inspectorWindow = document.getElementById("inspectorSpan");
 
     if (inspectorWindow.style.display == "none") {
         inspectorWindow.style.display = "inline-block";
-        //console.log("On click " + objectIdentifier);
-        clickedObject = node;
-        //inspectorAttr(objectIdentifier);
-        let placeholder = document.getElementById("objectName");
-        placeholder.placeholder = id;
+        clickedElement = node;
+        let displayIdOnInputBox = document.getElementById("placeholderID");
+        displayIdOnInputBox.placeholder = id;
     } else {
         inspectorWindow.style.display = "none";
     }
 }
 
 
-function displayInspectorValues(id) {
-    let inspectorValues = document.querySelectorAll("#inspectorValuesContainer div");
-    
-    //console.log(Is);
+function displayElementValueInInspector(id) {
+    const inspectorValues = document.querySelectorAll("#inspectorValuesContainer div");
+
     for (let i = 0; i < inspectorValues.length; i++) {
         if(inspectorValues[i].id != (id+"Inspector")) {
             inspectorValues[i].style.display = "none";
@@ -30,27 +31,28 @@ function displayInspectorValues(id) {
         }
     }
     let attributes = document.getElementById(id+"Attr");
-        if(attributes) {
-            attributes.style.display = "inline-block";
-        }
+    if(attributes) {
+        attributes.style.display = "inline-block";
+    }
 }
+
 document.onclick = function(node) {
     let clssName = node.path[2].className.split(' ').slice(1, 2);
     if(clssName == "start" || clssName == "step" || clssName == "diamond") {
         let objectIdentifier = node.path[2].id;
-        idEle = node.path[2].id;
+        clickedElementID = node.path[2].id;
         console.log(objectIdentifier);
-        displayInspectorWindow(node, objectIdentifier);
-        displayInspectorValues(objectIdentifier);
+        displayInspectorComponent(node, objectIdentifier);
+        displayElementValueInInspector(objectIdentifier);
         lastClickElement = clssName;
-        //console.log(elementsOnCanvas);
+        //console.(elementsOnCanvas);
     }
 }
 
 var block = false;  
     document.getElementById("attrBtn").addEventListener("click",  function() {
         if(!block) {
-            inspectorAttr(idEle);
+            inspectorAttr(clickedElementID);
             block = true;
         }
     });   
@@ -176,7 +178,7 @@ var block = false;
     }
 
     saveFunction = function saveOutput() {
-        var nodeID = clickedObject.path[2].id;
+        var nodeID = clickedElement.path[2].id;
         let userEnteredID = document.getElementById("objectName");
         let p = document.getElementById(nodeID).querySelectorAll("p");//.getElementsByClassName("p");
         let cont = document.getElementById(nodeID+"Inspector");
@@ -232,9 +234,9 @@ var block = false;
             //changeElementIDinArray(nodeID, userEnteredID.value);
             //changeElementIDinArray(oldID, nodeID);
 
-            jsPlumbInstance.setId(clickedObject.path[2].id, nodeID);
+            jsPlumbInstance.setId(clickedElement.path[2].id, nodeID);
             jsPlumbInstance.recalculateOffsets(nodeID);
 
-            idEle = nodeID;
+            clickedElementID = nodeID;
         }
     }

@@ -47,7 +47,7 @@ jsPlumb.ready(function () {
         let sourceID = info.sourceId;
         let targetID = info.targetId;
 
-        // let connectionID = myFunction("Enter ID: ", "id");
+        // let connectionID = alertBox("Enter ID: ", "id");
         // //jsPlumbInstance.setId(info.connection.id, connectionID);
         // info.connection.id = connectionID;
 
@@ -216,7 +216,7 @@ jsPlumb.ready(function () {
                 elementCount++;
 
                 let id;
-                id =  myFunction("Please enter your ID:", "ID");
+                id =  alertBox("Please enter your ID:", "ID");
                 id = "prov:" + id;
                 element = createElement(id);
 

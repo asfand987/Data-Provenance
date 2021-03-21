@@ -36,12 +36,12 @@ function displayInspectorComponent(node, id) {
         const displayIdOnInputBox = document.getElementById("placeholderID");
         displayIdOnInputBox.placeholder = id;
     } else {
-        inspectorWindow.style.display = "none";
-    }
+        inspectorWindow.style.display = "none"; //hide Inspector indow.
+    } 
 }
 
 /*
-**  This function displays each unique elements values in the Inspector Component.
+**  This function displays each unique element values in the Inspector Component.
 **  This function is used in the function @document.onclick so whenever an element
 **  is clicked on by the user, the inspector gets populated with the elements respective
 **  data.
@@ -50,14 +50,14 @@ function displayElementValuesInInspector(id) {
     const inspectorValues = document.querySelectorAll("#elementDataInInspector div");
 
     for (let i = 0; i < inspectorValues.length; i++) {
-        if(inspectorValues[i].id != (id+"inspectorComponent")) {
+        if(inspectorValues[i].id != (id+"-attributesContainerDivParent")) {
             inspectorValues[i].style.display = "none";
         }
         else {
             inspectorValues[i].style.display = "inline-block";
         }
     }
-    const displaySelectBox = document.getElementById(id+"selectionAttributes");
+    const displaySelectBox = document.getElementById(id+"-attributesContainerDiv");
     if(displaySelectBox) {
         displaySelectBox.style.display = "inline-block";
     }
@@ -68,10 +68,13 @@ document.getElementById("chooseAttributeBtn").addEventListener("click",  functio
 });   
 
    
-//var inputValue;
+/*
+**  This function is responsible for letting the user enter in data to elements, this is done inside the inspector.
+**  
+*/
 function userEnterDataIntoElement(id) {
     let elementDataDivParent = document.getElementById("elementDataInInspector");
-    let elementDataDiv = document.getElementById(id+"inspectorComponent");
+    let elementDataDiv = document.getElementById(id+"-attributesContainerDivParent");
     let attributeSelectionDiv =  document.getElementById("selectionAttributes");
     
     //------------create new form and corresponding elements for user to enter in new data and save--------------//
@@ -105,17 +108,17 @@ function userEnterDataIntoElement(id) {
     
 
     //-----------------------------------------------------Input-------------------------------------------------//
-    userInputAttr.id = id+"Input";
+    userInputAttr.id = id+"-Input";
     userInputAttr.type = 'text';
     userInputAttr.name = 'name';
 
     //-----------------------------------------------------Button-------------------------------------------------//
     attrSaveBtn.innerHTML = "S";
     attrSaveBtn.type = 'button';
-    attrSaveBtn.id = id+"Button";
+    attrSaveBtn.id = id+"-Button";
 
     //-----------------------------------------------------Label--------------------------------------------------//
-    attrLabel.id = id+"Label";
+    attrLabel.id = id+"-Label";
 
     //-----------------------------------------------------Form---------------------------------------------------//
     $(form).submit(function (e) {
@@ -138,137 +141,180 @@ function userEnterDataIntoElement(id) {
     else {
 
         let elementDataDiv = document.createElement("div");
-        elementDataDiv.id = id+"inspectorComponent";
+        elementDataDiv.id = id+"-attributesContainerDivParent";
         elementDataDiv.appendChild(form);
         elementDataDivParent.appendChild(elementDataDiv);
     }
     
-    displayNodeValues(id, userInputAttr, attrLabel, attrSaveBtn, form);
+    addDataToElement(id, userInputAttr, attrLabel, attrSaveBtn, form);
     
 }
 
    
-    function displayNodeValues(id, input, label, button, form) { 
-        let divAttr = document.getElementById(id+"selectionAttributes");
-     
-        if(!divAttr) {
-            divAttr = document.createElement('div');
-            divAttr.id = id+"selectionAttributes";
-        }
+function addDataToElement(id, input, label, button, form) { 
+    /*
+    ** if dataDiv already exists, add all existing data to it to display.
+    ** Otherwise create a new one.
+    */
+    let dataDiv = document.getElementById(id+"-attributesContainerDiv");
+    
+    if(!dataDiv) {
+        dataDiv = document.createElement('div');
+        dataDiv.id = id+"-attributesContainerDiv";
+    }
+    //------------------------------------------------------------------------------------------------------------//
+
+
+    /*
+    **  Display user entered in data to the inspector. Deletes the form used to enter in the data.
+    **  Called when '+' button is pressed in the inspector.
+    ** Returns dataDiv.
+    */
+    showNewDataInInspector(id, input, label, button, dataDiv);
+
+    form.appendChild(dataDiv);
+}
+
+/*
+**  Add data which user has entered from form into Inspector to display
+**
+*/
+function showNewDataInInspector(id, input, label, button, dataDiv) {
+    document.getElementById(id+"-Button").addEventListener("click", function() { 
         let br = document.createElement("br");
         let attrButton = document.createElement("button");
         let attrlabel = document.createElement("label");
-        
-        //add attributes to the inspector window
-        document.getElementById(id+"Button").addEventListener("click", function() {
-            let attributeValue = document.getElementById(id+"Input").value;
-            //console.log(attributeValue);
-            let node = document.getElementById(id);
-            node.attributes[2].nodeValue =  node.attributes[2].nodeValue + label.innerHTML+ ": " + attributeValue + ",";
-            
-            let nodeAttrs = node.attributes[2].nodeValue.split(",");
-            nodeAttrs.pop();
-            
-            for (let i = 0; i < nodeAttrs.length; i++) {
-                attrButton.innerHTML = "X";
-                attrButton.type = 'button';
-                attrButton.id = nodeAttrs[i];
-                //delete
-                attrButton.addEventListener("click", function() {
-                    attrlabel.remove();
-                    attrButton.remove();
-                    node.attributes[2].nodeValue = node.attributes[2].nodeValue.replace(attrlabel.innerHTML+",", "");
-                    //console.log( node.attributes[2].nodeValue);
-                })
-                attrlabel.innerHTML = nodeAttrs[i];
-                //console.log(attrlabel.innerHTML);
-                let prefix = nodeAttrs[i].split(" ")[0].slice(0, -1);
-                //let value =
-                divAttr.appendChild(attrlabel);
-                divAttr.appendChild(attrButton);
-                divAttr.appendChild(br);
-            }
-                //console.log(node.attributes[2].nodeValue);
-                //console.log(node.attributes[2]);
-                input.remove();
-                label.remove(); 
-                button.remove();
-            });
-        form.appendChild(divAttr);
-    }
+        let attributeValue = document.getElementById(id+"-Input").value;
+        let element = document.getElementById(id);
 
-    function myFunction(message, placeholder) { 
-        let txt;
-        let promptAlert = prompt(message, placeholder);
-        if (promptAlert == null || promptAlert == "") {
-          txt = "User cancelled the prompt.";
-        } else {
-          txt =  promptAlert;
+        //------------------------------------Add data directly onto element-----------------------------------------//
+        element.attributes[2].nodeValue =  element.attributes[2].nodeValue + label.innerHTML+ ": " + attributeValue + ",";
+        
+        //-----------------------------------------------------------------------------------------------------------//
+
+        //----------------------------------Get all data stored In element-------------------------------------------//
+        let elementAttributes = element.attributes[2].nodeValue.split(",");
+        elementAttributes.pop();
+        //-----------------------------------------------------------------------------------------------------------//
+
+        //----------------------------------Display all data stored in element in Inspector--------------------------//
+        for (let i = 0; i < elementAttributes.length; i++) {
+            attrButton.innerHTML = "X";
+            attrButton.type = 'button';
+            attrButton.id = elementAttributes[i];
+
+            //-------------------------------Delete data on from Inspector on click----------------------------------//
+            attrButton.addEventListener("click", function() { deleteData(attrlabel, attrButton, element); });
+            //-------------------------------------------------------------------------------------------------------//
+
+            attrlabel.innerHTML = elementAttributes[i];
+            dataDiv.appendChild(attrlabel);
+            dataDiv.appendChild(attrButton);
+            dataDiv.appendChild(br);
         }
-        //idIs = txt;
-        return txt;
-    }
+            //----------------------------------Remove From used to enter in new attribute data----------------------//
+            removeForm(input, label, button);
+        });
 
-    saveFunction = function saveOutput() {
-        var nodeID = clickedElement.path[2].id;
-        let userEnteredID = document.getElementById("objectName");
-        let p = document.getElementById(nodeID).querySelectorAll("p");//.getElementsByClassName("p");
-        let cont = document.getElementById(nodeID+"inspectorComponent");
-        let input = document.getElementById(nodeID+"Input");
-        let button = document.getElementById(nodeID+"Button");
-        let label = document.getElementById(nodeID+"Label");
-        let attr = document.getElementById(nodeID+"selectionAttributes");
+        return dataDiv;
+}
 
-        //console.log(nodeID);
-        let getNsOption = document.getElementById("addNStoID");
-        let getNSOptionValue = getNsOption.options[getNsOption.selectedIndex].value;
-        
-        
-        
-        //Delete old element ID
-        if(userEnteredID.value != '') {
-             //change connection ID
-            for(let i = 0; i < connections.length; i++) {
-                if(connections[i].includes(nodeID)) {
-                    connections[i] = connections[i].replaceAll(nodeID, userEnteredID.value);
-                }
-            }
 
-            if(getNSOptionValue != "default") {
-                userEnteredID.value = getNSOptionValue + ":" + userEnteredID.value;
-            }
-             else {
-                 userEnteredID.value = "prov:" + userEnteredID.value;
-             }
-            let oldID = nodeID;
+/*
+**  Each attribute has an "X" button to delete it. This function will remove remnants of that data from the Inspector.
+**
+*/
+function deleteData(label, button, element) {
+    label.remove();
+    button.remove();
+    element.attributes[2].nodeValue = element.attributes[2].nodeValue.replace(label.innerHTML+",", "");
 
-            //update nodeID with new ID
-            nodeID =  userEnteredID.value;
-            p[0].innerHTML = nodeID;
-            userEnteredID.value = '';       
-            
-            if(cont) { 
-                cont.id = nodeID+"inspectorComponent";
-            }
-            if(input) { 
-                input.id = nodeID+"Input";
-            }
-            if(button) { 
-                button.id = nodeID+"Button";
-            }
-            if(label) { 
-                label.id = nodeID+"Label";
-            }
-            if(attr) { 
-                attr.id = nodeID+"selectionAttributes";
-            }
+}
 
-            //changeElementIDinArray(nodeID, userEnteredID.value);
-            //changeElementIDinArray(oldID, nodeID);
+/*
+**  Deletes Form after the user has used it to make a new attribute
+**
+*/
+function removeForm(input, label, button) {
+    input.remove();
+    label.remove(); 
+    button.remove();
+}
 
-            jsPlumbInstance.setId(clickedElement.path[2].id, nodeID);
-            jsPlumbInstance.recalculateOffsets(nodeID);
 
-            clickedElementID = nodeID;
+
+
+document.getElementById("idBtn").addEventListener("click", function() { updateIDs(); });
+
+function updateIDs() {
+     //--------------------------------- ------Old ID and new ID-------------------------------------------------//
+    var elementID = clickedElement.path[2].id;
+    let userEnteredID = document.getElementById("placeholderID");
+    //-----------------------------------------------------------------------------------------------------------//
+
+
+    //----------------------------------Change name on element in the UI-----------------------------------------//
+    let elementInnerHTML = document.getElementById(elementID).querySelectorAll("p");
+    
+    //--------------------------To be updated, attribute container DIV's for each unique element-----------------//
+    let attributesContainerDivParent = document.getElementById(elementID+"-attributesContainerDivParent");
+    let attributesContainerDiv = document.getElementById(elementID+"-attributesContainerDiv");
+    //-----------------------------------------------------------------------------------------------------------//
+
+
+    //--------------------------To be updated, Form for adding new attributes------------------------------------//
+    let newAttributeInput = document.getElementById(elementID+"-Input");
+    let newAttributeButton = document.getElementById(elementID+"-Button");
+    let newAttributeLabel = document.getElementById(elementID+"-Label");
+
+    //-------------------------------------Update ID's-----------------------------------------------------------//
+    //-----------------------------------------------------------------------------------------------------------//
+    //-----------------------------------------------------------------------------------------------------------//
+    let getNsOption = document.getElementById("addNStoID");
+    let getNSnValue = getNsOption.options[getNsOption.selectedIndex].value;
+
+    if(userEnteredID.value != '') {
+
+        if(getNSnValue != "default") {
+            //Add prefix namespace that is currently selected to ID.
+            userEnteredID.value = getNSnValue + ":" + userEnteredID.value;
         }
+        else {
+            userEnteredID.value = "prov:" + userEnteredID.value;
+        }
+
+        //update old ID with new ID
+        elementID =  userEnteredID.value;
+
+        //update element name on UI
+        elementInnerHTML[0].innerHTML = elementID;
+
+        userEnteredID.value = '';       
+        
+
+        if(attributesContainerDivParent) {    attributesContainerDivParent.id = elementID+"-attributesContainerDivParent"; };
+        if(newAttributeInput) {     newAttributeInput.id = elementID+"-Input";  };
+        if(newAttributeButton) {    newAttributeButton.id = elementID+"-Button";    };
+        if(newAttributeLabel) {     newAttributeLabel.id = elementID+"-Label";  }
+        if(attributesContainerDiv) {    attributesContainerDiv.id = elementID+"-attributesContainerDiv";    }
+
+        //update instance
+        jsPlumbInstance.setId(clickedElement.path[2].id, elementID);
+        jsPlumbInstance.recalculateOffsets(elementID);
+
+        clickedElementID = elementID;
     }
+}
+
+
+
+function alertBox(message, placeholder) { 
+    let value;
+    let promptAlert = prompt(message, placeholder);
+    if (promptAlert == null || promptAlert == "") {
+        value = "User cancelled the prompt.";
+    } else {
+        value =  promptAlert;
+    }
+    return value;
+}

@@ -40,10 +40,6 @@ function displayInspectorComponent(node, id) {
     }
 }
 
-function hideInspectorWindow() {
-    const inspectorWindow = document.getElementById("inspectorSpan");
-    inspectorWindow.style.display = "none";
-}
 /*
 **  This function displays each unique elements values in the Inspector Component.
 **  This function is used in the function @document.onclick so whenever an element
@@ -67,13 +63,9 @@ function displayElementValuesInInspector(id) {
     }
 }
 
-var dataEntered = false;  
 document.getElementById("chooseAttributeBtn").addEventListener("click",  function() {
-    if(!dataEntered) {
         userEnterDataIntoElement(clickedElementID);
-    }
 });   
-
 
    
 //var inputValue;
@@ -82,57 +74,76 @@ function userEnterDataIntoElement(id) {
     let elementDataDiv = document.getElementById(id+"inspectorComponent");
     let attributeSelectionDiv =  document.getElementById("selectionAttributes");
     
+    //------------create new form and corresponding elements for user to enter in new data and save--------------//
     let form = document.createElement('form');
-    let input = document.createElement("input");
-    let label = document.createElement("label");
-    let button = document.createElement("button");
+
+    //input
+    let userInputAttr = document.createElement("input"); 
+
+    //label
+    let attrLabel = document.createElement("label");
+
+    //button
+    let attrSaveBtn = document.createElement("button");
+    //-----------------------------------------------------------------------------------------------------------//
+    //-----------------------------------------------------------------------------------------------------------//
+
     
-    let attributeType = attributeSelectionDiv.options[attributeSelectionDiv.selectedIndex].text;
+    let userSelectedAttrNamespace = attributeSelectionDiv.options[attributeSelectionDiv.selectedIndex].text;
     
+    //-------------------------------------------------------Alert prompt----------------------------------------//
     if(attributeSelectionDiv.options[attributeSelectionDiv.selectedIndex].parentElement.label == "Attributes") {
-        let enterAttributeValue = prompt("Enter " +  attributeType + " type", );
-        if(!enterAttributeValue) {
-            dataEntered = false;
-            //hideInspectorWindow();
-            return;
-        } 
-        label.innerHTML = attributeType + enterAttributeValue;
+        let alertPromptToEnterAttrType = prompt("Enter " +  userSelectedAttrNamespace + " type", );
+        if(!alertPromptToEnterAttrType)   return;
+        attrLabel.innerHTML = userSelectedAttrNamespace + alertPromptToEnterAttrType;
     }
     else {
-        label.innerHTML = attributeType;
+        attrLabel.innerHTML = userSelectedAttrNamespace;
     }
+    //-----------------------------------------------------------------------------------------------------------//
+    //-----------------------------------------------------------------------------------------------------------//
     
 
-    input.id = id+"Input";
-    input.type = 'text';
-    input.name = 'name';
-    button.innerHTML = "S";
-    button.type = 'button';
-    button.id = id+"Button";
-    label.id = id+"Label";
+    //-----------------------------------------------------Input-------------------------------------------------//
+    userInputAttr.id = id+"Input";
+    userInputAttr.type = 'text';
+    userInputAttr.name = 'name';
 
+    //-----------------------------------------------------Button-------------------------------------------------//
+    attrSaveBtn.innerHTML = "S";
+    attrSaveBtn.type = 'button';
+    attrSaveBtn.id = id+"Button";
+
+    //-----------------------------------------------------Label--------------------------------------------------//
+    attrLabel.id = id+"Label";
+
+    //-----------------------------------------------------Form---------------------------------------------------//
     $(form).submit(function (e) {
         e.preventDefault();
     });
-    form.appendChild(label);
-    form.appendChild(input);
-    form.appendChild(button);
-    //
+    form.appendChild(attrLabel);
+    form.appendChild(userInputAttr);
+    form.appendChild(attrSaveBtn);
+    //------------------------------------------------------------------------------------------------------------//
+    //------------------------------------------------------------------------------------------------------------//
 
+    /*
+    **  if elementDataDiv (div where data is held) already exists, add the form (data) to it and then add to parentDiv.
+    **  else create new elementDataDiv to add data to.
+    */
     if(elementDataDiv) {
         elementDataDiv.appendChild(form);
         elementDataDivParent.appendChild(elementDataDiv);
     }
     else {
-        input.id = id+"Input";
-        button.id = id+"Button";
-        let localDiv = document.createElement("div");
-        localDiv.id = id+"inspectorComponent";
-        localDiv.appendChild(form);
-        elementDataDivParent.appendChild(localDiv);
+
+        let elementDataDiv = document.createElement("div");
+        elementDataDiv.id = id+"inspectorComponent";
+        elementDataDiv.appendChild(form);
+        elementDataDivParent.appendChild(elementDataDiv);
     }
     
-    displayNodeValues(id, input, label, button, form);
+    displayNodeValues(id, userInputAttr, attrLabel, attrSaveBtn, form);
     
 }
 
@@ -150,7 +161,6 @@ function userEnterDataIntoElement(id) {
         
         //add attributes to the inspector window
         document.getElementById(id+"Button").addEventListener("click", function() {
-            dataEntered = false;
             let attributeValue = document.getElementById(id+"Input").value;
             //console.log(attributeValue);
             let node = document.getElementById(id);

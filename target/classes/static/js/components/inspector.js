@@ -200,7 +200,6 @@ function showNewDataInInspector(id, input, label, button, dataDiv) {
             attrButton.innerHTML = "X";
             attrButton.type = 'button';
             attrButton.id = elementAttributes[i];
-            br.id = id+"-br";
 
             //-------------------------------Delete data on from Inspector on click----------------------------------//
             attrButton.addEventListener("click", function() { deleteData(attrlabel, attrButton, br, element); });

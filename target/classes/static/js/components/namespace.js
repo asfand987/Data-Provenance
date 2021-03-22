@@ -1,27 +1,95 @@
+/*
+**  This file contains all code related to the namespace functionality.
+**
+**
+*/
+
+//---------------------------Global variables-------------------------------------------------------//
+var namespaceArray = {prefix:{default : 'http://kcl.ac.uk/1'}};
+
+
+/*
+**  This function lets the user enter in custom namespaces.
+**
+*/
 document.getElementById("nameSpaceButton").addEventListener("click", addNameSpace);
 
-    function deleteNameSpace(id) {
-        let namespaceDiv = document.getElementById(id);
-        let namespaceOptionID = document.getElementById(id + "Option");
-        let namespaceIdentifier = document.getElementById(id + ":");
-        
-        namespaceIdentifier.remove();
-        namespaceOptionID.remove();
-        namespaceDiv.remove();
+function addNameSpace() {
+    const userInput = prompt("Prefix", "namespace");
+    
+    //---------------------------Separate prefix and url from user input-----------------------------//
+    const separateInput = userInput.split(" ");
+    const prefix = separateInput[0];
+    const url = separateInput[1];
+    //-----------------------------------------------------------------------------------------------//
+    
+    displayNamespace(prefix, url);
+    addNamespaceAttributes(userInput.split(' ').slice(0, 1) + ":");
+    addNamespaceToInspector(prefix);
+}
+//---------------------------------------------------------------------------------------------------//
 
-        if(id == "zone") {
-            for(let i = 0; i < 6; i++) {
-                let zoneAttr = document.getElementById("zoneAttr" + i);
-                zoneAttr.remove();
-            }            
-        }
-        
-        //Delete from array
-        delete namespaceArray.prefix[id];
-        //console.log(namespaceArray);
 
+/*
+**  This function displays the namespace in the UI.
+**  Used in @addNameSpace().
+**
+*/
+function displayNamespace(prefix, url) {
+    const namespaceContainer = document.getElementById("namespaceContainer"); 
+    const namespaceDiv = document.createElement("div");
+    const namespaceBtn = document.createElement("button");
+    const br = document.createElement("br");
+
+    label.innerHTML = prefix;//
+    namespaceBtn.innerHTML = "X";
+    namespaceBtn.style = "margin:5px";
+    namespaceDiv.id = prefix;
+    
+    
+    namespaceBtn.addEventListener("click", function() {
+        deleteNameSpace(prefix);
+    });
+    namespaceDiv.style = "overflow-y: auto";
+    namespaceDiv.appendChild(label);
+    namespaceDiv.appendChild(namespaceBtn);
+    namespaceDiv.appendChild(br);
+    namespaceContainer.appendChild(namespaceDiv);
+
+    //add namespace to namespace array
+    namespaceArray.prefix[prefix] = url;
+}
+//----------------------------------------------------------------------------------------------------//
+
+/*
+**  This function delete namespace from the array and user interface.
+**  Used in @displayNamespace(prefix, url) function as a addEvenetListener to the namespaces respective 
+**  delete button in the UI.
+**
+*/
+function deleteNameSpace(id) {
+    let namespaceDiv = document.getElementById(id);
+    let namespaceOptionID = document.getElementById(id + "-NSoption");
+    let namespaceIdentifier = document.getElementById(id + ":");
+    
+    namespaceIdentifier.remove();
+    namespaceOptionID.remove();
+    namespaceDiv.remove();
+
+    removePredefinedAttributes(id);
+    
+    delete namespaceArray.prefix[id];
+
+}
+
+function removePredefinedAttributes(id) {
+    if(id == "zone") {
+        for(let i = 0; i < 6; i++) {
+            let zoneAttr = document.getElementById("zoneAttr" + i);
+            zoneAttr.remove();
+        }            
     }
-
+}
 
     function addNamespaceAttributes(namespace) {
         let selectionAttr = document.getElementById("attrOption");
@@ -66,14 +134,14 @@ document.getElementById("nameSpaceButton").addEventListener("click", addNameSpac
         //console.log(namespaceArray);
 
         addNamespaceAttributes(userInput.split(' ').slice(0, 1) + ":");
-        addNamespacetoInspector(prefix);
+        addNamespaceToInspector(prefix);
     }
 
-    function addNamespacetoInspector(NamespaceID) {
+    function addNamespaceToInspector(NamespaceID) {
         let namespaceAddtoID = document.getElementById("addNStoID");
         let namespaceOption = document.createElement("option");
         namespaceOption.innerHTML = NamespaceID;
-        namespaceOption.id = NamespaceID + "Option";
+        namespaceOption.id = NamespaceID + "-NSoption";
         namespaceAddtoID.appendChild(namespaceOption);
          //console.log(namespace);
     }
@@ -112,7 +180,7 @@ document.getElementById("nameSpaceButton").addEventListener("click", addNameSpac
                 namespaceContainer.appendChild(namespaceDiv);
                 //namespaceArray.prefix.push({[prefixValue]: url});
                 namespaceArray.prefix[prefixValue] = url;
-                addNamespacetoInspector(prefixValue);
+                addNamespaceToInspector(prefixValue);
 
                 namespaceBtn.addEventListener("click", function() {
                     deleteNameSpace(prefixValue);

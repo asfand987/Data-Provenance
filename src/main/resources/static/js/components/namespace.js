@@ -5,7 +5,7 @@
 */
 
 //---------------------------Global variables-------------------------------------------------------//
-var namespaceArray = {prefix:{default : 'http://kcl.ac.uk/1'}};
+var namespaceArray = {prefix:{default : 'http://www.w3.org/ns/prov#'}};
 
 
 /*

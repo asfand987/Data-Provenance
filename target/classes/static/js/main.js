@@ -1,12 +1,7 @@
-var endpointList = [];
-var sourcepointList = [];
-var _saveFlowchart, elementCount = 0;
 var jsPlumbInstance; //the jsPlumb jsPlumbInstance
 var properties = []; //keeps the properties of each element
 var elementsOnCanvas = [];
-var namespaceArray = {prefix:{default : 'http://kcl.ac.uk/1'}};
 var connections = [];
-var lastClickElement;
 
 jsPlumb.ready(function () {
     let element = "";   //the element which will be appended to the canvas
@@ -29,103 +24,59 @@ jsPlumb.ready(function () {
         Container: "canvas"
     });
 
-    //var windows = jsPlumb.getSelector(".canvas-wide .window start jsplumb-connected");
+    /**
+     * Add connection labels to connections.
+     */
     jsPlumbInstance.bind('connection', function (info) {
-
         let entity = "window start custom jtk-node jsplumb-connected jsplumb-endpoint-anchor jsplumb-draggable".split(' ').slice(1, 2)[0];
         let activity = "window step custom jtk-node jsplumb-connected-step jsplumb-endpoint-anchor jsplumb-draggable jsplumb-connected".split(' ').slice(1, 2)[0];
         let agent = "window diamond custom jtk-node jsplumb-connected-end jsplumb-endpoint-anchor jsplumb-draggable jsplumb-connected".split(' ').slice(1, 2)[0];; 
 
-        
-        //var source=info.sourceId.replace(/[0-9]/g, '');
         let source = info.source.className.split(' ').slice(1, 2)[0];
         let target = info.target.className.split(' ').slice(1, 2)[0];
        
         info.targetId = info.target.id;
         info.connection.targetId = info.target.id;
 
-        let sourceID = info.sourceId;
-        let targetID = info.targetId;
-
-        // let connectionID = alertBox("Enter ID: ", "id");
-        // //jsPlumbInstance.setId(info.connection.id, connectionID);
-        // info.connection.id = connectionID;
-
         jsPlumbInstance.draggable(jsPlumbInstance.getSelector(".jtk-node"), {
             grid: [20, 20]
         }); 
 
-        if (source == entity && source == target) {
-            info.connection.getOverlay("label").setLabel("wasDerivedFrom");
-            //connections.push("wasDerivedFrom(" + sourceID + ", " + targetID + ")");
-        }
-        else if(source == entity && target == agent) {
-            info.connection.getOverlay("label").setLabel("wasAttributedTo");
-            //connections.push("wasAttributedTo(" + sourceID + ", " + targetID + ")");
-        }
-        else if(source == entity && target == activity) {
-            info.connection.getOverlay("label").setLabel("wasGeneratedBy");
-            //connections.push("wasGeneratedBy(" + sourceID + ", " + targetID + ")");
-        }
-        else if(source == activity && target == agent) {
-            info.connection.getOverlay("label").setLabel("wasAssociatedWith");
-            //connections.push("wasAssociatedWith(" + sourceID + ", " + targetID + ")");
-        }
-        else if(source == activity && target == entity) {
-            info.connection.getOverlay("label").setLabel("used");
-            //connections.push("used(" + sourceID + ", " + targetID + ")");
-        }
-        else if(source == activity && target == source) {
-            info.connection.getOverlay("label").setLabel("wasInformedBy");
-            //connections.push("wasInformedBy(" + sourceID + ", " + targetID + ")");
-        }
-        else if(source == agent && target == source) {
-            info.connection.getOverlay("label").setLabel("actedOnBehalfOf");
-            //connections.push("actedOnBehalfOf(" + sourceID + ", " + targetID + ")");
-        }
-        else if(source == agent && target == activity) {
-            info.connection.getOverlay("label").setLabel("");
-            //connections.push("wasAttributedTo(" + sourceID + ", " + targetID + ")");
-        }
-        else if(source == agent && target == entity) {
-            info.connection.getOverlay("label").setLabel("");
-            //connections.push("wasAttributedTo(" + sourceID + ", " + targetID + ")");
-        }
+        if (source == entity && source == target) info.connection.getOverlay("label").setLabel("wasDerivedFrom");
+        else if(source == entity && target == agent) info.connection.getOverlay("label").setLabel("wasAttributedTo");
+        else if(source == entity && target == activity) info.connection.getOverlay("label").setLabel("wasGeneratedBy");
+        else if(source == activity && target == agent) info.connection.getOverlay("label").setLabel("wasAssociatedWith");
+        else if(source == activity && target == entity) info.connection.getOverlay("label").setLabel("used");
+        else if(source == activity && target == source) info.connection.getOverlay("label").setLabel("wasInformedBy");
+        else if(source == agent && target == source) info.connection.getOverlay("label").setLabel("actedOnBehalfOf");
+        else if(source == agent && target == activity) info.connection.getOverlay("label").setLabel("");
+        else if(source == agent && target == entity) info.connection.getOverlay("label").setLabel("");
     });
  
-    jsPlumbInstance.bind('click', function (connection, e) {
+    /**
+     * Delete connection on click.
+     */
+    jsPlumbInstance.bind('click', function (connection) {
         let answer = window.confirm("Are you sure you want to delete this connection?");
-        if(answer) {
-            jsPlumbInstance.detach(connection);
-        }
-
+        if(answer) jsPlumbInstance.detach(connection);
     });
 
+    /**
+     * Delete element from canvas on double click.
+     */
     $(document).on('dblclick','.window',function(){
         let answer = window.confirm("Are you sure you want to delete this connection?");
-                //console.log($(this).remove());
         if(!answer) return;
-        
         for (let i = 0; i < elementsOnCanvas.length; i++) {
-            if(elementsOnCanvas[i][0] == $(this)[0]) {
-                elementsOnCanvas.splice(i, 1);
-            }
+            if(elementsOnCanvas[i][0] == $(this)[0])  elementsOnCanvas.splice(i, 1);
         }
         jsPlumbInstance.remove($(this));
-        
-       
     });
   
-    //instance.connect({ source: "opened", target: "phone1", type:"basic" });
-    //define basic connection type
-    // var basicType = {
-    //     connector: "StateMachine",
-    //     paintStyle: {strokeStyle: "#216477", lineWidth: 4},
-    //     hoverPaintStyle: {strokeStyle: "blue"}
-    // };
-    //jsPlumbInstance.registerConnectionType("basic", basicType);
+    /**
+     * Define and register connections 
+     */
     jsPlumbInstance.registerConnectionType("basic", { anchor:"Continuous", connector:"StateMachine" });
-    //style for the connector
     var connectorPaintStyle = {
         lineWidth: 4,
         strokeStyle: "#61B7CF",
@@ -146,7 +97,6 @@ jsPlumb.ready(function () {
         strokeStyle: "#216477"
     },
 
-    //the source endpoint definition from which a connection can be started
     sourceEndpoint = {
         endpoint: "Dot",
         paintStyle: {
@@ -183,7 +133,7 @@ jsPlumb.ready(function () {
         isTarget: true
     };
 
-       
+    
 	function makeDraggable(id, className, text){
 	    $(id).draggable({
 		helper: function(){
@@ -201,26 +151,24 @@ jsPlumb.ready(function () {
 	makeDraggable("#activityID", "window step jsplumb-connected-step custom", "activity");
     makeDraggable("#agentID", "window diamond jsplumb-connected-end custom", "agents");
 
-    //make the editor canvas droppable
     entityCount = 1;
     agentCount = 1;
     activityCount = 1;
     tt = 0;
     
+    /**
+     * Allow the canvas to accept elements.
+     */
     $("#canvas").droppable({
         //accept: ".window",
-        drop: function (event, ui) {
-            //console.log(idIs);
+        drop: function () {
             if (clicked) {
     	        clicked = false;
-                elementCount++;
-
                 let id;
                 id =  alertBox("Please enter your ID:", "ID");
                 id = "prov:" + id;
                 element = createElement(id);
-
-                drawElement(element, "#canvas", id);//, name);
+                drawElement(element, "#canvas", id);
     	        element = "";
 	        }
         }   
@@ -258,7 +206,7 @@ jsPlumb.ready(function () {
             ["Top", "Bottom"], false);
         clicked = true;
     });
-    //["Left", "Right"], ["Top", "Bottom"]
+
     //load properties of a step element once the step element in the palette is clicked
     $('#activityID').mousedown(function () {
         loadProperties("window step custom jtk-node jsplumb-connected-step", "5em", "5em", "activity",
@@ -276,7 +224,11 @@ jsPlumb.ready(function () {
     });
 
    
-    //create an element to be drawn on the canvas
+    /**
+     * create an element to be drawn on the canvas
+     * @param {*} id 
+     * @returns element
+     */
     function createElement(id) {
         let arr = [];
         let elm = $('<div>').addClass(properties[0].clsName).attr('id', id).attr('variables', arr);
@@ -296,15 +248,15 @@ jsPlumb.ready(function () {
         return elm;
     }
 
-     //add the endpoints for the elements
-    // var epp;
+    /**
+     * Add endpoints to elements on canvas.
+     */
     var _addEndpoints = function (sourceAnchors, targetAnchors, id) {
         for (let i = 0; i < sourceAnchors.length; i++) {
             let sourceUUID = sourceAnchors[i];
             epp = jsPlumbInstance.addEndpoint(id, sourceEndpoint, {
                 anchor: sourceAnchors[i], uuid: sourceUUID
             });
-            //sourcepointList.push([id , epp]);
             epp = null;
         }
         for (let j = 0; j < targetAnchors.length; j++) {
@@ -312,12 +264,13 @@ jsPlumb.ready(function () {
             epp = jsPlumbInstance.addEndpoint(id, targetEndpoint, {
                 anchor: targetAnchors[j], uuid: targetUUID
             });
-            // endpointList.push([id, epp]);
-            //epp.canvas.setAttribute("title", "Drop a connection here");
             epp = null;
         }
     };
     
+    /**
+     * Draw element on canvas.
+     */
     function drawElement(element, canvasId, id) {
         $(canvasId).append(element);
         _addEndpoints(properties[0].startpoints, properties[0].endpoints, id);

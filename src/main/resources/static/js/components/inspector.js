@@ -62,16 +62,15 @@ function displayElementValuesInInspector(id) {
         displaySelectBox.style.display = "inline-block";
     }
 }
-
-document.getElementById("chooseAttributeBtn").addEventListener("click",  function() {
-        userEnterDataIntoElement(clickedElementID);
-});   
-
-   
+    
 /*
 **  This function is responsible for letting the user enter in data to elements, this is done inside the inspector.
 **  
 */
+document.getElementById("chooseAttributeBtn").addEventListener("click",  function() {
+    userEnterDataIntoElement(clickedElementID);
+});  
+
 function userEnterDataIntoElement(id) {
     let elementDataDivParent = document.getElementById("elementDataInInspector");
     let elementDataDiv = document.getElementById(id+"-attributesContainerDivParent");
@@ -150,12 +149,12 @@ function userEnterDataIntoElement(id) {
     
 }
 
-   
+/*
+** This funciton checks if dataDiv already exists, if so, add all existing data to it to display.
+** Otherwise create a new one.
+** Used in @userEnterDataIntoElement(id).
+*/
 function addDataToElement(id, input, label, button, form) { 
-    /*
-    ** if dataDiv already exists, add all existing data to it to display.
-    ** Otherwise create a new one.
-    */
     let dataDiv = document.getElementById(id+"-attributesContainerDiv");
     
     if(!dataDiv) {
@@ -163,7 +162,6 @@ function addDataToElement(id, input, label, button, form) {
         dataDiv.id = id+"-attributesContainerDiv";
     }
     //------------------------------------------------------------------------------------------------------------//
-
 
     /*
     **  Display user entered in data to the inspector. Deletes the form used to enter in the data.
@@ -202,9 +200,10 @@ function showNewDataInInspector(id, input, label, button, dataDiv) {
             attrButton.innerHTML = "X";
             attrButton.type = 'button';
             attrButton.id = elementAttributes[i];
+            br.id = id+"-br";
 
             //-------------------------------Delete data on from Inspector on click----------------------------------//
-            attrButton.addEventListener("click", function() { deleteData(attrlabel, attrButton, element); });
+            attrButton.addEventListener("click", function() { deleteData(attrlabel, attrButton, br, element); });
             //-------------------------------------------------------------------------------------------------------//
 
             attrlabel.innerHTML = elementAttributes[i];
@@ -224,9 +223,10 @@ function showNewDataInInspector(id, input, label, button, dataDiv) {
 **  Each attribute has an "X" button to delete it. This function will remove remnants of that data from the Inspector.
 **
 */
-function deleteData(label, button, element) {
+function deleteData(label, button, br, element) {
     label.remove();
     button.remove();
+    br.remove();
     element.attributes[2].nodeValue = element.attributes[2].nodeValue.replace(label.innerHTML+",", "");
 
 }
@@ -243,7 +243,10 @@ function removeForm(input, label, button) {
 
 
 
-
+/*
+**  This section updates the ID of elements as well as updating all corresponding div's inside the inspector for
+**  that particular element.
+*/
 document.getElementById("idBtn").addEventListener("click", function() { updateIDs(); });
 
 function updateIDs() {
@@ -275,13 +278,9 @@ function updateIDs() {
 
     if(userEnteredID.value != '') {
 
-        if(getNSnValue != "default") {
-            //Add prefix namespace that is currently selected to ID.
-            userEnteredID.value = getNSnValue + ":" + userEnteredID.value;
-        }
-        else {
-            userEnteredID.value = "prov:" + userEnteredID.value;
-        }
+        if(getNSnValue != "default") userEnteredID.value = getNSnValue + ":" + userEnteredID.value; 
+        else  userEnteredID.value = "prov:" + userEnteredID.value;
+        
 
         //update old ID with new ID
         elementID =  userEnteredID.value;
@@ -291,7 +290,6 @@ function updateIDs() {
 
         userEnteredID.value = '';       
         
-
         if(attributesContainerDivParent) {    attributesContainerDivParent.id = elementID+"-attributesContainerDivParent"; };
         if(newAttributeInput) {     newAttributeInput.id = elementID+"-Input";  };
         if(newAttributeButton) {    newAttributeButton.id = elementID+"-Button";    };
@@ -305,8 +303,6 @@ function updateIDs() {
         clickedElementID = elementID;
     }
 }
-
-
 
 function alertBox(message, placeholder) { 
     let value;

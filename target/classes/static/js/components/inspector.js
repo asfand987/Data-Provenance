@@ -112,7 +112,7 @@ function userEnterDataIntoElement(id) {
     userInputAttr.name = 'name';
 
     //-----------------------------------------------------Button-------------------------------------------------//
-    attrSaveBtn.innerHTML = "S";
+    attrSaveBtn.innerHTML = "✓";
     attrSaveBtn.type = 'button';
     attrSaveBtn.id = id+"-Button";
 
@@ -161,6 +161,7 @@ function addDataToElement(id, input, label, button, form) {
         dataDiv = document.createElement('div');
         dataDiv.id = id+"-attributesContainerDiv";
     }
+
     //------------------------------------------------------------------------------------------------------------//
 
     /*
@@ -184,6 +185,11 @@ function showNewDataInInspector(id, input, label, button, dataDiv) {
         let attrlabel = document.createElement("label");
         let attributeValue = document.getElementById(id+"-Input").value;
         let element = document.getElementById(id);
+
+        attrlabel.style.paddingLeft ="10%";
+        attrlabel.style.paddingRight ="10%";
+        attrButton.style.marginBottom = "5%";
+        
 
         //------------------------------------Add data directly onto element-----------------------------------------//
         element.attributes[2].nodeValue =  element.attributes[2].nodeValue + label.innerHTML+ ": " + attributeValue + ",";

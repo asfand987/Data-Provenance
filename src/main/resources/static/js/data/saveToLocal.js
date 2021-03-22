@@ -1,5 +1,4 @@
 
-
 function saveTextAsFile() {
     var textToWrite = document.getElementById('displayConvertedFile').value;
     var textFileAsBlob = new Blob([ textToWrite ], { type: 'text/plain' });
@@ -27,5 +26,5 @@ button.addEventListener('click', saveTextAsFile);
 function destroyClickedElement(event) {
     // remove the link from the DOM
     document.body.removeChild(event.target);
-  }
+}
 

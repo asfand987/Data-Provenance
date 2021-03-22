@@ -1,0 +1,67 @@
+body{ 
+	width:100%; 
+	margin:auto; 
+} 
+
+#inspectorSpan {
+    display: flex;
+	background-color: transparent;
+    font-family: Arial,sans-serif;
+    margin-left: auto;
+    margin-right: auto;
+	vertical-align: top;
+	padding: 5px;
+}
+
+#inspectorSpan {
+	vertical-align: top;
+	width: 30%;
+	border: thin black;
+}
+
+#inspectorComponent {
+	border: solid 1px grey;
+}
+
+
+#inspectorContainer {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	
+	padding-top: 5%;
+	padding-bottom: 5%;
+	border-top: solid 1px grey;
+	margin-top: 5%;
+}
+
+#inspectorAttributeContainer {
+	display: flex;
+	flex-wrap: wrap;	
+	justify-content: space-evenly;
+	border-bottom: solid 1px grey;		
+	padding-bottom: 3%;	
+}
+
+#placeholderID {
+	width: 25%;
+}
+
+#elementDataInInspector {
+	display: flex;
+	background-color: transparent;
+    font-family: Arial,sans-serif;
+	padding-top: 5%;
+	padding-bottom: 3%;
+	border: thin 1px black;
+}
+#elementDataInInspector input {
+	width: 30%;
+	margin-bottom: 2%;
+}
+
+#elementDataInInspector label {
+	padding-left: 5%;
+	padding-right: 5%;
+	margin-bottom: 2%;
+}

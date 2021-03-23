@@ -289,13 +289,12 @@ jsPlumb.ready(function () {
             targetEndpoint.paintStyle.fillStyle = "#55552b";
         }
     }
-    
+
     /**
      * Draw element on canvas.
      */
     function drawElement(element, canvasId, id) {
         $(canvasId).append(element);
-        console.log(element[0].classList);
         let type;
         if(element[0].classList[1] == "start") type = "entity"
         else if(element[0].classList[1] == "step") type = "activity";

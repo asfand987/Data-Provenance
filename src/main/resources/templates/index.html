@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="/css/editor.css">
 		<link rel="stylesheet" href="/css/icons.css">
 		<link rel="stylesheet" href="/css/inspector.css">
+		<link rel="stylesheet" href="/css/namespace.css">
 		
 	</head>
 	<body>
@@ -21,14 +22,16 @@
 		                <div class="container1" style="margin-top: 20px;">
 		                    <div class="jtk-d-canvas canvas-wide flowchart-d" id="canvas1">
 		                       	<div class="window start jsplumb-connected" id="entityID"><strong><p id="entityP">entity</p></strong></div>
-								<div class="window step jsplumb-connected-step" id="activityID"><strong><p>activity</p></strong></div>
+								<div class="window step jsplumb-connected-step" id="activityID"><strong><p>activity</p></strong>
+									<path d="M0.5,0 L0.74,0.145 L0.74,0.085 L0.80.085 L0.8,0.179 L1,0.3 L0.90,0.3 L0.90,1 L0.1,1 L0.1,0.3 L0,0.3z" />
+								</div>
 								<div class="window diamond jsplumb-connected-end" id="agentID"><strong><p>agent</p></strong></div>
 		                    </div>
 		                </div>
 		            </div>
 					<br>
 					<span style="display: inline-block; vertical-align: top; padding: 5px; width:99%; outline: thin solid black">
-						<div style="display: inline-block; vertical-align: top; padding: 5px; outline: thin solid gray">
+						<div class="namespace">
 							<label>Namespace</label>
 							<button id="nameSpaceButton">+</button>
 						</div>

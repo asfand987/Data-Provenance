@@ -240,7 +240,7 @@ jsPlumb.ready(function () {
         //console.log(properties[0].clsName );
         let strong = $('<strong>');
         elm.append("<i style='display: none' class=\"fa fa-trash fa-lg close-icon\"><\/i>");
-        let p = $('<p>').text(id);
+        let p = $('<p>').text(id.substring(0, 12));
         p.id = "p";
         strong.append(p);
         elm.append(strong);

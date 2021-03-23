@@ -100,9 +100,9 @@ jsPlumb.ready(function () {
     sourceEndpoint = {
         endpoint: "Dot",
         paintStyle: {
-            strokeStyle: "#7AB02C",
+           /* strokeStyle: "#bbbb77",  7AB02C*/
             fillStyle: "transparent",
-            radius: 7,
+            radius: 5,
             lineWidth: 3
         },
         isSource: true,
@@ -126,7 +126,7 @@ jsPlumb.ready(function () {
     //definition of the target endpoint the connector would end
     targetEndpoint = {
         endpoint: "Dot",
-        paintStyle: {fillStyle: "#7AB02C", radius: 9},
+        paintStyle: {fillStyle: "#7AB02C", radius: 5},
         maxConnections: -1,
         dropOptions: {hoverClass: "hover", activeClass: "active"},
         hoverPaintStyle: endpointHoverStyle,
@@ -251,7 +251,9 @@ jsPlumb.ready(function () {
     /**
      * Add endpoints to elements on canvas.
      */
-    var _addEndpoints = function (sourceAnchors, targetAnchors, id) {
+    var _addEndpoints = function (sourceAnchors, targetAnchors, id, type) {
+        endpointColours(type);
+        
         for (let i = 0; i < sourceAnchors.length; i++) {
             let sourceUUID = sourceAnchors[i];
             epp = jsPlumbInstance.addEndpoint(id, sourceEndpoint, {
@@ -269,11 +271,36 @@ jsPlumb.ready(function () {
     };
     
     /**
+     * This function adds colours to the endpoints depending on what type of
+     * element it is placed upon.
+     * @param {element} type 
+     */
+    function endpointColours(type) {
+        if(type == "entity") {
+            sourceEndpoint.paintStyle.strokeStyle = "#999966";
+            targetEndpoint.paintStyle.fillStyle = "#55552b";
+        }
+        else if(type == "activity") {
+            sourceEndpoint.paintStyle.strokeStyle = "#8080ff";
+            targetEndpoint.paintStyle.fillStyle = "#1a1aff";
+        }
+        else {
+            sourceEndpoint.paintStyle.strokeStyle = "#999966";
+            targetEndpoint.paintStyle.fillStyle = "#55552b";
+        }
+    }
+    
+    /**
      * Draw element on canvas.
      */
     function drawElement(element, canvasId, id) {
         $(canvasId).append(element);
-        _addEndpoints(properties[0].startpoints, properties[0].endpoints, id);
+        console.log(element[0].classList);
+        let type;
+        if(element[0].classList[1] == "start") type = "entity"
+        else if(element[0].classList[1] == "step") type = "activity";
+        else type = "agent";
+        _addEndpoints(properties[0].startpoints, properties[0].endpoints, id, type);
         jsPlumbInstance.draggable(jsPlumbInstance.getSelector(".jtk-node"), {
             grid: [20, 20]
         });   

@@ -5,6 +5,7 @@
 	vertical-align: top;
 	padding: 5px;
 	display: inline-block;
+	display: none;
 }
 
 #inspectorSpan {

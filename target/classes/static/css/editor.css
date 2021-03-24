@@ -51,7 +51,7 @@ width: 100%;
 
 .jtk-d-canvas {
     margin-left: 160px;
-    height:550px;
+    height:500px;
     border:1px solid #CCC;
     background-color:white;
 }
@@ -104,6 +104,22 @@ li {
     list-style-type: none;
 }
 
+@media all and (max-width: 1600px) { 
+    .container1 {
+        height: 500px;
+    }
+    .jtk-d-canvas {
+        height: 450px;
+    }
+}
+@media all and (max-width: 1400px) { 
+    .container1 {
+        height: 400px;
+    }
+    .jtk-d-canvas {
+        height: 350px;
+    }
+}
 @media all and (max-width: 1300px) { 
     .container1 {
         height: 400px;

@@ -50,12 +50,22 @@
     
 }
 
+.start p {
+    overflow: hidden;
+    max-width: 75ch;
+}
+.step p {
+    overflow: hidden;
+    max-width: 75ch;
+}
 .diamond p{
     -webkit-transform: rotate(-45deg);
     -moz-transform: rotate(-45deg);
     -o-transform: rotate(-45deg);
     -ms-transform: rotate(-45deg);
     transform: rotate(-45deg);
+    overflow: hidden;
+    max-width: 75ch;
 }
 
 /*
@@ -250,15 +260,45 @@ path, .jsplumb-endpoint {
      }
 } 
 
+@media all and (max-width: 1400px) {
+    .start {
+        width: 75px;
+        height: 50px;
+        line-height: 30px;
+        font-size: small;
+    }
+    .step {
+        width: 75px;
+        height: 50px;
+        line-height: 30px;
+        font-size: small;
+    }
+    .diamond{
+         width: 50px;
+         height: 50px;
+         line-height: 30px;
+         font-size: small;
+    }
+    #entityID {
+        top: 3em;
+    }
+    #activityID {
+        top: 11em;
+    }
+    #agentID {
+        top: 20em;
+    }
+} 
+
 @media all and (max-width: 1300px) {
     .start {
-        width: 70px;
+        width: 65px;
         height: 50px;
         line-height: 35px;
         font-size: x-small;
     }
     .step {
-        width: 70px;
+        width: 65px;
         height: 50px;
         line-height: 35px;
         font-size: x-small;

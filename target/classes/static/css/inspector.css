@@ -1,16 +1,13 @@
 
 #inspectorSpan {
-    display: flex;
 	background-color: transparent;
     font-family: Arial,sans-serif;
-    margin-left: auto;
-    margin-right: auto;
 	vertical-align: top;
 	padding: 5px;
+	display: inline-block;
 }
 
 #inspectorSpan {
-	vertical-align: top;
 	width: 30%;
 	border: thin black;
 }

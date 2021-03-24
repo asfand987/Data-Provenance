@@ -29,7 +29,13 @@
     line-height: 60px;
     color: black;
 }
-
+.test {
+    width: 120px;
+    border-radius: 0.5em;
+    height: 80px;
+    line-height: 60px;
+    color: black;
+}
 
 .diamond{
     -webkit-transform: rotate(45deg);
@@ -52,6 +58,7 @@
     -ms-transform: rotate(-45deg);
     transform: rotate(-45deg);
 }
+
 /*
 .p{
     transform: rotate(180deg);
@@ -161,6 +168,7 @@
 .window.jsplumb-connected-step {
     border: 2px solid #4d4dff;
 }
+
 
 .window.jsplumb-connected-end {
     border: 2px solid #331a00;

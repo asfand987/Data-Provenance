@@ -150,7 +150,6 @@ jsPlumb.ready(function () {
 	makeDraggable("#entityID", "window start jsplumb-connected custom", "entity");
 	makeDraggable("#activityID", "window step jsplumb-connected-step custom", "activity");
     makeDraggable("#agentID", "window diamond jsplumb-connected-end custom", "agents");
- //   makeDraggable("#agentID", "test", "agents");
 
     entityCount = 1;
     agentCount = 1;
@@ -223,14 +222,6 @@ jsPlumb.ready(function () {
         ["Left", "Right", "Top"], true, 100, 100);
         clicked = true;
     });
-
-    // $('#agentID').mousedown(function () {
-    //     loadProperties("test", "5em", "5em", "agents",
-    //     ["Bottom"],
-    //     ["Left", "Right", "Top"], true, 100, 100);
-    //     clicked = true;
-    // });
-
    
     /**
      * create an element to be drawn on the canvas

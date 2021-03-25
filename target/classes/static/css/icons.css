@@ -71,7 +71,7 @@
 }*/  
 
 
-.flowchart-d .window {
+.editor-d .window {
     border: 1px solid #346789;
     /* box-shadow: 2px 2px 19px #aaa;
     -o-box-shadow: 2px 2px 19px #aaa;
@@ -94,24 +94,24 @@
     -o-transition: -o-box-shadow 0.15s ease-in;
     transition: box-shadow 0.15s ease-in;
 }
-.flowchart-d .window.diamond p{
+.editor-d .window.diamond p{
     overflow: hidden;
     max-width: 75ch;
 }
 
-.flowchart-d .window.start {
+.editor-d .window.start {
     background-color: #ffff4d;
 }
 
-.flowchart-d .window.step {
+.editor-d .window.step {
     background-color: #9999ff;
 }
 
-.flowchart-d .window.diamond {
+.editor-d .window.diamond {
     background-color: #ff8533;
 }
 
-.flowchart-d .window:hover {
+.editor-d .window:hover {
     box-shadow: 2px 2px 19px #444;
     -o-box-shadow: 2px 2px 19px #444;
     -webkit-box-shadow: 2px 2px 19px #444;
@@ -121,11 +121,11 @@
 
 
 
-/* .flowchart-d .active {
+/* .editor-d .active {
     border: 1px dotted green;
 } */
 
-/* .flowchart-d .hover {
+/* .editor-d .hover {
     border: 1px dotted red;
 } */
 
@@ -148,11 +148,11 @@
 
 
 
-.flowchart-d .jsplumb-connector {
+.editor-d .jsplumb-connector {
     z-index: 4;
 }
 
-.flowchart-d .jsplumb-endpoint, .endpointTargetLabel, .endpointSourceLabel {
+.editor-d .jsplumb-endpoint, .endpointTargetLabel, .endpointSourceLabel {
     z-index: 21;
     cursor: pointer;
 }

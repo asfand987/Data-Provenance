@@ -17,21 +17,16 @@
 		
 	</head>
 	<body>
-		<div id="flowChartView" style="display:block;"> 
-			<p></p><center><strong style="font-size: 40px">Provenance Editor</strong></center>
-			<div style="width:70%; white-space:nowrap;">
-		        <span style="display: inline-block; vertical-align: top; padding: 5px; width:13%">
-		            <div id="myPalette" style="border: solid 1px gray; height: auto"><p></p><center><strong>Palette</strong></center>
-		                <div class="container1" style="margin-top: 20px;">
-		                    <div class="jtk-d-canvas canvas-wide flowchart-d" id="canvas1">
+		<div class="mainDiv"> 
+			<p></p><center><strong class="mainTitle">Provenance Editor</strong></center>
+			<div class="topPage">
+		        <span class="palette-namespace-span">
+		            <div class="paletteDiv"><center><strong>Palette</strong></center>
+		                <div class="paletteContainer">
+		                    <div class="jtk-d-canvas canvas-wide editor-d" id="canvas1">
 		                       	<div class="window start jsplumb-connected" id="entityID"><strong><p id="entityP">entity</p></strong></div>
-								<div class="window step jsplumb-connected-step" id="activityID"><strong><p>activity</p></strong>
-								</div>
+								<div class="window step jsplumb-connected-step" id="activityID"><strong><p>activity</p></strong></div>
 								<div class="window diamond jsplumb-connected-end" id="agentID"><strong><p class="desc-text">agent</p></strong></div>
-								<!-- <svg  class="test" id="a" width="50%" viewbox="0 0 100 100">
-								
-									<polygon  points="2,25 2,98 98,98 98,25 50,2z" fill="white" stroke-width="2" stroke="#642850"></polygon>
-								</svg> -->
 							</div>
 		                </div>
 		            </div>
@@ -57,7 +52,7 @@
 		        <span style="display: inline-block; vertical-align: top; padding: 5px; width:95%; height:100%">
 		          	<div id="myDiagram" style="border: solid 1px gray;;"><p></p><center><strong></strong></center>
 		              <div class="container" style="margin-top: 20px;">
-		                  <div class="jtk-d-canvas canvas-wide flowchart-d jtk-surface  jtk-surface-nopan" id="canvas">	  
+		                  <div class="jtk-d-canvas canvas-wide editor-d jtk-surface  jtk-surface-nopan" id="canvas">	  
 		                  </div>
 		              </div>
 		        	</div>

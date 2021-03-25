@@ -10,8 +10,29 @@ padding: 0;
 width: 100%;
 }
 
+.mainDiv {
+    display: block;
+}
+
+.mainTitle {
+    font-size: 40px;
+}
+
+.topPage {
+    width: 70%;
+    white-space: nowrap;
+}
+
+.palette-namespace-span {
+    display: inline-block;
+    vertical-align: top;
+    padding: 5px;
+    width: 13%;
+}
+
+
 @media all and (max-width: 1600px) { 
-    .container1 {
+    .paletteContainer {
         height: 500px;
     }
     .jtk-d-canvas {
@@ -19,7 +40,7 @@ width: 100%;
     }
 }
 @media all and (max-width: 1400px) { 
-    .container1 {
+    .paletteContainer {
         height: 400px;
     }
     .jtk-d-canvas {
@@ -27,7 +48,7 @@ width: 100%;
     }
 }
 @media all and (max-width: 1300px) { 
-    .container1 {
+    .paletteContainer {
         height: 400px;
     }
     .jtk-d-canvas {

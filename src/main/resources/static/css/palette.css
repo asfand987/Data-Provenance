@@ -1,5 +1,11 @@
 
-.container1 {
+.paletteDiv {
+    border: solid 1px gray;
+    height: auto;
+}
+
+
+.paletteContainer {
     background-color: transparent;
     font-family: Arial,sans-serif;
     margin-left: auto;
@@ -7,5 +13,5 @@
     width:90%;
     max-width:1500px;
     position: relative;
-    margin-top:98px;
+    margin-top:20px;
 }

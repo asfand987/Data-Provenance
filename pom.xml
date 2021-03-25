@@ -9,7 +9,7 @@
         <version>2.4.3</version>
     </parent>
 
-    <name>Data Provenance</name>
+    <name>Provenance</name>
     <description>Web App</description>
     <groupId>com.data.provenance</groupId>
     <artifactId>serving-web-content</artifactId>

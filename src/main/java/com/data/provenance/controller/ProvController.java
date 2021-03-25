@@ -1,6 +1,6 @@
 package com.data.provenance.controller;
 
-import com.data.provenance.prov.Conversion;
+import com.data.provenance.prov.conversion;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.openprovenance.prov.interop.InteropFramework;
@@ -23,7 +23,7 @@ public class ProvController {
         return "index";
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST)//, consumes = "text/plain")
+    @RequestMapping(value = "/", method = RequestMethod.POST)
     @ResponseBody
     public String PROV_JSON(@RequestBody String jsonString) throws Exception {
         JSONArray jsonArray = new JSONArray(jsonString);
@@ -47,7 +47,7 @@ public class ProvController {
         String sendDataToClient = "";
         try {
             String str = "";
-            Conversion conversion = new Conversion(InteropFramework.getDefaultFactory(), namespaceMap);
+            conversion conversion = new conversion(InteropFramework.getDefaultFactory(), namespaceMap);
 
             conversion.doConversions(jsonObject.toString(), conversionType); //jsonObject.toString()
             sendDataToClient = conversion.returnConvertedFile();

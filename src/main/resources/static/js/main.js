@@ -162,10 +162,6 @@ jsPlumb.ready(function () {
 	});
 
 
-    entityCount = 1;
-    agentCount = 1;
-    activityCount = 1;
-    tt = 0;
     
     /**
      * Allow the canvas to accept elements.
@@ -248,7 +244,7 @@ jsPlumb.ready(function () {
         });
         let strong = $('<strong>');
         element.append("<i style='display: none';><\/i>");
-        
+
         if (properties[0].clsName == "window diamond custom jtk-node jsplumb-connected-end") {
             const p = "<p style='line-height: 110%; margin-top: 35%' class='desc-text'" +
                  "ondblclick='$(this).focus();'>" + id + "</p>";
@@ -268,7 +264,7 @@ jsPlumb.ready(function () {
     /**
      * Add endpoints to elements on canvas.
      */
-    var _addEndpoints = function (sourceAnchors, targetAnchors, id, type) {
+    var addEndpointsToElements = function (sourceAnchors, targetAnchors, id, type) {
         endpointColours(type);
         
         for (let i = 0; i < sourceAnchors.length; i++) {
@@ -316,7 +312,7 @@ jsPlumb.ready(function () {
         if(element[0].classList[1] == "start") type = "entity"
         else if(element[0].classList[1] == "step") type = "activity";
         else type = "agent";
-        _addEndpoints(properties[0].startpoints, properties[0].endpoints, id, type);
+        addEndpointsToElements(properties[0].startpoints, properties[0].endpoints, id, type);
         jsPlumbInstance.draggable(jsPlumbInstance.getSelector(".jtk-node"), {
             grid: [20, 20]
         });   

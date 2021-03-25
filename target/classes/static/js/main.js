@@ -134,7 +134,7 @@ jsPlumb.ready(function () {
         isTarget: true
     };
 
-    
+     
 	function makeDraggable(id, className, text){
 	    $(id).draggable({
 		helper: function(){
@@ -150,8 +150,6 @@ jsPlumb.ready(function () {
 
 	makeDraggable("#entityID", "window start jsplumb-connected custom", "entity");
 	makeDraggable("#activityID", "window step jsplumb-connected-step custom", "activity");
-    //makeDraggable("#agentID", "window diamond jsplumb-connected-end custom", "agents");
-
 
     $("#agentID").draggable({
         helper: function () {
@@ -175,7 +173,7 @@ jsPlumb.ready(function () {
                 id =  alertBox("Please enter your ID:", "ID");
                 id = "prov:" + id;
                 element = createElement(id);
-                drawElement(element, "#canvas", id);
+                pulElementOnCanvas(element, "#canvas", id);
     	        element = "";
 	        }
         }   
@@ -306,7 +304,7 @@ jsPlumb.ready(function () {
     /**
      * Draw element on canvas.
      */
-    function drawElement(element, canvasId, id) {
+    function pulElementOnCanvas(element, canvasId, id) {
         $(canvasId).append(element);
         let type;
         if(element[0].classList[1] == "start") type = "entity"

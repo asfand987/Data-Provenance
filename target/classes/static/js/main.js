@@ -1,3 +1,4 @@
+
 var jsPlumbInstance; //the jsPlumb jsPlumbInstance
 var properties = []; //keeps the properties of each element
 var elementsOnCanvas = [];
@@ -139,7 +140,7 @@ jsPlumb.ready(function () {
 		helper: function(){
 		    return $("<div/>",{
 			text: text,
-			class:className
+			class:className,
 		    });
 		},
 		stack: ".custom",
@@ -149,7 +150,17 @@ jsPlumb.ready(function () {
 
 	makeDraggable("#entityID", "window start jsplumb-connected custom", "entity");
 	makeDraggable("#activityID", "window step jsplumb-connected-step custom", "activity");
-    makeDraggable("#agentID", "window diamond jsplumb-connected-end custom", "agents");
+    //makeDraggable("#agentID", "window diamond jsplumb-connected-end custom", "agents");
+
+
+    $("#agentID").draggable({
+        helper: function () {
+    	   return createElement("agent");
+        },
+        stack: ".custom",
+        revert: false
+	});
+
 
     entityCount = 1;
     agentCount = 1;
@@ -230,21 +241,28 @@ jsPlumb.ready(function () {
      */
     function createElement(id) {
         let arr = [];
-        let elm = $('<div>').addClass(properties[0].clsName).attr('id', id).attr('variables', arr);
-        //console.log(properties[0].clsName);
-        elm.css({
+        let element = $('<div>').addClass(properties[0].clsName).attr('id', id).attr('variables', arr);
+        element.css({
             'top': properties[0].top,
             'left': properties[0].left
         });
-        //console.log(properties[0].clsName );
         let strong = $('<strong>');
-        elm.append("<i style='display: none' class=\"fa fa-trash fa-lg close-icon\"><\/i>");
-        let p = $('<p>').text(id);//.substring(0, 12));
-        p.id = "p";
-        strong.append(p);
-        elm.append(strong);
-
-        return elm;
+        element.append("<i style='display: none';><\/i>");
+        
+        if (properties[0].clsName == "window diamond custom jtk-node jsplumb-connected-end") {
+            const p = "<p style='line-height: 110%; margin-top: 35%' class='desc-text'" +
+                 "ondblclick='$(this).focus();'>" + id + "</p>";
+            strong.append(p);
+        }
+        else {
+            const p = $('<p>').text(id);//.substring(0, 12));
+            p.id = "p";
+            strong.append(p);
+        }
+       
+        element.append(strong);
+        
+        return element;
     }
 
     /**

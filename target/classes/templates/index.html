@@ -4,16 +4,17 @@
 		<title>Data Provenance</title>
 		<meta http-equiv="content-type" content="text/html;charset=utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
-        <link href="/css/bootstrap.min.css" rel="stylesheet">
-        <link href="/css/font-awesome.css" rel="stylesheet">
-        <link rel="stylesheet" href="/css/jsPlumb-defaults.css">
+        <link href="/css/style/bootstrap.min.css" rel="stylesheet">
+        <link href="/css/style/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/jsPlumb/jsPlumb-defaults.css">
         <link rel="stylesheet" href="/css/editor.css">
-		<link rel="stylesheet" href="/css/icons.css">
-		<link rel="stylesheet" href="/css/inspector.css">
-		<link rel="stylesheet" href="/css/namespace.css">
-		<link rel="stylesheet" href="/css/palette.css">
-		<link rel="stylesheet" href="/css/canvas.css">
-		<link rel="stylesheet" href="/css/connectors.css">
+		<link rel="stylesheet" href="/css/elements/icons.css">
+		<link rel="stylesheet" href="/css/elements/connectors.css">
+		<link rel="stylesheet" href="/css/components/inspector.css">
+		<link rel="stylesheet" href="/css/components/namespace.css">
+		<link rel="stylesheet" href="/css/components/palette.css">
+		<link rel="stylesheet" href="/css/components/canvas.css">
+
 		
 	</head>
 	<body>
@@ -31,17 +32,14 @@
 		                </div>
 		            </div>
 					<br>
-					<span style="display: inline-block; vertical-align: top; padding: 5px; width:99%; outline: thin solid black">
-						<div class="namespace">
+					<span class="namespaceSpan">
+						<div class="namespaceDiv">
 							<label>Namespace</label>
 							<button id="nameSpaceButton">+</button>
 						</div>
 						<br>
 						<br>
-						<div id="namespaceContainer" style="display: inline-block; vertical-align: top; padding: 5px; outline: thin solid gray; overflow: hidden;
-						box-sizing: border-box;
-						display: flex;
-						flex-direction: column;">
+						<div id="namespaceContainer">
 							<div id="defaultNameSpaceDiv">
 								<label>default</label>
 								<br>
@@ -49,17 +47,16 @@
 						</div>
 					</span>
 		        </span>
-		        <span style="display: inline-block; vertical-align: top; padding: 5px; width:95%; height:100%">
-		          	<div id="myDiagram" style="border: solid 1px gray;;"><p></p><center><strong></strong></center>
-		              <div class="container" style="margin-top: 20px;">
+		        <span class="canvasSpan">
+		          	<div class="canvasDiv"><center><strong>Canvas</strong></center>
+		              <div class="canvas" style="margin-top: 20px;">
 		                  <div class="jtk-d-canvas canvas-wide editor-d jtk-surface  jtk-surface-nopan" id="canvas">	  
 		                  </div>
 		              </div>
 		        	</div>
 				</span>
 				<span id="inspectorSpan">
-					<div id="inspectorComponent" style=""><p></p><center><strong>Inspector</strong></center>
-							
+					<div id="inspectorComponent"></div><center><strong>Inspector</strong></center>
 						<div id="inspectorContainer"> 
 							<form id="form" action=""></form>
 							<label>ElementID: </label>
@@ -86,8 +83,7 @@
 		    </div>
 			<br>
 			<center>
-				<label for="cars">Choose conversion format:</label>
-
+				<label for="format">Choose conversion format:</label>
 				<select id="conversionFormat" style="margin-bottom: 1%;">
 					<option value="N">PROV-N</option>
 					<option value="XML">PROV-XML</option>

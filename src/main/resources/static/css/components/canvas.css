@@ -3,7 +3,18 @@
     height: 800px
 }
 
-.container {
+.canvasSpan {
+    display: inline-block;
+    vertical-align: top;
+    padding: 5px;
+    width: 95%;
+    height: 100%;
+}
+
+.canvasDiv {
+    border: solid 1px gray;
+}
+.canvas {
     background-color: transparent;
     font-family: Arial,sans-serif;
     margin-left: auto;
@@ -15,7 +26,7 @@
     margin-top:98px;
 }
 
-.container .description {
+.canvas .description {
     font-size: 13px;
     margin-top: 25px;
     padding: 13px;
@@ -23,7 +34,7 @@
     background-color: #f4f5ef;
 }
 
-.container .description li {
+.canvas .description li {
     list-style-type: disc !important;
 }
 

@@ -22,36 +22,3 @@ width: 100%;
     width: 70%;
     white-space: nowrap;
 }
-
-.palette-namespace-span {
-    display: inline-block;
-    vertical-align: top;
-    padding: 5px;
-    width: 13%;
-}
-
-
-@media all and (max-width: 1600px) { 
-    .paletteContainer {
-        height: 500px;
-    }
-    .jtk-d-canvas {
-        height: 450px;
-    }
-}
-@media all and (max-width: 1400px) { 
-    .paletteContainer {
-        height: 400px;
-    }
-    .jtk-d-canvas {
-        height: 350px;
-    }
-}
-@media all and (max-width: 1300px) { 
-    .paletteContainer {
-        height: 400px;
-    }
-    .jtk-d-canvas {
-        height: 350px;
-    }
-}

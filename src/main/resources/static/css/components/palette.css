@@ -1,7 +1,7 @@
 
 .paletteDiv {
     border: solid 1px gray;
-    height: auto;
+  
 }
 
 
@@ -14,4 +14,38 @@
     max-width:1500px;
     position: relative;
     margin-top:20px;
+}
+
+
+.palette-namespace-span {
+    display: inline-block;
+    vertical-align: top;
+    padding: 5px;
+    width: 13%;
+}
+
+
+@media all and (max-width: 1600px) { 
+    .paletteContainer {
+        height: 500px;
+    }
+    .jtk-d-canvas {
+        height: 450px;
+    }
+}
+@media all and (max-width: 1400px) { 
+    .paletteContainer {
+        height: 400px;
+    }
+    .jtk-d-canvas.canvas-wide.editor-d {
+        height: 370px;
+    }
+}
+@media all and (max-width: 1300px) { 
+    .paletteContainer {
+        height: 400px;
+    }
+    .jtk-d-canvas.canvas-wide.editor-d {
+        height: 370px;
+    }
 }

@@ -31,9 +31,6 @@
     color: black;
 }
 
-.end{
-}
-
 .diamond{
     -webkit-transform: rotate(45deg);
     -moz-transform: rotate(45deg);
@@ -64,12 +61,6 @@
     overflow: hidden;
     max-width: 75ch;
 }
-
-/*
-.p{
-    transform: rotate(180deg);
-}*/  
-
 
 .editor-d .window {
     border: 1px solid #346789;
@@ -143,7 +134,7 @@
 
 #agentID{
     top: 28em;
-    left: 2em;
+    left: 2.5em;
 }
 
 
@@ -240,6 +231,9 @@ path, .jsplumb-endpoint {
          line-height: 40px;
          font-size: small;
      }
+     #agentID {
+         left: 2em;
+     }
 } 
 
 @media all and (max-width: 1400px) {
@@ -269,6 +263,7 @@ path, .jsplumb-endpoint {
     }
     #agentID {
         top: 20em;
+        left: 1.6em;
     }
 } 
 

@@ -11,6 +11,9 @@
 
 #inspectorComponent {
 	border: solid 1px black;
+	box-sizing: border-box;
+  	display: flex;
+  	flex-direction: column;
 }
 
 .inspectorHeader {
@@ -18,41 +21,115 @@
 	margin: 10px;
 }
 
+
+/**
+*	Inspector ID header
+*/
 #inspectorContainer {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: space-evenly;
+	/* justify-content: space-evenly; */
 	padding-top: 5%;
+	/* display:inline-block; */
 	padding-bottom: 5%;
 	margin-top: 5%;
 }
 
-#inspectorAttributeContainer {
-	display: flex;
-	flex-wrap: wrap;	
-	justify-content: space-evenly;
-	padding-bottom: 3%;	
+#inspectorContainer label {
+	margin-left: 10px;
+	margin-top: 3%;
+	margin-right: 3%;
+	font-size: medium;
 }
 
 #placeholderID {
-	width: 25%;
+	width: 55%;
 }
+
+#idBtn {
+	float: right;
+	margin-right: 2%;
+} 
+
+@media all and (max-width: 1680px) { 
+	#placeholderID {
+		width: 50%;
+	}
+	
+}
+@media all and (max-width: 1530px) { 
+	#placeholderID {
+		width: 45%;
+	}
+	
+}
+@media all and (max-width: 1400px) { 
+    #placeholderID {
+		width: 40%;
+	}
+	#inspectorContainer label {
+		font-size: small;
+	}
+}
+@media all and (max-width: 1270px) { 
+	#placeholderID {
+		width: 35%;
+	}
+}
+
+/* -----------------------------------------------*/
+
+
+
+/**
+*	Inspector new attribute header
+*/
+
+
+#inspectorAttributeContainer {
+	display: flex;
+	flex-wrap: wrap;	
+	/* justify-content: space-evenly; */
+	padding-bottom: 3%;	
+}
+
+#inspectorAttributeContainer label {
+	margin-left: 10px;
+	margin-top: 3%;
+	margin-right: 3%;
+	font-size: medium;
+}
+@media all and (max-width: 1400px) { 
+	#inspectorAttributeContainer label {
+		font-size: small;
+	}
+}
+
+
+/* -----------------------------------------------*/
+
+/**
+*	Attribute section 
+*/
 
 #elementDataInInspector {
 	display: flex;
-	background-color: transparent;
-    font-family: Arial,sans-serif;
-	padding-top: 5%;
-	padding-bottom: 3%;
+    flex-direction: column;
+    flex-wrap: wrap;
 	outline: thin solid gray;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	overflow-y: auto;
 }
 #elementDataInInspector input {
-	width: 30%;
+	width: 40%; 
 	margin-bottom: 2%;
+	
 }
 
-#elementDataInInspector label {
+#elementDataInInspector * label {
 	padding-left: 5%;
 	padding-right: 5%;
 	margin-bottom: 2%;
+	font-size: medium;
 }

@@ -1,9 +1,6 @@
 var clickedElement;
 var clickedElementID;  //last element that was clicked
 
-
-
-
 /*
 **  This function is called every time an element on canvas is clicked on by the user.
 **  This is so the inspector component can be displayed on the interface as well as the
@@ -113,6 +110,7 @@ function userEnterDataIntoElement(id) {
 
     //-----------------------------------------------------Button-------------------------------------------------//
     attrSaveBtn.innerHTML = "✓";
+    attrSaveBtn.className = "inspectorBtn"
     attrSaveBtn.type = 'button';
     attrSaveBtn.id = id+"-Button";
 
@@ -138,7 +136,6 @@ function userEnterDataIntoElement(id) {
         elementDataDivParent.appendChild(elementDataDiv);
     }
     else {
-
         let elementDataDiv = document.createElement("div");
         elementDataDiv.id = id+"-attributesContainerDivParent";
         elementDataDiv.appendChild(form);
@@ -186,10 +183,7 @@ function showNewDataInInspector(id, input, label, button, dataDiv) {
         let attributeValue = document.getElementById(id+"-Input").value;
         let element = document.getElementById(id);
 
-        attrlabel.style.paddingLeft ="10%";
-        attrlabel.style.paddingRight ="10%";
-        attrButton.style.marginBottom = "5%";
-        
+        attrButton.className = "attributeDeleteBtn"
 
         //------------------------------------Add data directly onto element-----------------------------------------//
         element.attributes[2].nodeValue =  element.attributes[2].nodeValue + label.innerHTML+ ": " + attributeValue + ",";
@@ -245,7 +239,6 @@ function removeForm(input, label, button) {
     label.remove(); 
     button.remove();
 }
-
 
 
 /*

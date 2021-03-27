@@ -183,9 +183,9 @@ function displayTemplateNamespaces(templateNamespace) {
  */
 function addTemplateNamespaceAttributes() {
     const zoneAttributes = ["zone:id", "zone:type", "zone:min", "zone:max", "zone:parent", "zone:relation"];
-    const datasciAttributes = ["datasci:language"];
+    // const datasciAttributes = ["datasci:language"];
     addTemplateAttr(zoneAttributes, "zoneAttr");
-    addTemplateAttr(datasciAttributes, "datasciAttr");
+    // addTemplateAttr(datasciAttributes, "datasciAttr");
 }
 
 function addTemplateAttr(arr, type) {

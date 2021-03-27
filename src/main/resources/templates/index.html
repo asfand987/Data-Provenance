@@ -14,6 +14,7 @@
 		<link rel="stylesheet" href="/css/components/namespace.css">
 		<link rel="stylesheet" href="/css/components/palette.css">
 		<link rel="stylesheet" href="/css/components/canvas.css">
+		<link rel="stylesheet" href="/css/components/output.css">
 	</head>
 	<body>
 		<div class="mainDiv"> 
@@ -50,12 +51,24 @@
 		                  </div>
 		              </div>
 		        	</div>
+					<div class="conversionDiv">
+						<label class="convertLabel" for="format">Choose conversion format:</label>
+						<select id="conversionFormat">
+							<option value="N">PROV-N</option>
+							<option value="XML">PROV-XML</option>
+							<option value="RDF">PROV-RDF</option>
+							<option value="TURTLE">PROV-TURTLE</option>
+							<!-- <option value="JSON-LD">PROV-JSONLD</option> -->
+							<option value="TRIG">PROV-TriG</option>
+						</select>
+						<button class="btn btn-success" id="templateButton">Template</button>
+						<button class="btn btn-success" id="convertBtn">Convert</button>
+					</div>
 				</span>
 				<span id="inspectorSpan">
 					<div id="inspectorComponent"><center><h3>Inspector</h3></center>
 						<div class="inspectorHeader">
 							<div id="inspectorContainer"> 
-								<!-- <form id="form" action=""></form> -->
 								<label>ID: </label>
 								<input type="text" id="placeholderID" name="Name">
 								<select name="namespace" id="addNStoID">
@@ -77,21 +90,10 @@
 						<div id="elementDataInInspector"></div>		
 					</div>
 				</span>
+				
 		    </div>
 			<br>
-			<center>
-				<label for="format">Choose conversion format:</label>
-				<select id="conversionFormat" style="margin-bottom: 1%;">
-					<option value="N">PROV-N</option>
-					<option value="XML">PROV-XML</option>
-					<option value="RDF">PROV-RDF</option>
-					<option value="TURTLE">PROV-TURTLE</option>
-					<!-- <option value="JSON-LD">PROV-JSONLD</option> -->
-					<option value="TRIG">PROV-TriG</option>
-				</select>
-				<button class="btn btn-success" id="flowchartSaveBtn">Convert</button>
-				<button class="btn btn-success" id="templateButton">Template</button>
-			</center>
+				
 		</div>
 		<div id="fileDisplayer" style="margin-top: 5%;">
 			<center>

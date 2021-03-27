@@ -10,7 +10,7 @@ var wasInformedByArr = {wasInformedBy:{}};
 var actedOnBehalfOfArr = {actedOnBehalfOf:{}};
 var connectionArray = [];
 
-document.getElementById("flowchartSaveBtn").addEventListener("click", createJSON);
+document.getElementById("convertBtn").addEventListener("click", createJSON);
 
 function createJSON(){
     clearArrays();

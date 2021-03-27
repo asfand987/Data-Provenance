@@ -6,26 +6,24 @@
 	padding: 5px;
 	display: inline-block;
 	display: none;
-}
-
-#inspectorSpan {
 	width: 30%;
-	border: thin black;
 }
 
 #inspectorComponent {
-	border: solid 1px grey;
+	border: solid 1px black;
 }
 
+.inspectorHeader {
+	outline: thin solid gray;
+	margin: 10px;
+}
 
 #inspectorContainer {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-evenly;
-	
 	padding-top: 5%;
 	padding-bottom: 5%;
-	border-top: solid 1px grey;
 	margin-top: 5%;
 }
 
@@ -33,7 +31,6 @@
 	display: flex;
 	flex-wrap: wrap;	
 	justify-content: space-evenly;
-	border-bottom: solid 1px grey;		
 	padding-bottom: 3%;	
 }
 
@@ -47,7 +44,7 @@
     font-family: Arial,sans-serif;
 	padding-top: 5%;
 	padding-bottom: 3%;
-	border: thin 1px black;
+	outline: thin solid gray;
 }
 #elementDataInInspector input {
 	width: 30%;

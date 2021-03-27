@@ -32,15 +32,13 @@
 					<br>
 					<span class="namespaceSpan">
 						<div class="namespaceDiv">
-							<label>Namespace</label>
+							<h4>Namespace</h4>
 							<button id="nameSpaceButton">+</button>
 						</div>
-						<br>
 						<br>
 						<div id="namespaceContainer">
 							<div id="defaultNameSpaceDiv">
 								<label>default</label>
-								<br>
 							</div>
 						</div>
 					</span>
@@ -54,26 +52,28 @@
 		        	</div>
 				</span>
 				<span id="inspectorSpan">
-					<div id="inspectorComponent"></div><center><h3>Inspector</h3></center>
-						<div id="inspectorContainer"> 
-							<form id="form" action=""></form>
-							<label>ElementID: </label>
-							<input type="text" id="placeholderID" name="Name">
-							<select name="namespace" id="addNStoID">
-								<option>default</option>
-							</select>
-							<button id="idBtn">✓</button> 
-						</div>
-						<div id="inspectorAttributeContainer">
-							<label for="at">Attribute: </label> 
-							<select name="attributes" id="selectionAttributes">
-								<optgroup label="Attributes" id="attrOption">
-									<option>prov:</option>
-								</optgroup>
-								<optgroup label="Pre-defined Attributes" id="pd-attrOption"></optgroup>
-						
-							</select>
-							<button id="chooseAttributeBtn">+</button>
+					<div id="inspectorComponent"><center><h3>Inspector</h3></center>
+						<div class="inspectorHeader">
+							<div id="inspectorContainer"> 
+								<form id="form" action=""></form>
+								<label>ElementID: </label>
+								<input type="text" id="placeholderID" name="Name">
+								<select name="namespace" id="addNStoID">
+									<option>default</option>
+								</select>
+								<button id="idBtn">✓</button> 
+							</div>
+							<div id="inspectorAttributeContainer">
+								<label for="at">Attribute: </label> 
+								<select name="attributes" id="selectionAttributes">
+									<optgroup label="Attributes" id="attrOption">
+										<option>prov:</option>
+									</optgroup>
+									<optgroup label="Pre-defined Attributes" id="pd-attrOption"></optgroup>
+							
+								</select>
+								<button id="chooseAttributeBtn">+</button>
+							</div>
 						</div>
 						<div id="elementDataInInspector"></div>		
 					</div>

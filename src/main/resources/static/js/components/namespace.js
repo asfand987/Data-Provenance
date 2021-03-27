@@ -40,7 +40,6 @@ function displayNamespace(prefix, url) {
     const namespaceDiv = document.createElement("div");
     const namespaceBtn = document.createElement("button");
     const label = document.createElement("label");
-    const br = document.createElement("br");
 
     label.innerHTML = prefix;//
     namespaceBtn.innerHTML = "X";
@@ -54,7 +53,6 @@ function displayNamespace(prefix, url) {
     namespaceDiv.style = "overflow-y: auto";
     namespaceDiv.appendChild(label);
     namespaceDiv.appendChild(namespaceBtn);
-    namespaceDiv.appendChild(br);
     namespaceContainer.appendChild(namespaceDiv);
 
     //add namespace to namespace array
@@ -130,7 +128,8 @@ function addTemplate() {
 
     const templateNamespace = ["var https://eur03.safelinks.protection.outlook.com/?url=https%3A%2F%2Fkclhi.org%2Fprovenance%2Fpgt%2Fvar%2F&amp;data=04%7C01%7Casfand.khan%40kcl.ac.uk%7C3a4ba86164dd46d5754e08d8d739fefc%7C8370cf1416f34c16b83c724071654356%7C0%7C0%7C637495991372983971%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=Av1vl05MV1M1WxZVb42rGLtTk37kIQa7T9AmsNarCJg%3D&amp;reserved=0", 
     "vvar https://eur03.safelinks.protection.outlook.com/?url=https%3A%2F%2Fkclhi.org%2Fprovenance%2Fpgt%2Fvvar%2F&amp;data=04%7C01%7Casfand.khan%40kcl.ac.uk%7C3a4ba86164dd46d5754e08d8d739fefc%7C8370cf1416f34c16b83c724071654356%7C0%7C0%7C637495991372983971%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=ShrK0YkKgDsTjAVFL0%2Byst5XhXThLNep2ev%2FN5hSF%2B0%3D&amp;reserved=0",
-    "zone https://eur03.safelinks.protection.outlook.com/?url=https%3A%2F%2Fkclhi.org%2Fprovenance%2Fpgt%2Fzone%2F&amp;data=04%7C01%7Casfand.khan%40kcl.ac.uk%7C3a4ba86164dd46d5754e08d8d739fefc%7C8370cf1416f34c16b83c724071654356%7C0%7C0%7C637495991372983971%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=h3FIJgGbmcW5JyjoSKA1uGhLkoocZPvnEMDyJ0wtuAE%3D&amp;reserved=0"]
+    "zone https://eur03.safelinks.protection.outlook.com/?url=https%3A%2F%2Fkclhi.org%2Fprovenance%2Fpgt%2Fzone%2F&amp;data=04%7C01%7Casfand.khan%40kcl.ac.uk%7C3a4ba86164dd46d5754e08d8d739fefc%7C8370cf1416f34c16b83c724071654356%7C0%7C0%7C637495991372983971%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=h3FIJgGbmcW5JyjoSKA1uGhLkoocZPvnEMDyJ0wtuAE%3D&amp;reserved=0",
+    "datasci https://www.w3.org/TR/prov-overview/"];
         
 
     displayTemplateNamespaces(templateNamespace);
@@ -149,7 +148,6 @@ function displayTemplateNamespaces(templateNamespace) {
         //Create elements to display
         const label = document.createElement("label");
         const namespaceBtn = document.createElement("button");
-        const br = document.createElement("br");
         const namespaceDiv = document.createElement("div");
 
         //separate prefix name from url
@@ -165,7 +163,6 @@ function displayTemplateNamespaces(templateNamespace) {
         namespaceDiv.style = "overflow-y: auto";
         namespaceDiv.appendChild(label);
         namespaceDiv.appendChild(namespaceBtn);
-        namespaceDiv.appendChild(br);
 
         namespaceContainer.appendChild(namespaceDiv);
         namespaceArray.prefix[prefixValue] = url;
@@ -184,16 +181,25 @@ function displayTemplateNamespaces(templateNamespace) {
  * 
  */
 function addTemplateNamespaceAttributes() {
-    let selectionAttr = document.getElementById("pd-attrOption");
-    let namespaceAttrs = ["zone:id", "zone:type", "zone:min", "zone:max", "zone:parent", "zone:relation"];
+    let zoneAttributes = ["zone:id", "zone:type", "zone:min", "zone:max", "zone:parent", "zone:relation"];
+    let datasciAttributes = ["datasci:language"];
+    addTemplateAttr(zoneAttributes, "zoneAttr");
+    addTemplateAttr(datasciAttributes, "datasciAttr");
+    // for(let i = 0; i < namespaceAttrs.length; i++) {
+    //     let option = document.createElement("option");
+    //     option.id = "zoneAttr" + i;
+    //     option.innerHTML = namespaceAttrs[i];
+    //     selectionAttr.appendChild(option);
+    // }
+}
 
-    for(let i = 0; i < namespaceAttrs.length; i++) {
+function addTemplateAttr(arr, type) {
+    let selectionAttr = document.getElementById("pd-attrOption");
+    for(let i = 0; i < arr.length; i++) {
         let option = document.createElement("option");
-        let br = document.createElement("br");
-        option.id = "zoneAttr" + i;
-        option.innerHTML = namespaceAttrs[i];
+        option.id = type + i;
+        option.innerHTML = arr[i];
         selectionAttr.appendChild(option);
-        selectionAttr.appendChild(br);
     }
 }
 
@@ -204,11 +210,20 @@ function addTemplateNamespaceAttributes() {
 */
 function removePredefinedAttributes(id) {
     if(id == "zone") {
-        for(let i = 0; i < 6; i++) {
-            let zoneAttr = document.getElementById("zoneAttr" + i);
-            zoneAttr.remove();
-        }            
+        removeAttr("zoneAttr");
     }
+    else if(id == "datasci") {
+        removeAttr("datasciAttr");
+    }
+}
+
+function removeAttr(attrID) {
+    let index = 1;
+    if(attrID == "zoneAttr") index = 6;
+    for(index = 0; index < 6; index++) {
+        let zoneAttr = document.getElementById(attrID + index);
+        zoneAttr.remove();
+    }  
 }
    
 

@@ -2,25 +2,52 @@
     display: inline-block;
     vertical-align: top;
     padding: 5px;
+    width: 99%;
     outline: thin solid black;
+    position: relative;
 }
 
 
 .namespaceDiv {
     display: flex;
-    vertical-align: top;
     padding: 5px;
     outline: thin solid gray;
     flex-wrap: wrap;  
+    position: relative;
+}
+
+.namespaceDiv h4{
+    padding: 5px;
+    padding-right: 15px;
 }
 
 #namespaceContainer {
     display: inline-block;
-    vertical-align: top;
     padding: 5px;
     outline: thin solid gray;
     overflow: hidden;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+}
+
+
+@media all and (max-width: 1700px) { 
+    #nameSpaceButton {
+        width: 100%;
+    }
+    .namespaceDiv h4{
+        padding-left: 10px;
+    }
+}
+@media all and (max-width: 1500px) { 
+    .namespaceDiv h4{
+        padding: 3px;
+    }
+}
+@media all and (max-width: 1400px) { 
+    .namespaceDiv h4:before{
+        text-indent:0;
+        content: 'dde';
+    }
 }

@@ -15,7 +15,7 @@ var namespaceArray = {prefix:{default : 'http://www.w3.org/ns/prov#'}};
 document.getElementById("nameSpaceButton").addEventListener("click", addNameSpace);
 
 function addNameSpace() {
-    const userInput = prompt("Prefix", "namespace");
+    const userInput = prompt("Prefix", "prefix https://someurl.com/");
     
     //---------------------------Separate prefix and url from user input-----------------------------//
     const separateInput = userInput.split(" ");
@@ -43,14 +43,14 @@ function displayNamespace(prefix, url) {
 
     label.innerHTML = prefix;//
     namespaceBtn.innerHTML = "X";
-    namespaceBtn.style = "margin:5px";
+    namespaceBtn.className = "namespaceBtn"
+    namespaceBtn.style = "margin:1px";
     namespaceDiv.id = prefix;
-    
     
     namespaceBtn.addEventListener("click", function() {
         deleteNameSpace(prefix);
     });
-    namespaceDiv.style = "overflow-y: auto";
+    namespaceDiv.style = "overflow-y: auto; display: inline-block";
     namespaceDiv.appendChild(label);
     namespaceDiv.appendChild(namespaceBtn);
     namespaceContainer.appendChild(namespaceDiv);
@@ -151,13 +151,14 @@ function displayTemplateNamespaces(templateNamespace) {
         const namespaceDiv = document.createElement("div");
 
         //separate prefix name from url
-        let templateNamespaceArr = templateNamespace[i].split(' ');
-        let prefixValue = templateNamespaceArr[0];
-        let url = templateNamespaceArr[1];
+        const templateNamespaceArr = templateNamespace[i].split(' ');
+        const prefixValue = templateNamespaceArr[0];
+        const url = templateNamespaceArr[1];
 
         label.innerHTML = prefixValue;
         namespaceBtn.innerHTML = "X";
-        namespaceBtn.style = "margin:5px";
+        namespaceBtn.className = "namespaceBtn"
+        namespaceBtn.style = "margin:1px";
 
         namespaceDiv.id = prefixValue;
         namespaceDiv.style = "overflow-y: auto";
@@ -181,22 +182,16 @@ function displayTemplateNamespaces(templateNamespace) {
  * 
  */
 function addTemplateNamespaceAttributes() {
-    let zoneAttributes = ["zone:id", "zone:type", "zone:min", "zone:max", "zone:parent", "zone:relation"];
-    let datasciAttributes = ["datasci:language"];
+    const zoneAttributes = ["zone:id", "zone:type", "zone:min", "zone:max", "zone:parent", "zone:relation"];
+    const datasciAttributes = ["datasci:language"];
     addTemplateAttr(zoneAttributes, "zoneAttr");
     addTemplateAttr(datasciAttributes, "datasciAttr");
-    // for(let i = 0; i < namespaceAttrs.length; i++) {
-    //     let option = document.createElement("option");
-    //     option.id = "zoneAttr" + i;
-    //     option.innerHTML = namespaceAttrs[i];
-    //     selectionAttr.appendChild(option);
-    // }
 }
 
 function addTemplateAttr(arr, type) {
-    let selectionAttr = document.getElementById("pd-attrOption");
+    const selectionAttr = document.getElementById("pd-attrOption");
     for(let i = 0; i < arr.length; i++) {
-        let option = document.createElement("option");
+        const option = document.createElement("option");
         option.id = type + i;
         option.innerHTML = arr[i];
         selectionAttr.appendChild(option);

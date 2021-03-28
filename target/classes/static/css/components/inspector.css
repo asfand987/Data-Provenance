@@ -29,7 +29,7 @@
 	display: flex;
 	flex-wrap: wrap;
 	/* justify-content: space-evenly; */
-	padding-top: 5%;
+	/* padding-top: 1%; */
 	/* display:inline-block; */
 	padding-bottom: 5%;
 	margin-top: 5%;
@@ -124,10 +124,10 @@
 	padding-top: 10px;
 	padding-bottom: 10px;
 	overflow-x: auto;
-	overflow-y: hidden;
+	overflow-y: auto;
 }
 #elementDataInInspector * input {
-	width: 40%; 
+	width: 30%; 
 	margin-bottom: 2%;
 	
 }
@@ -135,8 +135,8 @@
 #elementDataInInspector * label {
 	padding-left: 5%;
 	padding-right: 5%;
-	margin-bottom: 2%;
-	font-size: medium;
+	margin-bottom: 5%;
+	font-size: small;
 }
 
 #elementDataInInspector * button {
@@ -159,7 +159,7 @@
 
 @media all and (max-width: 1700px) { 
 	#elementDataInInspector * input {
-		width: 30%; 
+		width: 20%; 
 	}
 	#elementDataInInspector * label {
 		padding-left: 5%;

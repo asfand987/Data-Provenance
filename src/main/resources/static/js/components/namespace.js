@@ -43,7 +43,8 @@ function displayNamespace(prefix, url) {
 
     label.innerHTML = prefix;//
     namespaceBtn.innerHTML = "X";
-    namespaceBtn.className = "namespaceBtn"
+    namespaceBtn.className = "btn btn-danger"
+
     namespaceBtn.style = "margin:1px";
     namespaceDiv.id = prefix;
     
@@ -158,9 +159,8 @@ function displayTemplateNamespaces(templateNamespace) {
 
         label.innerHTML = prefixValue;
         namespaceBtn.innerHTML = "X";
-        namespaceBtn.className = "namespaceBtn"
+        namespaceBtn.className = "btn btn-danger" //namespaceBtn
         namespaceBtn.style = "margin:1px";
-
         namespaceDiv.id = prefixValue;
         namespaceDiv.style = "overflow-y: auto";
         namespaceDiv.appendChild(label);

@@ -111,7 +111,7 @@ function userEnterDataIntoElement(id) {
 
     //-----------------------------------------------------Button-------------------------------------------------//
     attrSaveBtn.innerHTML = "✓";
-    attrSaveBtn.className = "inspectorBtn"
+    attrSaveBtn.className = "btn btn-warning";//"inspectorBtn"
     attrSaveBtn.type = 'button';
     attrSaveBtn.id = id+"-Button";
 
@@ -184,7 +184,7 @@ function showNewDataInInspector(id, input, label, button, dataDiv) {
         let attributeValue = document.getElementById(id+"-Input").value;
         let element = document.getElementById(id);
 
-        attrButton.className = "attributeDeleteBtn"
+        attrButton.className = "btn btn-danger"
 
         //------------------------------------Add data directly onto element-----------------------------------------//
         element.attributes[2].nodeValue =  element.attributes[2].nodeValue + label.innerHTML+ ": " + attributeValue + ",";

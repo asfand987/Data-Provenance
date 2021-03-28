@@ -18,7 +18,7 @@
 	</head>
 	<body>
 		<div class="mainDiv"> 
-			<p></p><center><h1 class="mainTitle">Provenance Editor</h1></center>
+			<p></p><center><h1 class="mainTitle">Provenance Graph Editor</h1></center>
 			<div class="topPage">
 		        <span class="palette-namespace-span">
 		            <div class="paletteDiv"><center><h3>Palette</h3></center>
@@ -34,12 +34,12 @@
 					<span class="namespaceSpan">
 						<div class="namespaceDiv">
 							<h4>Namespace</h4>
-							<button id="nameSpaceButton">+</button>
+							<button class="btn btn-primary" id="nameSpaceButton">+</button>
 						</div>
 						<br>
 						<div id="namespaceContainer">
 							<div id="defaultNameSpaceDiv">
-								<label>default</label>
+								<label style="font-size: medium">default</label>
 							</div>
 						</div>
 					</span>
@@ -61,7 +61,7 @@
 							<!-- <option value="JSON-LD">PROV-JSONLD</option> -->
 							<option value="TRIG">PROV-TriG</option>
 						</select>
-						<button class="btn btn-success" id="templateButton">Template</button>
+						<button class="btn btn-info" id="templateButton">Template</button>
 						<button class="btn btn-success" id="convertBtn">Convert</button>
 					</div>
 				</span>
@@ -74,7 +74,7 @@
 								<select name="namespace" id="addNStoID">
 									<option>default</option>
 								</select>
-								<button id="idBtn">✓</button> 
+								<button class="btn btn-primary" id="idBtn">✓</button> 
 							</div>
 							<div id="inspectorAttributeContainer">
 								<label for="at">Attribute: </label> 
@@ -84,7 +84,7 @@
 									</optgroup>
 									<optgroup label="Pre-defined" id="pd-attrOption"></optgroup>
 								</select>
-								<button id="chooseAttributeBtn">+</button>
+								<button class="btn btn-primary" id="chooseAttributeBtn">+</button>
 							</div>
 						</div>
 						<div id="elementDataInInspector"></div>		

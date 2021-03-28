@@ -17,14 +17,28 @@
 }
 
 .namespaceDiv h4{
-    padding: 5px;
-    padding-right: 15px;
+    padding-left: 20px;
 }
 
-.namespaceBtn {
+#namespaceContainer .btn.btn-danger {
     float: right;
-    vertical-align: top;
+    height: 20px;
+    width: 20px;
+    overflow: hidden;
+    line-height: 5px;
+    box-sizing: border-box; 
 }
+
+.namespaceDiv .btn.btn-primary {
+    width: 100%;
+}
+
+#prefix label {
+    padding-top: 5px;
+    font-size: medium;
+    vertical-align: middle;
+}
+
 
 #namespaceContainer {
     display: inline-block;
@@ -34,6 +48,8 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
+    overflow-x: auto;
 }
 
 @media all and (max-width: 1700px) { 
@@ -50,7 +66,7 @@
     }
 }
 @media all and (max-width: 1400px) { 
-    .namespaceDiv h4:before{
-      
+    .namespaceDiv h4{
+      font-size: medium;
     }
 }

@@ -1,13 +1,18 @@
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
-background-color: #FFF;
-color: #434343;
-font-family: Helvetica, sans-serif;
-font-size: 14px;
-font-weight: 400;
-height: 100%;
-padding: 0;
-width: 100%;
+    background-color: #FFF;
+    color: #434343;
+    font-family: Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    height: 100%;
+    padding: 0;
+    width: 100%;
+
 }
 
 .mainDiv {

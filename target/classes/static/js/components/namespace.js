@@ -122,6 +122,7 @@ function addNamespaceToInspector(NamespaceID) {
 */
 document.getElementById("templateButton").addEventListener("click", addTemplate);
 
+
 function addTemplate() {
     const answer = window.confirm("Are you sure you want to use this template?");
     if(!answer) return;

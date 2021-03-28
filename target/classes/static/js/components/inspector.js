@@ -51,12 +51,13 @@ function displayElementValuesInInspector(id) {
             inspectorValues[i].style.display = "none";
         }
         else {
-            inspectorValues[i].style.display = "inline-block";
+            inspectorValues[i].style.display = "block";
         }
     }
-    const displaySelectBox = document.getElementById(id+"-attributesContainerDiv");
-    if(displaySelectBox) {
-        displaySelectBox.style.display = "inline-block";
+    const displayAttrContainer = document.getElementById(id+"-attributesContainerDiv");
+    if(displayAttrContainer) {
+        displayAttrContainer.style.display = "block";
+        displayAttrContainer.label.style.paddingLeft = "5%";
     }
 }
     

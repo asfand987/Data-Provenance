@@ -16,9 +16,12 @@ function createJSON(){
     clearArrays();
     addConnectionsToArray();
     addElementToArray();
-    
-    sendJsonToServer();   
-    //console.log(activityArray);
+    sendJsonToServer(); 
+    scrollToOutput();  
+}
+
+function scrollToOutput() {
+    document.getElementById("saveButton").scrollIntoView();
 }
 
 function clearArrays(){

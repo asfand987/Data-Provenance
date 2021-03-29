@@ -74,9 +74,9 @@ function sendJsonToServer() {
             let textbox = document.getElementById('displayConvertedFile');
             textbox.value = data;
         },
-        error: function() {
-            console.log("error");
-        }, 
+        error: function(data){
+           
+       }
     });
 
 }

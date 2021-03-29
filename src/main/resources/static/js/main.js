@@ -170,6 +170,7 @@ jsPlumb.ready(function () {
             if (clicked) {
     	        clicked = false;
                 let id;
+               // id  = window.open(url,'name','height=200,width=150');
                 id =  alertBox("Please enter your ID:", "ID");
                 id = "prov:" + id;
                 element = createElement(id);

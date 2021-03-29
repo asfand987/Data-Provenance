@@ -75,7 +75,7 @@
 		font-size: small;
 	}
 }
-@media all and (max-width: 1270px) { 
+@media all and (max-width: 1320px) { 
 	#placeholderID {
 		width: 35%;
 	}

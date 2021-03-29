@@ -175,3 +175,9 @@
 		
 	}
 }
+@media all and (max-width: 1300px) { 
+	#elementDataInInspector * label {
+		font-size: smaller;
+		padding-left: 2%;
+	}
+}

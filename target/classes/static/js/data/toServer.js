@@ -13,12 +13,16 @@ var connectionArray = [];
 document.getElementById("convertBtn").addEventListener("click", createJSON);
 
 function createJSON(){
+    let alert = confirm("Convert to syntax form?");
+    if(!alert) return;
+
     clearArrays();
     addConnectionsToArray();
     addElementToArray();
     sendJsonToServer(); 
     scrollToOutput();  
 }
+
 
 function scrollToOutput() {
     document.getElementById("saveButton").scrollIntoView();

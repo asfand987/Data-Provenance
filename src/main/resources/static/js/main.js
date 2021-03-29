@@ -170,9 +170,12 @@ jsPlumb.ready(function () {
             if (clicked) {
     	        clicked = false;
                 let id;
-               // id  = window.open(url,'name','height=200,width=150');
-                id =  alertBox("Please enter your ID:", "ID");
-                id = "prov:" + id;
+                
+                id =  prompt("Please enter your ID:", "ID");
+
+                if(id)   id = "prov:" + id;
+                else return;
+                
                 element = createElement(id);
                 pulElementOnCanvas(element, "#canvas", id);
     	        element = "";

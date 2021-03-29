@@ -52,9 +52,9 @@ public class conversion {
         else if(type.equals("TURTLE")) {
             format = ProvFormat.TURTLE;
         }
-//        else if(type.equals("JSON-LD")) {
-//            format = ProvFormat.JSONLD;
-//        }
+        else if(type.equals("JSON")) {
+            format = ProvFormat.JSON;
+        }
         else {
             format = ProvFormat.TRIG;
         }

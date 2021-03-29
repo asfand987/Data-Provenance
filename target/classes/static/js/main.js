@@ -321,6 +321,9 @@ jsPlumb.ready(function () {
         elementsOnCanvas.push(element);
     }
 
+    window.onbeforeunload = function(e) {
+        return 'Are you sure you want to leave? You are in the middle of something.';
+      };
 });
 
 

@@ -25,7 +25,7 @@
 /**
 *	Inspector ID header
 */
-#inspectorContainer {
+#inspectorIdContainer {
 	display: flex;
 	flex-wrap: wrap;
 	/* justify-content: space-evenly; */
@@ -35,7 +35,7 @@
 	margin-top: 5%;
 }
 
-#inspectorContainer label {
+#inspectorIdContainer label {
 	margin-left: 10px;
 	margin-top: 3%;
 	margin-right: 3%;
@@ -71,7 +71,7 @@
     #placeholderID {
 		width: 40%;
 	}
-	#inspectorContainer label {
+	#inspectorIdContainer label {
 		font-size: small;
 	}
 }
@@ -90,21 +90,21 @@
 */
 
 
-#inspectorAttributeContainer {
+#inspectorDefineAttrContainer {
 	display: flex;
 	flex-wrap: wrap;	
 	/* justify-content: space-evenly; */
 	padding-bottom: 3%;	
 }
 
-#inspectorAttributeContainer label {
+#inspectorDefineAttrContainer label {
 	margin-left: 10px;
 	margin-top: 3%;
 	margin-right: 3%;
 	font-size: medium;
 }
 @media all and (max-width: 1400px) { 
-	#inspectorAttributeContainer label {
+	#inspectorDefineAttrContainer label {
 		font-size: small;
 	}
 }
@@ -116,7 +116,7 @@
 *	Attribute section 
 */
 
-#elementDataInInspector {
+#inspectorAttrContainer {
 	display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -126,20 +126,20 @@
 	overflow-x: auto;
 	overflow-y: auto;
 }
-#elementDataInInspector * input {
+#inspectorAttrContainer * input {
 	width: 30%; 
 	margin-bottom: 2%;
 	
 }
 
-#elementDataInInspector * label {
+#inspectorAttrContainer * label {
 	padding-left: 5%;
 	padding-right: 5%;
 	margin-bottom: 5%;
 	font-size: small;
 }
 
-#elementDataInInspector * button {
+#inspectorAttrContainer * button {
 	float: right;
 	margin-right: 10%;
 }
@@ -158,10 +158,10 @@
 
 
 @media all and (max-width: 1700px) { 
-	#elementDataInInspector * input {
+	#inspectorAttrContainer * input {
 		width: 20%; 
 	}
-	#elementDataInInspector * label {
+	#inspectorAttrContainer * label {
 		padding-left: 5%;
 		padding-right: 1%;
 		font-size: small;
@@ -170,13 +170,13 @@
 }
 
 @media all and (max-width: 1450px) { 
-	#elementDataInInspector * input {
+	#inspectorAttrContainer * input {
 		width: 20%; 
 		
 	}
 }
 @media all and (max-width: 1300px) { 
-	#elementDataInInspector * label {
+	#inspectorAttrContainer * label {
 		font-size: smaller;
 		padding-left: 2%;
 	}

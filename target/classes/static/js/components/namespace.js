@@ -24,8 +24,8 @@ function addNameSpace() {
     //-----------------------------------------------------------------------------------------------//
     
     displayNamespace(prefix, url);
-    addNamespaceAttributes(userInput.split(' ').slice(0, 1) + ":");
-    addNamespaceToInspector(prefix);
+    displayNamespaceInspecAttr(userInput.split(' ').slice(0, 1) + ":");
+    displayNamespaceInspecID(prefix);
 }
 //---------------------------------------------------------------------------------------------------//
 
@@ -88,7 +88,7 @@ function deleteNameSpace(id) {
 **  This function adds the namespace to the attribute section in the Inspector. Used in @addNameSpace().
 **  
 */
-function addNamespaceAttributes(namespace) {
+function displayNamespaceInspecAttr(namespace) {
     const selectionAttr = document.getElementById("attrOption");
     const option = document.createElement("option");
     option.id = namespace;
@@ -102,7 +102,7 @@ function addNamespaceAttributes(namespace) {
 **  This function adds a namespace option to the ID field in the inspector. 
 **
 */
-function addNamespaceToInspector(NamespaceID) {
+function displayNamespaceInspecID(NamespaceID) {
     const namespaceAddtoID = document.getElementById("addNStoID");
     const namespaceOption = document.createElement("option");
     namespaceOption.innerHTML = NamespaceID;
@@ -134,8 +134,8 @@ function addTemplate() {
     "datasci https://www.w3.org/TR/prov-overview/"];
         
 
-    displayTemplateNamespaces(templateNamespace);
-    addTemplateNamespaceAttributes();
+    displayTempInInspectorID(templateNamespace);
+    displayTempInInspectorAttrs();
         
 }
 
@@ -144,7 +144,7 @@ function addTemplate() {
  *  Used in addTemplate()
  *
 **/
-function displayTemplateNamespaces(templateNamespace) {
+function displayTempInInspectorID(templateNamespace) {
     const namespaceContainer = document.getElementById("namespaceContainer"); 
     for(let i = 0; i < templateNamespace.length; i++) {
         //Create elements to display
@@ -169,12 +169,12 @@ function displayTemplateNamespaces(templateNamespace) {
         namespaceContainer.appendChild(namespaceDiv);
         namespaceArray.prefix[prefixValue] = url;
 
-        addNamespaceToInspector(prefixValue);
+        displayNamespaceInspecID(prefixValue);
 
         namespaceBtn.addEventListener("click", function() {
             deleteNameSpace(prefixValue);
         });
-        addNamespaceAttributes(prefixValue + ":");
+        displayNamespaceInspecAttr(prefixValue + ":");
     }
 }
 
@@ -182,7 +182,7 @@ function displayTemplateNamespaces(templateNamespace) {
  * Add template namespaces to attributes section and predefined attributes section in inspector.
  * 
  */
-function addTemplateNamespaceAttributes() {
+function displayTempInInspectorAttrs() {
     const zoneAttributes = ["zone:id", "zone:type", "zone:min", "zone:max", "zone:parent", "zone:relation"];
     // const datasciAttributes = ["datasci:language"];
     addTemplateAttr(zoneAttributes, "zoneAttr");

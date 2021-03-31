@@ -44,7 +44,7 @@ function displayInspectorComponent(node, id) {
 **  data.
 */
 function displayElementValuesInInspector(id) {
-    const inspectorValues = document.querySelectorAll("#elementDataInInspector div");
+    const inspectorValues = document.querySelectorAll("#inspectorAttrContainer div");
 
     for (let i = 0; i < inspectorValues.length; i++) {
         if(inspectorValues[i].id != (id+"-attributesContainerDivParent")) {
@@ -70,7 +70,7 @@ document.getElementById("chooseAttributeBtn").addEventListener("click",  functio
 });  
 
 function userEnterDataIntoElement(id) {
-    let elementDataDivParent = document.getElementById("elementDataInInspector");
+    let elementDataDivParent = document.getElementById("inspectorAttrContainer");
     let elementDataDiv = document.getElementById(id+"-attributesContainerDivParent");
     let attributeSelectionDiv =  document.getElementById("selectionAttributes");
     

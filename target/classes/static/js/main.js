@@ -2,7 +2,6 @@
 var jsPlumbInstance; //the jsPlumb jsPlumbInstance
 var properties = []; //keeps the properties of each element
 var elementsOnCanvas = [];
-var connections = [];
 
 jsPlumb.ready(function () {
     let element = "";   //the element which will be appended to the canvas
@@ -107,12 +106,12 @@ jsPlumb.ready(function () {
             lineWidth: 3
         },
         isSource: true,
+        maxConnections: -1,
         connector: ["Flowchart", {stub: [40, 60], gap: 5, cornerRadius: 5, alwaysRespectStubs: true}],
         connectorStyle: connectorPaintStyle,
         hoverPaintStyle: endpointHoverStyle,
         connectorHoverStyle: connectorHoverStyle,
         EndpointOverlays: [],
-        maxConnections: -1,
         dragOptions: {},
         connectorOverlays: [
             ["Arrow", {
@@ -137,12 +136,7 @@ jsPlumb.ready(function () {
      
 	function makeDraggable(id, className, text){
 	    $(id).draggable({
-		helper: function(){
-		    return $("<div/>",{
-			text: text,
-			class:className,
-		    });
-		},
+		helper: function(){ return $("<div/>",{ text: text, class:className, }); },
 		stack: ".custom",
 		revert: false
 	    });
@@ -152,9 +146,7 @@ jsPlumb.ready(function () {
 	makeDraggable("#activityID", "window step jsplumb-connected-step custom", "activity");
 
     $("#agentID").draggable({
-        helper: function () {
-    	   return createElement("agent");
-        },
+        helper: function () { return createElement("agent"); },
         stack: ".custom",
         revert: false
 	});
@@ -177,7 +169,7 @@ jsPlumb.ready(function () {
                 else return;
                 
                 element = createElement(id);
-                pulElementOnCanvas(element, "#canvas", id);
+                putElementOnCanvas(element, "#canvas", id);
     	        element = "";
 	        }
         }   
@@ -308,7 +300,7 @@ jsPlumb.ready(function () {
     /**
      * Draw element on canvas.
      */
-    function pulElementOnCanvas(element, canvasId, id) {
+    function putElementOnCanvas(element, canvasId, id) {
         $(canvasId).append(element);
         let type;
         if(element[0].classList[1] == "start") type = "entity"

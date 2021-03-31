@@ -17,7 +17,7 @@ document.onclick = function(element) {
         let elementID = element.path[2].id;
         clickedElementID = element.path[2].id;
         displayInspectorComponent(element, elementID);
-        displayElementValuesInInspector(elementID);
+        displayElementAttributes(elementID);
     }
 }
 
@@ -43,7 +43,7 @@ function displayInspectorComponent(node, id) {
 **  is clicked on by the user, the inspector gets populated with the elements respective
 **  data.
 */
-function displayElementValuesInInspector(id) {
+function displayElementAttributes(id) {
     const inspectorValues = document.querySelectorAll("#inspectorAttrContainer div");
 
     for (let i = 0; i < inspectorValues.length; i++) {

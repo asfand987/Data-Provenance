@@ -43,7 +43,8 @@
 }
 
 #placeholderID {
-	width: 45%;
+	width: 55%;
+	/* height: 43px; */
 }
 
 /* #idBtn {
@@ -68,16 +69,24 @@
 	
 }
 @media all and (max-width: 1440px) { 
-    #placeholderID {
+	#placeholderID {
 		width: 40%;
 	}
 	#inspectorIdContainer label {
+		padding-top: 3px;
 		font-size: small;
 	}
+
 }
 @media all and (max-width: 1320px) { 
 	#placeholderID {
 		width: 35%;
+	}
+}
+
+@media all and (max-width: 1200px) { 
+	#placeholderID {
+		width: 30%;
 	}
 }
 
@@ -106,6 +115,17 @@
 @media all and (max-width: 1400px) { 
 	#inspectorDefineAttrContainer label {
 		font-size: small;
+		padding-top: 2px;
+	}
+}
+
+@media all and (max-width: 1300px) { 
+	#inspectorDefineAttrContainer label {
+		font-size: small;
+		padding-top: 2px;
+	}
+	#selectionAttributes {
+		width: 45%;
 	}
 }
 
@@ -166,18 +186,26 @@
 		padding-right: 1%;
 		font-size: small;
 	}
+	#inspectorAttrContainer * button {
+		margin-right: 5%;
+	}
 
 }
 
 @media all and (max-width: 1450px) { 
 	#inspectorAttrContainer * input {
 		width: 20%; 
-		
+	}
+	#inspectorAttrContainer * button {
+		margin-right: 3%;
 	}
 }
 @media all and (max-width: 1300px) { 
 	#inspectorAttrContainer * label {
 		font-size: smaller;
 		padding-left: 2%;
+	}
+	#inspectorAttrContainer * button {
+		margin-right: 2%;
 	}
 }

@@ -24,14 +24,14 @@ document.onclick = function(element) {
 /*
 **  This function makes the Inspector component visible on the interface.  
 */
-function displayInspectorComponent(node, id) {
+function displayInspectorComponent(element, elementID) {
     const inspectorWindow = document.getElementById("inspectorSpan");
 
     if (inspectorWindow.style.display == "none") {
         inspectorWindow.style.display = "inline-block";
-        clickedElement = node;
+        clickedElement = element;
         const displayIdOnInputBox = document.getElementById("placeholderID");
-        displayIdOnInputBox.placeholder = id;
+        displayIdOnInputBox.placeholder = elementID;
     } else {
         inspectorWindow.style.display = "none"; //hide Inspector indow.
     } 

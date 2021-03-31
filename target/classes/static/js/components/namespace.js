@@ -222,11 +222,4 @@ function removeAttr(attrID) {
     }  
 }
    
-
-// function removeDefaultNameSpace() {
-//     var removeDefaultNameSpaceDiv = document.getElementById("defaultNameSpaceDiv");
-//     namespaceArray.shift(); 
-//     removeDefaultNameSpaceDiv.remove();
-// }
-    
     

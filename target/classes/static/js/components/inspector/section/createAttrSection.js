@@ -16,7 +16,7 @@ document.getElementById("chooseAttributeBtn").addEventListener("click",  functio
 });  
 
 function createNewAttributes(id) {
-    let elementDataDivParent = document.getElementById("inspectorAttrContainer");
+    let elementDataDivParent = document.getElementById("inspectorDisplayAttrContainer");
     let elementDataDiv = document.getElementById(id+"-attributesContainerDivParent");
     let attributeSelectionDiv =  document.getElementById("selectionAttributes");
     

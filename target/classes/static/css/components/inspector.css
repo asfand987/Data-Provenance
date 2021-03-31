@@ -99,28 +99,28 @@
 */
 
 
-#inspectorDefineAttrContainer {
+#inspectorCreateAttrContainer {
 	display: flex;
 	flex-wrap: wrap;	
 	/* justify-content: space-evenly; */
 	padding-bottom: 3%;	
 }
 
-#inspectorDefineAttrContainer label {
+#inspectorCreateAttrContainer label {
 	margin-left: 10px;
 	margin-top: 3%;
 	margin-right: 3%;
 	font-size: medium;
 }
 @media all and (max-width: 1400px) { 
-	#inspectorDefineAttrContainer label {
+	#inspectorCreateAttrContainer label {
 		font-size: small;
 		padding-top: 2px;
 	}
 }
 
 @media all and (max-width: 1300px) { 
-	#inspectorDefineAttrContainer label {
+	#inspectorCreateAttrContainer label {
 		font-size: small;
 		padding-top: 2px;
 	}
@@ -136,7 +136,7 @@
 *	Attribute section 
 */
 
-#inspectorAttrContainer {
+#inspectorDisplayAttrContainer {
 	display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -146,20 +146,20 @@
 	overflow-x: auto;
 	overflow-y: auto;
 }
-#inspectorAttrContainer * input {
+#inspectorDisplayAttrContainer * input {
 	width: 30%; 
 	margin-bottom: 2%;
 	
 }
 
-#inspectorAttrContainer * label {
+#inspectorDisplayAttrContainer * label {
 	padding-left: 5%;
 	padding-right: 5%;
 	margin-bottom: 5%;
 	font-size: small;
 }
 
-#inspectorAttrContainer * button {
+#inspectorDisplayAttrContainer * button {
 	float: right;
 	margin-right: 10%;
 }
@@ -180,34 +180,34 @@
 }
 
 @media all and (max-width: 1700px) { 
-	#inspectorAttrContainer * input {
+	#inspectorDisplayAttrContainer * input {
 		width: 20%; 
 	}
-	#inspectorAttrContainer * label {
+	#inspectorDisplayAttrContainer * label {
 		padding-left: 5%;
 		padding-right: 1%;
 		font-size: small;
 	}
-	#inspectorAttrContainer * button {
+	#inspectorDisplayAttrContainer * button {
 		margin-right: 5%;
 	}
 
 }
 
 @media all and (max-width: 1450px) { 
-	#inspectorAttrContainer * input {
+	#inspectorDisplayAttrContainer * input {
 		width: 20%; 
 	}
-	#inspectorAttrContainer * button {
+	#inspectorDisplayAttrContainer * button {
 		margin-right: 3%;
 	}
 }
 @media all and (max-width: 1350px) { 
-	#inspectorAttrContainer * label {
+	#inspectorDisplayAttrContainer * label {
 		font-size: smaller;
 		padding-left: 2%;
 	}
-	#inspectorAttrContainer * button {
+	#inspectorDisplayAttrContainer * button {
 		margin-right: 2%;
 	}
 }

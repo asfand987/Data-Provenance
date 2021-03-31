@@ -44,7 +44,7 @@ function displayInspectorComponent(element, elementID) {
 **  data.
 */
 function displayElementAttributes(id) {
-    const inspectorValues = document.querySelectorAll("#inspectorAttrContainer div");
+    const inspectorValues = document.querySelectorAll("#inspectorDisplayAttrContainer div");
 
     for (let i = 0; i < inspectorValues.length; i++) {
         if(inspectorValues[i].id != (id+"-attributesContainerDivParent")) {

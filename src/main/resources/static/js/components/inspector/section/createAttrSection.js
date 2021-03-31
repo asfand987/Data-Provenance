@@ -32,6 +32,7 @@ function createNewAttributes(id) {
     //button
     let attrSaveBtn = document.createElement("button");
 
+    let newLine = document.createElement("p");
     
     let userSelectedAttrNamespace = attributeSelectionDiv.options[attributeSelectionDiv.selectedIndex].text;
     
@@ -59,12 +60,15 @@ function createNewAttributes(id) {
     //Label info
     attrLabel.id = id+"-Label";
 
+    newLine.className = "clear";
+
     $(form).submit(function (e) {
         e.preventDefault();
     });
     form.appendChild(attrLabel);
     form.appendChild(userInputAttr);
     form.appendChild(attrSaveBtn);
+    form.appendChild(newLine);
 
     /*
     **  if elementDataDiv (div where data is held) already exists, add the form (data) to it and then add to parentDiv.

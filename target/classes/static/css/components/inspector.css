@@ -175,7 +175,9 @@
 	height: 25px;
 	line-height: 3px;
 }
-
+.clear {
+	clear:both
+}
 
 @media all and (max-width: 1700px) { 
 	#inspectorAttrContainer * input {
@@ -200,7 +202,7 @@
 		margin-right: 3%;
 	}
 }
-@media all and (max-width: 1300px) { 
+@media all and (max-width: 1350px) { 
 	#inspectorAttrContainer * label {
 		font-size: smaller;
 		padding-left: 2%;

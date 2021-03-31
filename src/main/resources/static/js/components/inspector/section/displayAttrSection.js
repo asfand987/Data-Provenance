@@ -33,11 +33,11 @@ function displayAttrInInspector(id, input, label, button, form) {
 */
 function createComponentsToDisplay(id, input, label, button, attributeDiv) {
     document.getElementById(id+"-Button").addEventListener("click", function() { 
-        let br = document.createElement("br");
         let attrButton = document.createElement("button");
         let attrLabel = document.createElement("label");
         let attributeValue = document.getElementById(id+"-Input").value;
         let element = document.getElementById(id);
+        let newLine = document.createElement("p");
 
         attrButton.className = "btn btn-danger"
 
@@ -54,14 +54,14 @@ function createComponentsToDisplay(id, input, label, button, attributeDiv) {
             attrButton.innerHTML = "X";
             attrButton.type = 'button';
             attrButton.id = elementAttributes[i];
-
+            newLine.className = "clear";
             //Delete attribute on from Inspector and remove value from DOM object on click
             attrButton.addEventListener("click", function() { deleteAttribute(attrLabel, attrButton, br, element); });
 
             attrLabel.innerHTML = elementAttributes[i];
             attributeDiv.appendChild(attrLabel);
             attributeDiv.appendChild(attrButton);
-            attributeDiv.appendChild(br);
+            attributeDiv.appendChild(newLine);
         }
             //Remove From used to enter in new attribute data
             removeForm(input, label, button);

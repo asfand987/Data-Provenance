@@ -45,15 +45,23 @@ function sendJsonToServer() {
        // dataType: 'text',
         contentType: "application/json; charset=utf-8",
         success: function (data) {
-            let textbox = document.getElementById('displayConvertedFile');
-            textbox.value = data;
+            displayOutput(data);
         },
-        error: function(data){
-           
-       }
+        error: function(){}
     });
 
 }
+
+function displayOutput(data) {
+    let outputTextBox = document.getElementById('displayConvertedFile');
+    if(data.substring(0, 3) == "org") {
+        outputTextBox.value = " Error - \n " + data;
+    }
+    else {
+        outputTextBox.value =  data;
+    }
+}
+
 
 function scrollToOutput() {
     document.getElementById("saveButton").scrollIntoView();

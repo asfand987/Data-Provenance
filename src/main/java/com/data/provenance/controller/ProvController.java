@@ -18,30 +18,40 @@ public class ProvController {
 
     private HashMap<String, String> namespaceMap = new HashMap<>();
 
+    /**
+     * Start page
+     * @return index.html
+     */
     @RequestMapping("/")
     public String start() {
         return "index";
     }
 
+    /**
+     * Takes PROV-JSON input as a string from client side. Parses and converts the file.
+     * Returned back to client as a string.
+     * @param jsonString
+     * @return String
+     */
     @RequestMapping(value = "/", method = RequestMethod.POST)
     @ResponseBody
     public String transferData(@RequestBody String jsonString) {
         String sendDataToClient = "";
         try {
             JSONArray jsonArray = new JSONArray(jsonString);
-            JSONObject jsonObject = new JSONObject();
+            JSONObject provJSON = new JSONObject();
 
-            jsonObject.put("prefix", jsonArray.getJSONObject(0).getJSONObject("prefix"));
-            jsonObject.put("entity", jsonArray.getJSONObject(1).getJSONObject("entity"));
-            jsonObject.put("activity", jsonArray.getJSONObject(2).getJSONObject("activity"));
-            jsonObject.put("agent", jsonArray.getJSONObject(3).getJSONObject("agent"));
-            jsonObject.put("wasDerivedFrom", jsonArray.getJSONObject(4).getJSONObject("wasDerivedFrom"));
-            jsonObject.put("wasAttributedTo", jsonArray.getJSONObject(5).getJSONObject("wasAttributedTo"));
-            jsonObject.put("wasGeneratedBy", jsonArray.getJSONObject(6).getJSONObject("wasGeneratedBy"));
-            jsonObject.put("wasAssociatedWith", jsonArray.getJSONObject(7).getJSONObject("wasAssociatedWith"));
-            jsonObject.put("used", jsonArray.getJSONObject(8).getJSONObject("used"));
-            jsonObject.put("wasInformedBy", jsonArray.getJSONObject(9).getJSONObject("wasInformedBy"));
-            jsonObject.put("actedOnBehalfOf", jsonArray.getJSONObject(10).getJSONObject("actedOnBehalfOf"));
+            provJSON.put("prefix", jsonArray.getJSONObject(0).getJSONObject("prefix"));
+            provJSON.put("entity", jsonArray.getJSONObject(1).getJSONObject("entity"));
+            provJSON.put("activity", jsonArray.getJSONObject(2).getJSONObject("activity"));
+            provJSON.put("agent", jsonArray.getJSONObject(3).getJSONObject("agent"));
+            provJSON.put("wasDerivedFrom", jsonArray.getJSONObject(4).getJSONObject("wasDerivedFrom"));
+            provJSON.put("wasAttributedTo", jsonArray.getJSONObject(5).getJSONObject("wasAttributedTo"));
+            provJSON.put("wasGeneratedBy", jsonArray.getJSONObject(6).getJSONObject("wasGeneratedBy"));
+            provJSON.put("wasAssociatedWith", jsonArray.getJSONObject(7).getJSONObject("wasAssociatedWith"));
+            provJSON.put("used", jsonArray.getJSONObject(8).getJSONObject("used"));
+            provJSON.put("wasInformedBy", jsonArray.getJSONObject(9).getJSONObject("wasInformedBy"));
+            provJSON.put("actedOnBehalfOf", jsonArray.getJSONObject(10).getJSONObject("actedOnBehalfOf"));
 
             String conversionType = jsonArray.getString(11).toString();
             populateNamespaceMap(jsonArray);
@@ -49,7 +59,7 @@ public class ProvController {
             String str = "";
             conversion conversion = new conversion(InteropFramework.getDefaultFactory(), namespaceMap);
 
-            conversion.doConversions(jsonObject.toString(), conversionType); //jsonObject.toString()
+            conversion.doConversions(provJSON.toString(), conversionType); //jsonObject.toString()
             sendDataToClient = conversion.returnConvertedFile();
         }
         catch (Exception e) {
@@ -60,6 +70,11 @@ public class ProvController {
         return sendDataToClient;
     }
 
+    /**
+     * Adds all namespaces to hashmap.
+     * @param jsonArray
+     * @throws JSONException
+     */
     public void populateNamespaceMap(JSONArray jsonArray) throws JSONException {
         JSONObject namespaceObject = new JSONObject(jsonArray.get(0).toString());
         JSONObject namespaceArray = namespaceObject.getJSONObject("prefix");

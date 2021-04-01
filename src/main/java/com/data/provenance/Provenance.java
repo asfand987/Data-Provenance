@@ -5,9 +5,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class provenance {
+public class Provenance {
     public static void main(String[] args) {
         BasicConfigurator.configure();
-        SpringApplication.run(provenance.class, args);
+        SpringApplication.run(Provenance.class, args);
     }
 }

@@ -1,20 +1,17 @@
 package com.data.provenance.controller;
 
-import com.data.provenance.prov.conversion;
+import com.data.provenance.prov.Convert;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.openprovenance.prov.interop.InteropFramework;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.json.JSONObject;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 
-@Controller
-public class ProvController {
+@org.springframework.stereotype.Controller
+public class Controller {
 
     private HashMap<String, String> namespaceMap = new HashMap<>();
 
@@ -57,7 +54,7 @@ public class ProvController {
             populateNamespaceMap(jsonArray);
 
             String str = "";
-            conversion conversion = new conversion(InteropFramework.getDefaultFactory(), namespaceMap);
+            Convert conversion = new Convert(InteropFramework.getDefaultFactory(), namespaceMap);
 
             conversion.doConversions(provJSON.toString(), conversionType); //jsonObject.toString()
             sendDataToClient = conversion.returnConvertedFile();

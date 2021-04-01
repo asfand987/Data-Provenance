@@ -9,13 +9,13 @@ import org.openprovenance.prov.model.Namespace;
 import org.openprovenance.prov.model.ProvFactory;
 
 
-public class conversion {
+public class Convert {
 
     private final ProvFactory pFactory;
     private Namespace ns;
     private String convertedFile;
 
-    public conversion(ProvFactory pFactory, HashMap<String, String> map) {
+    public Convert(ProvFactory pFactory, HashMap<String, String> map) {
         this.pFactory = pFactory;
         ns=new Namespace();
 

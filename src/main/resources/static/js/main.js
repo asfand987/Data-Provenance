@@ -181,8 +181,8 @@ jsPlumb.ready(function () {
         x = event.pageX;
         y = event.pageY;
         if (clicked) {
-            properties[0].top = y - 308;
-            properties[0].left = x - 308;
+            properties[0].top = y - 200;
+            properties[0].left = x - 260;
         }
     });
 

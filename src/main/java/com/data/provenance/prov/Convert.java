@@ -15,6 +15,11 @@ public class Convert {
     private Namespace ns;
     private String convertedFile;
 
+    /**
+     * Constructor method
+     * @param pFactory
+     * @param map
+     */
     public Convert(ProvFactory pFactory, HashMap<String, String> map) {
         this.pFactory = pFactory;
         ns=new Namespace();
@@ -26,6 +31,12 @@ public class Convert {
        }
     }
 
+    /**
+     * Takes an input and conversion type, performs conversion.
+     * @param filein PROV-JSON format
+     * @param type to convert into
+     * @throws FileNotFoundException
+     */
     public void doConversions(String filein, String type) throws FileNotFoundException {
         ProvFormat format = conversionType(type);
         InteropFramework intF = new InteropFramework();
@@ -38,6 +49,11 @@ public class Convert {
         convertedFile = fileOutput.toString();
     }
 
+    /**
+     * Selects correct conversion output
+     * @param type conversion type
+     * @return conversion format
+     */
     private ProvFormat conversionType(String type) {
         ProvFormat format;
         if(type.equals("N")) {
@@ -60,6 +76,11 @@ public class Convert {
         }
         return format;
     }
+
+    /**
+     *
+     * @return converted file
+     */
     public String returnConvertedFile() {
         return convertedFile;
     }

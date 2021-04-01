@@ -41,7 +41,8 @@ function updateNewID() {
         //update element name on UI
         elementInnerHTML[0].innerHTML = newID;
 
-        
+        inputComponent.value = '';
+        inputComponent.placeholder = newID;
         //update form for creating new attributes
         if(attributesContainerDivParent) {    attributesContainerDivParent.id = newID+"-attributesContainerDivParent"; };
         if(newAttributeInput) {     newAttributeInput.id = newID+"-Input";  };

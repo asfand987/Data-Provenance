@@ -47,7 +47,8 @@ function sendJsonToServer() {
         success: function (data) {
             displayOutput(data);
         },
-        error: function(){}
+        error: function(){
+        }
     });
 
 }

@@ -26,14 +26,13 @@ document.onclick = function(element) {
 */
 function displayInspectorComponent(element, elementID) {
     const inspectorWindow = document.getElementById("inspectorSpan");
-
     if (inspectorWindow.style.display == "none") {
-        inspectorWindow.style.display = "inline-block";
-        clickedElement = element;
         const displayIdOnInputBox = document.getElementById("placeholderID");
         displayIdOnInputBox.placeholder = elementID;
+        inspectorWindow.style.display = "inline-block";
+        clickedElement = element;
     } else {
-        inspectorWindow.style.display = "none"; //hide Inspector indow.
+        inspectorWindow.style.display = "none"; //hide Inspector in dow.
     } 
 }
 

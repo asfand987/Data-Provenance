@@ -151,8 +151,6 @@ jsPlumb.ready(function () {
         revert: false
 	});
 
-
-    
     /**
      * Allow the canvas to accept elements.
      */
@@ -163,7 +161,7 @@ jsPlumb.ready(function () {
     	        clicked = false;
                 let id;
                 
-                id =  prompt("Please enter your ID:", "ID");
+                id =  prompt("Please enter a ID, prov:", );
 
                 if(id)   id = "prov:" + id;
                 else return;

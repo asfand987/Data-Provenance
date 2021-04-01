@@ -11,14 +11,14 @@ var clickedElementID;  //last element that was clicked
 **  "diamond" = agent element
 */
 document.onclick = function(element) {
-    let clssName = element.path[2].className.split(' ').slice(1, 3).join().replace(/,/g, "");
-
+    const clssName = element.path[2].className.split(' ').slice(1, 3).join().replace(/,/g, "");
     if(clssName == "startcustom" || clssName == "stepcustom" || clssName == "diamondcustom") {   
-        let elementID = element.path[2].id;
+        const elementID = element.path[2].id;
         clickedElementID = element.path[2].id;
         displayInspectorComponent(element, elementID);
         displayElementAttributes(elementID);
     }
+
 }
 
 /*

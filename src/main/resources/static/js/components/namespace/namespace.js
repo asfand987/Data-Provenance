@@ -15,7 +15,7 @@ var namespaceArray = {prefix:{default : 'http://www.w3.org/ns/prov#'}};
 document.getElementById("nameSpaceButton").addEventListener("click", addNameSpace);
 
 function addNameSpace() {
-    const userInput = prompt("Prefix", "prefix https://someurl.com/");
+    const userInput = prompt("Namespace", "Prefix https://someurl.com/");
     
     //---------------------------Separate prefix and url from user input-----------------------------//
     const separateInput = userInput.split(" ");

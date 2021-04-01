@@ -16,11 +16,9 @@ function addTemplate() {
     const answer = window.confirm("Are you sure you want to use this template?");
     if(!answer) return;
 
-    const templateNamespace = ["var https://eur03.safelinks.protection.outlook.com/?url=https%3A%2F%2Fkclhi.org%2Fprovenance%2Fpgt%2Fvar%2F&amp;data=04%7C01%7Casfand.khan%40kcl.ac.uk%7C3a4ba86164dd46d5754e08d8d739fefc%7C8370cf1416f34c16b83c724071654356%7C0%7C0%7C637495991372983971%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=Av1vl05MV1M1WxZVb42rGLtTk37kIQa7T9AmsNarCJg%3D&amp;reserved=0", 
-    "vvar https://eur03.safelinks.protection.outlook.com/?url=https%3A%2F%2Fkclhi.org%2Fprovenance%2Fpgt%2Fvvar%2F&amp;data=04%7C01%7Casfand.khan%40kcl.ac.uk%7C3a4ba86164dd46d5754e08d8d739fefc%7C8370cf1416f34c16b83c724071654356%7C0%7C0%7C637495991372983971%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=ShrK0YkKgDsTjAVFL0%2Byst5XhXThLNep2ev%2FN5hSF%2B0%3D&amp;reserved=0",
-    "zone https://eur03.safelinks.protection.outlook.com/?url=https%3A%2F%2Fkclhi.org%2Fprovenance%2Fpgt%2Fzone%2F&amp;data=04%7C01%7Casfand.khan%40kcl.ac.uk%7C3a4ba86164dd46d5754e08d8d739fefc%7C8370cf1416f34c16b83c724071654356%7C0%7C0%7C637495991372983971%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=h3FIJgGbmcW5JyjoSKA1uGhLkoocZPvnEMDyJ0wtuAE%3D&amp;reserved=0",
-    "datasci https://eur03.safelinks.protection.outlook.com/?url=https%3A%2F%2Fkclhi.org%2Fdatasci%2F&amp;data=04%7C01%7Casfand.khan%40kcl.ac.uk%7C8508a24f34c9454239a708d8f2c5352e%7C8370cf1416f34c16b83c724071654356%7C0%7C0%7C637526276100481689%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=yDvfzQA%2Fse5yZpxjLmZtD9M%2BYc6DGUQV3BM2%2BfJkJQY%3D&amp;reserved=0"];
-        
+    const templateNamespace = ["var https://kclhi.org/provenance/pgt/var/", 
+    "vvar https://kclhi.org/provenance/pgt/vvar/",
+    "zone https://kclhi.org/provenance/pgt/zone/"];
 
     displayTempInInspectorID(templateNamespace);
     displayTempInInspectorAttrs();
@@ -72,9 +70,7 @@ function displayTempInInspectorID(templateNamespace) {
  */
 function displayTempInInspectorAttrs() {
     const zoneAttributes = ["zone:id", "zone:type", "zone:min", "zone:max", "zone:parent", "zone:relation"];
-    // const datasciAttributes = ["datasci:language"];
     addTemplateAttr(zoneAttributes, "zoneAttr");
-    // addTemplateAttr(datasciAttributes, "datasciAttr");
 }
 
 function addTemplateAttr(arr, type) {
@@ -95,9 +91,6 @@ function addTemplateAttr(arr, type) {
 function removePredefinedAttributes(id) {
     if(id == "zone") {
         removeAttr("zoneAttr");
-    }
-    else if(id == "datasci") {
-        removeAttr("datasciAttr");
     }
 }
 

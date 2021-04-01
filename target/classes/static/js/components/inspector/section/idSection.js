@@ -8,7 +8,7 @@ document.getElementById("idBtn").addEventListener("click", function() { updateNe
 
 function updateNewID() {
     var oldID = clickedElement.path[2].id;
-    let newID = document.getElementById("placeholderID");
+    let inputComponent = document.getElementById("placeholderID");
 
 
     //Change name on element in the UI
@@ -28,30 +28,31 @@ function updateNewID() {
     let getNsOption = document.getElementById("addNStoID");
     let getNSnValue = getNsOption.options[getNsOption.selectedIndex].value;
 
-    if(newID.value != '') {
 
-        if(getNSnValue != "default") newID.value = getNSnValue + ":" + newID.value; 
-        else  newID.value = "prov:" + newID.value;
-        
+    if(inputComponent.value != '') {
+
         //update old ID with new ID
-        oldID =  newID.value;
+        newID =  inputComponent.value;
+
+        if(getNSnValue != "default") newID = getNSnValue + ":" + newID; 
+        else  newID = "prov:" + newID;
+        
 
         //update element name on UI
-        elementInnerHTML[0].innerHTML = oldID;
+        elementInnerHTML[0].innerHTML = newID;
 
-        newID.value = '';       
         
         //update form for creating new attributes
-        if(attributesContainerDivParent) {    attributesContainerDivParent.id = oldID+"-attributesContainerDivParent"; };
-        if(newAttributeInput) {     newAttributeInput.id = oldID+"-Input";  };
-        if(newAttributeButton) {    newAttributeButton.id = oldID+"-Button";    };
-        if(newAttributeLabel) {     newAttributeLabel.id = oldID+"-Label";  }
-        if(attributesContainerDiv) {    attributesContainerDiv.id = oldID+"-attributesContainerDiv";    }
+        if(attributesContainerDivParent) {    attributesContainerDivParent.id = newID+"-attributesContainerDivParent"; };
+        if(newAttributeInput) {     newAttributeInput.id = newID+"-Input";  };
+        if(newAttributeButton) {    newAttributeButton.id = newID+"-Button";    };
+        if(newAttributeLabel) {     newAttributeLabel.id = newID+"-Label";  }
+        if(attributesContainerDiv) {    attributesContainerDiv.id = newID+"-attributesContainerDiv";    }
 
         //update instance
-        jsPlumbInstance.setId(clickedElement.path[2].id, oldID);
-        jsPlumbInstance.recalculateOffsets(oldID);
+        jsPlumbInstance.setId(clickedElement.path[2].id, newID);
+        jsPlumbInstance.recalculateOffsets(newID);
 
-        clickedElementID = oldID;
+        clickedElementID = newID;
     }
 }

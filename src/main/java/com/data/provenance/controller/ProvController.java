@@ -25,7 +25,7 @@ public class ProvController {
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
     @ResponseBody
-    public String PROV_JSON(@RequestBody String jsonString) {
+    public String transferData(@RequestBody String jsonString) {
         String sendDataToClient = "";
         try {
             JSONArray jsonArray = new JSONArray(jsonString);

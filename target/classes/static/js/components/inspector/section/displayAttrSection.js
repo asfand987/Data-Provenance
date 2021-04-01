@@ -56,7 +56,7 @@ function createComponentsToDisplay(id, input, label, button, attributeDiv) {
             attrButton.id = elementAttributes[i];
             newLine.className = "clear";
             //Delete attribute on from Inspector and remove value from DOM object on click
-            attrButton.addEventListener("click", function() { deleteAttribute(attrLabel, attrButton, br, element); });
+            attrButton.addEventListener("click", function() { deleteAttribute(attrLabel, attrButton, newLine, element); });
 
             attrLabel.innerHTML = elementAttributes[i];
             attributeDiv.appendChild(attrLabel);
@@ -75,10 +75,10 @@ function createComponentsToDisplay(id, input, label, button, attributeDiv) {
 **  Each attribute has an "X" button to delete it. This function will remove remnants of that data from the Inspector.
 **
 */
-function deleteAttribute(label, button, br, element) {
+function deleteAttribute(label, button, newLine, element) {
     label.remove();
     button.remove();
-    br.remove();
+    newLine.remove();
     element.attributes[2].nodeValue = element.attributes[2].nodeValue.replace(label.innerHTML+",", "");
 
 }

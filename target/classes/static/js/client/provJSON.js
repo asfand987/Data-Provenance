@@ -1,4 +1,3 @@
-
 var wasDerivedFromArr = {wasDerivedFrom:{}};
 var wasAttributedToArr = {wasAttributedTo:{}};
 var wasGeneratedByArr = {wasGeneratedBy:{}};

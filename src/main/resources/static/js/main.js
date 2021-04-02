@@ -1,3 +1,11 @@
+/**
+ *  I verify that I am the sole author of the programs contained in this
+    folder, except where explicitly stated to the contrary. 
+
+    Asfand Khan
+    02/04/2021
+ */
+
 
 var jsPlumbInstance; //the jsPlumb jsPlumbInstance
 var properties = []; //keeps the properties of each element

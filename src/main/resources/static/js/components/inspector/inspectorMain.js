@@ -26,7 +26,7 @@ document.onclick = function(element) {
 */
 function displayInspectorComponent(element, elementID) {
     const inspectorWindow = document.getElementById("inspectorSpan");
-    if (inspectorWindow.style.display == "none") {
+    if (inspectorWindow.style.display != "inline-block") {
         const displayIdOnInputBox = document.getElementById("placeholderID");
         displayIdOnInputBox.placeholder = elementID;
         inspectorWindow.style.display = "inline-block";

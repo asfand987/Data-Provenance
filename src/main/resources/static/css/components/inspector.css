@@ -47,15 +47,6 @@
 	/* height: 43px; */
 }
 
-/* #idBtn {
-	float: right;
-	margin-right: 2%;
-	border-radius: 4px;
-	color: #fff;
-  	background-color: #337ab7;
-  	border-color: #2e6da4;
-}  */
-
 @media all and (max-width: 1680px) { 
 	#placeholderID {
 		width: 50%;

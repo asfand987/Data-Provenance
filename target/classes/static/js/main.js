@@ -77,63 +77,13 @@ jsPlumb.ready(function () {
      * Define and register connections 
      */
     jsPlumbInstance.registerConnectionType("basic", { anchor:"Continuous", connector:"StateMachine" });
-    var connectorPaintStyle = {
-        lineWidth: 4,
-        strokeStyle: "#61B7CF",
-        joinstyle: "round",
-        outlineColor: "white",
-        outlineWidth: 2
-    },
-
-    //style for the connector hover
-    connectorHoverStyle = {
-        lineWidth: 4,
-        strokeStyle: "#216477",
-        outlineWidth: 2,
-        outlineColor: "white"
-    },
-    endpointHoverStyle = {
-        fillStyle: "#216477",
-        strokeStyle: "#216477"
-    },
-
-    sourceEndpoint = {
-        endpoint: "Dot",
-        paintStyle: {
-           /* strokeStyle: "#bbbb77",  7AB02C*/
-            fillStyle: "transparent",
-            radius: 5,
-            lineWidth: 3
-        },
-        isSource: true,
-        maxConnections: -1,
-        connector: ["Flowchart", {stub: [40, 60], gap: 5, cornerRadius: 5, alwaysRespectStubs: true}],
-        connectorStyle: connectorPaintStyle,
-        hoverPaintStyle: endpointHoverStyle,
-        connectorHoverStyle: connectorHoverStyle,
-        EndpointOverlays: [],
-        dragOptions: {},
-        connectorOverlays: [
-            ["Arrow", {
-                location: 1,
-                visible: true,
-                id: "ARROW",
-                direction: 1
-            }]
-        ]
-    },
-
-    //definition of the target endpoint the connector would end
-    targetEndpoint = {
-        endpoint: "Dot",
-        paintStyle: {fillStyle: "#7AB02C", radius: 5},
-        maxConnections: -1,
-        dropOptions: {hoverClass: "hover", activeClass: "active"},
-        hoverPaintStyle: endpointHoverStyle,
-        isTarget: true
-    };
-
-     
+   
+    /**
+     * Makes elements draggable
+     * @param {*} id 
+     * @param {*} className 
+     * @param {*} text 
+     */
 	function makeDraggable(id, className, text){
 	    $(id).draggable({
 		helper: function(){ return $("<div/>",{ text: text, class:className, }); },
@@ -199,14 +149,14 @@ jsPlumb.ready(function () {
         });
     }
 
-	//load properties of a start element once the start element in the palette is clicked
+	//load properties of a entity once it is clicked inside the palette.
     $('#entityID').mousedown(function () {
         loadProperties("window start custom jtk-node jsplumb-connected", "5em", "5em", "entity", ["Left", "Right"],
             ["Top", "Bottom"], false);
         clicked = true;
     });
 
-    //load properties of a step element once the step element in the palette is clicked
+    //load properties of a activity once it is clicked inside the palette
     $('#activityID').mousedown(function () {
         loadProperties("window step custom jtk-node jsplumb-connected-step", "5em", "5em", "activity",
         ["Left", "Right"],
@@ -214,7 +164,7 @@ jsPlumb.ready(function () {
         clicked = true;
     });
 
-    //load properties of a decision element once the decision element in the palette is clicked
+    //load properties of a agent once it is clicked inside the palette
     $('#agentID').mousedown(function () {
         loadProperties("window diamond custom jtk-node jsplumb-connected-end", "5em", "5em", "agents",
         ["Bottom"],
@@ -256,45 +206,21 @@ jsPlumb.ready(function () {
     /**
      * Add endpoints to elements on canvas.
      */
-    var addEndpointsToElements = function (sourceAnchors, targetAnchors, id, type) {
-        endpointColours(type);
-        
+    var addEndpointsToElements = function (sourceAnchors, targetAnchors, id) {
         for (let i = 0; i < sourceAnchors.length; i++) {
             let sourceUUID = sourceAnchors[i];
-            epp = jsPlumbInstance.addEndpoint(id, sourceEndpoint, {
+            jsPlumbInstance.addEndpoint(id, sourceEndpoint, {
                 anchor: sourceAnchors[i], uuid: sourceUUID
             });
-            epp = null;
         }
         for (let j = 0; j < targetAnchors.length; j++) {
             let targetUUID = targetAnchors[j];
-            epp = jsPlumbInstance.addEndpoint(id, targetEndpoint, {
+            jsPlumbInstance.addEndpoint(id, targetEndpoint, {
                 anchor: targetAnchors[j], uuid: targetUUID
             });
-            epp = null;
         }
     };
     
-    /**
-     * This function adds colours to the endpoints depending on what type of
-     * element it is placed upon.
-     * @param {element} type 
-     */
-    function endpointColours(type) {
-        if(type == "entity") {
-            sourceEndpoint.paintStyle.strokeStyle = "#999966";
-            targetEndpoint.paintStyle.fillStyle = "#55552b";
-        }
-        else if(type == "activity") {
-            sourceEndpoint.paintStyle.strokeStyle = "#8080ff";
-            targetEndpoint.paintStyle.fillStyle = "#1a1aff";
-        }
-        else {
-            sourceEndpoint.paintStyle.strokeStyle = "#999966";
-            targetEndpoint.paintStyle.fillStyle = "#55552b";
-        }
-    }
-
     /**
      * Draw element on canvas.
      */
@@ -311,10 +237,15 @@ jsPlumb.ready(function () {
         elementsOnCanvas.push(element);
     }
 
+    /**
+     * Confirm page reload
+     */
     window.onbeforeunload = function(e) {
         return 'Are you sure you want to leave? You are in the middle of something.';
       };
 });
+
+
 
 
 

@@ -27,7 +27,6 @@ function addNameSpace() {
     displayNamespaceInspecAttr(userInput.split(' ').slice(0, 1) + ":");
     displayNamespaceInspecID(prefix);
 }
-//---------------------------------------------------------------------------------------------------//
 
 
 /*
@@ -59,7 +58,6 @@ function displayNamespace(prefix, url) {
     //add namespace to namespace array
     namespaceArray.prefix[prefix] = url;
 }
-//----------------------------------------------------------------------------------------------------//
 
 /*
 **  This function delete namespace from the array and user interface.
@@ -82,7 +80,6 @@ function deleteNameSpace(id) {
 
 }
 
-//----------------------------------------------------------------------------------------------------//
 
 /*
 **  This function adds the namespace to the attribute section in the Inspector. Used in @addNameSpace().
@@ -96,7 +93,6 @@ function displayNamespaceInspecAttr(namespace) {
     selectionAttr.appendChild(option);
     
 }
-//----------------------------------------------------------------------------------------------------//
 
 /*
 **  This function adds a namespace option to the ID field in the inspector. 
@@ -109,4 +105,3 @@ function displayNamespaceInspecID(NamespaceID) {
     namespaceOption.id = NamespaceID + "-NSoption";
     namespaceAddtoID.appendChild(namespaceOption);
 }
-//----------------------------------------------------------------------------------------------------//

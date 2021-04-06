@@ -17,11 +17,10 @@ document.getElementById("nameSpaceButton").addEventListener("click", addNameSpac
 function addNameSpace() {
     const userInput = prompt("Namespace", "Prefix http://www.w3.org/ns/prov#");
     
-    //---------------------------Separate prefix and url from user input-----------------------------//
+    //Separate prefix and url from user input
     const separateInput = userInput.split(" ");
     const prefix = separateInput[0];
     const url = separateInput[1];
-    //-----------------------------------------------------------------------------------------------//
     
     displayNamespace(prefix, url);
     displayNamespaceInspecAttr(userInput.split(' ').slice(0, 1) + ":");

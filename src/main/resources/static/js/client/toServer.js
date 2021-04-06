@@ -1,50 +1,44 @@
+/**
+ * This file is responsible for sending and receiving data from the server side.
+ */
 
-document.getElementById("convertBtn").addEventListener("click", createJSON);
+/**
+ * Button responsible for exporting in the user interface.
+ */
+document.getElementById("exportBtn").addEventListener("click", parseDataIntoProvJSON);
 
-function createJSON(){
+
+/**
+ * parses all data on the canvas into PROV-JSON format.
+ * @returns 
+ */
+function parseDataIntoProvJSON(){
     let alert = confirm("Convert to syntax form?");
     if(!alert) return;
 
-    clearArrays();
-    addConnectionsToArray();
-    addElementToArray();
+    //All these files are in the outputController class
+    clearObjects();
+    addConnectionsToObject();
+    addElementsToObject();
     sendJsonToServer(); 
     scrollToOutput();  
 }
 
-
+/**
+ * Sends data to server as a string.
+ * Receives data as a string.
+ */
 function sendJsonToServer() {
-    let conversionFormatOption =  document.getElementById("conversionFormat");
-    let conversionFormat = conversionFormatOption.options[conversionFormatOption.selectedIndex].value;
-
-    var JSON_Array = [];
-    var conversionType = [conversionFormat]
-    
-    JSON_Array = JSON_Array.concat(
-        namespaceArray, 
-        entityArray,
-        activityArray, 
-        agentArray, 
-        wasDerivedFromArr, 
-        wasAttributedToArr,  
-        wasGeneratedByArr, 
-        wasAssociatedWithArr, 
-        usedArr, wasInformedByArr, 
-        actedOnBehalfOfArr, 
-        conversionType
-        );
-    
-
-    var JSONstring = JSON.stringify(JSON_Array);
-    //console.log(JSONstring);        
+    const JSON_Object = combineAllObjects();
+    const JSONObjectString = JSON.stringify(JSON_Object);
 
     $.ajax({
         url: 'http://localhost:8080/',
         type: 'POST',
-        data: JSONstring,
-       // dataType: 'text',
+        data: JSONObjectString,
         contentType: "application/json; charset=utf-8",
         success: function (data) {
+            // this function is in the controller class.
             displayOutput(data);
         },
         error: function(){
@@ -53,17 +47,29 @@ function sendJsonToServer() {
 
 }
 
-function displayOutput(data) {
-    let outputTextBox = document.getElementById('displayConvertedFile');
-    if(data.substring(0, 3) == "org") {
-        outputTextBox.value = " Error - \n " + data;
-    }
-    else {
-        outputTextBox.value =  data;
-    }
+function combineAllObjects() {
+    const conversionFormatOption =  document.getElementById("conversionFormat");
+    const conversionFormat = conversionFormatOption.options[conversionFormatOption.selectedIndex].value;
+
+    let JSON_Object = [];
+    const conversionType = [conversionFormat]
+    
+    JSON_Object = JSON_Object.concat(
+        namespaceArray, 
+        entityObject,
+        activityObject, 
+        agentObject, 
+        wasDerivedFromObject, 
+        wasAttributedToObject,  
+        wasGeneratedByObject, 
+        wasAssociatedWithObject, 
+        usedObject, wasInformedByObject, 
+        actedOnBehalfOfObject, 
+        conversionType
+        );
+    
+    return JSON_Object;
 }
 
 
-function scrollToOutput() {
-    document.getElementById("saveButton").scrollIntoView();
-}
+

@@ -29,8 +29,15 @@
 
 /**
  * Add endpoints to elements on canvas.
+ *  This function was citied from the jsPlumb community edition page
+ * 
+ * Title: Flowchart Demo
+ * Author: jsPlumb
+ * Date: Dec 2020
+ * Type: code
+ * Availability: https://github.com/jsplumb/jsplumb/blob/master/demo/flowchart/demo.js
  */
-    var addEndpointsToElements = function (sourceAnchors, targetAnchors, id) {
+var addEndpointsToElements = function (sourceAnchors, targetAnchors, id) {
     for (let i = 0; i < sourceAnchors.length; i++) {
         let uuid = sourceAnchors[i];
         jsPlumbInstance.addEndpoint(id, sourceEndpoint, {

@@ -6,12 +6,15 @@
   function createElement(id) {
     let arr = [];
     let element = $('<div>').addClass(properties[0].clsName).attr('id', id).attr('variables', arr);
-    element.css({'top': properties[0].top, 'left': properties[0].left});
     let strong = $('<strong>');
+    element.css({'top': properties[0].top, 'left': properties[0].left});
     element.append("<i style='display: none';><\/i>");
 
-    if (properties[0].clsName == "window diamond custom jtk-node jsplumb-connected-end") {
-        let p = "<p style='line-height: 110%; margin-top: 35%' class='desc-text'" + "ondblclick='$(this).focus();'>" + id + "</p>";
+    const agent = "window diamond custom jtk-node jsplumb-connected-end";
+    const className  = properties[0].clsName;
+
+    if (className == agent) {
+        let p = "<p style='line-height: 110%; margin-top: 35%' class='agentLabel'" + "ondblclick='$(this).focus();'>" + id + "</p>";
         strong.append(p);
     }
     else {
@@ -29,15 +32,15 @@
  */
     var addEndpointsToElements = function (sourceAnchors, targetAnchors, id) {
     for (let i = 0; i < sourceAnchors.length; i++) {
-        let sourceUUID = sourceAnchors[i];
+        let uuid = sourceAnchors[i];
         jsPlumbInstance.addEndpoint(id, sourceEndpoint, {
-            anchor: sourceAnchors[i], uuid: sourceUUID
+            anchor: sourceAnchors[i], uuid: uuid
         });
     }
     for (let j = 0; j < targetAnchors.length; j++) {
-        let targetUUID = targetAnchors[j];
+        let uuid = targetAnchors[j];
         jsPlumbInstance.addEndpoint(id, targetEndpoint, {
-            anchor: targetAnchors[j], uuid: targetUUID
+            anchor: targetAnchors[j], uuid: uuid
         });
     }
 };

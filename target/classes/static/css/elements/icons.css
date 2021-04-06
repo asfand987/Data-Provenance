@@ -44,7 +44,7 @@
     color: black;
 }
 
-.desc-text{
+.agentLabel{
     -webkit-transform: rotate(-45deg);
     -moz-transform: rotate(-45deg);
     -o-transform: rotate(-45deg);
@@ -64,10 +64,7 @@
 
 .editor-d .window {
     border: 1px solid #346789;
-    /* box-shadow: 2px 2px 19px #aaa;
-    -o-box-shadow: 2px 2px 19px #aaa;
-    -webkit-box-shadow: 2px 2px 19px #aaa;
-    -moz-box-shadow: 2px 2px 19px #aaa; */
+
     -moz-border-radius: 0.5em;
     /* opacity: 0.8; */
     /*width: 80px;

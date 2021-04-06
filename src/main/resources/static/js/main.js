@@ -19,7 +19,7 @@ var clickedElement = false;
 jsPlumb.ready(function () {
     let element = "";   //the element which will be appended to the canvas
 
-    jsPlumbInstance = window.jsp = jsPlumb.getInstance({
+    jsPlumbInstance = jsPlumb.getInstance({
         DragOptions: { cursor: 'pointer', zIndex: 2000 },
         ConnectionOverlays: [ ["Arrow", { location: 1, visible: true, id: "ARROW", length: 14, foldback: 0.8 }], [ "Label", { label: "", id: "label", cssClass: "aLabel" }]],
         Container: "canvas"
@@ -75,9 +75,7 @@ jsPlumb.ready(function () {
     /**
      * Register connections 
      */
-    jsPlumbInstance.registerConnectionType("basic", { anchor:"Continuous", connector:"StateMachine" });
-   
-   
+    jsPlumbInstance.registerConnectionType("basic", { anchor:"Continuous", connector:"StateMachine" });   
 
 	makeElementDraggable("#entityID", "window start jsplumb-connected custom", "entity");
 	makeElementDraggable("#activityID", "window step jsplumb-connected-step custom", "activity");
@@ -137,11 +135,7 @@ jsPlumb.ready(function () {
     $('#agentID').mousedown(function () {
         addProperties("window diamond custom jtk-node jsplumb-connected-end", "5em", "5em", "agents", ["Bottom"], ["Left", "Right", "Top"]);
         clickedElement = true;
-    });     
-   
-   
-
-    
+    });      
 });
 
 

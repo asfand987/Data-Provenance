@@ -35,6 +35,7 @@ public class Controller {
     public String transferData(@RequestBody String jsonString) {
         String sendDataToClient = "";
         try {
+            System.out.println(jsonString);
             JSONArray jsonArray = new JSONArray(jsonString);
             JSONObject provJSON = new JSONObject();
 

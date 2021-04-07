@@ -38,7 +38,7 @@ public class Controller {
             System.out.println(jsonString);
             JSONArray jsonArray = new JSONArray(jsonString);
             JSONObject provJSON = new JSONObject();
-           System.out.println(jsonArray.getJSONObject(0));
+
             provJSON.put("prefix", jsonArray.getJSONObject(0).getJSONObject("prefix"));
             provJSON.put("entity", jsonArray.getJSONObject(1).getJSONObject("entity"));
             provJSON.put("activity", jsonArray.getJSONObject(2).getJSONObject("activity"));
@@ -57,14 +57,15 @@ public class Controller {
             String str = "";
             Convert conversion = new Convert(InteropFramework.getDefaultFactory(), namespaceMap);
 
-            conversion.doConversions(provJSON.toString(), conversionType); //jsonObject.toString()
+            //perform conversion.
+            conversion.doConversions(provJSON.toString(), conversionType);
             sendDataToClient = conversion.returnConvertedFile();
         }
         catch (Exception e) {
             sendDataToClient = e.toString();
             return sendDataToClient;
         }
-
+        //return converted file back to client side.
         return sendDataToClient;
     }
 

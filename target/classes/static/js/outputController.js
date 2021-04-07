@@ -40,7 +40,6 @@ function addToObject(id, elementAttributeValues, type) {
         let value = allAttributes[1];
         attribute.attrs[prefix] = value;
     }
-    console.log(type);
     if(type == "entity") {
         entityObject.entity[id] = attribute.attrs;
     }

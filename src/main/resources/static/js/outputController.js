@@ -40,7 +40,6 @@ function addToObject(id, elementAttributeValues, type) {
         let value = allAttributes[1];
         attribute.attrs[prefix] = value;
     }
-    console.log(type);
     if(type == "entity") {
         entityObject.entity[id] = attribute.attrs;
     }
@@ -95,7 +94,6 @@ function combineConnectionObjects() {
  
 function addConnectionsToObject() {
     $.each(jsPlumbInstance.getAllConnections(), function (idx, connection) {
-        console.log(connection);
         let source = connection.source.className;
         let target = connection.target.className;
 

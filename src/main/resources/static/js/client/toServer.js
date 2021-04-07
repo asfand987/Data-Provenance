@@ -67,7 +67,6 @@ function combineAllObjects() {
         actedOnBehalfOfObject, 
         conversionType
         );
-    console.log(JSON_Object);
     return JSON_Object;
 }
 

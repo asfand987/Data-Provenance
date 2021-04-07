@@ -1,9 +1,9 @@
 /**
  * This class defines source and target endpoints as well as connectors.
- */
-
+ *
+ *
 /********************************************************************************************
- * Code for this page was citied from the jsPlumb community edition page
+ * Code for this page was citied from the jsPlumb community edition page which is open source
  * 
  * Title: Flowchart Demo
  * Author: jsPlumb

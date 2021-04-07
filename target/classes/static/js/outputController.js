@@ -94,7 +94,6 @@ function combineConnectionObjects() {
  
 function addConnectionsToObject() {
     $.each(jsPlumbInstance.getAllConnections(), function (idx, connection) {
-        console.log(connection);
         let source = connection.source.className;
         let target = connection.target.className;
 

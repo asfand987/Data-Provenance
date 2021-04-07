@@ -3,9 +3,9 @@
  *
  *  Asfand Khan
  *  April 2021
- */
-
-/**
+ *
+ *
+ *
  *  This is the main file for the client side. 
  * 
 */
@@ -103,9 +103,9 @@ jsPlumb.ready(function () {
      * Take the x and y co-ordinates of the element when it's placed on canvas, and adjust them accordingly.
      */
     var x, y;
-    $(document).on("mousemove", function (event) {
-        x = event.pageX;
-        y = event.pageY;
+    $(document).on("mousemove", function (e) {
+        x = e.pageX;
+        y = e.pageY;
         if (clickedElement) {
             properties[0].top = y - 200;
             properties[0].left = x - 260;

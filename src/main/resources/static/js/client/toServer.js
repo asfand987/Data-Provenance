@@ -47,6 +47,11 @@ function sendJsonToServer() {
 
 }
 
+/**
+ * This function combines all individual elements into one single element which is in the same format 
+ * as PROV-JSON.
+ * @returns JSON_Object
+ */
 function combineAllObjects() {
     const conversionFormatOption =  document.getElementById("conversionFormat");
     const conversionFormat = conversionFormatOption.options[conversionFormatOption.selectedIndex].value;

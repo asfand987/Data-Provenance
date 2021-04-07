@@ -38,7 +38,7 @@ public class Controller {
             System.out.println(jsonString);
             JSONArray jsonArray = new JSONArray(jsonString);
             JSONObject provJSON = new JSONObject();
-
+           System.out.println(jsonArray.getJSONObject(0));
             provJSON.put("prefix", jsonArray.getJSONObject(0).getJSONObject("prefix"));
             provJSON.put("entity", jsonArray.getJSONObject(1).getJSONObject("entity"));
             provJSON.put("activity", jsonArray.getJSONObject(2).getJSONObject("activity"));

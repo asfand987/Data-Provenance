@@ -6,8 +6,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.openprovenance.prov.interop.InteropFramework;
 
@@ -26,6 +24,10 @@ public class ConvertTest {
         convert = new Convert(InteropFramework.getDefaultFactory(), namespaceMap);
     }
 
+    /**
+     * Input data is populated in this function.
+     * @throws JSONException
+     */
     public void setUpProvEnvironment() throws JSONException {
         JSONArray jsonArray = new JSONArray("[{\"prefix\":{\"default\":\"http://www.w3.org/ns/prov#\"}},{\"entity\":{}},{\"activity\":{}},{\"agent\":{}},{\"wasDerivedFrom\":{}},{\"wasAttributedTo\":{}},{\"wasGeneratedBy\":{}},{\"wasAssociatedWith\":{}},{\"used\":{}},{\"wasInformedBy\":{}},{\"actedOnBehalfOf\":{}},\"N\"]");
         namespaceMap.put("default", "http://www.w3.org/ns/prov#");
@@ -53,20 +55,6 @@ public class ConvertTest {
         convert.doConversions(provJSON.toString(), type);
         String actualOutput = convert.returnConvertedFile();
         String expectedOutput = "document\n" + "default <http://www.w3.org/ns/prov#>\n" + "endDocument\n".replaceAll("\\n|\\r\\n", System.getProperty("line.separator"));
-        assertEquals(expectedOutput, actualOutput);
-    }
-
-    /**
-     * Verified PROV-XML format is supported
-     * @throws FileNotFoundException
-     */
-    @Test
-    public void provXML_conversionTest() throws FileNotFoundException {
-        String type = "XML";
-        convert.doConversions(provJSON.toString(), type);
-        String actualOutput = convert.returnConvertedFile();
-        String expectedOutput = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-                "<document xmlns=\"http://www.w3.org/ns/prov#\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:ns3=\"http://openprovenance.org/prov/extension#\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"/>".replaceAll("\\n|\\r\\n", System.getProperty("line.separator"));
         assertEquals(expectedOutput, actualOutput);
     }
 
@@ -123,10 +111,5 @@ public class ConvertTest {
                 "  }\n" +
                 "}".replaceAll("\\n|\\r\\n", System.getProperty("line.separator"));
         assertEquals(expectedOutput, actualOutput);
-    }
-
-    @Test
-    public void verifyElementsSupported() {
-
     }
 }

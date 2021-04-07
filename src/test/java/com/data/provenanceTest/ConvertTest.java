@@ -22,11 +22,11 @@ public class ConvertTest {
     @BeforeEach
     public void setUp() throws JSONException {
         namespaceMap = new HashMap<>();
-        setUUpProvEnvironment();
+        setUpProvEnvironment();
         convert = new Convert(InteropFramework.getDefaultFactory(), namespaceMap);
     }
 
-    public void setUUpProvEnvironment() throws JSONException {
+    public void setUpProvEnvironment() throws JSONException {
         JSONArray jsonArray = new JSONArray("[{\"prefix\":{\"default\":\"http://www.w3.org/ns/prov#\"}},{\"entity\":{}},{\"activity\":{}},{\"agent\":{}},{\"wasDerivedFrom\":{}},{\"wasAttributedTo\":{}},{\"wasGeneratedBy\":{}},{\"wasAssociatedWith\":{}},{\"used\":{}},{\"wasInformedBy\":{}},{\"actedOnBehalfOf\":{}},\"N\"]");
         namespaceMap.put("default", "http://www.w3.org/ns/prov#");
         provJSON = new JSONObject();
@@ -43,6 +43,10 @@ public class ConvertTest {
         provJSON.put("actedOnBehalfOf", jsonArray.getJSONObject(10).getJSONObject("actedOnBehalfOf"));
     }
 
+    /**
+     * Verified PROV-N format is supported
+     * @throws FileNotFoundException
+     */
     @Test
     public void provN_conversionTest() throws JSONException, FileNotFoundException {
         String type = "N";
@@ -52,6 +56,10 @@ public class ConvertTest {
         assertEquals(expectedOutput, actualOutput);
     }
 
+    /**
+     * Verified PROV-XML format is supported
+     * @throws FileNotFoundException
+     */
     @Test
     public void provXML_conversionTest() throws FileNotFoundException {
         String type = "XML";
@@ -62,6 +70,10 @@ public class ConvertTest {
         assertEquals(expectedOutput, actualOutput);
     }
 
+    /**
+     * Verified PROV-RDF format is supported
+     * @throws FileNotFoundException
+     */
     @Test
     public void provRDF_conversionTest() throws FileNotFoundException {
         String type = "RDF";
@@ -78,6 +90,10 @@ public class ConvertTest {
         assertEquals(expectedOutput, actualOutput);
     }
 
+    /**
+     * Verified PROV-TURTLE format is supported
+     * @throws FileNotFoundException
+     */
     @Test
     public void provTURTLE_conversionTest() throws JSONException, FileNotFoundException {
         String type = "TURTLE";
@@ -88,5 +104,29 @@ public class ConvertTest {
                 "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\r\n" +
                 "@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\r\n\n".replaceAll("\\n|\\r\\n", System.getProperty("line.separator"));
         assertEquals(expectedOutput, actualOutput);
+    }
+
+    /**
+     * Verified PROV-JSON format is supported
+     * @throws FileNotFoundException
+     */
+    @Test
+    public void provJSON_conversionTest() throws JSONException, FileNotFoundException {
+        String type = "JSON";
+        convert.doConversions(provJSON.toString(), type);
+        String actualOutput = convert.returnConvertedFile();
+        String expectedOutput = "{\n" +
+                "  \"prefix\": {\n" +
+                "    \"xsd\": \"http://www.w3.org/2001/XMLSchema#\",\n" +
+                "    \"default\": \"http://www.w3.org/ns/prov#\",\n" +
+                "    \"prov\": \"http://www.w3.org/ns/prov#\"\n" +
+                "  }\n" +
+                "}".replaceAll("\\n|\\r\\n", System.getProperty("line.separator"));
+        assertEquals(expectedOutput, actualOutput);
+    }
+
+    @Test
+    public void verifyElementsSupported() {
+
     }
 }

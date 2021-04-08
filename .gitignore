@@ -5,3 +5,5 @@
 /.vscode
 */target/*
 /target
+/output.txt
+/debug.og

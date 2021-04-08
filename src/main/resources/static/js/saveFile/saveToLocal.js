@@ -5,7 +5,7 @@
  */
 
 /********************************************************************************************
- * Code for this page was citied from stack overflow
+ * Code for this page was cited from stack overflow
  * 
  * Title: Saving HTML5 textarea contents to file
  * Author: @engincancan

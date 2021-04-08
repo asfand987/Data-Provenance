@@ -31,7 +31,7 @@
  * Add endpoints to elements on canvas.
  * 
  * 
- * This function was citied from the jsPlumb community edition page which is open source.
+ * This function was cited from the jsPlumb community edition page which is open source.
  * 
  * Title: Flowchart Demo
  * Author: jsPlumb

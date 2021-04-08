@@ -1,68 +1,4 @@
-
-._jsPlumb_connector {
-    z-index:9;
-}
-
-._jsPlumb_endpoint {
-    z-index:12;
-    opacity:0.8;
-    cursor:pointer;
-}
-
-._jsPlumb_overlay {
-    background-color: white;
-    color: #434343;
-    font-weight: 400;
-    padding: 4px;
-    z-index:10;
-
-}
-
-._jsPlumb_overlay._jsPlumb_hover {
-    color: #434343;
-}
-
-path {
-    cursor:pointer;
-}
-
-.delete {
-    padding: 2px;
-    cursor: pointer;
-    float: left;
-    font-size: 10px;
-    line-height: 20px;
-}
-
-.add, .edit {
-    cursor: pointer;
-    float:right;
-    font-size: 10px;
-    line-height: 20px;
-    margin-right:2px;
-    padding: 2px;
-}
-
-.edit:hover {
-    color: #ff8000;
-}
-
-.selected-mode {
-    color:#E4F013;
-}
-
-.connect {
-    width:10px;
-    height:10px;
-    background-color:#f76258;
-    position:absolute;
-    bottom: 13px;
-    right: 5px;
-}
-
-/* header styles */
-
-
+/* Connector label */
 .aLabel{
     background-color: white;
     padding: 0.4em;
@@ -73,7 +9,5 @@ path {
     opacity: 0.8;
     cursor: pointer;
 }
-
-
 
 

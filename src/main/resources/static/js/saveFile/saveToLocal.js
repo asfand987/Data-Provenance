@@ -4,6 +4,17 @@
  * 
  */
 
+/********************************************************************************************
+ * Code for this page was citied from stack overflow
+ * 
+ * Title: Saving HTML5 textarea contents to file
+ * Author: @engincancan
+ * Date: March 2020
+ * Type: code
+ * Availability: https://stackoverflow.com/questions/21479107/saving-html5-textarea-contents-to-file
+ 
+ ******************************************************************************************* */
+
 const button = document.getElementById('saveButton');
 button.addEventListener('click', saveTextAsFile);
 

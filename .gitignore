@@ -7,3 +7,6 @@
 /target
 /output.txt
 /debug.log
+/serving-web-content.iml
+/.settings
+/.factorypath

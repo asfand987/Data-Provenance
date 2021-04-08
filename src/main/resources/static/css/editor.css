@@ -15,6 +15,10 @@ body {
 
 }
 
+h3 {
+    padding-top: 10px;
+}
+
 .mainDiv {
     display: block;
 }

@@ -64,7 +64,7 @@ jsPlumb.ready(function () {
      * Delete element from canvas on double click.
      */
     $(document).on('dblclick','.window',function(){
-        const answer = window.confirm("Are you sure you want to delete this connection?");
+        const answer = window.confirm("Are you sure you want to delete this element?");
         if(!answer) return;
         for (let i = 0; i < elementsOnCanvas.length; i++) {
             if(elementsOnCanvas[i][0] == $(this)[0])  elementsOnCanvas.splice(i, 1);

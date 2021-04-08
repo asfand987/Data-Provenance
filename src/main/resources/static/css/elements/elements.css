@@ -8,6 +8,20 @@
     z-index: 5;
 }
 
+#entityID{
+    top: 4em;
+    left: 1em;
+}
+
+#activityID{
+    top: 15em;
+    left: 1em;
+}
+
+#agentID{
+    top: 28em;
+    left: 2.5em;
+}
 
 #canvas{
     z-index: 1;
@@ -100,23 +114,6 @@
     -moz-box-shadow: 2px 2px 19px #444;
     opacity: 0.6;
 }
-
-
-#entityID{
-    top: 4em;
-    left: 1em;
-}
-
-#activityID{
-    top: 15em;
-    left: 1em;
-}
-
-#agentID{
-    top: 28em;
-    left: 2.5em;
-}
-
 
 
 .editor-d .jsplumb-connector {

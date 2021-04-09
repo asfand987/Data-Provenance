@@ -20,6 +20,6 @@ First you must build the project.
 
 To run the test files
 
-1. navigate to src/test/java/com/data/provenanceTest/ConvertTest.java 
-2. right click and select run 'ConvertTest'.
+1. Navigate to src/test/java/com/data/provenanceTest/ConvertTest.java 
+2. Right click and select run 'ConvertTest'.
 

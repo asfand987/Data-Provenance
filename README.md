@@ -16,3 +16,10 @@ First you must build the project.
 4. Open a browser, type in http://localhost:8080/
 5. Project should start running.
 
+## Test
+
+To run the test files
+
+1. navigate to src/test/java/com/data/provenanceTest/ConvertTest.java 
+2. right click and select run 'ConvertTest'.
+
